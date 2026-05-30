@@ -1,0 +1,45 @@
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.cache
+
+# Keil MDK user-local files
+*.uvguix.*
+*.uvgui.*
+*.uvoptx
+
+# Keil MDK build outputs
+MDK-ARM/Master/
+MDK-ARM/Objects/
+MDK-ARM/Listings/
+Listings/
+*.axf
+*.elf
+*.hex
+*.bin
+*.map
+*.lst
+*.crf
+*.o
+*.d
+*.dep
+*.lnp
+*.build_log.htm
+MDK-ARM/**/*.htm
+
+# CMake or Make build folders, if generated locally
+build/
+cmake-build-*/
+
+# Python caches sometimes created by tooling scripts
+__pycache__/
+*.py[cod]

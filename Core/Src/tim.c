@@ -1,0 +1,322 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file    tim.c
+  * @brief   This file provides code for the configuration
+  *          of the TIM instances.
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2025 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include "tim.h"
+
+/* USER CODE BEGIN 0 */
+#define SERVO_PWM_PRESCALER         (240U - 1U)
+#define SERVO_PWM_PERIOD            (20000U - 1U)
+#define SERVO_PULSE_MIN_US          500U
+#define SERVO_PULSE_MAX_US          2500U
+#define SERVO_MAX_ANGLE_DEG         180U
+#define SERVO_LEFT_OPEN_ANGLE_DEG   30U
+#define SERVO_LEFT_CLOSE_ANGLE_DEG  130U
+#define SERVO_RIGHT_OPEN_ANGLE_DEG  180U
+#define SERVO_RIGHT_CLOSE_ANGLE_DEG 100U
+#define SERVO_LEFT_CLOSE_PULSE_US   (SERVO_PULSE_MIN_US + \
+                                    ((SERVO_LEFT_CLOSE_ANGLE_DEG * \
+                                      (SERVO_PULSE_MAX_US - SERVO_PULSE_MIN_US)) / \
+                                     SERVO_MAX_ANGLE_DEG))
+#define SERVO_RIGHT_CLOSE_PULSE_US  (SERVO_PULSE_MIN_US + \
+                                    ((SERVO_RIGHT_CLOSE_ANGLE_DEG * \
+                                      (SERVO_PULSE_MAX_US - SERVO_PULSE_MIN_US)) / \
+                                     SERVO_MAX_ANGLE_DEG))
+
+static volatile uint8_t g_servo_door_is_open = 0U;
+
+static uint32_t Servo_AngleToPulseUs(uint16_t angle_deg)
+{
+  uint32_t pulse_us;
+
+  if (angle_deg > SERVO_MAX_ANGLE_DEG)
+  {
+    angle_deg = SERVO_MAX_ANGLE_DEG;
+  }
+
+  pulse_us = SERVO_PULSE_MIN_US +
+             (((uint32_t)angle_deg * (SERVO_PULSE_MAX_US - SERVO_PULSE_MIN_US)) /
+              SERVO_MAX_ANGLE_DEG);
+  return pulse_us;
+}
+
+static void Servo_SetChannelAngleDeg(uint32_t channel, uint16_t angle_deg)
+{
+  __HAL_TIM_SET_COMPARE(&htim3, channel, Servo_AngleToPulseUs(angle_deg));
+}
+
+/* USER CODE END 0 */
+
+TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
+
+/* TIM2 init function */
+void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 4800-1;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 10000-1;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
+
+/* TIM3 init function */
+void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = SERVO_PWM_PRESCALER;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = SERVO_PWM_PERIOD;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = SERVO_LEFT_CLOSE_PULSE_US;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.Pulse = SERVO_RIGHT_CLOSE_PULSE_US;
+  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+  HAL_TIM_MspPostInit(&htim3);
+
+}
+
+void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
+{
+
+  if(tim_baseHandle->Instance==TIM2)
+  {
+  /* USER CODE BEGIN TIM2_MspInit 0 */
+
+  /* USER CODE END TIM2_MspInit 0 */
+    /* TIM2 clock enable */
+    __HAL_RCC_TIM2_CLK_ENABLE();
+
+    /* TIM2 interrupt Init */
+    HAL_NVIC_SetPriority(TIM2_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(TIM2_IRQn);
+  /* USER CODE BEGIN TIM2_MspInit 1 */
+
+  /* USER CODE END TIM2_MspInit 1 */
+  }
+}
+
+void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef* tim_pwmHandle)
+{
+
+  if(tim_pwmHandle->Instance==TIM3)
+  {
+  /* USER CODE BEGIN TIM3_MspInit 0 */
+
+  /* USER CODE END TIM3_MspInit 0 */
+    /* TIM3 clock enable */
+    __HAL_RCC_TIM3_CLK_ENABLE();
+  /* USER CODE BEGIN TIM3_MspInit 1 */
+
+  /* USER CODE END TIM3_MspInit 1 */
+  }
+}
+
+void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
+{
+
+  if(tim_baseHandle->Instance==TIM2)
+  {
+  /* USER CODE BEGIN TIM2_MspDeInit 0 */
+
+  /* USER CODE END TIM2_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_TIM2_CLK_DISABLE();
+
+    /* TIM2 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(TIM2_IRQn);
+  /* USER CODE BEGIN TIM2_MspDeInit 1 */
+
+  /* USER CODE END TIM2_MspDeInit 1 */
+  }
+}
+
+void HAL_TIM_PWM_MspDeInit(TIM_HandleTypeDef* tim_pwmHandle)
+{
+
+  if(tim_pwmHandle->Instance==TIM3)
+  {
+  /* USER CODE BEGIN TIM3_MspDeInit 0 */
+
+  /* USER CODE END TIM3_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_TIM3_CLK_DISABLE();
+  /* USER CODE BEGIN TIM3_MspDeInit 1 */
+
+  /* USER CODE END TIM3_MspDeInit 1 */
+  }
+}
+
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
+{
+
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  if(timHandle->Instance==TIM3)
+  {
+  /* USER CODE BEGIN TIM3_MspPostInit 0 */
+
+  /* USER CODE END TIM3_MspPostInit 0 */
+
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    /**TIM3 GPIO Configuration
+    PA6     ------> TIM3_CH1
+    PB1     ------> TIM3_CH4
+    */
+    GPIO_InitStruct.Pin = SERVO_LEFT_PWM_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
+    HAL_GPIO_Init(SERVO_LEFT_PWM_GPIO_Port, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = SERVO_RIGHT_PWM_Pin;
+    HAL_GPIO_Init(SERVO_RIGHT_PWM_GPIO_Port, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN TIM3_MspPostInit 1 */
+
+  /* USER CODE END TIM3_MspPostInit 1 */
+  }
+
+}
+
+/* USER CODE BEGIN 1 */
+void Servo_DoorInit(void)
+{
+  if (HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  if (HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  Servo_SetDoorClosed();
+}
+
+void Servo_SetAngleDeg(uint16_t angle_deg)
+{
+  Servo_SetChannelAngleDeg(TIM_CHANNEL_1, angle_deg);
+}
+
+void Servo_SetDoorOpen(void)
+{
+  Servo_SetChannelAngleDeg(TIM_CHANNEL_1, SERVO_LEFT_OPEN_ANGLE_DEG);
+  Servo_SetChannelAngleDeg(TIM_CHANNEL_4, SERVO_RIGHT_OPEN_ANGLE_DEG);
+  g_servo_door_is_open = 1U;
+}
+
+void Servo_SetDoorClosed(void)
+{
+  Servo_SetChannelAngleDeg(TIM_CHANNEL_1, SERVO_LEFT_CLOSE_ANGLE_DEG);
+  Servo_SetChannelAngleDeg(TIM_CHANNEL_4, SERVO_RIGHT_CLOSE_ANGLE_DEG);
+  g_servo_door_is_open = 0U;
+}
+
+uint8_t Servo_SetDoorByCloudValue(int32_t open_value)
+{
+  if (open_value == 1)
+  {
+    Servo_SetDoorOpen();
+    return 1U;
+  }
+
+  if (open_value == 0)
+  {
+    Servo_SetDoorClosed();
+    return 1U;
+  }
+
+  return 0U;
+}
+
+uint8_t Servo_GetDoorState(void)
+{
+  return g_servo_door_is_open;
+}
+
+/* USER CODE END 1 */
+
