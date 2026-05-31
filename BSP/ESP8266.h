@@ -26,6 +26,7 @@ uint8_t *ESP8266_GetIPD(uint32_t timeout_ms);
 uint8_t ESP8266_Init(void);
 
 void ESP8266_RxFeedByte(uint8_t byte);
+void ESP8266_RxFeedBlock(const uint8_t *data, uint16_t len);
 uint8_t ESP8266_HasTransportError(void);
 void ESP8266_ClearTransportError(void);
 uint8_t ESP8266_GetLastInitStatus(void);

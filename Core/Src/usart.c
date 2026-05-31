@@ -771,14 +771,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
-    uint16_t i = 0U;
-
     if (huart->Instance == USART6)
     {
-        for (i = 0U; i < Size; i++)
-        {
-            ESP8266_RxFeedByte(esp8266_rx_dma_buffer[i]);
-        }
+        ESP8266_RxFeedBlock(esp8266_rx_dma_buffer, Size);
 
         memset(esp8266_rx_dma_buffer, 0, sizeof(esp8266_rx_dma_buffer));
         if (HAL_UARTEx_ReceiveToIdle_DMA(&huart6,

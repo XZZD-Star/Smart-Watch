@@ -650,22 +650,8 @@ uint8_t ESP8266_Init(void)
   return 1U;
 }
 
-void ESP8266_RxFeedByte(uint8_t byte)
+static void ESP8266_UpdateTransportError(uint16_t count)
 {
-  uint16_t count = g_esp8266_rx_count;
-
-  if (count >= (ESP8266_RX_BUFFER_SIZE - 1U))
-  {
-    g_esp8266_rx_count = 0U;
-    count = 0U;
-  }
-
-  g_esp8266_rx_buffer[count] = byte;
-  count++;
-  g_esp8266_rx_buffer[count] = 0U;
-  g_esp8266_rx_count = count;
-  g_esp8266_rx_last_tick = HAL_GetTick();
-
   if ((ESP8266_BufferContains(g_esp8266_rx_buffer, count, "CLOSED") != 0U) ||
       (ESP8266_BufferContains(g_esp8266_rx_buffer, count, "WIFI DISCONNECT") != 0U) ||
       (ESP8266_BufferContains(g_esp8266_rx_buffer, count, "link is not") != 0U) ||
@@ -673,6 +659,50 @@ void ESP8266_RxFeedByte(uint8_t byte)
   {
     g_esp8266_transport_error = 1U;
   }
+}
+
+void ESP8266_RxFeedBlock(const uint8_t *data, uint16_t len)
+{
+  uint16_t count = g_esp8266_rx_count;
+  uint16_t offset = 0U;
+
+  if ((data == NULL) || (len == 0U))
+  {
+    return;
+  }
+
+  while (offset < len)
+  {
+    uint16_t space;
+    uint16_t copy_len;
+
+    if (count >= (ESP8266_RX_BUFFER_SIZE - 1U))
+    {
+      g_esp8266_rx_count = 0U;
+      count = 0U;
+    }
+
+    space = (uint16_t)((ESP8266_RX_BUFFER_SIZE - 1U) - count);
+    copy_len = (uint16_t)(len - offset);
+    if (copy_len > space)
+    {
+      copy_len = space;
+    }
+
+    memcpy(&g_esp8266_rx_buffer[count], &data[offset], copy_len);
+    count = (uint16_t)(count + copy_len);
+    g_esp8266_rx_buffer[count] = 0U;
+    g_esp8266_rx_count = count;
+    offset = (uint16_t)(offset + copy_len);
+  }
+
+  g_esp8266_rx_last_tick = HAL_GetTick();
+  ESP8266_UpdateTransportError(count);
+}
+
+void ESP8266_RxFeedByte(uint8_t byte)
+{
+  ESP8266_RxFeedBlock(&byte, 1U);
 }
 
 uint8_t ESP8266_HasTransportError(void)
