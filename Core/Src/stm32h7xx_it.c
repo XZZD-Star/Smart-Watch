@@ -24,8 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "./usart/yuanzi_usart.h"
 #include "string.h"
-#include <stdlib.h>   // strtof
-#include <ctype.h>    // isdigit
+#include <ctype.h>
 #include <stdint.h>
 #include "usart.h"
 #include "motion_input.h"
@@ -76,11 +75,6 @@ extern UART_HandleTypeDef huart7;
 extern TIM_HandleTypeDef htim1;
 
 /* USER CODE BEGIN EV */
-float Calibrate_yaw,Calibrate_pitch,Calibrate_roll,Calibrate_yaw2,Calibrate_pitch2,Calibrate_roll2;
-int extract_ypr(const uint8_t *buf, int len,
-                float *yaw, float *pitch, float *roll);
-uint16_t Calibrate_count = 0;     //校准3s计时
-uint16_t startRcv = 0;            //接收校准信号标识位
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -257,24 +251,6 @@ void TIM1_UP_IRQHandler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
-    /* Calibration disabled for data collection. */
-    /*
-    if (startRcv)
-    {
-        Calibrate_count++;
-        if (Calibrate_count >= 30)
-        {
-            Calibrate_yaw = yaw;
-            Calibrate_pitch = pitch;
-            Calibrate_roll = roll;
-            Calibrate_yaw2 = yaw2;
-            Calibrate_pitch2 = pitch2;
-            Calibrate_roll2 = roll2;
-            Calibrate_count = 0;
-            startRcv = 0;
-        }
-    }
-    */
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
@@ -439,43 +415,6 @@ static char *trim_spaces(char *s)
         end--;
     }
     return s;
-}
-
-int extract_ypr(const uint8_t *buf, int len,
-                float *yaw, float *pitch, float *roll)
-{
-const char *p   = (const char *)buf;
-    const char *end = p + len;
-
-    int found = 0;
-
-    /* �ֲ� lambda����ȡһ������ */
-    #define PARSE_KEY(key, dst) do {                                    \
-        const char *k = (const char *)buf;                              \
-            k = strstr(p, key);                                          \
-        if (k) {                                                       \
-            k += strlen(key);                                          \
-            char tmp[16] = {0};                                        \
-            int  n = 0;                                                \
-            if (k < end && *k == '-') tmp[n++] = *k++;                 \
-            /* �����ֺ�С���� */                                       \
-            while (k < end && (isdigit((unsigned char)*k) || *k == '.') && n < 15) \
-                tmp[n++] = *k++;                                       \
-            if (n > 0) {                                               \
-                tmp[n] = '\0';                                         \
-                *(dst) = strtof(tmp, NULL);                            \
-                ++found;                                               \
-            }                                                          \
-        }                                                              \
-    } while (0)
-
-    /* ˳���޹صؽ��������ֶ� */
-    PARSE_KEY("yaw:",   yaw);
-    PARSE_KEY("pitch:", pitch);
-    PARSE_KEY("roll:",  roll);
-
-    #undef PARSE_KEY
-    return found;
 }
 
 static void motion_uart4_handle_command(const uint8_t *buf, uint16_t len)
