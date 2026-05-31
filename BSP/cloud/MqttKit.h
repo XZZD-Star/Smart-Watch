@@ -47,9 +47,12 @@ enum MqttQosLevel
   MQTT_QOS_LEVEL2 = 2
 };
 
+/* 释放 MQTT 组包时申请的临时缓冲。 */
 void MQTT_DeleteBuffer(MQTT_PACKET_STRUCTURE *mqttPacket);
 
+/* 解析 MQTT 固定头，返回包类型。 */
 uint8_t MQTT_UnPacketRecv(uint8_t *dataPtr);
+/* 生成 MQTT CONNECT 包。 */
 uint8_t MQTT_PacketConnect(const char *user,
                            const char *password,
                            const char *devid,
@@ -60,13 +63,17 @@ uint8_t MQTT_PacketConnect(const char *user,
                            const char *will_msg,
                            int32_t will_retain,
                            MQTT_PACKET_STRUCTURE *mqttPacket);
+/* 解析 MQTT CONNACK 包。 */
 uint8_t MQTT_UnPacketConnectAck(uint8_t *rev_data);
+/* 生成 MQTT SUBSCRIBE 包。 */
 uint8_t MQTT_PacketSubscribe(uint16_t pkt_id,
                              enum MqttQosLevel qos,
                              const char *topics[],
                              uint8_t topics_cnt,
                              MQTT_PACKET_STRUCTURE *mqttPacket);
+/* 解析 MQTT SUBACK 包。 */
 uint8_t MQTT_UnPacketSubscribe(uint8_t *rev_data);
+/* 生成 MQTT PUBLISH 包。 */
 uint8_t MQTT_PacketPublish(uint16_t pkt_id,
                            const char *topic,
                            const char *payload,
@@ -75,6 +82,7 @@ uint8_t MQTT_PacketPublish(uint16_t pkt_id,
                            int32_t retain,
                            int32_t own,
                            MQTT_PACKET_STRUCTURE *mqttPacket);
+/* 解析 MQTT PUBLISH 包，返回 topic、payload 和 QoS 信息。 */
 uint8_t MQTT_UnPacketPublish(uint8_t *rev_data,
                              char **topic,
                              uint16_t *topic_len,
@@ -82,7 +90,9 @@ uint8_t MQTT_UnPacketPublish(uint8_t *rev_data,
                              uint16_t *payload_len,
                              uint8_t *qos,
                              uint16_t *pkt_id);
+/* 解析 MQTT PUBACK 包。 */
 uint8_t MQTT_UnPacketPublishAck(uint8_t *rev_data);
+/* 生成 MQTT PINGREQ 包。 */
 uint8_t MQTT_PacketPing(MQTT_PACKET_STRUCTURE *mqttPacket);
 
 #endif /* __MQTTKIT_H__ */

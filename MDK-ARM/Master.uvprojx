@@ -340,7 +340,7 @@
               <MiscControls>--cpu=Cortex-M7.fp.dp --fpu=FPv5_D16</MiscControls>
               <Define>USE_PWR_LDO_SUPPLY,USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../App/motion;../App/ai;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
+              <IncludePath>../Core/Inc;../App/motion;../App/ai;../App/cloud;../App/screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2106,6 +2106,36 @@
               <FilePath>..\App\ai\motion_ai.c</FilePath>
             </File>
             <File>
+              <FileName>cloud_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\cloud\cloud_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>cloud_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\cloud\cloud_task.h</FilePath>
+            </File>
+            <File>
+              <FileName>motion_app_events.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\motion\motion_app_events.c</FilePath>
+            </File>
+            <File>
+              <FileName>motion_app_events.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\motion\motion_app_events.h</FilePath>
+            </File>
+            <File>
+              <FileName>motion_frame.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\motion\motion_frame.h</FilePath>
+            </File>
+            <File>
+              <FileName>motion_input.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\motion\motion_input.c</FilePath>
+            </File>
+            <File>
               <FileName>motion_input.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\App\motion\motion_input.h</FilePath>
@@ -2126,6 +2156,16 @@
               <FilePath>..\App\motion\motion_window_test.c</FilePath>
             </File>
             <File>
+              <FileName>motion_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\motion\motion_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>motion_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\motion\motion_task.h</FilePath>
+            </File>
+            <File>
               <FileName>rule_action_recognizer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\App\rule action\rule_action_recognizer.c</FilePath>
@@ -2134,6 +2174,16 @@
               <FileName>rule_action_recognizer.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\App\rule action\rule_action_recognizer.h</FilePath>
+            </File>
+            <File>
+              <FileName>screen_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\screen\screen_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>screen_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\screen\screen_task.h</FilePath>
             </File>
           </Files>
         </Group>

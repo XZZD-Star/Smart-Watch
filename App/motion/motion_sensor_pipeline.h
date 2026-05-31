@@ -7,47 +7,18 @@ extern "C" {
 
 #include <stdint.h>
 
+#include "motion_frame.h"
+
 #define MOTION_SENSOR_ID_UPPER 0U
 #define MOTION_SENSOR_ID_FORE  1U
 
-extern volatile uint32_t g_lost_u;
-extern volatile uint32_t g_lost_f;
-extern volatile uint32_t g_align_fail_count;
-
-extern volatile uint8_t  g_fused_row_ready;
-extern volatile uint64_t g_fused_ts_us;
-extern volatile float    g_fused_upper_yaw;
-extern volatile float    g_fused_upper_pitch;
-extern volatile float    g_fused_upper_roll;
-extern volatile float    g_fused_fore_yaw;
-extern volatile float    g_fused_fore_pitch;
-extern volatile float    g_fused_fore_roll;
-extern volatile uint32_t g_fused_seq_u;
-extern volatile uint32_t g_fused_seq_f;
-extern volatile uint32_t g_fused_lost_u;
-extern volatile uint32_t g_fused_lost_f;
-extern volatile int32_t  g_fused_upper_heart_rate;
-extern volatile int32_t  g_fused_upper_spo2;
-extern volatile int8_t   g_fused_upper_hr_valid;
-extern volatile int8_t   g_fused_upper_spo2_valid;
-extern volatile uint32_t g_fused_upper_ppg_fill;
-extern volatile uint32_t g_fused_upper_ppg_calc_count;
-extern volatile uint32_t g_fused_upper_ppg_pending;
-extern volatile uint32_t g_fused_upper_ppg_part_id;
-extern volatile uint32_t g_fused_upper_ppg_rev_id;
-extern volatile uint32_t g_fused_upper_ppg_int_level;
-extern volatile int32_t  g_fused_fore_heart_rate;
-extern volatile int32_t  g_fused_fore_spo2;
-extern volatile int8_t   g_fused_fore_hr_valid;
-extern volatile int8_t   g_fused_fore_spo2_valid;
-extern volatile uint32_t g_fused_fore_ppg_fill;
-extern volatile uint32_t g_fused_fore_ppg_calc_count;
-extern volatile uint32_t g_fused_fore_ppg_pending;
-extern volatile uint32_t g_fused_fore_ppg_part_id;
-extern volatile uint32_t g_fused_fore_ppg_rev_id;
-extern volatile uint32_t g_fused_fore_ppg_int_level;
-
+/* ISR 调用：保存一包原始姿态数据并通知运动任务，函数内部不做解析。 */
 void MotionSensorPipeline_StorePacketFromIsr(uint8_t sensor_id, const uint8_t *buf, uint16_t len);
+/* 运动任务调用：处理 ISR 暂存包，完成解析、丢包统计和双节点对齐。 */
+uint8_t Motion_ProcessPendingPosePackets(void);
+/* 运动任务调用：取走最近生成的一帧融合数据，成功返回 1。 */
+uint8_t MotionSensorPipeline_TakeFusedFrame(motion_fused_frame_t *frame);
+/* start/clear 场景调用：清空暂存包、序号统计和融合帧状态。 */
 void MotionSensorPipeline_Reset(void);
 
 #ifdef __cplusplus

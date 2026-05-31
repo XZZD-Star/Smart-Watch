@@ -3,7 +3,6 @@
 #include "task.h"
 #include "cmsis_os2.h"
 #include "./usart/yuanzi_usart.h"
-#include "motion_input.h"
 #include "motion_sensor_pipeline.h"
 
 #include <ctype.h>
@@ -52,11 +51,11 @@ static uint8_t  has_last_seq_u = 0U;
 static uint8_t  has_last_seq_f = 0U;
 static uint32_t last_seq_u = 0U;
 static uint32_t last_seq_f = 0U;
-volatile uint32_t g_lost_u = 0U;
-volatile uint32_t g_lost_f = 0U;
+static uint32_t lost_u = 0U;
+static uint32_t lost_f = 0U;
 static uint32_t disorder_u = 0U;
 static uint32_t disorder_f = 0U;
-volatile uint32_t g_align_fail_count = 0U;
+static uint32_t align_fail_count = 0U;
 
 static uint8_t  dwt_ts_inited = 0U;
 static uint32_t dwt_cycles_per_us = 1U;
@@ -73,38 +72,8 @@ float yaw2 = 0.0f;
 float pitch2 = 0.0f;
 float roll2 = 0.0f;
 
-volatile uint8_t  g_fused_row_ready = 0U;
-volatile uint64_t g_fused_ts_us = 0ULL;
-volatile float    g_fused_upper_yaw = 0.0f;
-volatile float    g_fused_upper_pitch = 0.0f;
-volatile float    g_fused_upper_roll = 0.0f;
-volatile float    g_fused_fore_yaw = 0.0f;
-volatile float    g_fused_fore_pitch = 0.0f;
-volatile float    g_fused_fore_roll = 0.0f;
-volatile uint32_t g_fused_seq_u = 0U;
-volatile uint32_t g_fused_seq_f = 0U;
-volatile uint32_t g_fused_lost_u = 0U;
-volatile uint32_t g_fused_lost_f = 0U;
-volatile int32_t  g_fused_upper_heart_rate = 0;
-volatile int32_t  g_fused_upper_spo2 = 0;
-volatile int8_t   g_fused_upper_hr_valid = 0;
-volatile int8_t   g_fused_upper_spo2_valid = 0;
-volatile uint32_t g_fused_upper_ppg_fill = 0U;
-volatile uint32_t g_fused_upper_ppg_calc_count = 0U;
-volatile uint32_t g_fused_upper_ppg_pending = 0U;
-volatile uint32_t g_fused_upper_ppg_part_id = 0U;
-volatile uint32_t g_fused_upper_ppg_rev_id = 0U;
-volatile uint32_t g_fused_upper_ppg_int_level = 0U;
-volatile int32_t  g_fused_fore_heart_rate = 0;
-volatile int32_t  g_fused_fore_spo2 = 0;
-volatile int8_t   g_fused_fore_hr_valid = 0;
-volatile int8_t   g_fused_fore_spo2_valid = 0;
-volatile uint32_t g_fused_fore_ppg_fill = 0U;
-volatile uint32_t g_fused_fore_ppg_calc_count = 0U;
-volatile uint32_t g_fused_fore_ppg_pending = 0U;
-volatile uint32_t g_fused_fore_ppg_part_id = 0U;
-volatile uint32_t g_fused_fore_ppg_rev_id = 0U;
-volatile uint32_t g_fused_fore_ppg_int_level = 0U;
+static volatile uint8_t fused_row_ready = 0U;
+static motion_fused_frame_t fused_frame = {0};
 
 static char *trim_spaces(char *s);
 static int parse_u32_token(char *token, uint32_t *out);
@@ -387,21 +356,21 @@ static void update_seq_stats(uint8_t sensor_id, uint32_t seq)
 {
     uint32_t *last_seq = NULL;
     uint8_t *has_last = NULL;
-    volatile uint32_t *lost = NULL;
+    uint32_t *lost = NULL;
     uint32_t *disorder = NULL;
 
     if (sensor_id == MOTION_SENSOR_ID_UPPER)
     {
         last_seq = &last_seq_u;
         has_last = &has_last_seq_u;
-        lost = &g_lost_u;
+        lost = &lost_u;
         disorder = &disorder_u;
     }
     else
     {
         last_seq = &last_seq_f;
         has_last = &has_last_seq_f;
-        lost = &g_lost_f;
+        lost = &lost_f;
         disorder = &disorder_f;
     }
 
@@ -436,38 +405,39 @@ static void try_emit_fused(void)
     diff = abs_diff_u64(upper_frame.ts_us, fore_frame.ts_us);
     if (diff <= ALIGN_THRESHOLD_US)
     {
-        g_fused_ts_us = upper_frame.ts_us;
-        g_fused_upper_yaw = upper_frame.yaw;
-        g_fused_upper_pitch = upper_frame.pitch;
-        g_fused_upper_roll = upper_frame.roll;
-        g_fused_fore_yaw = fore_frame.yaw;
-        g_fused_fore_pitch = fore_frame.pitch;
-        g_fused_fore_roll = fore_frame.roll;
-        g_fused_seq_u = upper_frame.seq;
-        g_fused_seq_f = fore_frame.seq;
-        g_fused_lost_u = g_lost_u;
-        g_fused_lost_f = g_lost_f;
-        g_fused_upper_heart_rate = upper_frame.heart_rate;
-        g_fused_upper_spo2 = upper_frame.spo2;
-        g_fused_upper_hr_valid = upper_frame.hr_valid;
-        g_fused_upper_spo2_valid = upper_frame.spo2_valid;
-        g_fused_upper_ppg_fill = upper_frame.ppg_fill;
-        g_fused_upper_ppg_calc_count = upper_frame.ppg_calc_count;
-        g_fused_upper_ppg_pending = upper_frame.ppg_pending;
-        g_fused_upper_ppg_part_id = upper_frame.ppg_part_id;
-        g_fused_upper_ppg_rev_id = upper_frame.ppg_rev_id;
-        g_fused_upper_ppg_int_level = upper_frame.ppg_int_level;
-        g_fused_fore_heart_rate = fore_frame.heart_rate;
-        g_fused_fore_spo2 = fore_frame.spo2;
-        g_fused_fore_hr_valid = fore_frame.hr_valid;
-        g_fused_fore_spo2_valid = fore_frame.spo2_valid;
-        g_fused_fore_ppg_fill = fore_frame.ppg_fill;
-        g_fused_fore_ppg_calc_count = fore_frame.ppg_calc_count;
-        g_fused_fore_ppg_pending = fore_frame.ppg_pending;
-        g_fused_fore_ppg_part_id = fore_frame.ppg_part_id;
-        g_fused_fore_ppg_rev_id = fore_frame.ppg_rev_id;
-        g_fused_fore_ppg_int_level = fore_frame.ppg_int_level;
-        g_fused_row_ready = 1U;
+        fused_frame.ts_us = upper_frame.ts_us;
+        fused_frame.upper_yaw = upper_frame.yaw;
+        fused_frame.upper_pitch = upper_frame.pitch;
+        fused_frame.upper_roll = upper_frame.roll;
+        fused_frame.fore_yaw = fore_frame.yaw;
+        fused_frame.fore_pitch = fore_frame.pitch;
+        fused_frame.fore_roll = fore_frame.roll;
+        fused_frame.seq_u = upper_frame.seq;
+        fused_frame.seq_f = fore_frame.seq;
+        fused_frame.lost_u = lost_u;
+        fused_frame.lost_f = lost_f;
+        fused_frame.upper_bio.heart_rate = upper_frame.heart_rate;
+        fused_frame.upper_bio.spo2 = upper_frame.spo2;
+        fused_frame.upper_bio.hr_valid = upper_frame.hr_valid;
+        fused_frame.upper_bio.spo2_valid = upper_frame.spo2_valid;
+        fused_frame.upper_bio.ppg_fill = upper_frame.ppg_fill;
+        fused_frame.upper_bio.ppg_calc_count = upper_frame.ppg_calc_count;
+        fused_frame.upper_bio.ppg_pending = upper_frame.ppg_pending;
+        fused_frame.upper_bio.ppg_part_id = upper_frame.ppg_part_id;
+        fused_frame.upper_bio.ppg_rev_id = upper_frame.ppg_rev_id;
+        fused_frame.upper_bio.ppg_int_level = upper_frame.ppg_int_level;
+        fused_frame.fore_bio.heart_rate = fore_frame.heart_rate;
+        fused_frame.fore_bio.spo2 = fore_frame.spo2;
+        fused_frame.fore_bio.hr_valid = fore_frame.hr_valid;
+        fused_frame.fore_bio.spo2_valid = fore_frame.spo2_valid;
+        fused_frame.fore_bio.ppg_fill = fore_frame.ppg_fill;
+        fused_frame.fore_bio.ppg_calc_count = fore_frame.ppg_calc_count;
+        fused_frame.fore_bio.ppg_pending = fore_frame.ppg_pending;
+        fused_frame.fore_bio.ppg_part_id = fore_frame.ppg_part_id;
+        fused_frame.fore_bio.ppg_rev_id = fore_frame.ppg_rev_id;
+        fused_frame.fore_bio.ppg_int_level = fore_frame.ppg_int_level;
+        fused_frame.align_fail_count = align_fail_count;
+        fused_row_ready = 1U;
 
         upper_frame.valid = 0U;
         fore_frame.valid = 0U;
@@ -479,6 +449,7 @@ void MotionSensorPipeline_StorePacketFromIsr(uint8_t sensor_id, const uint8_t *b
     pose_pending_packet_t *packet = NULL;
     BaseType_t higher_priority_task_woken = pdFALSE;
 
+    /* 中断里只复制原始包并通知任务，解析和融合放到任务态完成。 */
     if ((buf == NULL) || (len == 0U))
     {
         return;
@@ -505,6 +476,28 @@ void MotionSensorPipeline_StorePacketFromIsr(uint8_t sensor_id, const uint8_t *b
         vTaskNotifyGiveFromISR((TaskHandle_t)Task1Handle, &higher_priority_task_woken);
         portYIELD_FROM_ISR(higher_priority_task_woken);
     }
+}
+
+uint8_t MotionSensorPipeline_TakeFusedFrame(motion_fused_frame_t *frame)
+{
+    uint8_t has_frame = 0U;
+
+    if (frame == NULL)
+    {
+        return 0U;
+    }
+
+    /* 融合帧由 pipeline 生成、运动任务消费，这里隐藏内部全局状态。 */
+    taskENTER_CRITICAL();
+    if (fused_row_ready != 0U)
+    {
+        *frame = fused_frame;
+        fused_row_ready = 0U;
+        has_frame = 1U;
+    }
+    taskEXIT_CRITICAL();
+
+    return has_frame;
 }
 
 static uint8_t take_pending_pose_packet(
@@ -549,7 +542,7 @@ static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t defaul
     {
         if (upper_frame.valid)
         {
-            g_align_fail_count++;
+            align_fail_count++;
         }
         upper_frame = frame;
         yaw = frame.yaw;
@@ -560,7 +553,7 @@ static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t defaul
     {
         if (fore_frame.valid)
         {
-            g_align_fail_count++;
+            align_fail_count++;
         }
         fore_frame = frame;
         yaw2 = frame.yaw;
@@ -578,6 +571,7 @@ uint8_t Motion_ProcessPendingPosePackets(void)
     uint64_t local_ts_us = 0ULL;
     uint8_t processed = 0U;
 
+    /* 任务态逐包解析，避免 USART1/USART3 中断里做 strtof 等重操作。 */
     if (take_pending_pose_packet(&upper_pending_packet, local_buf, &local_len, &local_ts_us) != 0U)
     {
         process_pose_packet(local_buf, local_len, MOTION_SENSOR_ID_UPPER, local_ts_us);
@@ -595,6 +589,7 @@ uint8_t Motion_ProcessPendingPosePackets(void)
 
 void MotionSensorPipeline_Reset(void)
 {
+    /* start/clear 会清空对齐窗口和统计，确保下一次识别从干净状态开始。 */
     upper_frame = (pose_frame_t){0};
     fore_frame = (pose_frame_t){0};
     upper_pending_packet.pending = 0U;
@@ -610,11 +605,11 @@ void MotionSensorPipeline_Reset(void)
     has_last_seq_f = 0U;
     last_seq_u = 0U;
     last_seq_f = 0U;
-    g_lost_u = 0U;
-    g_lost_f = 0U;
+    lost_u = 0U;
+    lost_f = 0U;
     disorder_u = 0U;
     disorder_f = 0U;
-    g_align_fail_count = 0U;
+    align_fail_count = 0U;
 
     yaw = 0.0f;
     pitch = 0.0f;
@@ -623,38 +618,8 @@ void MotionSensorPipeline_Reset(void)
     pitch2 = 0.0f;
     roll2 = 0.0f;
 
-    g_fused_row_ready = 0U;
-    g_fused_ts_us = 0ULL;
-    g_fused_upper_yaw = 0.0f;
-    g_fused_upper_pitch = 0.0f;
-    g_fused_upper_roll = 0.0f;
-    g_fused_fore_yaw = 0.0f;
-    g_fused_fore_pitch = 0.0f;
-    g_fused_fore_roll = 0.0f;
-    g_fused_seq_u = 0U;
-    g_fused_seq_f = 0U;
-    g_fused_lost_u = 0U;
-    g_fused_lost_f = 0U;
-    g_fused_upper_heart_rate = 0;
-    g_fused_upper_spo2 = 0;
-    g_fused_upper_hr_valid = 0;
-    g_fused_upper_spo2_valid = 0;
-    g_fused_upper_ppg_fill = 0U;
-    g_fused_upper_ppg_calc_count = 0U;
-    g_fused_upper_ppg_pending = 0U;
-    g_fused_upper_ppg_part_id = 0U;
-    g_fused_upper_ppg_rev_id = 0U;
-    g_fused_upper_ppg_int_level = 0U;
-    g_fused_fore_heart_rate = 0;
-    g_fused_fore_spo2 = 0;
-    g_fused_fore_hr_valid = 0;
-    g_fused_fore_spo2_valid = 0;
-    g_fused_fore_ppg_fill = 0U;
-    g_fused_fore_ppg_calc_count = 0U;
-    g_fused_fore_ppg_pending = 0U;
-    g_fused_fore_ppg_part_id = 0U;
-    g_fused_fore_ppg_rev_id = 0U;
-    g_fused_fore_ppg_int_level = 0U;
+    fused_row_ready = 0U;
+    fused_frame = (motion_fused_frame_t){0};
 
     dwt_ts_inited = 0U;
     dwt_last_cyccnt = 0U;

@@ -8,6 +8,7 @@ extern "C" {
 #include <stdint.h>
 
 #include "app_x-cube-ai.h"
+#include "motion_frame.h"
 
 #define MOTION_AI_FEATURE_COUNT          APP_X_CUBE_AI_INPUT_FEATURES
 #define MOTION_AI_WINDOW_FRAMES          APP_X_CUBE_AI_INPUT_FRAMES
@@ -26,38 +27,6 @@ extern "C" {
 #if (MOTION_AI_BASELINE_TARGET_FRAMES > MOTION_AI_BASELINE_MAX_FRAMES)
 #error "MOTION_AI_BASELINE_TARGET_FRAMES must be <= MOTION_AI_BASELINE_MAX_FRAMES"
 #endif
-
-typedef struct
-{
-  int32_t heart_rate;
-  int32_t spo2;
-  int8_t hr_valid;
-  int8_t spo2_valid;
-  uint32_t ppg_fill;
-  uint32_t ppg_calc_count;
-  uint32_t ppg_pending;
-  uint32_t ppg_part_id;
-  uint32_t ppg_rev_id;
-  uint32_t ppg_int_level;
-} motion_bio_sample_t;
-
-typedef struct
-{
-  uint64_t ts_us;
-  float upper_yaw;
-  float upper_pitch;
-  float upper_roll;
-  float fore_yaw;
-  float fore_pitch;
-  float fore_roll;
-  uint32_t seq_u;
-  uint32_t seq_f;
-  uint32_t lost_u;
-  uint32_t lost_f;
-  motion_bio_sample_t upper_bio;
-  motion_bio_sample_t fore_bio;
-  uint32_t align_fail_count;
-} motion_fused_frame_t;
 
 typedef enum
 {
@@ -122,17 +91,29 @@ typedef struct
   motion_fall_local_debug_t fall_local_debug;
 } motion_ai_result_t;
 
+/* 初始化 AI 识别上下文，任务启动时调用一次。 */
 void MotionAi_Init(void);
+/* 重置基线、窗口和平滑状态，start/模式切换时调用。 */
 void MotionAi_Reset(void);
+/* 设置是否单次测试完成后停在 TEST_DONE 状态。 */
 void MotionAi_SetSingleTestEnabled(uint8_t enabled);
+/* 设置本地跌倒检测是否可以主动触发云端告警。 */
 void MotionAi_SetLocalFallTriggerEnabled(uint8_t enabled);
+/* 查询本地跌倒检测触发开关。 */
 uint8_t MotionAi_IsLocalFallTriggerEnabled(void);
+/* 云端 test 下发后，用指定动作和分数驱动演示覆盖路径。 */
 void MotionAi_SetDemoOverride(int32_t test_value, int32_t action_id, int32_t score);
+/* 清除云端演示覆盖状态。 */
 void MotionAi_ClearDemoOverride(void);
+/* 消费一帧融合姿态数据并推进 AI 状态机。 */
 const motion_ai_result_t* MotionAi_ProcessFusedFrame(const motion_fused_frame_t *frame);
+/* 读取最近一次 AI 结果，不推进状态机。 */
 const motion_ai_result_t* MotionAi_GetResult(void);
+/* 将 AI 状态枚举转成调试输出字符串。 */
 const char* MotionAi_StateName(motion_ai_state_t state);
+/* 将动作标签枚举转成调试输出字符串。 */
 const char* MotionAi_LabelName(motion_label_t label);
+/* 将本地跌倒状态枚举转成调试输出字符串。 */
 const char* MotionAi_FallLocalStateName(motion_fall_local_state_t state);
 
 #ifdef __cplusplus

@@ -219,64 +219,109 @@ typedef struct
   ActionResult result;
 } RuleEngine;
 
+/* 载入规则识别默认参数，任务初始化时调用。 */
 void RuleConfig_LoadDefault(RuleConfig *cfg);
+
+/* 初始化规则识别引擎，运动任务启动时调用。 */
 void RuleEngine_Init(RuleEngine *eng, const RuleConfig *cfg);
+
+/* 清空当前动作会话，start/clear 或 AI 重启后调用。 */
 void RuleEngine_ResetSession(RuleEngine *eng);
+
+/* 设置动作模板表，通常使用默认模板。 */
 void RuleEngine_SetTemplates(
   RuleEngine *eng,
   const ActionTemplate *templates,
   uint32_t template_count);
+
+/* 输入一帧姿态数据并推进规则状态机，非 ISR 调用。 */
 void RuleEngine_Update(
   RuleEngine *eng,
   const float raw[AXIS_COUNT],
   float motion_energy,
   uint32_t now_ms);
+
+/* 使用原始姿态数据完成能量计算和状态机更新，非 ISR 调用。 */
 void RuleEngine_ProcessRaw(
   RuleEngine *eng,
   const float raw[AXIS_COUNT],
   uint32_t now_ms);
 
+/* 计算当前帧相对上一帧的运动能量。 */
 float Rule_ComputeMotionEnergy(const RuleEngine *eng, const float raw[AXIS_COUNT]);
 
+/* 更新动作幅度统计，用于动作质量评分。 */
 void Rule_UpdateAmplitudeStats(ActionSession *session, const float delta[AXIS_COUNT]);
+
+/* 更新峰值保持统计，用于动作质量评分。 */
 void Rule_UpdatePeakStats(ActionSession *session, const float delta[AXIS_COUNT]);
+
+/* 判断状态机是否进入峰值保持阶段。 */
 uint8_t Rule_ShouldEnterPeakHold(RuleEngine *eng);
+
+/* 判断状态机是否退出峰值保持阶段。 */
 uint8_t Rule_ShouldExitPeakHold(RuleEngine *eng);
+
+/* 判断动作是否已经回到初始姿态附近。 */
 uint8_t Rule_IsActionReturned(RuleEngine *eng);
 
+/* 根据会话统计快速过滤不匹配的动作模板。 */
 uint8_t Rule_FilterTemplate(
   const ActionSession *session,
   const ActionTemplate *tmpl);
+
+/* 计算动作会话和模板的匹配分数。 */
 float Rule_ComputeTemplateMatchScore(
   const ActionSession *session,
   const ActionTemplate *tmpl,
   float *amp_distance,
   float *peak_distance);
+
+/* 从模板表中识别动作类型并输出结果。 */
 ActionType Rule_RecognizeAction(
   const ActionSession *session,
   const ActionTemplate *templates,
   uint32_t template_count,
   ActionResult *out_result);
 
+/* 计算动作完整度分数。 */
 uint16_t Rule_ScoreCompleteness(const ActionSession *session);
+
+/* 计算动作幅度分数。 */
 uint16_t Rule_ScoreAmplitude(
   const ActionSession *session,
   const ActionTemplate *tmpl);
+
+/* 计算峰值保持分数。 */
 uint16_t Rule_ScorePeakHold(
   const ActionSession *session,
   const ActionTemplate *tmpl);
+
+/* 汇总规则识别结果，供运动任务输出。 */
 void Rule_EvaluateResult(
   const RuleConfig *cfg,
   const ActionSession *session,
   ActionResult *out_result);
 
+/* 获取内置动作模板表。 */
 const ActionTemplate* Rule_GetDefaultTemplates(uint32_t *count);
+
+/* 获取最近一次规则识别结果。 */
 const ActionResult* RuleEngine_GetResult(const RuleEngine *eng);
+
+/* 获取当前规则识别会话状态。 */
 const ActionSession* RuleEngine_GetSession(const RuleEngine *eng);
 
+/* 调试输出：规则状态名。 */
 const char* Rule_StateName(RuleState state);
+
+/* 调试输出：动作名。 */
 const char* Rule_ActionName(ActionType action);
+
+/* 调试输出：评分等级名。 */
 const char* Rule_GradeName(RuleGrade grade);
+
+/* 调试输出：姿态轴名。 */
 const char* Rule_AxisName(AxisIndex axis);
 
 #ifdef __cplusplus

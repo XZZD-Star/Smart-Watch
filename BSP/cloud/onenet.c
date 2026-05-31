@@ -1082,6 +1082,7 @@ static void OneNet_HandlePropertySet(const char *topic,
 {
   onenet_prop_set_context_t ctx;
 
+  /* 属性下发先解析成上下文，再统一应用动作，避免协议解析和业务控制交叉。 */
   OneNet_InitPropSetContext(&ctx);
   Debug_Printf("[MQTT] PROP SET matched\r\n");
   OneNet_CopyDownlink(topic, topic_len, payload, payload_len);
@@ -1295,6 +1296,7 @@ void OneNet_RevPro(const uint8_t *packet)
 {
   uint8_t type = 0U;
 
+  /* 网络任务收到 MQTT 包后只进入这里分发，外层不理解具体 topic/payload。 */
   if (packet == NULL)
   {
     return;

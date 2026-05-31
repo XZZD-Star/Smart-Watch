@@ -30,9 +30,6 @@
 #include "usart.h"
 #include "motion_input.h"
 #include "motion_sensor_pipeline.h"
-#include "motion_mode.h"
-#include "motion_window_test.h"
-#include "onenet.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,7 +52,6 @@
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
-static void reset_pose_pipeline(void);
 static void motion_uart4_handle_command(const uint8_t *buf, uint16_t len);
 
 /* USER CODE END PFP */
@@ -85,8 +81,6 @@ int extract_ypr(const uint8_t *buf, int len,
                 float *yaw, float *pitch, float *roll);
 uint16_t Calibrate_count = 0;     //校准3s计时
 uint16_t startRcv = 0;            //接收校准信号标识位
-
-volatile uint8_t  g_motion_ai_restart_req = 0U;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -299,6 +293,7 @@ void USART1_IRQHandler(void)
   tmp_flag = __HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE);
   if ((tmp_flag != RESET))
   {
+    /* 传感器中断只计算 DMA 长度并存包，解析/融合交给 Task1。 */
     rx_len = (uint16_t)(RXBUFFERSIZE - __HAL_DMA_GET_COUNTER(&hdma_usart1_rx));
     if (rx_len > RXBUFFERSIZE)
     {
@@ -342,6 +337,7 @@ void USART3_IRQHandler(void)
   tmp_flag = __HAL_UART_GET_FLAG(&huart3, UART_FLAG_IDLE);
   if ((tmp_flag != RESET))
   {
+    /* 前臂传感器与上臂保持同样的轻量 ISR 路径。 */
     rx_len = (uint16_t)(RXBUFFERSIZE - __HAL_DMA_GET_COUNTER(&hdma_usart3_rx));
     if (rx_len > RXBUFFERSIZE)
     {
@@ -482,17 +478,6 @@ const char *p   = (const char *)buf;
     return found;
 }
 
-static void reset_pose_pipeline(void)
-{
-    __disable_irq();
-    MotionSensorPipeline_Reset();
-    Calibrate_count = 0U;
-    __enable_irq();
-
-    memset(g_rx_buffer, 0, sizeof(g_rx_buffer));
-    memset(g_rx_buffer2, 0, sizeof(g_rx_buffer2));
-}
-
 static void motion_uart4_handle_command(const uint8_t *buf, uint16_t len)
 {
     char line[64] = {0};
@@ -530,6 +515,7 @@ static void motion_uart4_handle_command(const uint8_t *buf, uint16_t len)
         return;
     }
 
+    /* UART4 只解析本地命令文本，真正控制动作交给 App/motion。 */
     if (strcmp(command, "start") == 0)
     {
         Motion_RequestStart();
@@ -538,38 +524,6 @@ static void motion_uart4_handle_command(const uint8_t *buf, uint16_t len)
     {
         Motion_RequestClear();
     }
-}
-
-void Motion_RequestStart(void)
-{
-    if (g_motion_output_mode == MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST)
-    {
-        g_motion_single_armed = 0U;
-        MotionWindowTest_RequestRun();
-        return;
-    }
-
-    if (g_motion_ai_restart_req != 0U)
-    {
-        return;
-    }
-
-    if (g_motion_output_mode == MOTION_OUTPUT_MODE_SINGLE_ONCE)
-    {
-        g_motion_single_armed = 1U;
-    }
-    else
-    {
-        g_motion_single_armed = 0U;
-    }
-
-    reset_pose_pipeline();
-    g_motion_ai_restart_req = 1U;
-}
-
-void Motion_RequestClear(void)
-{
-    OneNet_ClearFallAlarm();
 }
 
 /* USER CODE END 1 */
