@@ -65,8 +65,6 @@ void UART4_IRQHandler(void);
 void USART6_IRQHandler(void);
 void UART7_IRQHandler(void);
 /* USER CODE BEGIN EFP */
-void Motion_RequestStart(void);
-void Motion_RequestClear(void);
 
 /* USER CODE END EFP */
 

@@ -8,7 +8,7 @@
 #include "MqttKit.h"
 #include "debug_uart7.h"
 #include "motion_ai.h"
-#include "stm32h7xx_it.h"
+#include "motion_input.h"
 #include "tim.h"
 
 #define ONENET_PACKET_TIMEOUT_MS       3000U
@@ -50,6 +50,29 @@ typedef struct
   int32_t shoulder_raise_count;
   int32_t side_raise_count;
 } onenet_train_plan_t;
+
+typedef struct
+{
+  char request_id[ONENET_REQUEST_ID_SIZE];
+  int32_t test_value;
+  int32_t decoded_action_id;
+  int32_t decoded_score;
+  int32_t open_value;
+  int32_t start_value;
+  int32_t fall_alarm_value;
+  uint8_t has_request_id;
+  uint8_t has_test_value;
+  uint8_t test_value_valid;
+  uint8_t has_plan_update;
+  uint8_t has_open_value;
+  uint8_t open_value_valid;
+  uint8_t has_start_value;
+  uint8_t start_value_valid;
+  uint8_t has_fall_alarm_value;
+  uint8_t fall_alarm_value_valid;
+  uint16_t reply_code;
+  const char *reply_message;
+} onenet_prop_set_context_t;
 
 static onenet_train_plan_t g_onenet_train_plan = {0};
 static onenet_train_plan_t g_onenet_train_display = {0};
@@ -747,6 +770,402 @@ uint8_t OneNet_PostPendingFallAlarm(void)
   return 1U;
 }
 
+static void OneNet_InitPropSetContext(onenet_prop_set_context_t *ctx)
+{
+  if (ctx == NULL)
+  {
+    return;
+  }
+
+  memset(ctx, 0, sizeof(*ctx));
+  ctx->reply_code = ONENET_REPLY_CODE_OK;
+  ctx->reply_message = "success";
+}
+
+static void OneNet_HandleTrainPlanProperty(onenet_prop_set_context_t *ctx)
+{
+  int32_t plan_value = 0;
+
+  if (ctx == NULL)
+  {
+    return;
+  }
+
+  if (OneNet_ParsePropertyIntValue(g_onenet_last_payload,
+                                   ONENET_DP_ELBOW_FLEX_COUNT_KEY,
+                                   &plan_value) != 0U)
+  {
+    g_onenet_train_plan.elbow_flex_count = plan_value;
+    ctx->has_plan_update = 1U;
+    Debug_Printf("[MQTT] PLAN SET elbow_flex_count=%ld\r\n", (long)plan_value);
+  }
+  if (OneNet_ParsePropertyIntValue(g_onenet_last_payload,
+                                   ONENET_DP_FRONT_RAISE_COUNT_KEY,
+                                   &plan_value) != 0U)
+  {
+    g_onenet_train_plan.front_raise_count = plan_value;
+    ctx->has_plan_update = 1U;
+    Debug_Printf("[MQTT] PLAN SET front_raise_count=%ld\r\n", (long)plan_value);
+  }
+  if (OneNet_ParsePropertyIntValue(g_onenet_last_payload,
+                                   ONENET_DP_SHOULDER_RAISE_COUNT_KEY,
+                                   &plan_value) != 0U)
+  {
+    g_onenet_train_plan.shoulder_raise_count = plan_value;
+    ctx->has_plan_update = 1U;
+    Debug_Printf("[MQTT] PLAN SET shoulder_raise_count=%ld\r\n", (long)plan_value);
+  }
+  if (OneNet_ParsePropertyIntValue(g_onenet_last_payload,
+                                   ONENET_DP_SIDE_RAISE_COUNT_KEY,
+                                   &plan_value) != 0U)
+  {
+    g_onenet_train_plan.side_raise_count = plan_value;
+    ctx->has_plan_update = 1U;
+    Debug_Printf("[MQTT] PLAN SET side_raise_count=%ld\r\n", (long)plan_value);
+  }
+
+  if (ctx->has_plan_update != 0U)
+  {
+    OneNet_ResetTrainDisplayFromPlan();
+    Debug_Printf("[MQTT] PLAN DISPLAY RESET elbow=%ld front=%ld shoulder=%ld side=%ld\r\n",
+                 (long)g_onenet_train_display.elbow_flex_count,
+                 (long)g_onenet_train_display.front_raise_count,
+                 (long)g_onenet_train_display.shoulder_raise_count,
+                 (long)g_onenet_train_display.side_raise_count);
+  }
+}
+
+static void OneNet_HandleDoorProperty(onenet_prop_set_context_t *ctx)
+{
+  if (ctx == NULL)
+  {
+    return;
+  }
+
+  ctx->has_open_value = OneNet_ParsePropertyIntValue(g_onenet_last_payload,
+                                                     ONENET_DP_OPEN_KEY,
+                                                     &ctx->open_value);
+  if (ctx->has_open_value == 0U)
+  {
+    return;
+  }
+
+  ctx->open_value_valid = Servo_SetDoorByCloudValue(ctx->open_value);
+  if (ctx->open_value_valid != 0U)
+  {
+    Debug_Printf("[MQTT] DOOR SET open=%ld applied_state=%u\r\n",
+                 (long)ctx->open_value,
+                 (unsigned int)Servo_GetDoorState());
+  }
+  else
+  {
+    ctx->reply_code = ONENET_REPLY_CODE_BAD_REQUEST;
+    ctx->reply_message = "open must be 0 or 1";
+    Debug_Printf("[MQTT][WARN] DOOR SET invalid open=%ld\r\n",
+                 (long)ctx->open_value);
+  }
+}
+
+static void OneNet_HandleFallAlarmProperty(onenet_prop_set_context_t *ctx)
+{
+  if (ctx == NULL)
+  {
+    return;
+  }
+
+  ctx->has_fall_alarm_value = OneNet_ParsePropertyIntValue(g_onenet_last_payload,
+                                                           ONENET_DP_FALL_ALARM_KEY,
+                                                           &ctx->fall_alarm_value);
+  if (ctx->has_fall_alarm_value == 0U)
+  {
+    return;
+  }
+
+  if ((ctx->fall_alarm_value == 0) || (ctx->fall_alarm_value == 1))
+  {
+    ctx->fall_alarm_value_valid = 1U;
+    Debug_Printf("[MQTT] FALL SET fall_alarm=%ld\r\n",
+                 (long)ctx->fall_alarm_value);
+  }
+  else
+  {
+    ctx->reply_code = ONENET_REPLY_CODE_BAD_REQUEST;
+    ctx->reply_message = "fall_alarm must be 0 or 1";
+    Debug_Printf("[MQTT][WARN] FALL SET invalid fall_alarm=%ld\r\n",
+                 (long)ctx->fall_alarm_value);
+  }
+}
+
+static void OneNet_HandleStartProperty(onenet_prop_set_context_t *ctx)
+{
+  if (ctx == NULL)
+  {
+    return;
+  }
+
+  ctx->has_start_value = OneNet_ParsePropertyIntValue(g_onenet_last_payload,
+                                                      ONENET_DP_START_KEY,
+                                                      &ctx->start_value);
+  if (ctx->has_start_value == 0U)
+  {
+    return;
+  }
+
+  if (ctx->start_value == 1)
+  {
+    ctx->start_value_valid = 1U;
+    Debug_Printf("[MQTT] START SET start=%ld\r\n",
+                 (long)ctx->start_value);
+  }
+  else
+  {
+    ctx->reply_code = ONENET_REPLY_CODE_BAD_REQUEST;
+    ctx->reply_message = "start must be 1";
+    Debug_Printf("[MQTT][WARN] START SET invalid start=%ld\r\n",
+                 (long)ctx->start_value);
+  }
+}
+
+static void OneNet_HandleTestProperty(onenet_prop_set_context_t *ctx)
+{
+  if (ctx == NULL)
+  {
+    return;
+  }
+
+  ctx->has_test_value = OneNet_ParseTestValue(g_onenet_last_payload, &ctx->test_value);
+}
+
+static void OneNet_LogPropertySetSummary(const onenet_prop_set_context_t *ctx)
+{
+  if (ctx == NULL)
+  {
+    return;
+  }
+
+  Debug_Printf("[MQTT] PROP SET payload=%s\r\n", g_onenet_last_payload);
+
+  if (ctx->has_test_value != 0U)
+  {
+    Debug_Printf("[MQTT] PROP SET test=%ld\r\n", (long)ctx->test_value);
+  }
+  if (ctx->has_plan_update != 0U)
+  {
+    Debug_Printf("[MQTT] PROP SET plan update parsed\r\n");
+  }
+  if (ctx->has_open_value != 0U)
+  {
+    Debug_Printf("[MQTT] PROP SET open=%ld\r\n", (long)ctx->open_value);
+  }
+  if (ctx->has_fall_alarm_value != 0U)
+  {
+    Debug_Printf("[MQTT] PROP SET fall_alarm=%ld\r\n", (long)ctx->fall_alarm_value);
+  }
+  if (ctx->has_start_value != 0U)
+  {
+    Debug_Printf("[MQTT] PROP SET start=%ld\r\n", (long)ctx->start_value);
+  }
+  if ((ctx->has_test_value == 0U) &&
+      (ctx->has_plan_update == 0U) &&
+      (ctx->has_open_value == 0U) &&
+      (ctx->has_fall_alarm_value == 0U) &&
+      (ctx->has_start_value == 0U))
+  {
+    Debug_Printf("[MQTT][WARN] PROP SET no known property parsed\r\n");
+  }
+}
+
+static void OneNet_ApplyDoorProperty(const onenet_prop_set_context_t *ctx)
+{
+  if ((ctx == NULL) ||
+      (ctx->has_open_value == 0U) ||
+      (ctx->open_value_valid == 0U))
+  {
+    return;
+  }
+
+  g_onenet_pending_door_state_value = (int32_t)Servo_GetDoorState();
+  g_onenet_door_state_post_pending = 1U;
+  Debug_Printf("[MQTT] open cached, defer post to net task value=%ld\r\n",
+               (long)g_onenet_pending_door_state_value);
+}
+
+static void OneNet_ApplyFallAlarmProperty(const onenet_prop_set_context_t *ctx)
+{
+  if ((ctx == NULL) ||
+      (ctx->has_fall_alarm_value == 0U) ||
+      (ctx->fall_alarm_value_valid == 0U))
+  {
+    return;
+  }
+
+  if (ctx->fall_alarm_value != 0)
+  {
+    OneNet_ActivateFallAlarm();
+  }
+  else
+  {
+    Motion_RequestClear();
+  }
+}
+
+static void OneNet_ApplyStartProperty(const onenet_prop_set_context_t *ctx)
+{
+  if ((ctx == NULL) ||
+      (ctx->has_start_value == 0U) ||
+      (ctx->start_value_valid == 0U))
+  {
+    return;
+  }
+
+  Motion_RequestStart();
+}
+
+static void OneNet_ApplyTestProperty(onenet_prop_set_context_t *ctx)
+{
+  if ((ctx == NULL) || (ctx->has_test_value == 0U))
+  {
+    return;
+  }
+
+  ctx->decoded_action_id = ctx->test_value / 10;
+  ctx->decoded_score = ctx->test_value % 10;
+  ctx->test_value_valid = OneNet_IsDecodedTestValueValid(ctx->decoded_action_id,
+                                                         ctx->decoded_score);
+  Debug_Printf("[MQTT] PROP SET decoded action_id=%ld score=%ld valid=%u\r\n",
+               (long)ctx->decoded_action_id,
+               (long)ctx->decoded_score,
+               (unsigned int)ctx->test_value_valid);
+
+  if (ctx->test_value_valid != 0U)
+  {
+    g_onenet_last_valid_test_value = ctx->test_value;
+    g_onenet_has_valid_test_value = 1U;
+    MotionAi_SetDemoOverride(ctx->test_value,
+                             ctx->decoded_action_id,
+                             ctx->decoded_score);
+  }
+  else
+  {
+    MotionAi_ClearDemoOverride();
+    Debug_Printf("[MQTT][WARN] PROP SET invalid test=%ld, demo override cleared\r\n",
+                 (long)ctx->test_value);
+  }
+
+  Debug_Printf("[MQTT] PROP SET test cached, defer post until TEST_DONE\r\n");
+}
+
+static void OneNet_ApplyTrainPlanProperty(const onenet_prop_set_context_t *ctx)
+{
+  if ((ctx == NULL) || (ctx->has_plan_update == 0U))
+  {
+    return;
+  }
+
+  g_onenet_train_plan_post_pending = 1U;
+  Debug_Printf("[MQTT] PLAN SET cached, defer post to net task\r\n");
+}
+
+static void OneNet_ApplyPropertySetActions(onenet_prop_set_context_t *ctx)
+{
+  OneNet_ApplyDoorProperty(ctx);
+  OneNet_ApplyFallAlarmProperty(ctx);
+  OneNet_ApplyStartProperty(ctx);
+  OneNet_ApplyTestProperty(ctx);
+  OneNet_ApplyTrainPlanProperty(ctx);
+}
+
+static void OneNet_HandlePropertySet(const char *topic,
+                                     uint16_t topic_len,
+                                     const char *payload,
+                                     uint16_t payload_len)
+{
+  onenet_prop_set_context_t ctx;
+
+  OneNet_InitPropSetContext(&ctx);
+  Debug_Printf("[MQTT] PROP SET matched\r\n");
+  OneNet_CopyDownlink(topic, topic_len, payload, payload_len);
+
+  ctx.has_request_id = OneNet_ParseRequestId(g_onenet_last_payload,
+                                             ctx.request_id,
+                                             sizeof(ctx.request_id));
+  OneNet_HandleTestProperty(&ctx);
+  OneNet_HandleTrainPlanProperty(&ctx);
+  OneNet_HandleDoorProperty(&ctx);
+  OneNet_HandleFallAlarmProperty(&ctx);
+  OneNet_HandleStartProperty(&ctx);
+  OneNet_LogPropertySetSummary(&ctx);
+
+  if (ctx.has_request_id != 0U)
+  {
+    Debug_Printf("[MQTT] PROP SET reply id=%s\r\n", ctx.request_id);
+    if (OneNet_SendPropertySetReply(ctx.request_id,
+                                    ctx.reply_code,
+                                    ctx.reply_message) == 0U)
+    {
+      g_onenet_session_error = 1U;
+      return;
+    }
+
+    OneNet_ApplyPropertySetActions(&ctx);
+  }
+  else
+  {
+    Debug_Printf("[MQTT][ERR] PROP SET missing id\r\n");
+    g_onenet_last_status = ONENET_STATUS_FAIL_RX_PARSE;
+  }
+}
+
+static void OneNet_HandlePublishPacket(const uint8_t *packet)
+{
+  char *topic = NULL;
+  char *payload = NULL;
+  char topic_text[ONENET_DOWNLINK_TOPIC_SIZE];
+  char payload_text[ONENET_DOWNLINK_PAYLOAD_SIZE];
+  uint16_t topic_len = 0U;
+  uint16_t payload_len = 0U;
+  uint8_t qos = 0U;
+  uint16_t pkt_id = 0U;
+  uint8_t parse_status = 0U;
+
+  parse_status = MQTT_UnPacketPublish((uint8_t *)packet,
+                                      &topic,
+                                      &topic_len,
+                                      &payload,
+                                      &payload_len,
+                                      &qos,
+                                      &pkt_id);
+  if (parse_status != 0U)
+  {
+    Debug_Printf("[MQTT] PUBLISH parse fail code=%u\r\n",
+                 (unsigned int)parse_status);
+    g_onenet_session_error = 1U;
+    g_onenet_last_status = ONENET_STATUS_FAIL_RX_PARSE;
+    return;
+  }
+
+  OneNet_CopyTextForLog(topic, topic_len, topic_text, sizeof(topic_text));
+  OneNet_CopyTextForLog(payload, payload_len, payload_text, sizeof(payload_text));
+
+  Debug_Printf("[MQTT] RX PUBLISH topic=%s qos=%u pkt_id=%u payload_len=%u\r\n",
+               topic_text,
+               (unsigned int)qos,
+               (unsigned int)pkt_id,
+               (unsigned int)payload_len);
+  Debug_Printf("[MQTT] RX PUBLISH payload=%s\r\n", payload_text);
+
+  if (OneNet_TopicMatches(topic, topic_len, ONENET_TOPIC_PROP_SET) != 0U)
+  {
+    OneNet_HandlePropertySet(topic, topic_len, payload, payload_len);
+  }
+  else
+  {
+    Debug_Printf("[MQTT] PUBLISH topic mismatch expect=%s got=%s\r\n",
+                 ONENET_TOPIC_PROP_SET,
+                 topic_text);
+  }
+}
+
 uint8_t OneNet_DevLink(void)
 {
   MQTT_PACKET_STRUCTURE packet = {0};
@@ -926,293 +1345,8 @@ void OneNet_RevPro(const uint8_t *packet)
       break;
 
     case MQTT_PKT_PUBLISH:
-    {
-      char *topic = NULL;
-      char *payload = NULL;
-      char topic_text[ONENET_DOWNLINK_TOPIC_SIZE];
-      char payload_text[ONENET_DOWNLINK_PAYLOAD_SIZE];
-      char request_id[ONENET_REQUEST_ID_SIZE];
-      uint16_t topic_len = 0U;
-      uint16_t payload_len = 0U;
-      uint8_t qos = 0U;
-      uint16_t pkt_id = 0U;
-      int32_t test_value = 0;
-      int32_t decoded_action_id = 0;
-      int32_t decoded_score = 0;
-      int32_t plan_value = 0;
-      int32_t open_value = 0;
-      int32_t start_value = 0;
-      int32_t fall_alarm_value = 0;
-      uint8_t has_request_id = 0U;
-      uint8_t has_test_value = 0U;
-      uint8_t test_value_valid = 0U;
-      uint8_t has_plan_update = 0U;
-      uint8_t has_open_value = 0U;
-      uint8_t open_value_valid = 0U;
-      uint8_t has_start_value = 0U;
-      uint8_t start_value_valid = 0U;
-      uint8_t has_fall_alarm_value = 0U;
-      uint8_t fall_alarm_value_valid = 0U;
-      uint16_t reply_code = ONENET_REPLY_CODE_OK;
-      const char *reply_message = "success";
-
-      {
-        uint8_t parse_status = MQTT_UnPacketPublish((uint8_t *)packet,
-                                                    &topic,
-                                                    &topic_len,
-                                                    &payload,
-                                                    &payload_len,
-                                                    &qos,
-                                                    &pkt_id);
-        if (parse_status != 0U)
-        {
-          Debug_Printf("[MQTT] PUBLISH parse fail code=%u\r\n",
-                       (unsigned int)parse_status);
-          g_onenet_session_error = 1U;
-          g_onenet_last_status = ONENET_STATUS_FAIL_RX_PARSE;
-          break;
-        }
-      }
-
-      OneNet_CopyTextForLog(topic, topic_len, topic_text, sizeof(topic_text));
-      OneNet_CopyTextForLog(payload, payload_len, payload_text, sizeof(payload_text));
-
-      Debug_Printf("[MQTT] RX PUBLISH topic=%s qos=%u pkt_id=%u payload_len=%u\r\n",
-                   topic_text,
-                   (unsigned int)qos,
-                   (unsigned int)pkt_id,
-                   (unsigned int)payload_len);
-      Debug_Printf("[MQTT] RX PUBLISH payload=%s\r\n", payload_text);
-
-      if (OneNet_TopicMatches(topic, topic_len, ONENET_TOPIC_PROP_SET) != 0U)
-      {
-        Debug_Printf("[MQTT] PROP SET matched\r\n");
-        OneNet_CopyDownlink(topic, topic_len, payload, payload_len);
-
-        memset(request_id, 0, sizeof(request_id));
-        has_request_id = OneNet_ParseRequestId(g_onenet_last_payload,
-                                               request_id,
-                                               sizeof(request_id));
-        has_test_value = OneNet_ParseTestValue(g_onenet_last_payload, &test_value);
-        if (OneNet_ParsePropertyIntValue(g_onenet_last_payload,
-                                         ONENET_DP_ELBOW_FLEX_COUNT_KEY,
-                                         &plan_value) != 0U)
-        {
-          g_onenet_train_plan.elbow_flex_count = plan_value;
-          has_plan_update = 1U;
-          Debug_Printf("[MQTT] PLAN SET elbow_flex_count=%ld\r\n", (long)plan_value);
-        }
-        if (OneNet_ParsePropertyIntValue(g_onenet_last_payload,
-                                         ONENET_DP_FRONT_RAISE_COUNT_KEY,
-                                         &plan_value) != 0U)
-        {
-          g_onenet_train_plan.front_raise_count = plan_value;
-          has_plan_update = 1U;
-          Debug_Printf("[MQTT] PLAN SET front_raise_count=%ld\r\n", (long)plan_value);
-        }
-        if (OneNet_ParsePropertyIntValue(g_onenet_last_payload,
-                                         ONENET_DP_SHOULDER_RAISE_COUNT_KEY,
-                                         &plan_value) != 0U)
-        {
-          g_onenet_train_plan.shoulder_raise_count = plan_value;
-          has_plan_update = 1U;
-          Debug_Printf("[MQTT] PLAN SET shoulder_raise_count=%ld\r\n", (long)plan_value);
-        }
-        if (OneNet_ParsePropertyIntValue(g_onenet_last_payload,
-                                         ONENET_DP_SIDE_RAISE_COUNT_KEY,
-                                         &plan_value) != 0U)
-        {
-          g_onenet_train_plan.side_raise_count = plan_value;
-          has_plan_update = 1U;
-          Debug_Printf("[MQTT] PLAN SET side_raise_count=%ld\r\n", (long)plan_value);
-        }
-
-        if (has_plan_update != 0U)
-        {
-          OneNet_ResetTrainDisplayFromPlan();
-          Debug_Printf("[MQTT] PLAN DISPLAY RESET elbow=%ld front=%ld shoulder=%ld side=%ld\r\n",
-                       (long)g_onenet_train_display.elbow_flex_count,
-                       (long)g_onenet_train_display.front_raise_count,
-                       (long)g_onenet_train_display.shoulder_raise_count,
-                       (long)g_onenet_train_display.side_raise_count);
-        }
-
-        has_open_value = OneNet_ParsePropertyIntValue(g_onenet_last_payload,
-                                                      ONENET_DP_OPEN_KEY,
-                                                      &open_value);
-        if (has_open_value != 0U)
-        {
-          open_value_valid = Servo_SetDoorByCloudValue(open_value);
-          if (open_value_valid != 0U)
-          {
-            Debug_Printf("[MQTT] DOOR SET open=%ld applied_state=%u\r\n",
-                         (long)open_value,
-                         (unsigned int)Servo_GetDoorState());
-          }
-          else
-          {
-            reply_code = ONENET_REPLY_CODE_BAD_REQUEST;
-            reply_message = "open must be 0 or 1";
-            Debug_Printf("[MQTT][WARN] DOOR SET invalid open=%ld\r\n",
-                         (long)open_value);
-          }
-        }
-
-        has_fall_alarm_value = OneNet_ParsePropertyIntValue(g_onenet_last_payload,
-                                                            ONENET_DP_FALL_ALARM_KEY,
-                                                            &fall_alarm_value);
-        if (has_fall_alarm_value != 0U)
-        {
-          if ((fall_alarm_value == 0) || (fall_alarm_value == 1))
-          {
-            fall_alarm_value_valid = 1U;
-            Debug_Printf("[MQTT] FALL SET fall_alarm=%ld\r\n",
-                         (long)fall_alarm_value);
-          }
-          else
-          {
-            reply_code = ONENET_REPLY_CODE_BAD_REQUEST;
-            reply_message = "fall_alarm must be 0 or 1";
-            Debug_Printf("[MQTT][WARN] FALL SET invalid fall_alarm=%ld\r\n",
-                         (long)fall_alarm_value);
-          }
-        }
-
-        has_start_value = OneNet_ParsePropertyIntValue(g_onenet_last_payload,
-                                                       ONENET_DP_START_KEY,
-                                                       &start_value);
-        if (has_start_value != 0U)
-        {
-          if (start_value == 1)
-          {
-            start_value_valid = 1U;
-            Debug_Printf("[MQTT] START SET start=%ld\r\n",
-                         (long)start_value);
-          }
-          else
-          {
-            reply_code = ONENET_REPLY_CODE_BAD_REQUEST;
-            reply_message = "start must be 1";
-            Debug_Printf("[MQTT][WARN] START SET invalid start=%ld\r\n",
-                         (long)start_value);
-          }
-        }
-
-        Debug_Printf("[MQTT] PROP SET payload=%s\r\n", g_onenet_last_payload);
-
-        if (has_test_value != 0U)
-        {
-          Debug_Printf("[MQTT] PROP SET test=%ld\r\n", (long)test_value);
-        }
-        if (has_plan_update != 0U)
-        {
-          Debug_Printf("[MQTT] PROP SET plan update parsed\r\n");
-        }
-        if (has_open_value != 0U)
-        {
-          Debug_Printf("[MQTT] PROP SET open=%ld\r\n", (long)open_value);
-        }
-        if (has_fall_alarm_value != 0U)
-        {
-          Debug_Printf("[MQTT] PROP SET fall_alarm=%ld\r\n", (long)fall_alarm_value);
-        }
-        if (has_start_value != 0U)
-        {
-          Debug_Printf("[MQTT] PROP SET start=%ld\r\n", (long)start_value);
-        }
-        if ((has_test_value == 0U) &&
-            (has_plan_update == 0U) &&
-            (has_open_value == 0U) &&
-            (has_fall_alarm_value == 0U) &&
-            (has_start_value == 0U))
-        {
-          Debug_Printf("[MQTT][WARN] PROP SET no known property parsed\r\n");
-        }
-
-        if (has_request_id != 0U)
-        {
-          Debug_Printf("[MQTT] PROP SET reply id=%s\r\n", request_id);
-          if (OneNet_SendPropertySetReply(request_id,
-                                          reply_code,
-                                          reply_message) == 0U)
-          {
-            g_onenet_session_error = 1U;
-          }
-          else
-          {
-            if ((has_open_value != 0U) && (open_value_valid != 0U))
-            {
-              g_onenet_pending_door_state_value = (int32_t)Servo_GetDoorState();
-              g_onenet_door_state_post_pending = 1U;
-              Debug_Printf("[MQTT] open cached, defer post to net task value=%ld\r\n",
-                           (long)g_onenet_pending_door_state_value);
-            }
-
-            if ((has_fall_alarm_value != 0U) && (fall_alarm_value_valid != 0U))
-            {
-              if (fall_alarm_value != 0)
-              {
-                OneNet_ActivateFallAlarm();
-              }
-              else
-              {
-                Motion_RequestClear();
-              }
-            }
-
-            if ((has_start_value != 0U) && (start_value_valid != 0U))
-            {
-              Motion_RequestStart();
-            }
-
-            if (has_test_value != 0U)
-            {
-              decoded_action_id = test_value / 10;
-              decoded_score = test_value % 10;
-              test_value_valid = OneNet_IsDecodedTestValueValid(decoded_action_id,
-                                                                decoded_score);
-              Debug_Printf("[MQTT] PROP SET decoded action_id=%ld score=%ld valid=%u\r\n",
-                           (long)decoded_action_id,
-                           (long)decoded_score,
-                           (unsigned int)test_value_valid);
-
-              if (test_value_valid != 0U)
-              {
-                g_onenet_last_valid_test_value = test_value;
-                g_onenet_has_valid_test_value = 1U;
-                MotionAi_SetDemoOverride(test_value, decoded_action_id, decoded_score);
-              }
-              else
-              {
-                MotionAi_ClearDemoOverride();
-                Debug_Printf("[MQTT][WARN] PROP SET invalid test=%ld, demo override cleared\r\n",
-                             (long)test_value);
-              }
-
-              Debug_Printf("[MQTT] PROP SET test cached, defer post until TEST_DONE\r\n");
-            }
-
-            if (has_plan_update != 0U)
-            {
-              g_onenet_train_plan_post_pending = 1U;
-              Debug_Printf("[MQTT] PLAN SET cached, defer post to net task\r\n");
-            }
-          }
-        }
-        else
-        {
-          Debug_Printf("[MQTT][ERR] PROP SET missing id\r\n");
-          g_onenet_last_status = ONENET_STATUS_FAIL_RX_PARSE;
-        }
-      }
-      else
-      {
-        Debug_Printf("[MQTT] PUBLISH topic mismatch expect=%s got=%s\r\n",
-                     ONENET_TOPIC_PROP_SET,
-                     topic_text);
-      }
+      OneNet_HandlePublishPacket(packet);
       break;
-    }
 
     default:
       Debug_Printf("[MQTT] RX UNHANDLED TYPE=%u\r\n", (unsigned int)type);

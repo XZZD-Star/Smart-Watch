@@ -39,6 +39,8 @@
 #include "uart7_role.h"
 #include "uart_screen.h"
 #include "health_monitor.h"
+#include "motion_input.h"
+#include "motion_sensor_pipeline.h"
 #include "motion_mode.h"
 #include "motion_ai.h"
 #include "motion_window_test.h"
@@ -48,39 +50,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-extern volatile uint8_t  g_fused_row_ready;
-extern volatile uint64_t g_fused_ts_us;
-extern volatile float    g_fused_upper_yaw;
-extern volatile float    g_fused_upper_pitch;
-extern volatile float    g_fused_upper_roll;
-extern volatile float    g_fused_fore_yaw;
-extern volatile float    g_fused_fore_pitch;
-extern volatile float    g_fused_fore_roll;
-extern volatile uint32_t g_fused_seq_u;
-extern volatile uint32_t g_fused_seq_f;
-extern volatile uint32_t g_fused_lost_u;
-extern volatile uint32_t g_fused_lost_f;
-extern volatile int32_t  g_fused_upper_heart_rate;
-extern volatile int32_t  g_fused_upper_spo2;
-extern volatile int8_t   g_fused_upper_hr_valid;
-extern volatile int8_t   g_fused_upper_spo2_valid;
-extern volatile uint32_t g_fused_upper_ppg_fill;
-extern volatile uint32_t g_fused_upper_ppg_calc_count;
-extern volatile uint32_t g_fused_upper_ppg_pending;
-extern volatile uint32_t g_fused_upper_ppg_part_id;
-extern volatile uint32_t g_fused_upper_ppg_rev_id;
-extern volatile uint32_t g_fused_upper_ppg_int_level;
-extern volatile int32_t  g_fused_fore_heart_rate;
-extern volatile int32_t  g_fused_fore_spo2;
-extern volatile int8_t   g_fused_fore_hr_valid;
-extern volatile int8_t   g_fused_fore_spo2_valid;
-extern volatile uint32_t g_fused_fore_ppg_fill;
-extern volatile uint32_t g_fused_fore_ppg_calc_count;
-extern volatile uint32_t g_fused_fore_ppg_pending;
-extern volatile uint32_t g_fused_fore_ppg_part_id;
-extern volatile uint32_t g_fused_fore_ppg_rev_id;
-extern volatile uint32_t g_fused_fore_ppg_int_level;
-extern volatile uint32_t g_align_fail_count;
 extern volatile uint8_t  g_motion_ai_restart_req;
 /* USER CODE END PTD */
 
@@ -151,7 +120,6 @@ const osSemaphoreAttr_t myBinarySem01_attributes = {
 /* USER CODE BEGIN FunctionPrototypes */
 
 QueueHandle_t Semaphore;
-uint8_t Motion_ProcessPendingPosePackets(void);
 static RuleEngine g_task1_rule_engine;
 static uint8_t task1_consume_ai_restart_request(void);
 static uint8_t task1_try_take_fused_frame(motion_fused_frame_t *frame);

@@ -629,6 +629,11 @@
               </FileOption>
             </File>
             <File>
+              <FileName>motion_sensor_pipeline.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/motion_sensor_pipeline.c</FilePath>
+            </File>
+            <File>
               <FileName>crc.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/crc.c</FilePath>
