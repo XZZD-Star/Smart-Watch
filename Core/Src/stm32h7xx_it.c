@@ -27,6 +27,9 @@
 #include <stdlib.h>   // strtof
 #include <ctype.h>    // isdigit
 #include <stdint.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os2.h"
 #include "usart.h"
 #include "motion_mode.h"
 #include "motion_window_test.h"
@@ -56,6 +59,15 @@ typedef struct
     uint8_t  valid;
 } pose_frame_t;
 
+typedef struct
+{
+    uint8_t data[RXBUFFERSIZE];
+    uint16_t len;
+    uint64_t ts_us;
+    volatile uint8_t pending;
+    volatile uint32_t dropped;
+} pose_pending_packet_t;
+
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
@@ -79,13 +91,16 @@ typedef struct
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
 static uint64_t get_ts_us(void);
-static int parse_pose_frame(const uint8_t *buf, uint16_t len, uint8_t default_sensor_id, pose_frame_t *out);
+static int parse_pose_frame(const uint8_t *buf, uint16_t len, uint8_t default_sensor_id, uint64_t ts_us, pose_frame_t *out);
 static void update_seq_stats(uint8_t sensor_id, uint32_t seq);
-static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t default_sensor_id);
+static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t default_sensor_id, uint64_t ts_us);
 static uint64_t abs_diff_u64(uint64_t a, uint64_t b);
 static void try_emit_fused(void);
+static void store_pose_packet_from_isr(uint8_t sensor_id, const uint8_t *buf, uint16_t len);
+static uint8_t take_pending_pose_packet(pose_pending_packet_t *packet, uint8_t *buf, uint16_t *len, uint64_t *ts_us);
 static void reset_pose_pipeline(void);
 static void motion_uart4_handle_command(const uint8_t *buf, uint16_t len);
+uint8_t Motion_ProcessPendingPosePackets(void);
 void Motion_RequestStart(void);
 void Motion_RequestClear(void);
 
@@ -109,6 +124,7 @@ extern UART_HandleTypeDef huart3;
 extern UART_HandleTypeDef huart6;
 extern UART_HandleTypeDef huart7;
 extern TIM_HandleTypeDef htim1;
+extern osThreadId_t Task1Handle;
 
 /* USER CODE BEGIN EV */
 float yaw,pitch,roll;
@@ -136,6 +152,9 @@ static uint8_t  dwt_ts_inited = 0U;
 static uint32_t dwt_cycles_per_us = 1U;
 static uint32_t dwt_last_cyccnt = 0U;
 static uint64_t dwt_cycle_high = 0U;
+
+static pose_pending_packet_t upper_pending_packet = {0};
+static pose_pending_packet_t fore_pending_packet = {0};
 
 volatile uint8_t  g_fused_row_ready = 0U;
 volatile uint64_t g_fused_ts_us = 0ULL;
@@ -389,8 +408,7 @@ void USART1_IRQHandler(void)
     }
     __HAL_UART_CLEAR_IDLEFLAG(&huart1);
     HAL_UART_DMAStop(&huart1);
-    process_pose_packet(g_rx_buffer, rx_len, SENSOR_ID_UPPER);
-    memset(g_rx_buffer, 0, sizeof(g_rx_buffer));
+    store_pose_packet_from_isr(SENSOR_ID_UPPER, g_rx_buffer, rx_len);
     recv_end_flag = 1;
   }
 
@@ -433,8 +451,7 @@ void USART3_IRQHandler(void)
     }
     __HAL_UART_CLEAR_IDLEFLAG(&huart3);
     HAL_UART_DMAStop(&huart3);
-    process_pose_packet(g_rx_buffer2, rx_len, SENSOR_ID_FORE);
-    memset(g_rx_buffer2, 0, sizeof(g_rx_buffer2));
+    store_pose_packet_from_isr(SENSOR_ID_FORE, g_rx_buffer2, rx_len);
     recv_end_flag2 = 1;
   }
   /* USER CODE END USART3_IRQn 0 */
@@ -623,7 +640,12 @@ static uint64_t get_ts_us(void)
     return (dwt_cycle_high + (uint64_t)now) / (uint64_t)dwt_cycles_per_us;
 }
 
-static int parse_pose_frame(const uint8_t *buf, uint16_t len, uint8_t default_sensor_id, pose_frame_t *out)
+static int parse_pose_frame(
+    const uint8_t *buf,
+    uint16_t len,
+    uint8_t default_sensor_id,
+    uint64_t ts_us,
+    pose_frame_t *out)
 {
     char line[192] = {0};
     char *tokens[15] = {0};
@@ -752,7 +774,7 @@ static int parse_pose_frame(const uint8_t *buf, uint16_t len, uint8_t default_se
     out->ppg_part_id = ppg_part_id;
     out->ppg_rev_id = ppg_rev_id;
     out->ppg_int_level = ppg_int_level;
-    out->ts_us = get_ts_us();
+    out->ts_us = ts_us;
     out->valid = 1U;
     return 1;
 }
@@ -851,11 +873,71 @@ static void try_emit_fused(void)
     }
 }
 
-static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t default_sensor_id)
+static void store_pose_packet_from_isr(uint8_t sensor_id, const uint8_t *buf, uint16_t len)
+{
+    pose_pending_packet_t *packet = NULL;
+    BaseType_t higher_priority_task_woken = pdFALSE;
+
+    if ((buf == NULL) || (len == 0U))
+    {
+        return;
+    }
+
+    if (len > RXBUFFERSIZE)
+    {
+        len = RXBUFFERSIZE;
+    }
+
+    packet = (sensor_id == SENSOR_ID_UPPER) ? &upper_pending_packet : &fore_pending_packet;
+    if (packet->pending != 0U)
+    {
+        packet->dropped++;
+    }
+
+    memcpy(packet->data, buf, len);
+    packet->len = len;
+    packet->ts_us = get_ts_us();
+    packet->pending = 1U;
+
+    if ((Task1Handle != NULL) && (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING))
+    {
+        vTaskNotifyGiveFromISR((TaskHandle_t)Task1Handle, &higher_priority_task_woken);
+        portYIELD_FROM_ISR(higher_priority_task_woken);
+    }
+}
+
+static uint8_t take_pending_pose_packet(
+    pose_pending_packet_t *packet,
+    uint8_t *buf,
+    uint16_t *len,
+    uint64_t *ts_us)
+{
+    uint8_t has_packet = 0U;
+
+    if ((packet == NULL) || (buf == NULL) || (len == NULL) || (ts_us == NULL))
+    {
+        return 0U;
+    }
+
+    taskENTER_CRITICAL();
+    if (packet->pending != 0U)
+    {
+        *len = packet->len;
+        *ts_us = packet->ts_us;
+        memcpy(buf, packet->data, packet->len);
+        packet->pending = 0U;
+        has_packet = 1U;
+    }
+    taskEXIT_CRITICAL();
+
+    return has_packet;
+}
+
+static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t default_sensor_id, uint64_t ts_us)
 {
     pose_frame_t frame = {0};
 
-    if (!parse_pose_frame(buf, len, default_sensor_id, &frame))
+    if (!parse_pose_frame(buf, len, default_sensor_id, ts_us, &frame))
     {
         return;
     }
@@ -886,6 +968,28 @@ static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t defaul
     }
 
     try_emit_fused();
+}
+
+uint8_t Motion_ProcessPendingPosePackets(void)
+{
+    uint8_t local_buf[RXBUFFERSIZE];
+    uint16_t local_len = 0U;
+    uint64_t local_ts_us = 0ULL;
+    uint8_t processed = 0U;
+
+    if (take_pending_pose_packet(&upper_pending_packet, local_buf, &local_len, &local_ts_us) != 0U)
+    {
+        process_pose_packet(local_buf, local_len, SENSOR_ID_UPPER, local_ts_us);
+        processed = 1U;
+    }
+
+    if (take_pending_pose_packet(&fore_pending_packet, local_buf, &local_len, &local_ts_us) != 0U)
+    {
+        process_pose_packet(local_buf, local_len, SENSOR_ID_FORE, local_ts_us);
+        processed = 1U;
+    }
+
+    return processed;
 }
 
 int extract_ypr(const uint8_t *buf, int len,
@@ -930,6 +1034,14 @@ static void reset_pose_pipeline(void)
     __disable_irq();
     upper_frame = (pose_frame_t){0};
     fore_frame = (pose_frame_t){0};
+    upper_pending_packet.pending = 0U;
+    upper_pending_packet.len = 0U;
+    upper_pending_packet.ts_us = 0ULL;
+    upper_pending_packet.dropped = 0U;
+    fore_pending_packet.pending = 0U;
+    fore_pending_packet.len = 0U;
+    fore_pending_packet.ts_us = 0ULL;
+    fore_pending_packet.dropped = 0U;
 
     has_last_seq_u = 0U;
     has_last_seq_f = 0U;

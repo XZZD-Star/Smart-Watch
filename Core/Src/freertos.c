@@ -127,14 +127,14 @@ osThreadId_t Task1Handle;
 const osThreadAttr_t Task1_attributes = {
   .name = "Task1",
   .stack_size = 512 * 4,
-  .priority = (osPriority_t) osPriorityLow,
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* Definitions for Task2 */
 osThreadId_t Task2Handle;
 const osThreadAttr_t Task2_attributes = {
   .name = "Task2",
   .stack_size = 1024 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .priority = (osPriority_t) osPriorityBelowNormal,
 };
 /* Definitions for myQueue01 */
 osMessageQueueId_t myQueue01Handle;
@@ -151,6 +151,7 @@ const osSemaphoreAttr_t myBinarySem01_attributes = {
 /* USER CODE BEGIN FunctionPrototypes */
 
 QueueHandle_t Semaphore;
+uint8_t Motion_ProcessPendingPosePackets(void);
 static RuleEngine g_task1_rule_engine;
 static uint8_t task1_consume_ai_restart_request(void);
 static uint8_t task1_try_take_fused_frame(motion_fused_frame_t *frame);
@@ -345,6 +346,7 @@ void StartTask1(void *argument)
   for(;;)
   {
     motion_fused_frame_t fused_frame;
+    uint8_t sensor_work_done = Motion_ProcessPendingPosePackets();
 
     if (task1_consume_ai_restart_request())
     {
@@ -382,7 +384,7 @@ void StartTask1(void *argument)
         }
       }
 
-      osDelay(10);
+      (void)ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(10));
       continue;
     }
 
@@ -404,9 +406,13 @@ void StartTask1(void *argument)
         task1_try_take_fused_frame(&fused_frame))
     {
       task1_process_fused_frame(&fused_frame);
+      sensor_work_done = 1U;
     }
 
-    osDelay(10);
+    if (sensor_work_done == 0U)
+    {
+      (void)ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(10));
+    }
   }
   /* USER CODE END StartTask1 */
 }
