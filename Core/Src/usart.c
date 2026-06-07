@@ -24,6 +24,8 @@
 #include "./usart/yuanzi_usart.h"
 #include "ESP8266.h"
 #include "string.h"
+#include "uart7_role.h"
+#include "uart_screen.h"
 
 uint8_t rx_buffer[RX_BUFFER_SIZE];
 uint16_t rx_index;
@@ -785,6 +787,14 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
         __HAL_DMA_DISABLE_IT(&hdma_usart6_rx, DMA_IT_HT);
         return;
     }
+
+#if APP_UART7_IS_SCREEN
+    if (huart->Instance == UART7)
+    {
+        Screen_Nextion_HandleRxEvent(huart, Size);
+        return;
+    }
+#endif
 
     (void)Size;
 }

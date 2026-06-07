@@ -8,6 +8,7 @@
 #include "MqttKit.h"
 #include "debug_uart7.h"
 #include "motion_ai.h"
+#include "motion_app_events.h"
 #include "motion_input.h"
 #include "tim.h"
 
@@ -1063,6 +1064,7 @@ static void OneNet_ApplyTrainPlanProperty(const onenet_prop_set_context_t *ctx)
   }
 
   g_onenet_train_plan_post_pending = 1U;
+  MotionEvents_RequestTrainingPageRefresh();
   Debug_Printf("[MQTT] PLAN SET cached, defer post to net task\r\n");
 }
 

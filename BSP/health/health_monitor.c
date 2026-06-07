@@ -29,6 +29,37 @@ static uint8_t HealthMonitor_IsWeatherValid(WeatherType_t type)
   return ((uint32_t)type <= (uint32_t)WEATHER_FOGGY) ? 1U : 0U;
 }
 
+static const char *HealthMonitor_GetTrainingComponent(HealthMonitorTrainItem_t item)
+{
+  switch (item)
+  {
+  case HEALTH_MONITOR_TRAIN_ITEM_ELBOW_FLEX:
+    return HEALTH_MONITOR_COMP_TRAIN1;
+  case HEALTH_MONITOR_TRAIN_ITEM_FRONT_RAISE:
+    return HEALTH_MONITOR_COMP_TRAIN2;
+  case HEALTH_MONITOR_TRAIN_ITEM_SHOULDER_RAISE:
+    return HEALTH_MONITOR_COMP_TRAIN3;
+  case HEALTH_MONITOR_TRAIN_ITEM_SIDE_RAISE:
+    return HEALTH_MONITOR_COMP_TRAIN4;
+  default:
+    return NULL;
+  }
+}
+
+static void HealthMonitor_SetTrainingPlanItem(HealthMonitorTrainItem_t item, int32_t count)
+{
+  const char *component = HealthMonitor_GetTrainingComponent(item);
+  char text[16];
+
+  if (component == NULL)
+  {
+    return;
+  }
+
+  (void)snprintf(text, sizeof(text), "%ld", (long)count);
+  Screen_Nextion_SetText(component, text);
+}
+
 static void HealthMonitor_UpdateHeartSpo2(uint8_t heart_rate, uint8_t spo2)
 {
   char text[16];
@@ -45,19 +76,14 @@ static void HealthMonitor_UpdateTrainingPlan(int32_t elbow_flex_count,
                                              int32_t shoulder_raise_count,
                                              int32_t side_raise_count)
 {
-  char text[16];
-
-  (void)snprintf(text, sizeof(text), "%ld", (long)elbow_flex_count);
-  Screen_Nextion_SetText(HEALTH_MONITOR_COMP_TRAIN1, text);
-
-  (void)snprintf(text, sizeof(text), "%ld", (long)front_raise_count);
-  Screen_Nextion_SetText(HEALTH_MONITOR_COMP_TRAIN2, text);
-
-  (void)snprintf(text, sizeof(text), "%ld", (long)shoulder_raise_count);
-  Screen_Nextion_SetText(HEALTH_MONITOR_COMP_TRAIN3, text);
-
-  (void)snprintf(text, sizeof(text), "%ld", (long)side_raise_count);
-  Screen_Nextion_SetText(HEALTH_MONITOR_COMP_TRAIN4, text);
+  HealthMonitor_SetTrainingPlanItem(HEALTH_MONITOR_TRAIN_ITEM_ELBOW_FLEX,
+                                    elbow_flex_count);
+  HealthMonitor_SetTrainingPlanItem(HEALTH_MONITOR_TRAIN_ITEM_FRONT_RAISE,
+                                    front_raise_count);
+  HealthMonitor_SetTrainingPlanItem(HEALTH_MONITOR_TRAIN_ITEM_SHOULDER_RAISE,
+                                    shoulder_raise_count);
+  HealthMonitor_SetTrainingPlanItem(HEALTH_MONITOR_TRAIN_ITEM_SIDE_RAISE,
+                                    side_raise_count);
 }
 
 void HealthMonitor_Init(void)
@@ -69,6 +95,11 @@ void HealthMonitor_SetPage(uint8_t page_id)
 {
   g_health_monitor_current_page = page_id;
   Screen_Nextion_SetPage(page_id);
+}
+
+void HealthMonitor_SetCurrentPage(uint8_t page_id)
+{
+  g_health_monitor_current_page = page_id;
 }
 
 uint8_t HealthMonitor_GetCurrentPage(void)
@@ -164,6 +195,11 @@ void HealthMonitor_UpdateTrainingPlanOnly(const HealthData_t *data)
                                    data->side_raise_count);
 }
 
+void HealthMonitor_UpdateTrainingPlanItem(HealthMonitorTrainItem_t item, int32_t count)
+{
+  HealthMonitor_SetTrainingPlanItem(item, count);
+}
+
 void HealthMonitor_RefreshTrainingPlanOnly(void)
 {
   Screen_Nextion_RefreshComponent(HEALTH_MONITOR_COMP_TRAIN1);
@@ -172,7 +208,19 @@ void HealthMonitor_RefreshTrainingPlanOnly(void)
   Screen_Nextion_RefreshComponent(HEALTH_MONITOR_COMP_TRAIN4);
 }
 
-void HealthMonitor_UpdateAll(const HealthData_t *data)
+void HealthMonitor_RefreshTrainingPlanItem(HealthMonitorTrainItem_t item)
+{
+  const char *component = HealthMonitor_GetTrainingComponent(item);
+
+  if (component == NULL)
+  {
+    return;
+  }
+
+  Screen_Nextion_RefreshComponent(component);
+}
+
+void HealthMonitor_UpdateHomeOnly(const HealthData_t *data)
 {
   if (data == NULL)
   {
@@ -189,6 +237,16 @@ void HealthMonitor_UpdateAll(const HealthData_t *data)
   HealthMonitor_UpdateTempHumi(data->indoor_temp_tenths, data->humidity);
   Screen_Nextion_SetPicture(HEALTH_MONITOR_COMP_HEART_ICON, HEALTH_MONITOR_HEART_ICON_PIC_ID);
   HealthMonitor_UpdateHeartSpo2(data->heart_rate, data->spo2);
+}
+
+void HealthMonitor_UpdateAll(const HealthData_t *data)
+{
+  if (data == NULL)
+  {
+    return;
+  }
+
+  HealthMonitor_UpdateHomeOnly(data);
   HealthMonitor_UpdateTrainingPlanOnly(data);
 }
 
@@ -199,5 +257,5 @@ void HealthMonitor_SendDemoFrame(const HealthData_t *data)
     return;
   }
 
-  HealthMonitor_UpdateAll(data);
+  HealthMonitor_UpdateHomeOnly(data);
 }

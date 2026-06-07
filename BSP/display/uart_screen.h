@@ -33,6 +33,10 @@ void Screen_SendCommand(const char *cmd);
 
 /* Nextion 页面切换。 */
 void Screen_Nextion_SetPage(uint8_t page_id);
+/* Nextion 当前页查询。 */
+void Screen_Nextion_RequestPageId(void);
+uint8_t Screen_Nextion_TakeLatestPageId(uint8_t *page_id);
+void Screen_Nextion_HandleRxEvent(UART_HandleTypeDef *huart, uint16_t size);
 /* Nextion 文本控件更新。 */
 void Screen_Nextion_SetText(const char *component, const char *text);
 /* Nextion 数值控件更新。 */

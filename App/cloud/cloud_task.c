@@ -135,17 +135,17 @@ static void cloud_service_loop(void)
   {
     uint32_t now = osKernelGetTickCount();
 
-    if (cloud_publish_periodic(now, &last_publish_tick) == 0U)
-    {
-      break;
-    }
-
     if (cloud_post_motion_events(subscribe_logged) == 0U)
     {
       break;
     }
 
     if (cloud_post_onenet_states(subscribe_logged) == 0U)
+    {
+      break;
+    }
+
+    if (cloud_publish_periodic(now, &last_publish_tick) == 0U)
     {
       break;
     }

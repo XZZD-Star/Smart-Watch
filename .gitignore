@@ -11,6 +11,7 @@ desktop.ini
 *.tmp
 *.temp
 *.cache
+.waylog/
 
 # Keil MDK user-local files
 *.uvguix.*

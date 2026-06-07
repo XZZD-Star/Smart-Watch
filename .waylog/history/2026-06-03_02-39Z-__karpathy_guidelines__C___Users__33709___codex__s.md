@@ -811,3 +811,501 @@ g_onenet_subscribe_ready = 0U;
 总结一下：这三个函数不是“每 10ms 都重新初始化/订阅”，而是“每次重新建网络会话时执行一次”。但命名和结构还有优化空间，尤其 `cloud_wait_wifi_init` 名字不准，`cloud_reset_session` 有些清理项和 `ESP8266_Init()` 重复。
 
 ---
+
+
+**User**
+
+cloud_service_loop();   // 正常情况下会一直卡在这里跑上报/下行
+也就是说正常情况下都是在这个函数中运行，除非tcp中断需要重连
+
+---
+
+
+**OpenAI Codex**
+
+对，理解正确。
+
+正常成功联网后的运行路径就是：
+
+```c
+cloud_reset_session();
+cloud_wait_wifi_init();
+cloud_connect_mqtt();
+cloud_send_subscribe();
+
+cloud_service_loop();   // 长时间运行在这里
+```
+
+进入 `cloud_service_loop()` 后，它会反复做这些事：
+
+- 定时 `OneNet_Publish()` 上报心率、血氧这类固定健康数据
+- 订阅确认后，上报运动识别结果
+- 订阅确认后，上报跌倒、门状态、训练计划这些 pending 状态
+- `ESP8266_GetIPD()` 接收云端下行
+- `OneNet_RevPro()` 解析下行命令
+- 检查 TCP/MQTT 是否出错
+
+只有出现这些情况才会跳出 `cloud_service_loop()`，回到外层重新初始化连接：
+
+- `OneNet_Publish()` 失败
+- 动作结果上报失败
+- pending 状态上报失败
+- `ESP8266_HasTransportError()` 检测到 TCP/WiFi 断开
+- `OneNet_HasSessionError()` 检测到 MQTT 会话错误，比如订阅 ACK 失败
+
+所以可以把外层理解成：
+
+**建连接、订阅、进入服务循环；服务循环出错后，清理并重连。**
+
+你的说法“除非 TCP 中断需要重连”基本对，但再准确一点是：不只是 TCP 中断，MQTT 会话错误或任意关键上报失败，也会退出服务循环然后重连。
+
+---
+
+
+**User**
+
+但是，现在开始训练的时候，串口显示已经识别出了动作，但是上传到云端，小程序来获取显示需要好久
+现在我是来排查到底是嵌入式端问题还是小程序端问题
+先说嵌入式端，本来我看cloudtask任务好几个函数都有长时间osdelay，但是实际一般cloud_service_loop都在这个函数内部来执行，但是这个函数内部osdelay算是比较短的，
+那可能会是嵌入式端的问题吗，分析一下
+
+---
+
+
+**OpenAI Codex**
+
+我先只排查嵌入式端，不改代码。重点看 `cloud_service_loop` 里是否有会阻塞很久的调用，以及动作识别结果从 Task1 排队到 MQTT 发送之间有没有明显等待点。
+
+---
+
+
+**OpenAI Codex**
+
+我已经看到几个关键点：`cloud_service_loop` 本身没有秒级 `osDelay`，但里面有 `ESP8266_GetIPD(50U)` 和多次 MQTT 发送；真正判断嵌入式端是否慢，要看“识别完成排队”和“MQTT 发送 OK”之间的日志间隔。再看一下任务优先级，确认网络任务会不会被运动任务压住。
+
+---
+
+
+**OpenAI Codex**
+
+先把英文/代码名对应一下：
+
+`CloudTask_Run` 是“上云任务主函数”。  
+`cloud_service_loop` 是“上云服务循环”。  
+`osDelay` 是 FreeRTOS/CMSIS 的任务延时。  
+`TCP` 是网络连接层，`MQTT` 是云端协议层。
+
+你的判断基本对：**正常联网后，嵌入式端确实主要一直运行在 `cloud_service_loop()` 里**。外面的 `1000ms` 延时、WiFi 初始化、MQTT 连接、订阅，只有重连时才会重新走。
+
+所以如果日志里已经出现过：
+
+```text
+[TCP] INIT OK
+[MQTT] CONNECT OK
+[MQTT] SUBSCRIBE SENT
+[MQTT] SUBSCRIBE OK
+```
+
+并且训练过程中没有反复出现：
+
+```text
+[TCP] TRANSPORT ERROR
+[MQTT] SESSION ERROR
+[TCP] WIFI REUSE IF CONNECTED, REINIT TCP/MQTT
+```
+
+那嵌入式端不太像是因为 `CloudTask` 里的长 `osDelay` 导致“好久”。
+
+但嵌入式端仍然有几个可能的延迟点：
+
+1. `ESP8266_GetIPD(50U)` 每轮最多等 50ms  
+   这个在 [cloud_task.c](<D:/Qian Start/Smart Watch/H743/App/cloud/cloud_task.c:269>)。也就是说没有下行数据时，一轮循环可能是 `50ms + osDelay(10)` 左右。这个是几十毫秒级，不应该造成几秒级延迟。
+
+2. 动作结果不是等 5 秒周期上报  
+   `ONENET_PUBLISH_INTERVAL_MS` 是 5000ms，但那是固定心率/血氧周期上报。动作结果在 [cloud_post_motion_events](<D:/Qian Start/Smart Watch/H743/App/cloud/cloud_task.c:181>) 里每轮都会检查，正常应该很快发，不会等 5 秒。
+
+3. 每次动作完成会发两次属性  
+   Task1 识别完成后会排队：
+   - `test + confidence`
+   - `action_kind`
+
+   然后 Task2 顺序发送这两个 MQTT 属性。每个发送都会走 `ESP8266_SendData()`，里面 `AT+CIPSEND` 最多等 3000ms。如果 ESP8266 或 TCP 状态不好，这里可能卡住或失败。但正常网络下不应该很久。
+
+4. 当前 `ESP8266_SendData()` 没等云端 ACK  
+   [ESP8266_SendData](<D:/Qian Start/Smart Watch/H743/BSP/wifi/ESP8266.c:458>) 只是等到 `AT+CIPSEND` 返回 `>`，然后把 MQTT 数据写给 ESP8266。它没有等待 `SEND OK`，也没有等待 OneNet 属性上报 ACK。
+
+   所以嵌入式日志里的：
+
+   ```text
+   [MQTT] PROP POST action_kind OK
+   ```
+
+   更准确地说是“已经把数据交给 ESP8266 发送”，不等于“小程序马上能读到云端更新”。
+
+5. 如果没有 `SUBSCRIBE OK`，动作结果会一直不发  
+   `cloud_post_motion_events()` 只有 `subscribe_logged != 0U` 才真正上传。如果订阅 ACK 没收到或没解析到，Task1 虽然识别完了，也只会排队，Task2 不会上报。
+
+最关键的排查方法是看串口日志链路：
+
+```text
+TEST_DONE
+[MQTT] test+confidence queued ...
+[MQTT] action_kind queued ...
+[MQTT] PROP POST test+confidence TX ...
+[MQTT] PROP POST test+confidence OK ...
+[MQTT] PROP POST action_kind TX ...
+[MQTT] PROP POST action_kind OK ...
+```
+
+判断标准：
+
+- 如果 `queued` 到 `PROP POST ... OK` 间隔很短，但小程序很久才显示，问题更偏云端/小程序端。
+- 如果 `queued` 后很久才出现 `PROP POST ... TX/OK`，问题在嵌入式 Task2 或 ESP8266 发送链路。
+- 如果只看到 `TEST_DONE`，看不到 `queued`，说明 Task1 没拿到有效 `test_value`，这也是嵌入式逻辑问题。
+- 如果看到频繁重连日志，那就是嵌入式网络链路问题，会造成秒级甚至十几秒延迟。
+
+我现在的判断：**如果没有重连、已经 `SUBSCRIBE OK`，嵌入式端理论上不会因为 `cloud_service_loop` 的 `osDelay` 造成明显慢；更可疑的是云端属性同步/小程序轮询，或者 ESP8266 发送并未真正等到云端确认。**
+
+---
+
+
+**User**
+
+帮我先总结一下上面这个小程序需要好久才能获取的问题原因
+
+---
+
+
+**OpenAI Codex**
+
+小程序“好久才获取到”的原因可以先按链路分成三段看：
+
+**1. 嵌入式识别到动作，但未及时上报**
+
+可能点：
+
+- Task1 已经 `TEST_DONE`，但没有拿到有效 `test_value`，所以只会上报 `action_kind=0` 或跳过 `test+confidence`。
+- `cloud_service_loop()` 还没进入 `SUBSCRIBE OK` 状态，导致 pending 的运动事件只排队、不上传。
+- Task2 网络任务被阻塞在 ESP8266 发送、接收或重连流程中。
+- TCP/MQTT 不稳定，反复重连，外层 `1000ms` delay 和重新初始化会造成明显延迟。
+
+判断日志：
+
+```text
+TEST_DONE
+[MQTT] test+confidence queued ...
+[MQTT] action_kind queued ...
+[MQTT] PROP POST test+confidence TX ...
+[MQTT] PROP POST test+confidence OK ...
+[MQTT] PROP POST action_kind TX ...
+[MQTT] PROP POST action_kind OK ...
+```
+
+如果 `queued` 到 `PROP POST ... OK` 间隔很长，问题偏嵌入式端。
+
+**2. 嵌入式已经发出，但云端未立即可见**
+
+当前 `ESP8266_SendData()` 只等 `AT+CIPSEND` 出现 `>`，然后把 MQTT 数据写出去。代码里的 `PROP POST ... OK` 更像是“数据已经交给 ESP8266 发送”，不是“云端已经确认属性更新”。
+
+所以可能存在：
+
+- ESP8266 实际发送慢。
+- 云端处理属性上报有延迟。
+- 没有等待 OneNet 的属性上报 ACK，导致串口日志看起来很快，但云端状态还没同步完成。
+
+如果串口很快出现 `PROP POST action_kind OK`，但 OneNet 平台或小程序迟迟看不到，问题更偏云端同步或小程序读取方式。
+
+**3. 小程序获取方式本身有延迟**
+
+常见可能：
+
+- 小程序是定时轮询，轮询间隔较长。
+- 小程序读的是云端缓存数据，不是实时 MQTT 下行。
+- 小程序接口拿到的是旧属性快照，平台刷新有延迟。
+- 小程序没有在训练完成后立即重新请求，而是等页面刷新/定时器。
+- 小程序端对 `action_kind`、`test`、`confidence` 的字段判断或去重逻辑导致显示延后。
+
+**当前初步判断**
+
+如果设备串口日志中已经很快出现：
+
+```text
+[MQTT] PROP POST action_kind OK
+```
+
+并且没有频繁重连日志，那么 `CloudTask` 里的 `osDelay` 不太像主要原因。更可疑的是：
+
+- 小程序轮询/刷新间隔；
+- OneNet 属性同步延迟；
+- 嵌入式端没有等待云端真正 ACK，只能证明“发出”，不能证明“云端已更新”。
+
+最有效的下一步是对比三个时间点：`TEST_DONE` 时间、`PROP POST action_kind OK` 时间、小程序显示更新时间。
+
+---
+
+
+**User**
+
+目前我还是偏向嵌入式端问题，因为在我没有加入串口屏之前，小程序端反应很快
+
+---
+
+
+**OpenAI Codex**
+
+这个判断有依据：变量发生在“加入串口屏之后”，就不能只盯 `CloudTask` 的 `osDelay`，要看串口屏有没有间接影响 Task2、ESP8266 串口接收、或者动作完成后的上报路径。我先只读屏幕和串口相关代码，确认可能的干扰点。
+
+---
+
+
+**OpenAI Codex**
+
+从代码看，串口屏本身任务优先级比 CloudTask 低，理论上不会长期压住上云任务。但它确实加入了大量阻塞式 UART 发送和动作完成后的屏幕刷新路径，所以需要把“直接影响”和“间接影响”分开判断。
+
+---
+
+
+**OpenAI Codex**
+
+我还需要确认 `printf` 到底走哪个串口，因为动作识别日志如果还是阻塞输出，可能会影响任务调度和时序。读一下 `main.c` 里重定向部分。
+
+---
+
+
+**OpenAI Codex**
+
+对，你这个判断现在是合理的：**既然没加串口屏前小程序响应快，加了串口屏后变慢，嵌入式端嫌疑明显上升。**
+
+但我不认为主要矛盾是 `cloud_service_loop()` 里的 `osDelay(10)`。从当前代码看，正常联网后确实一直在 [cloud_service_loop](<D:/Qian Start/Smart Watch/H743/App/cloud/cloud_task.c:126>)，里面的显式 delay 不长。更可疑的是下面几类。
+
+**最可疑：串口屏加入后影响 ESP8266 发送稳定性**
+
+串口屏和 ESP8266 虽然不是同一个串口，屏幕走 `UART7`，ESP8266 走 `USART6`，但它们可能共享电源、地线、板上供电余量。串口屏尤其带背光时电流不小，可能导致 ESP8266 供电抖动、TCP 延迟、偶发断连或 `AT+CIPSEND` 等待变慢。
+
+如果是这个问题，串口会看到类似：
+
+```text
+[TCP] TRANSPORT ERROR
+[MQTT] SESSION ERROR
+[TCP] WIFI REUSE IF CONNECTED, REINIT TCP/MQTT
+[MQTT][ERR] ... send fail
+```
+
+或者 `queued` 到 `PROP POST ... TX/OK` 中间隔很久。
+
+**第二可疑：屏幕任务用了阻塞式串口发送**
+
+屏幕底层在 [uart_screen.c](<D:/Qian Start/Smart Watch/H743/BSP/display/uart_screen.c:36>) 里用的是：
+
+```c
+HAL_UART_Transmit(..., HAL_MAX_DELAY)
+```
+
+而屏幕每秒会发不少 Nextion 命令，动作完成后还会额外切页、刷新训练页两轮。理论上 `defaultTask` 优先级是 `osPriorityLow`，CloudTask 是 `osPriorityBelowNormal`，所以 CloudTask 应该能抢占屏幕任务；但这个阻塞发送仍然会增加系统负担，也可能暴露 UART/HAL 阻塞问题。
+
+**第三可疑：屏幕显示的是本地状态，不代表云端已更新**
+
+动作完成后，Task1 里会先本地更新训练显示：
+
+```c
+OneNet_UpdateTrainDisplayByAction(...)
+MotionEvents_RequestTrainingPageRefresh()
+```
+
+所以串口屏看到动作/次数变化，说明本地识别成功、本地显示更新成功，不代表 MQTT 已经上传成功。也就是说“屏幕快、小程序慢”反而可能说明卡在本地到云端这段。
+
+**第四可疑：Task2 优先级偏低**
+
+当前优先级是：
+
+```text
+Task1 运动识别: AboveNormal
+Task2 上云: BelowNormal
+defaultTask 屏幕: Low
+```
+
+屏幕任务不会压住 Task2，但 Task1 优先级比 Task2 高。如果加入屏幕后动作完成时又触发更多本地处理、日志、页面刷新请求，整体时序可能让 Task2 上传更晚。这个可能性低于供电/ESP8266稳定性，但可以排查。
+
+**我的当前判断**
+
+如果“没加屏幕前快，加屏幕后慢”，我会优先怀疑嵌入式端，而且顺序是：
+
+1. 屏幕硬件加入后影响 ESP8266 供电/通信稳定性。
+2. 屏幕刷新带来的阻塞 UART 发送和系统负载影响时序。
+3. CloudTask/ESP8266 发送链路本身没有等云端 ACK，日志看起来可能比云端实际更新早。
+4. 小程序端轮询慢仍可能存在，但不是首要怀疑。
+
+最直接的验证是看时间差：`TEST_DONE` -> `[MQTT] action_kind queued` -> `[MQTT] PROP POST action_kind TX` -> `[MQTT] PROP POST action_kind OK`。如果这段已经慢，就是嵌入式端；如果这段很快但小程序慢，才转向云端/小程序端。
+
+---
+
+
+**User**
+
+好的，再帮我先总结一下上面这个小程序需要好久才能显示的问题原因
+
+---
+
+
+**OpenAI Codex**
+
+目前“小程序很久才显示”的原因，按现有线索总结如下：
+
+**更偏嵌入式端的原因**
+
+加入串口屏之前小程序响应快，加入后变慢，所以嵌入式端嫌疑变大。
+
+可能原因：
+
+1. 串口屏影响 ESP8266 稳定性  
+   屏幕背光和 ESP8266 都比较吃电。如果供电余量不足，可能导致 ESP8266 TCP/MQTT 发送变慢、断连、重连。
+
+2. 屏幕任务增加阻塞式 UART 发送  
+   串口屏发送使用 `HAL_UART_Transmit(..., HAL_MAX_DELAY)`，每秒刷新多个控件，动作完成后还会切页和刷新训练页。虽然屏幕任务优先级低，但仍会增加系统负担。
+
+3. Task2 上云任务可能被网络发送卡住  
+   动作结果上报不是等 5 秒周期，而是识别完成后立即检查 pending 并上传。但 `ESP8266_SendData()` 内部会等待 `AT+CIPSEND` 的 `>`，异常时可能卡到秒级。
+
+4. 频繁重连会造成明显延迟  
+   如果串口日志出现 `TRANSPORT ERROR`、`SESSION ERROR`、`REINIT TCP/MQTT`，那每次都会重新初始化、连接、订阅，延迟会很明显。
+
+5. 屏幕本地显示快，不代表云端已更新  
+   动作识别后会先更新本地训练显示，再排队 MQTT 上报。所以屏幕看到变化，只说明本地识别成功，不代表小程序能马上读到云端数据。
+
+**更偏云端/小程序端的原因**
+
+如果嵌入式串口日志显示：
+
+```text
+[MQTT] action_kind queued ...
+[MQTT] PROP POST action_kind TX ...
+[MQTT] PROP POST action_kind OK ...
+```
+
+这些日志间隔很短，但小程序仍然很久才显示，那问题就更偏：
+
+- OneNet 属性同步延迟；
+- 小程序轮询间隔较长；
+- 小程序读取的是旧缓存；
+- 小程序没有在动作完成后主动刷新；
+- 小程序对 `action_kind`、`test`、`confidence` 有去重或判断逻辑。
+
+**当前优先怀疑**
+
+基于“加串口屏前快，加串口屏后慢”，当前优先怀疑嵌入式侧：
+
+1. 屏幕加入后供电/干扰影响 ESP8266。
+2. 屏幕阻塞发送和刷新逻辑增加系统负担。
+3. 上云链路中 ESP8266 发送或 MQTT 会话出现延迟/重连。
+
+最关键的排查证据是对比这几个日志之间的时间：
+
+```text
+TEST_DONE
+[MQTT] action_kind queued ...
+[MQTT] PROP POST action_kind TX ...
+[MQTT] PROP POST action_kind OK ...
+```
+
+如果 `queued` 到 `PROP POST OK` 慢，就是嵌入式问题；如果这段很快但小程序慢，才主要看小程序/云端。
+
+---
+
+
+**User**
+
+我该怎么来看日志的时间简单来跟我说下，以及怎么来看ESP8266的串口信息，从串口4来看吗？！
+
+---
+
+
+**OpenAI Codex**
+
+我先确认一下当前工程里各个串口的角色，尤其 `UART4`、`USART6`、`UART7`，避免把“看哪个串口”说反。
+
+---
+
+
+**OpenAI Codex**
+
+先解释一下英文名：
+
+`ESP8266` 是 WiFi 模块。  
+`UART4` 是 STM32 的串口 4。  
+`USART6` 是 STM32 的串口 6。  
+`timestamp` 是时间戳。
+
+简单说：**不要默认从 UART4 看 ESP8266。工程里 ESP8266 接的是 `USART6`，UART4 主要是接收云控/调试命令。**
+
+你现在要排查延迟，最简单看法是这样：
+
+**1. 先看日志时间**
+
+用串口助手打开你平时看日志的那个串口，然后打开“接收加时间戳”功能。
+
+比如串口助手里通常叫：
+
+- 显示时间
+- 加时间戳
+- timestamp
+- 每行显示接收时间
+
+然后做一次训练，重点看这几行的时间间隔：
+
+```text
+TEST_DONE
+[MQTT] test+confidence queued ...
+[MQTT] action_kind queued ...
+[MQTT] PROP POST test+confidence TX ...
+[MQTT] PROP POST test+confidence OK ...
+[MQTT] PROP POST action_kind TX ...
+[MQTT] PROP POST action_kind OK ...
+```
+
+判断方式很简单：
+
+- `TEST_DONE` 到 `queued` 慢：Task1 到上报排队有问题。
+- `queued` 到 `PROP POST ... TX` 慢：CloudTask 没及时处理 pending。
+- `TX` 到 `OK` 慢：ESP8266 发送/网络链路慢。
+- `PROP POST action_kind OK` 很快，但小程序慢：更偏 OneNet/小程序端。
+
+**2. ESP8266 串口信息看哪里**
+
+代码里 ESP8266 是 `USART6`：
+
+```c
+MX_USART6_UART_Init()
+```
+
+所以如果你想看 ESP8266 的原始 AT/TCP 信息，应该看 **USART6**，不是 UART4。
+
+但注意：USART6 已经连接到 ESP8266。你不能随便把电脑串口直接“插进去发命令”，否则会和 STM32 抢总线。只能做监听：
+
+- USB-TTL 的 RX 接 ESP8266 TX / STM32 USART6 RX 那条线，看 ESP8266 回来的内容；
+- USB-TTL 的 GND 接板子 GND；
+- 波特率 115200；
+- 一般不要接 USB-TTL 的 TX，避免干扰。
+
+如果你想看 STM32 发给 ESP8266 的 AT 命令，就监听 STM32 USART6 TX 那条线。
+
+**3. 当前工程还有一个坑**
+
+你现在 `UART7` 被配置成串口屏：
+
+```c
+#define APP_UART7_ROLE UART7_ROLE_SCREEN
+```
+
+所以 `Debug_Printf()` 在当前模式下是空函数，很多 `[MQTT] ...`、`[TCP] ...` 日志可能根本不会输出。
+
+也就是说：你能看到的 `TEST_DONE` 可能是 `printf()` 打出来的，但 `CloudTask` 里的 MQTT 详细日志不一定能看到。
+
+最简单的排查方式：
+
+- 保持串口屏运行；
+- 用串口助手给当前日志串口加时间戳；
+- 如果看不到 `[MQTT] PROP POST ...` 这些日志，就需要临时把关键 MQTT 日志输出到你当前能看的串口，或者临时把 `UART7` 切回 debug 模式测试一次。
+
+结论：**看延迟用串口助手时间戳；看 ESP8266 原始通信看 USART6，不是 UART4。**
+
+---

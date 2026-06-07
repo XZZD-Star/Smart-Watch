@@ -6,7 +6,6 @@
 
 #include "cmsis_os2.h"
 #include "health_monitor.h"
-#include "motion_app_events.h"
 #include "onenet.h"
 #include "uart7_role.h"
 #include "uart_screen.h"
@@ -20,9 +19,16 @@
 #define SCREEN_FIXED_OUTDOOR_TEMP    26
 #define SCREEN_FIXED_INDOOR_TEMP_TENTHS 265
 #define SCREEN_FIXED_HUMIDITY        60U
-#define SCREEN_TRAINING_REFRESH_PASSES 2U
+#define SCREEN_TASK_POLL_INTERVAL_MS 200U
+#define SCREEN_CLOCK_UPDATE_INTERVAL_MS 5000U
+#define SCREEN_PAGE_QUERY_INTERVAL_MS 500U
 
 static void screen_build_health_data(HealthData_t *data, uint32_t time_base_tick);
+static void screen_track_current_page(uint32_t now_tick,
+                                      uint32_t *last_page_query_tick,
+                                      uint8_t *last_page,
+                                      uint8_t *home_dirty,
+                                      uint8_t *training_dirty);
 #if APP_UART7_IS_SCREEN && APP_SCREEN_IS_COMPONENT_PROBE
 static void screen_component_probe_init(void);
 static void screen_component_probe_tick(void);
@@ -32,6 +38,11 @@ void ScreenTask_Run(void)
 {
   HealthData_t screen_data;
   uint32_t screen_time_base_tick = 0U;
+  uint32_t last_clock_update_tick = 0U;
+  uint32_t last_page_query_tick = 0U;
+  uint8_t last_screen_page = HEALTH_MONITOR_PAGE_HOME;
+  uint8_t home_dirty = 1U;
+  uint8_t training_dirty = 1U;
 
   /* defaultTask 只维护低频屏幕刷新，不参与运动识别和网络发送。 */
 #if APP_UART7_IS_SCREEN
@@ -45,6 +56,11 @@ void ScreenTask_Run(void)
   HealthMonitor_SetPage(HEALTH_MONITOR_PAGE_HOME);
   osDelay(SCREEN_PAGE_SETTLE_DELAY_MS);
   HealthMonitor_SendDemoFrame(&screen_data);
+  home_dirty = 0U;
+  last_screen_page = HealthMonitor_GetCurrentPage();
+  last_clock_update_tick = osKernelGetTickCount();
+  last_page_query_tick = last_clock_update_tick;
+  Screen_Nextion_RequestPageId();
 #else
   screen_component_probe_init();
 #endif
@@ -55,36 +71,62 @@ void ScreenTask_Run(void)
   {
 #if APP_UART7_IS_SCREEN
 #if APP_SCREEN_IS_HEALTH_MONITOR
-    uint8_t refresh_training_page = 0U;
-    uint8_t refresh_pass = 0U;
+    uint32_t now_tick = osKernelGetTickCount();
+    uint8_t current_page = HEALTH_MONITOR_PAGE_HOME;
 
-    refresh_training_page = MotionEvents_TakeTrainingPageRefresh();
+    screen_track_current_page(now_tick,
+                              &last_page_query_tick,
+                              &last_screen_page,
+                              &home_dirty,
+                              &training_dirty);
 
-    screen_build_health_data(&screen_data, screen_time_base_tick);
+    current_page = HealthMonitor_GetCurrentPage();
 
-    if (refresh_training_page != 0U)
+    if (current_page != HEALTH_MONITOR_PAGE_HOME)
     {
-      for (refresh_pass = 0U;
-           refresh_pass < SCREEN_TRAINING_REFRESH_PASSES;
-           refresh_pass++)
+      home_dirty = 1U;
+    }
+    if (current_page != HEALTH_MONITOR_PAGE_TRAINING)
+    {
+      training_dirty = 1U;
+    }
+
+    if (current_page == HEALTH_MONITOR_PAGE_HOME)
+    {
+      if (home_dirty != 0U)
       {
-        HealthMonitor_SetPage(HEALTH_MONITOR_PAGE_HOME);
-        osDelay(SCREEN_PAGE_SETTLE_DELAY_MS);
-        HealthMonitor_SetPage(HEALTH_MONITOR_PAGE_TRAINING);
-        osDelay(SCREEN_PAGE_SETTLE_DELAY_MS);
-        /* 切页后重新取快照，保证强制刷新使用最新训练次数。 */
+        screen_build_health_data(&screen_data, screen_time_base_tick);
+        HealthMonitor_UpdateHomeOnly(&screen_data);
+        home_dirty = 0U;
+        last_clock_update_tick = now_tick;
+      }
+      else if ((now_tick - last_clock_update_tick) >= SCREEN_CLOCK_UPDATE_INTERVAL_MS)
+      {
+        screen_build_health_data(&screen_data, screen_time_base_tick);
+        HealthMonitor_UpdateDateTime(screen_data.year,
+                                     screen_data.month,
+                                     screen_data.day,
+                                     screen_data.hour,
+                                     screen_data.minute,
+                                     screen_data.second);
+        last_clock_update_tick = now_tick;
+      }
+    }
+    else if (current_page == HEALTH_MONITOR_PAGE_TRAINING)
+    {
+      if (training_dirty != 0U)
+      {
         screen_build_health_data(&screen_data, screen_time_base_tick);
         HealthMonitor_UpdateTrainingPlanOnly(&screen_data);
         HealthMonitor_RefreshTrainingPlanOnly();
+        training_dirty = 0U;
       }
     }
-
-    HealthMonitor_UpdateAll(&screen_data);
 #else
     screen_component_probe_tick();
 #endif
 #endif
-    osDelay(1000);
+    osDelay(SCREEN_TASK_POLL_INTERVAL_MS);
   }
 }
 
@@ -126,6 +168,48 @@ static void screen_build_health_data(HealthData_t *data, uint32_t time_base_tick
   data->front_raise_count = display_snapshot.front_raise_count;
   data->shoulder_raise_count = display_snapshot.shoulder_raise_count;
   data->side_raise_count = display_snapshot.side_raise_count;
+}
+
+static void screen_track_current_page(uint32_t now_tick,
+                                      uint32_t *last_page_query_tick,
+                                      uint8_t *last_page,
+                                      uint8_t *home_dirty,
+                                      uint8_t *training_dirty)
+{
+  uint8_t page_id = 0U;
+
+  if ((last_page_query_tick == NULL) ||
+      (last_page == NULL) ||
+      (home_dirty == NULL) ||
+      (training_dirty == NULL))
+  {
+    return;
+  }
+
+  if (Screen_Nextion_TakeLatestPageId(&page_id) != 0U)
+  {
+    if (page_id != *last_page)
+    {
+      if (page_id == HEALTH_MONITOR_PAGE_HOME)
+      {
+        *home_dirty = 1U;
+      }
+      else if (page_id == HEALTH_MONITOR_PAGE_TRAINING)
+      {
+        *training_dirty = 1U;
+      }
+
+      *last_page = page_id;
+    }
+
+    HealthMonitor_SetCurrentPage(page_id);
+  }
+
+  if ((now_tick - *last_page_query_tick) >= SCREEN_PAGE_QUERY_INTERVAL_MS)
+  {
+    Screen_Nextion_RequestPageId();
+    *last_page_query_tick = now_tick;
+  }
 }
 
 /* 组件探测模式仅在显式配置时编译，用于定位屏幕控件名。 */

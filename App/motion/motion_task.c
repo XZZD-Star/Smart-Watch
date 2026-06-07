@@ -498,7 +498,7 @@ static void task1_output_single_once_event(
       OneNet_UpdateTrainDisplayByAction((int32_t)result->final_label);
 
 #if APP_UART7_IS_SCREEN && APP_SCREEN_IS_HEALTH_MONITOR
-      MotionEvents_RequestTrainingPageRefresh();
+      MotionEvents_RequestTrainingPageRefreshByAction((int32_t)result->final_label);
 #endif
     }
     else
