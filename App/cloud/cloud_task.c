@@ -8,6 +8,9 @@
 #include "ESP8266.h"
 #include "motion_app_events.h"
 #include "onenet.h"
+#include "uart7_role.h"
+
+#define CLOUD_TASK_SOFT_MASK_DELAY_MS 200U
 
 static void cloud_reset_session(void);
 static void cloud_wait_wifi_init(void);
@@ -32,6 +35,13 @@ void CloudTask_Run(void)
 
   for(;;)
   {
+    if (APP_SCREEN_TASK_SOFT_MASK_ENABLED)
+    {
+      /* 软屏蔽时不建立 WiFi/MQTT 会话，周期休眠让出 CPU。 */
+      osDelay(CLOUD_TASK_SOFT_MASK_DELAY_MS);
+      continue;
+    }
+
     cloud_reset_session();
     cloud_wait_wifi_init();
 

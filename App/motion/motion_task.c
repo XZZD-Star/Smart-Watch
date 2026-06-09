@@ -18,6 +18,7 @@
 #include "uart7_role.h"
 
 #define FALL_WARNING_INTERVAL_MS 500U
+#define MOTION_TASK_SOFT_MASK_DELAY_MS 50U
 
 static uint8_t task1_consume_ai_restart_request(void);
 static uint8_t task1_try_take_fused_frame(motion_fused_frame_t *frame);
@@ -628,7 +629,17 @@ void MotionTask_Run(void)
   for(;;)
   {
     motion_fused_frame_t fused_frame;
-    uint8_t sensor_work_done = Motion_ProcessPendingPosePackets();
+    uint8_t sensor_work_done = 0U;
+
+    if (APP_SCREEN_TASK_SOFT_MASK_ENABLED)
+    {
+      /* 软屏蔽时保留任务存活，但不进入运动识别主体逻辑。 */
+      (void)ulTaskNotifyTake(pdTRUE, 0U);
+      osDelay(MOTION_TASK_SOFT_MASK_DELAY_MS);
+      continue;
+    }
+
+    sensor_work_done = Motion_ProcessPendingPosePackets();
 
     if (task1_consume_ai_restart_request())
     {
