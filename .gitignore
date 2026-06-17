@@ -44,3 +44,6 @@ cmake-build-*/
 # Python caches sometimes created by tooling scripts
 __pycache__/
 *.py[cod]
+
+# Waylog local history
+.waylog/
