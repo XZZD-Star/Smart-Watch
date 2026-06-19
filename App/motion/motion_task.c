@@ -29,6 +29,7 @@ static int32_t task1_encode_action_kind_value(int32_t test_value);
 static void task1_process_fused_frame(const motion_fused_frame_t *frame);
 static void task1_handle_local_fall_result(const motion_ai_result_t *result);
 static void task1_output_capture_csv(const motion_fused_frame_t *frame);
+static void task1_output_bio_capture_csv(const motion_fused_frame_t *frame);
 static void task1_output_recognition_csv(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
 static void task1_output_single_once_event(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
 static void task1_output_brief_result(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
@@ -40,6 +41,7 @@ typedef struct
 {
   motion_output_mode_t last_mode;
   uint8_t capture_header_printed;
+  uint8_t bio_capture_header_printed;
   uint8_t recognition_header_printed;
   uint8_t rule_header_printed;
   uint8_t recognition_done_reported;
@@ -63,6 +65,7 @@ static motion_output_state_t g_task1_output_state =
   0U,
   0U,
   0U,
+  0U,
   (motion_ai_state_t)0xFF
 };
 
@@ -74,7 +77,7 @@ static uint8_t task1_consume_ai_restart_request(void)
 
 static uint8_t task1_mode_uses_single_test(motion_output_mode_t mode)
 {
-  return (mode == MOTION_OUTPUT_MODE_SINGLE_ONCE) ? 1U : 0U;
+  return (mode == MOTION_OUTPUT_MODE_RUN) ? 1U : 0U;
 }
 
 static uint8_t task1_try_run_model_window_test(void)
@@ -98,6 +101,7 @@ static void task1_output_state_reset(motion_output_mode_t mode, uint8_t fresh_se
 
   g_task1_output_state.last_mode = mode;
   g_task1_output_state.capture_header_printed = 0U;
+  g_task1_output_state.bio_capture_header_printed = 0U;
   g_task1_output_state.recognition_header_printed = 0U;
   g_task1_output_state.rule_header_printed = 0U;
 
@@ -147,6 +151,14 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
 
   /* 统一在这里按输出模式分发，保持 AI、规则调试和采集输出的入口一致。 */
   current_mode = g_motion_output_mode;
+  if ((current_mode != MOTION_OUTPUT_MODE_RUN) &&
+      (current_mode != MOTION_OUTPUT_MODE_CAPTURE) &&
+      (current_mode != MOTION_OUTPUT_MODE_BIO_CAPTURE) &&
+      (current_mode != MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST) &&
+      (current_mode != MOTION_OUTPUT_MODE_RULE_DEBUG))
+  {
+    current_mode = MOTION_OUTPUT_MODE_RUN;
+  }
   previous_mode = g_task1_output_state.last_mode;
   if (g_task1_output_state.last_mode != current_mode)
   {
@@ -172,30 +184,22 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
 
   switch (current_mode)
   {
-    case MOTION_OUTPUT_MODE_CAPTURE:
-      task1_output_capture_csv(frame);
-      break;
-
-    case MOTION_OUTPUT_MODE_RECOGNITION_VERBOSE:
-      result = MotionAi_ProcessFusedFrame(frame);
-      task1_handle_local_fall_result(result);
-      task1_output_recognition_csv(frame, result);
-      break;
-
-    case MOTION_OUTPUT_MODE_SINGLE_ONCE:
+    case MOTION_OUTPUT_MODE_RUN:
       if (g_motion_single_armed == 0U)
       {
         return;
       }
       result = MotionAi_ProcessFusedFrame(frame);
       task1_handle_local_fall_result(result);
-      task1_output_recognition_csv(frame, result);
+      task1_output_single_once_event(frame, result);
       break;
 
-    case MOTION_OUTPUT_MODE_BIO_AI_BRIEF:
-      result = MotionAi_ProcessFusedFrame(frame);
-      task1_handle_local_fall_result(result);
-      task1_output_brief_result(frame, result);
+    case MOTION_OUTPUT_MODE_CAPTURE:
+      task1_output_capture_csv(frame);
+      break;
+
+    case MOTION_OUTPUT_MODE_BIO_CAPTURE:
+      task1_output_bio_capture_csv(frame);
       break;
 
     case MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST:
@@ -221,7 +225,13 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
       break;
 
     default:
-      task1_output_capture_csv(frame);
+      if (g_motion_single_armed == 0U)
+      {
+        return;
+      }
+      result = MotionAi_ProcessFusedFrame(frame);
+      task1_handle_local_fall_result(result);
+      task1_output_single_once_event(frame, result);
       break;
   }
 }
@@ -242,28 +252,18 @@ static void task1_handle_local_fall_result(const motion_ai_result_t *result)
 
 static void task1_output_capture_csv(const motion_fused_frame_t *frame)
 {
-  int32_t bio_hr;
-  int32_t bio_spo2;
-
   if (frame == NULL)
   {
     return;
   }
 
-  bio_hr = task1_bio_value_or_invalid(
-    frame->fore_bio.heart_rate,
-    frame->fore_bio.hr_valid);
-  bio_spo2 = task1_bio_value_or_invalid(
-    frame->fore_bio.spo2,
-    frame->fore_bio.spo2_valid);
-
   if (g_task1_output_state.capture_header_printed == 0U)
   {
-    printf("ts_ms,upper_yaw,upper_pitch,upper_roll,fore_yaw,fore_pitch,fore_roll,hr,hr_valid,spo2,spo2_valid,ppg_fill,ppg_calc_count,ppg_pending,lost_u,lost_f,align_fail_count\r\n");
+    printf("ts_ms,upper_yaw,upper_pitch,upper_roll,fore_yaw,fore_pitch,fore_roll,align_fail_count,lost_u,lost_f\r\n");
     g_task1_output_state.capture_header_printed = 1U;
   }
 
-  printf("%llu,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%ld,%d,%ld,%d,%lu,%lu,%lu,%lu,%lu,%lu\r\n",
+  printf("%llu,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%lu,%lu,%lu\r\n",
          (unsigned long long)(frame->ts_us / 1000ULL),
          frame->upper_yaw,
          frame->upper_pitch,
@@ -271,23 +271,40 @@ static void task1_output_capture_csv(const motion_fused_frame_t *frame)
          frame->fore_yaw,
          frame->fore_pitch,
          frame->fore_roll,
-         (long)bio_hr,
+         (unsigned long)frame->align_fail_count,
+         (unsigned long)frame->lost_u,
+         (unsigned long)frame->lost_f);
+}
+
+static void task1_output_bio_capture_csv(const motion_fused_frame_t *frame)
+{
+  if (frame == NULL)
+  {
+    return;
+  }
+
+  if (g_task1_output_state.bio_capture_header_printed == 0U)
+  {
+    printf("ts_ms,heart_rate,hr_valid,spo2,spo2_valid,ppg_fill,ppg_calc_count,ppg_pending\r\n");
+    g_task1_output_state.bio_capture_header_printed = 1U;
+  }
+
+  printf("%llu,%ld,%d,%ld,%d,%lu,%lu,%lu\r\n",
+         (unsigned long long)(frame->ts_us / 1000ULL),
+         (long)frame->fore_bio.heart_rate,
          (int)frame->fore_bio.hr_valid,
-         (long)bio_spo2,
+         (long)frame->fore_bio.spo2,
          (int)frame->fore_bio.spo2_valid,
          (unsigned long)frame->fore_bio.ppg_fill,
          (unsigned long)frame->fore_bio.ppg_calc_count,
-         (unsigned long)frame->fore_bio.ppg_pending,
-         (unsigned long)frame->lost_u,
-         (unsigned long)frame->lost_f,
-         (unsigned long)frame->align_fail_count);
+         (unsigned long)frame->fore_bio.ppg_pending);
 }
 
 static void task1_output_recognition_csv(
   const motion_fused_frame_t *frame,
   const motion_ai_result_t *result)
 {
-  if (g_motion_output_mode == MOTION_OUTPUT_MODE_SINGLE_ONCE)
+  if (g_motion_output_mode == MOTION_OUTPUT_MODE_RUN)
   {
     task1_output_single_once_event(frame, result);
     return;

@@ -38,7 +38,7 @@ void Motion_RequestStart(void)
     }
 
     g_motion_single_armed =
-        (g_motion_output_mode == MOTION_OUTPUT_MODE_SINGLE_ONCE) ? 1U : 0U;
+        (g_motion_output_mode == MOTION_OUTPUT_MODE_RUN) ? 1U : 0U;
 
     reset_pose_pipeline();
     g_motion_ai_restart_req = 1U;
