@@ -340,7 +340,7 @@
               <MiscControls>--cpu=Cortex-M7.fp.dp --fpu=FPv5_D16</MiscControls>
               <Define>USE_PWR_LDO_SUPPLY,USE_HAL_DRIVER,STM32H743xx,USER_VECT_TAB_ADDRESS</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../App/motion;../App/ai;../App/cloud;../App/screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../BSP/w25q128;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
+              <IncludePath>../Core/Inc;../Common;../App/motion;../App/ai;../App/cloud;../App/screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../BSP/w25q128;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -856,6 +856,36 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+            <File>
+              <FileName>bootloader_ota.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/bootloader_ota.c</FilePath>
+            </File>
+            <File>
+              <FileName>bootloader_ota.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>../Core/Inc/bootloader_ota.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Common</GroupName>
+          <Files>
+            <File>
+              <FileName>ota_layout.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>../Common/ota_layout.h</FilePath>
+            </File>
+            <File>
+              <FileName>crc16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Common/crc16.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc16.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>../Common/crc16.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2746,7 +2776,7 @@
               <MiscControls>--cpu=Cortex-M7.fp.dp --fpu=FPv5_D16</MiscControls>
               <Define>USE_PWR_LDO_SUPPLY,USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../App/motion;../App/ai;../App/cloud;../App/screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../BSP/w25q128;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
+              <IncludePath>../Core/Inc;../Common;../App/motion;../App/ai;../App/cloud;../App/screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../BSP/w25q128;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -3454,6 +3484,36 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>bootloader_ota.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/bootloader_ota.c</FilePath>
+            </File>
+            <File>
+              <FileName>bootloader_ota.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>../Core/Inc/bootloader_ota.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Common</GroupName>
+          <Files>
+            <File>
+              <FileName>ota_layout.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>../Common/ota_layout.h</FilePath>
+            </File>
+            <File>
+              <FileName>crc16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Common/crc16.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc16.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>../Common/crc16.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3862,7 +3922,7 @@
                   <RVCTZI>0</RVCTZI>
                   <RVCTOtherData>0</RVCTOtherData>
                   <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
+                  <IncludeInBuild>1</IncludeInBuild>
                   <AlwaysBuild>2</AlwaysBuild>
                   <GenerateAssemblyFile>2</GenerateAssemblyFile>
                   <AssembleAssemblyFile>2</AssembleAssemblyFile>
@@ -3918,7 +3978,7 @@
                   <RVCTZI>0</RVCTZI>
                   <RVCTOtherData>0</RVCTOtherData>
                   <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
+                  <IncludeInBuild>1</IncludeInBuild>
                   <AlwaysBuild>2</AlwaysBuild>
                   <GenerateAssemblyFile>2</GenerateAssemblyFile>
                   <AssembleAssemblyFile>2</AssembleAssemblyFile>
@@ -5885,7 +5945,7 @@
                   <RVCTZI>0</RVCTZI>
                   <RVCTOtherData>0</RVCTOtherData>
                   <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
+                  <IncludeInBuild>1</IncludeInBuild>
                   <AlwaysBuild>2</AlwaysBuild>
                   <GenerateAssemblyFile>2</GenerateAssemblyFile>
                   <AssembleAssemblyFile>2</AssembleAssemblyFile>

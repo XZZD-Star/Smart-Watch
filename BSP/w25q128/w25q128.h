@@ -59,6 +59,16 @@ int W25Q128_PageProgram(uint32_t address, const uint8_t *data, uint16_t length);
 int W25Q128_ReadData(uint32_t address, uint8_t *data, uint32_t length);
 
 /**
+ * @brief 擦除覆盖 [address, address + length) 的所有 4KB 扇区。
+ */
+int W25Q128_EraseRange(uint32_t address, uint32_t length);
+
+/**
+ * @brief 按 256 字节页边界拆分写入数据，函数内部不自动擦除。
+ */
+int W25Q128_WriteData(uint32_t address, const uint8_t *data, uint32_t length);
+
+/**
  * @brief 读取 ID、擦除、写入、读回并校验测试数据。
  */
 int W25Q128_Test(void);

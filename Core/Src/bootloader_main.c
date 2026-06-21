@@ -1,13 +1,19 @@
 /* Includes ------------------------------------------------------------------*/
+#include "bootloader_ota.h"
 #include "main.h"
+#include "ota_layout.h"
+#include "w25q128.h"
 #include <stdio.h>
 
 /* Private define ------------------------------------------------------------*/
-#define APP_ADDR              0x08020000U
-#define SRAM1_START_ADDR      0x20000000U
-#define SRAM1_END_ADDR        0x2001FFFFU
-#define AXI_SRAM_START_ADDR   0x24000000U
-#define AXI_SRAM_END_ADDR     0x2407FFFFU
+#define DTCM_RAM_START_ADDR   0x20000000UL
+#define DTCM_RAM_END_ADDR     0x2001FFFFUL
+#define AXI_SRAM_START_ADDR   0x24000000UL
+#define AXI_SRAM_END_ADDR     0x2407FFFFUL
+#define SRAM123_START_ADDR    0x30000000UL
+#define SRAM123_END_ADDR      0x30047FFFUL
+#define SRAM4_START_ADDR      0x38000000UL
+#define SRAM4_END_ADDR        0x3800FFFFUL
 
 /* Private typedef -----------------------------------------------------------*/
 typedef void (*app_entry_t)(void);
@@ -18,21 +24,42 @@ UART_HandleTypeDef huart2;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void MX_USART2_UART_Init(void);
-static uint8_t IsAppValid(void);
-static void JumpToApp(void);
+static uint8_t Boot_AppIsValid(void);
+static void Boot_DeInit(void);
+static void Boot_JumpToApp(void);
+static uint8_t Boot_IsRamAddress(uint32_t address);
 
 int main(void)
 {
+  int ota_result;
+
   HAL_Init();
   SystemClock_Config();
   MX_USART2_UART_Init();
+  W25Q128_Init();
 
   printf("BOOT LOADER\r\n");
   HAL_Delay(50);
 
-  if (IsAppValid())
+  ota_result = BootOTA_TryInstall();
+  if (ota_result == BOOT_OTA_INSTALLED)
   {
-    JumpToApp();
+    printf("OTA INSTALLED\r\n");
+    HAL_Delay(50);
+    NVIC_SystemReset();
+  }
+  else if (ota_result == BOOT_OTA_ERROR)
+  {
+    while (1)
+    {
+      printf("OTA ERROR\r\n");
+      HAL_Delay(1000);
+    }
+  }
+
+  if (Boot_AppIsValid())
+  {
+    Boot_JumpToApp();
   }
 
   while (1)
@@ -42,19 +69,24 @@ int main(void)
   }
 }
 
-static uint8_t IsAppValid(void)
+static uint8_t Boot_IsRamAddress(uint32_t address)
 {
-  uint32_t app_msp = *(uint32_t *)APP_ADDR;
-  uint32_t app_reset = *(uint32_t *)(APP_ADDR + 4U);
-
-  (void)app_reset;
-
-  if ((app_msp >= SRAM1_START_ADDR) && (app_msp <= SRAM1_END_ADDR))
+  if ((address >= DTCM_RAM_START_ADDR) && (address <= DTCM_RAM_END_ADDR))
   {
     return 1U;
   }
 
-  if ((app_msp >= AXI_SRAM_START_ADDR) && (app_msp <= AXI_SRAM_END_ADDR))
+  if ((address >= AXI_SRAM_START_ADDR) && (address <= AXI_SRAM_END_ADDR))
+  {
+    return 1U;
+  }
+
+  if ((address >= SRAM123_START_ADDR) && (address <= SRAM123_END_ADDR))
+  {
+    return 1U;
+  }
+
+  if ((address >= SRAM4_START_ADDR) && (address <= SRAM4_END_ADDR))
   {
     return 1U;
   }
@@ -62,27 +94,81 @@ static uint8_t IsAppValid(void)
   return 0U;
 }
 
-static void JumpToApp(void)
+static uint8_t Boot_AppIsValid(void)
 {
-  uint32_t app_msp = *(uint32_t *)APP_ADDR;
-  uint32_t app_reset = *(uint32_t *)(APP_ADDR + 4U);
+  uint32_t app_msp = *(uint32_t *)APP_FLASH_ADDR;
+  uint32_t app_reset = *(uint32_t *)(APP_FLASH_ADDR + 4UL);
+  uint32_t reset_address = app_reset & ~1UL;
+
+  if ((app_msp == 0xFFFFFFFFUL) || (app_msp == 0x00000000UL))
+  {
+    return 0U;
+  }
+
+  if (Boot_IsRamAddress(app_msp) == 0U)
+  {
+    return 0U;
+  }
+
+  if ((app_reset & 1UL) == 0UL)
+  {
+    return 0U;
+  }
+
+  if ((reset_address < APP_FLASH_ADDR) || (reset_address >= INTERNAL_FLASH_END))
+  {
+    return 0U;
+  }
+
+  return 1U;
+}
+
+static void Boot_DeInit(void)
+{
   uint32_t i;
 
-  __disable_irq();
+  HAL_GPIO_WritePin(W25Q128_CS_GPIO_PORT, W25Q128_CS_GPIO_PIN, GPIO_PIN_SET);
+  (void)HAL_UART_DeInit(&huart2);
 
   SysTick->CTRL = 0U;
   SysTick->LOAD = 0U;
   SysTick->VAL = 0U;
 
-  for (i = 0U; i < 8U; i++)
+  SCB->ICSR = SCB_ICSR_PENDSTCLR_Msk | SCB_ICSR_PENDSVCLR_Msk;
+
+  for (i = 0UL; i < (uint32_t)(sizeof(NVIC->ICER) / sizeof(NVIC->ICER[0])); i++)
   {
-    NVIC->ICER[i] = 0xFFFFFFFFU;
-    NVIC->ICPR[i] = 0xFFFFFFFFU;
+    NVIC->ICER[i] = 0xFFFFFFFFUL;
+    NVIC->ICPR[i] = 0xFFFFFFFFUL;
   }
 
-  SCB->VTOR = APP_ADDR;
+  if ((SCB->CCR & SCB_CCR_DC_Msk) != 0UL)
+  {
+    SCB_CleanInvalidateDCache();
+    SCB_DisableDCache();
+  }
+
+  if ((SCB->CCR & SCB_CCR_IC_Msk) != 0UL)
+  {
+    SCB_InvalidateICache();
+    SCB_DisableICache();
+  }
+}
+
+static void Boot_JumpToApp(void)
+{
+  uint32_t app_msp = *(uint32_t *)APP_FLASH_ADDR;
+  uint32_t app_reset = *(uint32_t *)(APP_FLASH_ADDR + 4UL);
+
+  __disable_irq();
+  Boot_DeInit();
+
+  SCB->VTOR = APP_FLASH_ADDR;
+  __set_CONTROL(0U);
+  __ISB();
   __set_MSP(app_msp);
-  __enable_irq();
+  __DSB();
+  __ISB();
 
   ((app_entry_t)app_reset)();
 }

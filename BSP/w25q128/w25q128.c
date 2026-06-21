@@ -327,6 +327,73 @@ int W25Q128_ReadData(uint32_t address, uint8_t *data, uint32_t length)
   return W25Q128_OK;
 }
 
+int W25Q128_EraseRange(uint32_t address, uint32_t length)
+{
+  uint32_t start_sector;
+  uint32_t end_address;
+  uint32_t sector;
+  int ret;
+
+  if (length == 0UL)
+  {
+    return W25Q128_OK;
+  }
+
+  if ((address >= W25Q128_FLASH_SIZE) ||
+      (length > (W25Q128_FLASH_SIZE - address)))
+  {
+    return W25Q128_ERR_ERASE;
+  }
+
+  start_sector = address - (address % W25Q128_SECTOR_SIZE);
+  end_address = address + length;
+
+  for (sector = start_sector; sector < end_address; sector += W25Q128_SECTOR_SIZE)
+  {
+    ret = W25Q128_SectorErase4KB(sector);
+    if (ret != W25Q128_OK)
+    {
+      return ret;
+    }
+  }
+
+  return W25Q128_OK;
+}
+
+int W25Q128_WriteData(uint32_t address, const uint8_t *data, uint32_t length)
+{
+  uint32_t written = 0UL;
+  int ret;
+
+  if (length == 0UL)
+  {
+    return W25Q128_OK;
+  }
+
+  if ((data == 0) || (W25Q128_IsRangeValid(address, length) == 0))
+  {
+    return W25Q128_ERR_WRITE;
+  }
+
+  while (written < length)
+  {
+    uint32_t current_address = address + written;
+    uint32_t page_remain = W25Q128_PAGE_SIZE - (current_address % W25Q128_PAGE_SIZE);
+    uint32_t remain = length - written;
+    uint32_t chunk = (remain < page_remain) ? remain : page_remain;
+
+    ret = W25Q128_PageProgram(current_address, &data[written], (uint16_t)chunk);
+    if (ret != W25Q128_OK)
+    {
+      return ret;
+    }
+
+    written += chunk;
+  }
+
+  return W25Q128_OK;
+}
+
 int W25Q128_Test(void)
 {
   static const uint8_t test_data[32] = {
