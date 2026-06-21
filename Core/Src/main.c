@@ -94,7 +94,6 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
   /* USER CODE BEGIN SysInit */
   delay_init(480);
   /* USER CODE END SysInit */
@@ -104,6 +103,7 @@ int main(void)
   MX_DMA_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
+  
   MX_USART3_UART_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
@@ -114,12 +114,13 @@ int main(void)
   MX_X_CUBE_AI_Init();
   /* USER CODE BEGIN 2 */
   Servo_DoorInit();
-//  Debug_Printf("BOOT OK\r\n");
+  //Debug_Printf("BOOT OK\r\n");
+  printf("OTA Book\r\n");
 	
-	printf("BOOT TEST 1\r\n");
+	//printf("BOOT TEST 1\r\n");
 	W25Q128_Init();
 	//W25Q128_ReadIDLoopTest();
-	W25Q128_Test();
+	//W25Q128_Test();
 	
 //	int w25q_ret = W25Q128_Test();
 //	Debug_Printf("W25Q128_Test ret=%d\r\n", w25q_ret);
