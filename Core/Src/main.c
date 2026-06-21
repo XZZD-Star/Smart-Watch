@@ -26,6 +26,7 @@
 #include "usart.h"
 #include "gpio.h"
 #include "app_x-cube-ai.h"
+#include "w25q128.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -113,7 +114,15 @@ int main(void)
   MX_X_CUBE_AI_Init();
   /* USER CODE BEGIN 2 */
   Servo_DoorInit();
-  Debug_Printf("BOOT OK\r\n");
+//  Debug_Printf("BOOT OK\r\n");
+	
+	printf("BOOT TEST 1\r\n");
+	W25Q128_Init();
+	//W25Q128_ReadIDLoopTest();
+	W25Q128_Test();
+	
+//	int w25q_ret = W25Q128_Test();
+//	Debug_Printf("W25Q128_Test ret=%d\r\n", w25q_ret);
 //    HAL_UART_Receive_IT(&huart1,(uint8_t *)g_rx_buffer,RXBUFFERSIZE);
     
 

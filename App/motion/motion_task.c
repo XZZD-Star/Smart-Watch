@@ -30,6 +30,7 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame);
 static void task1_handle_local_fall_result(const motion_ai_result_t *result);
 static void task1_output_capture_csv(const motion_fused_frame_t *frame);
 static void task1_output_bio_capture_csv(const motion_fused_frame_t *frame);
+static void task1_output_uart_debug_once(void);
 static void task1_output_recognition_csv(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
 static void task1_output_single_once_event(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
 static void task1_output_brief_result(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
@@ -42,6 +43,7 @@ typedef struct
   motion_output_mode_t last_mode;
   uint8_t capture_header_printed;
   uint8_t bio_capture_header_printed;
+  uint8_t uart_debug_reported;
   uint8_t recognition_header_printed;
   uint8_t rule_header_printed;
   uint8_t recognition_done_reported;
@@ -58,6 +60,7 @@ volatile uint8_t g_motion_single_armed = 0U;
 static motion_output_state_t g_task1_output_state =
 {
   (motion_output_mode_t)0xFF,
+  0U,
   0U,
   0U,
   0U,
@@ -102,8 +105,14 @@ static void task1_output_state_reset(motion_output_mode_t mode, uint8_t fresh_se
   g_task1_output_state.last_mode = mode;
   g_task1_output_state.capture_header_printed = 0U;
   g_task1_output_state.bio_capture_header_printed = 0U;
+  g_task1_output_state.uart_debug_reported = 0U;
   g_task1_output_state.recognition_header_printed = 0U;
   g_task1_output_state.rule_header_printed = 0U;
+
+  if (mode == MOTION_OUTPUT_MODE_UART_DEBUG)
+  {
+    task1_output_uart_debug_once();
+  }
 
   if (fresh_session != 0U)
   {
@@ -154,6 +163,7 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
   if ((current_mode != MOTION_OUTPUT_MODE_RUN) &&
       (current_mode != MOTION_OUTPUT_MODE_CAPTURE) &&
       (current_mode != MOTION_OUTPUT_MODE_BIO_CAPTURE) &&
+      (current_mode != MOTION_OUTPUT_MODE_UART_DEBUG) &&
       (current_mode != MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST) &&
       (current_mode != MOTION_OUTPUT_MODE_RULE_DEBUG))
   {
@@ -200,6 +210,10 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
 
     case MOTION_OUTPUT_MODE_BIO_CAPTURE:
       task1_output_bio_capture_csv(frame);
+      break;
+
+    case MOTION_OUTPUT_MODE_UART_DEBUG:
+      task1_output_uart_debug_once();
       break;
 
     case MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST:
@@ -298,6 +312,15 @@ static void task1_output_bio_capture_csv(const motion_fused_frame_t *frame)
          (unsigned long)frame->fore_bio.ppg_fill,
          (unsigned long)frame->fore_bio.ppg_calc_count,
          (unsigned long)frame->fore_bio.ppg_pending);
+}
+
+static void task1_output_uart_debug_once(void)
+{
+  if (g_task1_output_state.uart_debug_reported == 0U)
+  {
+    printf("mode=UART_DEBUG\r\n");
+    g_task1_output_state.uart_debug_reported = 1U;
+  }
 }
 
 static void task1_output_recognition_csv(

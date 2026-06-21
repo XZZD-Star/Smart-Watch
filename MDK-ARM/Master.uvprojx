@@ -340,7 +340,7 @@
               <MiscControls>--cpu=Cortex-M7.fp.dp --fpu=FPv5_D16</MiscControls>
               <Define>USE_PWR_LDO_SUPPLY,USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../App/motion;../App/ai;../App/cloud;../App/screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
+              <IncludePath>../Core/Inc;../App/motion;../App/ai;../App/cloud;../App/screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../BSP/w25q128;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1996,6 +1996,16 @@
               <FileName>ESP8266.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\BSP\wifi\ESP8266.h</FilePath>
+            </File>
+            <File>
+              <FileName>w25q128.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\w25q128\w25q128.c</FilePath>
+            </File>
+            <File>
+              <FileName>w25q128.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\BSP\w25q128\w25q128.h</FilePath>
             </File>
           </Files>
         </Group>
