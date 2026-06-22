@@ -10,6 +10,7 @@
 #include "main.h"
 #include "md5.h"
 #include "ota_config.h"
+#include "ota_device_info.h"
 #include "ota_http.h"
 #include "ota_info.h"
 #include "w25q128.h"
@@ -247,6 +248,27 @@ static int OTAService_ParseOnenetEnvelope(const char *json, uint32_t *code, char
   return 1;
 }
 
+static void OTAService_SyncRunningVersion(void)
+{
+  if (OTADeviceInfo_SaveRunningVersion(OTA_CURRENT_VERSION) != OTA_DEVICE_INFO_OK)
+  {
+    Debug_Printf("[OTA] device version sync failed\r\n");
+  }
+}
+
+static void OTAService_GetReportVersion(char *version, uint32_t version_size)
+{
+  if ((version == 0) || (version_size == 0UL))
+  {
+    return;
+  }
+
+  if (OTADeviceInfo_GetCurrentVersion(version, version_size) != OTA_DEVICE_INFO_OK)
+  {
+    (void)snprintf(version, version_size, "%s", OTA_CURRENT_VERSION);
+  }
+}
+
 static int OTAService_ParseTask(const char *json, OTA_TaskInfo_t *task)
 {
   if ((json == 0) || (task == 0))
@@ -379,7 +401,7 @@ static int OTAService_PostPendingSimulateVersion(void)
   return OTA_SERVICE_UPDATED;
 }
 
-static int OTAService_QueryTask(OTA_TaskInfo_t *task)
+static int OTAService_QueryTask(OTA_TaskInfo_t *task, const char *current_version)
 {
   char request[OTA_HTTP_REQ_MAX];
   char body[OTA_JSON_BODY_MAX];
@@ -389,7 +411,7 @@ static int OTAService_QueryTask(OTA_TaskInfo_t *task)
   uint32_t code = 0UL;
   int request_len;
 
-  if (task == 0)
+  if ((task == 0) || (current_version == 0) || (*current_version == '\0'))
   {
     return OTA_SERVICE_ERROR;
   }
@@ -405,7 +427,7 @@ static int OTAService_QueryTask(OTA_TaskInfo_t *task)
                          ONENET_PRODUCT_ID,
                          ONENET_DEVICE_NAME,
                          (unsigned int)OTA_QUERY_TYPE,
-                         OTA_CURRENT_VERSION,
+                         current_version,
                          OTA_HTTP_HOST,
                          OTA_AUTHORIZATION);
   if ((request_len <= 0) || ((size_t)request_len >= sizeof(request)))
@@ -601,8 +623,12 @@ static int OTAService_SaveSimulateInfo(const OTA_TaskInfo_t *task)
 int OTAService_CheckOnce(void)
 {
   OTA_TaskInfo_t task;
+  char current_version[OTA_TARGET_VERSION_LEN];
   char actual_md5[33];
   int result;
+
+  OTAService_SyncRunningVersion();
+  OTAService_GetReportVersion(current_version, (uint32_t)sizeof(current_version));
 
   Debug_Printf("[OTA] check start host=%s port=%u\r\n",
                OTA_HTTP_HOST,
@@ -627,10 +653,10 @@ int OTAService_CheckOnce(void)
     return OTA_SERVICE_ERROR;
   }
 
-  result = OTAService_PostVersion(OTA_CURRENT_VERSION);
+  result = OTAService_PostVersion(current_version);
   if (result == OTA_SERVICE_NO_UPDATE)
   {
-    result = OTAService_QueryTask(&task);
+    result = OTAService_QueryTask(&task, current_version);
   }
 
   if (result == OTA_SERVICE_UPDATED)

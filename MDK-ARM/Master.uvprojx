@@ -1019,6 +1019,16 @@
               <FileType>5</FileType>
               <FilePath>../Common/ota_info.h</FilePath>
             </File>
+            <File>
+              <FileName>ota_device_info.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Common/ota_device_info.c</FilePath>
+            </File>
+            <File>
+              <FileName>ota_device_info.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>../Common/ota_device_info.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3904,6 +3914,16 @@
               <FileName>ota_info.h</FileName>
               <FileType>5</FileType>
               <FilePath>../Common/ota_info.h</FilePath>
+            </File>
+            <File>
+              <FileName>ota_device_info.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Common/ota_device_info.c</FilePath>
+            </File>
+            <File>
+              <FileName>ota_device_info.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>../Common/ota_device_info.h</FilePath>
             </File>
           </Files>
         </Group>

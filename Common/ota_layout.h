@@ -23,6 +23,10 @@ extern "C" {
 #define OTA_RESERVED_ADDR     0x001000UL
 #define OTA_RESERVED_SIZE     0x0000F000UL
 
+#define OTA_DEVICE_INFO_A_ADDR 0x001000UL
+#define OTA_DEVICE_INFO_B_ADDR 0x002000UL
+#define OTA_DEVICE_INFO_SIZE   0x00001000UL
+
 #define OTA_BIN_ADDR          0x010000UL
 #define OTA_BIN_REGION_SIZE   0x00200000UL
 #define OTA_BIN_REGION_END    0x20FFFFUL
@@ -32,6 +36,7 @@ extern "C" {
 #define W25Q_TEST_ADDR        0x210000UL
 
 #define OTA_INFO_MAGIC        0x4F544132UL
+#define OTA_DEVICE_INFO_MAGIC 0x44455632UL
 #define OTA_READY_FLAG        1UL
 #define OTA_SIMULATE_FLAG     2UL
 #define OTA_INVALID_FLAG      0xFFFFFFFFUL
@@ -51,6 +56,16 @@ typedef struct
   uint8_t reserved;
   uint16_t info_crc16;
 } OTA_Info_t;
+
+typedef struct
+{
+  uint32_t header_magic;
+  uint32_t sequence;
+  char current_version[OTA_TARGET_VERSION_LEN];
+  char previous_version[OTA_TARGET_VERSION_LEN];
+  uint32_t last_upgrade_result;
+  uint16_t info_crc16;
+} OTA_DeviceInfo_t;
 
 #ifdef __cplusplus
 }
