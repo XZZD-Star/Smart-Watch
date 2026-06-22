@@ -32,7 +32,8 @@ extern "C" {
 #define W25Q_TEST_ADDR        0x210000UL
 
 #define OTA_INFO_MAGIC        0x4F544132UL
-#define OTA_READY_FLAG        0x5A5AA5A5UL
+#define OTA_READY_FLAG        1UL
+#define OTA_SIMULATE_FLAG     2UL
 #define OTA_INVALID_FLAG      0xFFFFFFFFUL
 
 #define OTA_TARGET_VERSION_LEN  32U

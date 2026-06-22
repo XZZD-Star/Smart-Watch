@@ -18,6 +18,7 @@
 #define OTA_JSON_BODY_MAX      768U
 #define OTA_MSG_MAX             32U
 #define OTA_SIZE_LIMIT          OTA_BIN_MAX_SIZE
+#define OTA_SIMULATE_UPGRADE_ONLY 1U
 
 typedef struct
 {
@@ -272,7 +273,7 @@ static int OTAService_ParseTask(const char *json, OTA_TaskInfo_t *task)
 
   OTAService_ToLowerMd5(task->md5);
   if ((MD5_IsHexString(task->md5) == 0U) ||
-      (task->type != OTA_UPGRADE_TYPE) ||
+      (task->type != OTA_TASK_RESPONSE_TYPE) ||
       (task->status == 0UL) ||
       (task->size == 0UL) ||
       (task->size > OTA_SIZE_LIMIT))
@@ -283,7 +284,7 @@ static int OTAService_ParseTask(const char *json, OTA_TaskInfo_t *task)
   return 1;
 }
 
-static int OTAService_PostVersion(void)
+static int OTAService_PostVersion(const char *version)
 {
   char request[OTA_HTTP_REQ_MAX];
   char body[OTA_JSON_BODY_MAX];
@@ -296,11 +297,16 @@ static int OTAService_PostVersion(void)
   int request_len;
 
   memset(body, 0, sizeof(body));
+  if ((version == 0) || (*version == '\0'))
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
   json_len = snprintf(json,
                       sizeof(json),
                       "{\"s_version\":\"%s\",\"f_version\":\"%s\"}",
-                      OTA_CURRENT_VERSION,
-                      OTA_CURRENT_VERSION);
+                      version,
+                      version);
   if ((json_len <= 0) || ((size_t)json_len >= sizeof(json)))
   {
     return OTA_SERVICE_ERROR;
@@ -340,8 +346,37 @@ static int OTAService_PostVersion(void)
     return OTA_SERVICE_ERROR;
   }
 
-  Debug_Printf("[OTA] version reported version=%s\r\n", OTA_CURRENT_VERSION);
+  Debug_Printf("[OTA] version reported version=%s\r\n", version);
   return OTA_SERVICE_NO_UPDATE;
+}
+
+static int OTAService_PostPendingSimulateVersion(void)
+{
+  OTA_Info_t info;
+  int result;
+
+  result = OTAInfo_LoadSimulate(&info);
+  if (result == OTA_INFO_NO_READY)
+  {
+    return OTA_SERVICE_NO_UPDATE;
+  }
+  if (result != OTA_INFO_OK)
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  if (OTAService_PostVersion(info.target_version) != OTA_SERVICE_NO_UPDATE)
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  if (OTAInfo_Invalidate() != OTA_INFO_OK)
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  Debug_Printf("[OTA] simulate version reported target=%s\r\n", info.target_version);
+  return OTA_SERVICE_UPDATED;
 }
 
 static int OTAService_QueryTask(OTA_TaskInfo_t *task)
@@ -369,7 +404,7 @@ static int OTAService_QueryTask(OTA_TaskInfo_t *task)
                          "\r\n",
                          ONENET_PRODUCT_ID,
                          ONENET_DEVICE_NAME,
-                         (unsigned int)OTA_UPGRADE_TYPE,
+                         (unsigned int)OTA_QUERY_TYPE,
                          OTA_CURRENT_VERSION,
                          OTA_HTTP_HOST,
                          OTA_AUTHORIZATION);
@@ -389,6 +424,8 @@ static int OTAService_QueryTask(OTA_TaskInfo_t *task)
     Debug_Printf("[OTA] task query failed\r\n");
     return OTA_SERVICE_ERROR;
   }
+
+  Debug_Printf("[OTA] query body=%s\r\n", body);
 
   if (strcmp(msg, "not exist") == 0)
   {
@@ -543,6 +580,24 @@ static int OTAService_SaveReadyInfo(const OTA_TaskInfo_t *task)
   return OTA_SERVICE_UPDATED;
 }
 
+static int OTAService_SaveSimulateInfo(const OTA_TaskInfo_t *task)
+{
+  OTA_Info_t info;
+
+  memset(&info, 0, sizeof(info));
+  info.firmware_size = task->size;
+  (void)snprintf(info.target_version, sizeof(info.target_version), "%s", task->target);
+  (void)snprintf(info.task_id, sizeof(info.task_id), "%s", task->tid);
+  (void)snprintf(info.expected_md5, sizeof(info.expected_md5), "%s", task->md5);
+
+  if (OTAInfo_SaveSimulate(&info) != OTA_INFO_OK)
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  return OTA_SERVICE_UPDATED;
+}
+
 int OTAService_CheckOnce(void)
 {
   OTA_TaskInfo_t task;
@@ -560,7 +615,19 @@ int OTAService_CheckOnce(void)
     return OTA_SERVICE_ERROR;
   }
 
-  result = OTAService_PostVersion();
+  result = OTAService_PostPendingSimulateVersion();
+  if (result == OTA_SERVICE_UPDATED)
+  {
+    ESP8266_CloseTcp();
+    return OTA_SERVICE_NO_UPDATE;
+  }
+  if (result == OTA_SERVICE_ERROR)
+  {
+    ESP8266_CloseTcp();
+    return OTA_SERVICE_ERROR;
+  }
+
+  result = OTAService_PostVersion(OTA_CURRENT_VERSION);
   if (result == OTA_SERVICE_NO_UPDATE)
   {
     result = OTAService_QueryTask(&task);
@@ -568,23 +635,37 @@ int OTAService_CheckOnce(void)
 
   if (result == OTA_SERVICE_UPDATED)
   {
-    memset(actual_md5, 0, sizeof(actual_md5));
-    result = OTAService_DownloadFirmware(&task, actual_md5);
-    if ((result == OTA_SERVICE_UPDATED) && (strcmp(actual_md5, task.md5) != 0))
+    if (OTA_SIMULATE_UPGRADE_ONLY != 0U)
     {
-      Debug_Printf("[OTA] md5 mismatch\r\n");
-      result = OTA_SERVICE_ERROR;
-    }
-    if (result == OTA_SERVICE_UPDATED)
-    {
-      if (OTAService_SaveReadyInfo(&task) == OTA_SERVICE_UPDATED)
+      if (OTAService_SaveSimulateInfo(&task) == OTA_SERVICE_UPDATED)
       {
-        Debug_Printf("[OTA] ready set, reset to bootloader\r\n");
+        Debug_Printf("[OTA] simulate ready set, reset to bootloader target=%s\r\n", task.target);
         ESP8266_CloseTcp();
         osDelay(200);
         NVIC_SystemReset();
       }
       result = OTA_SERVICE_ERROR;
+    }
+    else
+    {
+      memset(actual_md5, 0, sizeof(actual_md5));
+      result = OTAService_DownloadFirmware(&task, actual_md5);
+      if ((result == OTA_SERVICE_UPDATED) && (strcmp(actual_md5, task.md5) != 0))
+      {
+        Debug_Printf("[OTA] md5 mismatch\r\n");
+        result = OTA_SERVICE_ERROR;
+      }
+      if (result == OTA_SERVICE_UPDATED)
+      {
+        if (OTAService_SaveReadyInfo(&task) == OTA_SERVICE_UPDATED)
+        {
+          Debug_Printf("[OTA] ready set, reset to bootloader\r\n");
+          ESP8266_CloseTcp();
+          osDelay(200);
+          NVIC_SystemReset();
+        }
+        result = OTA_SERVICE_ERROR;
+      }
     }
   }
 

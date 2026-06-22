@@ -15,8 +15,11 @@ extern "C" {
 
 uint16_t OTAInfo_CalcCrc16(const OTA_Info_t *info);
 uint8_t OTAInfo_IsReadyValid(const OTA_Info_t *info);
+uint8_t OTAInfo_IsSimulateValid(const OTA_Info_t *info);
 int OTAInfo_Load(OTA_Info_t *info);
+int OTAInfo_LoadSimulate(OTA_Info_t *info);
 int OTAInfo_SaveReady(const OTA_Info_t *info);
+int OTAInfo_SaveSimulate(const OTA_Info_t *info);
 int OTAInfo_Invalidate(void);
 
 #ifdef __cplusplus

@@ -114,6 +114,11 @@ int BootOTA_TryInstall(void)
   char external_md5[33];
   char internal_md5[33];
 
+  if (OTAInfo_LoadSimulate(&info) == OTA_INFO_OK)
+  {
+    return BOOT_OTA_NO_UPDATE;
+  }
+
   if (OTAInfo_Load(&info) != OTA_INFO_OK)
   {
     return BOOT_OTA_NO_UPDATE;
