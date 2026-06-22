@@ -100,6 +100,8 @@ static void cloud_check_ota_once(void)
     Debug_Printf("[OTA] check failed, continue mqtt\r\n");
   }
 
+  ESP8266_CloseTcp();
+  osDelay(300);
   ESP8266_Clear();
   ESP8266_ClearTransportError();
 }

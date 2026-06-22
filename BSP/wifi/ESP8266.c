@@ -12,6 +12,9 @@
 #define ESP8266_POLL_DELAY_MS            10U
 #define ESP8266_RX_IDLE_MS               20U
 #define ESP8266_AT_TIMEOUT_MS          3000U
+#define ESP8266_RST_TIMEOUT_MS         8000U
+#define ESP8266_RST_STABILIZE_MS        800U
+#define ESP8266_ESCAPE_GUARD_MS        1000U
 #define ESP8266_WIFI_TIMEOUT_MS       40000U
 #define ESP8266_TCP_TIMEOUT_MS        10000U
 #define ESP8266_CIPSEND_TIMEOUT_MS     3000U
@@ -33,7 +36,10 @@ static uint8_t ESP8266_SendCmdInternal(const char *cmd,
                                        const char *expect,
                                        const char *alt_expect,
                                        uint32_t timeout_ms);
+static uint8_t ESP8266_ResetModule(void);
+static void ESP8266_TryExitTransparentMode(void);
 static void ESP8266_TryCloseSocket(void);
+static uint8_t ESP8266_InitCommands(void);
 static uint8_t ESP8266_CheckIPDPayload(uint32_t *ipd_len,
                                        uint16_t *payload_offset,
                                        uint16_t *available_len,
@@ -274,6 +280,20 @@ static void ESP8266_TryCloseSocket(void)
   ESP8266_ClearTransportError();
 }
 
+static void ESP8266_TryExitTransparentMode(void)
+{
+  static const uint8_t escape_cmd[] = "+++";
+
+  ESP8266_Clear();
+  ESP8266_ClearTransportError();
+  ESP8266_SleepMs(ESP8266_ESCAPE_GUARD_MS);
+  ESP8266_SendRaw(escape_cmd, (uint16_t)(sizeof(escape_cmd) - 1U));
+  ESP8266_SleepMs(ESP8266_ESCAPE_GUARD_MS);
+  (void)ESP8266_WaitReceive(200U);
+  ESP8266_Clear();
+  ESP8266_ClearTransportError();
+}
+
 static uint8_t ESP8266_CheckIPDPayload(uint32_t *ipd_len,
                                        uint16_t *payload_offset,
                                        uint16_t *available_len,
@@ -409,6 +429,43 @@ static uint8_t ESP8266_SendCmdInternal(const char *cmd,
     return 1U;
   }
 
+  return 0U;
+}
+
+static uint8_t ESP8266_ResetModule(void)
+{
+  uint32_t start;
+  static const uint8_t rst_cmd[] = "AT+RST\r\n";
+
+  ESP8266_Clear();
+  ESP8266_ClearTransportError();
+  ESP8266_SendRaw(rst_cmd, (uint16_t)(sizeof(rst_cmd) - 1U));
+
+  start = ESP8266_GetTickMs();
+  while ((ESP8266_GetTickMs() - start) < ESP8266_RST_TIMEOUT_MS)
+  {
+    if (ESP8266_CurrentBufferContains("ready") != 0U)
+    {
+      ESP8266_SleepMs(ESP8266_RST_STABILIZE_MS);
+      ESP8266_Clear();
+      ESP8266_ClearTransportError();
+      return 1U;
+    }
+
+    ESP8266_SleepMs(ESP8266_POLL_DELAY_MS);
+  }
+
+  ESP8266_DebugDumpCurrentRx("RST_TIMEOUT", 96U);
+  ESP8266_Clear();
+  ESP8266_ClearTransportError();
+
+  if (ESP8266_SendCmd("AT", "OK", ESP8266_AT_TIMEOUT_MS) != 0U)
+  {
+    return 1U;
+  }
+
+  ESP8266_Clear();
+  ESP8266_ClearTransportError();
   return 0U;
 }
 
@@ -588,7 +645,7 @@ uint8_t *ESP8266_GetIPD(uint32_t timeout_ms)
   return NULL;
 }
 
-uint8_t ESP8266_Init(void)
+static uint8_t ESP8266_InitCommands(void)
 {
   char cmd[ESP8266_CMD_BUFFER_SIZE];
 
@@ -598,8 +655,13 @@ uint8_t ESP8266_Init(void)
 
   if (ESP8266_SendCmd("AT", "OK", ESP8266_AT_TIMEOUT_MS) == 0U)
   {
-    g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_AT;
-    return 0U;
+    ESP8266_TryExitTransparentMode();
+    ESP8266_TryCloseSocket();
+    if (ESP8266_SendCmd("AT", "OK", ESP8266_AT_TIMEOUT_MS) == 0U)
+    {
+      g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_AT;
+      return 0U;
+    }
   }
 
   if (ESP8266_SendCmd("ATE0", "OK", ESP8266_AT_TIMEOUT_MS) == 0U)
@@ -607,6 +669,15 @@ uint8_t ESP8266_Init(void)
     g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_ATE0;
     return 0U;
   }
+
+  if (ESP8266_SendCmd("AT+CIPMODE=0", "OK", ESP8266_AT_TIMEOUT_MS) == 0U)
+  {
+    g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_CIPMODE;
+    return 0U;
+  }
+
+  ESP8266_TryExitTransparentMode();
+  ESP8266_TryCloseSocket();
 
   if (ESP8266_SendCmd("AT+CWMODE=1", "OK", ESP8266_AT_TIMEOUT_MS) == 0U)
   {
@@ -634,14 +705,35 @@ uint8_t ESP8266_Init(void)
     }
   }
 
+  ESP8266_TryCloseSocket();
   if (ESP8266_SendCmd("AT+CIPMUX=0", "OK", ESP8266_AT_TIMEOUT_MS) == 0U)
   {
-    g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_CIPMUX;
-    return 0U;
+    ESP8266_TryCloseSocket();
+    if (ESP8266_SendCmd("AT+CIPMUX=0", "OK", ESP8266_AT_TIMEOUT_MS) == 0U)
+    {
+      g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_CIPMUX;
+      return 0U;
+    }
   }
 
   g_esp8266_last_init_status = ESP8266_INIT_STATUS_OK;
   return 1U;
+}
+
+uint8_t ESP8266_Init(void)
+{
+  if (ESP8266_InitCommands() != 0U)
+  {
+    return 1U;
+  }
+
+  if (ESP8266_ResetModule() == 0U)
+  {
+    g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_RST;
+    return 0U;
+  }
+
+  return ESP8266_InitCommands();
 }
 
 uint8_t ESP8266_ConnectTcp(const char *host, uint16_t port)

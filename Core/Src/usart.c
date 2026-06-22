@@ -29,7 +29,48 @@
 
 uint8_t rx_buffer[RX_BUFFER_SIZE];
 uint16_t rx_index;
-static uint8_t esp8266_rx_dma_buffer[256];
+#define ESP8266_RX_DMA_BUFFER_SIZE 2048U
+static uint8_t esp8266_rx_dma_buffer[ESP8266_RX_DMA_BUFFER_SIZE];
+static uint16_t esp8266_rx_dma_last_pos;
+
+static void USART6_FeedRxDmaRing(uint16_t dma_pos, HAL_UART_RxEventTypeTypeDef event_type)
+{
+    uint16_t buffer_size = (uint16_t)sizeof(esp8266_rx_dma_buffer);
+
+    if (dma_pos > buffer_size)
+    {
+        return;
+    }
+
+    if ((event_type == HAL_UART_RXEVENT_IDLE) &&
+        (dma_pos == buffer_size) &&
+        (esp8266_rx_dma_last_pos == 0U))
+    {
+        return;
+    }
+
+    if (dma_pos == esp8266_rx_dma_last_pos)
+    {
+        return;
+    }
+
+    if (dma_pos > esp8266_rx_dma_last_pos)
+    {
+        ESP8266_RxFeedBlock(&esp8266_rx_dma_buffer[esp8266_rx_dma_last_pos],
+                            (uint16_t)(dma_pos - esp8266_rx_dma_last_pos));
+    }
+    else
+    {
+        ESP8266_RxFeedBlock(&esp8266_rx_dma_buffer[esp8266_rx_dma_last_pos],
+                            (uint16_t)(buffer_size - esp8266_rx_dma_last_pos));
+        if (dma_pos > 0U)
+        {
+            ESP8266_RxFeedBlock(esp8266_rx_dma_buffer, dma_pos);
+        }
+    }
+
+    esp8266_rx_dma_last_pos = (dma_pos == buffer_size) ? 0U : dma_pos;
+}
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart4;
@@ -259,6 +300,7 @@ void MX_USART6_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART6_Init 2 */
+  esp8266_rx_dma_last_pos = 0U;
   if (HAL_UARTEx_ReceiveToIdle_DMA(&huart6,
                                    esp8266_rx_dma_buffer,
                                    sizeof(esp8266_rx_dma_buffer)) != HAL_OK)
@@ -563,7 +605,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     hdma_usart6_rx.Init.MemInc = DMA_MINC_ENABLE;
     hdma_usart6_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
     hdma_usart6_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
-    hdma_usart6_rx.Init.Mode = DMA_NORMAL;
+    hdma_usart6_rx.Init.Mode = DMA_CIRCULAR;
     hdma_usart6_rx.Init.Priority = DMA_PRIORITY_LOW;
     hdma_usart6_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
     if (HAL_DMA_Init(&hdma_usart6_rx) != HAL_OK)
@@ -775,16 +817,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
     if (huart->Instance == USART6)
     {
-        ESP8266_RxFeedBlock(esp8266_rx_dma_buffer, Size);
-
-        memset(esp8266_rx_dma_buffer, 0, sizeof(esp8266_rx_dma_buffer));
-        if (HAL_UARTEx_ReceiveToIdle_DMA(&huart6,
-                                         esp8266_rx_dma_buffer,
-                                         sizeof(esp8266_rx_dma_buffer)) != HAL_OK)
-        {
-            Error_Handler();
-        }
-        __HAL_DMA_DISABLE_IT(&hdma_usart6_rx, DMA_IT_HT);
+        USART6_FeedRxDmaRing(Size, HAL_UARTEx_GetRxEventType(huart));
         return;
     }
 
