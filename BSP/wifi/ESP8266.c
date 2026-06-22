@@ -26,6 +26,7 @@ static volatile uint16_t g_esp8266_rx_count = 0U;
 static volatile uint32_t g_esp8266_rx_last_tick = 0U;
 static volatile uint8_t g_esp8266_transport_error = 0U;
 static volatile uint8_t g_esp8266_last_init_status = ESP8266_INIT_STATUS_OK;
+static volatile uint32_t g_esp8266_last_ipd_len = 0UL;
 static uint8_t g_esp8266_rx_buffer[ESP8266_RX_BUFFER_SIZE];
 
 static uint8_t ESP8266_SendCmdInternal(const char *cmd,
@@ -212,7 +213,7 @@ static uint8_t ESP8266_IsTargetWifiConnected(void)
     return 0U;
   }
 
-  return ESP8266_CurrentBufferContains(WIFI_SSID);
+  return ESP8266_CurrentBufferContains(OTA_WIFI_SSID);
 }
 
 static uint8_t ESP8266_WaitForEitherPattern(const char *expect,
@@ -419,6 +420,7 @@ void ESP8266_Clear(void)
   memset(g_esp8266_rx_buffer, 0, sizeof(g_esp8266_rx_buffer));
   g_esp8266_rx_count = 0U;
   g_esp8266_rx_last_tick = 0U;
+  g_esp8266_last_ipd_len = 0UL;
   if (primask == 0U)
   {
     __enable_irq();
@@ -510,6 +512,7 @@ uint8_t *ESP8266_GetIPD(uint32_t timeout_ms)
         s_last_incomplete_count = 0U;
         s_last_incomplete_have = 0U;
         s_last_incomplete_need = 0U;
+        g_esp8266_last_ipd_len = ipd_len;
         Debug_Printf("[TCP] +IPD len=%lu offset=%u rx_count=%u\r\n",
                      (unsigned long)ipd_len,
                      (unsigned int)payload_offset,
@@ -619,7 +622,11 @@ uint8_t ESP8266_Init(void)
 
   if (ESP8266_IsTargetWifiConnected() == 0U)
   {
-    (void)snprintf(cmd, sizeof(cmd), "AT+CWJAP=\"%s\",\"%s\"", WIFI_SSID, WIFI_PASSWORD);
+    (void)snprintf(cmd,
+                   sizeof(cmd),
+                   "AT+CWJAP=\"%s\",\"%s\"",
+                   OTA_WIFI_SSID,
+                   OTA_WIFI_PASSWORD);
     if (ESP8266_SendCmd(cmd, "GOT IP", ESP8266_WIFI_TIMEOUT_MS) == 0U)
     {
       g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_CWJAP;
@@ -627,19 +634,32 @@ uint8_t ESP8266_Init(void)
     }
   }
 
-  ESP8266_TryCloseSocket();
-
   if (ESP8266_SendCmd("AT+CIPMUX=0", "OK", ESP8266_AT_TIMEOUT_MS) == 0U)
   {
     g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_CIPMUX;
     return 0U;
   }
 
+  g_esp8266_last_init_status = ESP8266_INIT_STATUS_OK;
+  return 1U;
+}
+
+uint8_t ESP8266_ConnectTcp(const char *host, uint16_t port)
+{
+  char cmd[ESP8266_CMD_BUFFER_SIZE];
+
+  if ((host == NULL) || (*host == '\0') || (port == 0U))
+  {
+    g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_CIPSTART;
+    return 0U;
+  }
+
+  ESP8266_TryCloseSocket();
   (void)snprintf(cmd,
                  sizeof(cmd),
                  "AT+CIPSTART=\"TCP\",\"%s\",%u",
-                 ONENET_HOST,
-                 (unsigned int)ONENET_PORT);
+                 host,
+                 (unsigned int)port);
   if (ESP8266_SendCmdInternal(cmd, "CONNECT", "ALREADY CONNECTED", ESP8266_TCP_TIMEOUT_MS) == 0U)
   {
     g_esp8266_last_init_status = ESP8266_INIT_STATUS_FAIL_CIPSTART;
@@ -648,6 +668,16 @@ uint8_t ESP8266_Init(void)
 
   g_esp8266_last_init_status = ESP8266_INIT_STATUS_OK;
   return 1U;
+}
+
+void ESP8266_CloseTcp(void)
+{
+  ESP8266_TryCloseSocket();
+}
+
+uint32_t ESP8266_GetLastIPDLength(void)
+{
+  return g_esp8266_last_ipd_len;
 }
 
 static void ESP8266_UpdateTransportError(uint16_t count)

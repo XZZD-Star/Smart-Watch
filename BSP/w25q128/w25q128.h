@@ -69,6 +69,11 @@ int W25Q128_EraseRange(uint32_t address, uint32_t length);
 int W25Q128_WriteData(uint32_t address, const uint8_t *data, uint32_t length);
 
 /**
+ * @brief Write data and read it back for byte-by-byte verification.
+ */
+int W25Q128_WriteDataVerified(uint32_t address, const uint8_t *data, uint32_t length);
+
+/**
  * @brief 读取 ID、擦除、写入、读回并校验测试数据。
  */
 int W25Q128_Test(void);

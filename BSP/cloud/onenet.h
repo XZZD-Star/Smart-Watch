@@ -3,11 +3,11 @@
 
 #include <stdint.h>
 
-#define ONENET_PRODUCT_ID               "S9U9FY9ZdS"
-#define ONENET_DEVICE_NAME              "Bracelet"
-#define ONENET_CLIENT_ID                ONENET_DEVICE_NAME
-#define ONENET_USERNAME                 ONENET_PRODUCT_ID
-#define ONENET_PASSWORD                 "version=2018-10-31&res=products%2FS9U9FY9ZdS%2Fdevices%2FBracelet&et=1805863774&method=md5&sign=h%2F8qRCOICNVzmUC0cTq5Bg%3D%3D"
+#include "ota_config.h"
+
+#define ONENET_CLIENT_ID                ONENET_MQTT_CLIENT_ID
+#define ONENET_USERNAME                 ONENET_MQTT_USERNAME
+#define ONENET_PASSWORD                 ONENET_MQTT_PASSWORD
 
 #define ONENET_KEEP_ALIVE_SECONDS       60U
 #define ONENET_PUBLISH_INTERVAL_MS    5000U

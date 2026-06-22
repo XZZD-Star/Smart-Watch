@@ -8,9 +8,12 @@
 #include "ESP8266.h"
 #include "motion_app_events.h"
 #include "onenet.h"
+#include "ota_config.h"
+#include "ota_service.h"
 
 static void cloud_reset_session(void);
 static void cloud_wait_wifi_init(void);
+static void cloud_check_ota_once(void);
 static uint8_t cloud_connect_mqtt(void);
 static uint8_t cloud_send_subscribe(void);
 static void cloud_restart_session_delay(void);
@@ -34,6 +37,7 @@ void CloudTask_Run(void)
   {
     cloud_reset_session();
     cloud_wait_wifi_init();
+    cloud_check_ota_once();
 
     if (cloud_connect_mqtt() == 0U)
     {
@@ -74,8 +78,41 @@ static void cloud_wait_wifi_init(void)
   Debug_Printf("[TCP] INIT OK\r\n");
 }
 
+static void cloud_check_ota_once(void)
+{
+  static uint8_t checked = 0U;
+  int result;
+
+  if (checked != 0U)
+  {
+    return;
+  }
+  checked = 1U;
+
+  result = OTAService_CheckOnce();
+
+  if (result == OTA_SERVICE_NO_UPDATE)
+  {
+    Debug_Printf("[OTA] no update, continue mqtt\r\n");
+  }
+  else if (result == OTA_SERVICE_ERROR)
+  {
+    Debug_Printf("[OTA] check failed, continue mqtt\r\n");
+  }
+
+  ESP8266_Clear();
+  ESP8266_ClearTransportError();
+}
+
 static uint8_t cloud_connect_mqtt(void)
 {
+  if (ESP8266_ConnectTcp(ONENET_MQTT_HOST, ONENET_MQTT_PORT) == 0U)
+  {
+    Debug_Printf("[MQTT] TCP CONNECT FAIL code=%u\r\n",
+                 (unsigned int)ESP8266_GetLastInitStatus());
+    return 0U;
+  }
+
   while (OneNet_DevLink() == 0U)
   {
     Debug_Printf("[MQTT] CONNECT FAIL code=%u ack=%u\r\n",

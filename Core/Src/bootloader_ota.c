@@ -1,122 +1,88 @@
 #include "bootloader_ota.h"
 
-#include "crc16.h"
-#include "main.h"
+#include <string.h>
+
+#include "internal_flash.h"
+#include "md5.h"
+#include "ota_info.h"
 #include "ota_layout.h"
 #include "w25q128.h"
 
-#include <string.h>
-
-#define BOOT_OTA_READ_CHUNK        512UL
-#define BOOT_FLASH_WORD_SIZE        32UL
-#define BOOT_FLASH_WORD_U32_COUNT    8UL
+#define BOOT_OTA_READ_CHUNK  512UL
 
 static int BootOTA_IsFirmwareSizeValid(uint32_t firmware_size)
 {
   return ((firmware_size > 0UL) && (firmware_size <= OTA_BIN_MAX_SIZE));
 }
 
-static int BootOTA_ClearInfo(void)
-{
-  return W25Q128_EraseRange(OTA_INFO_ADDR, OTA_INFO_SIZE);
-}
-
-static int BootOTA_CalcW25Q128Crc(uint32_t address, uint32_t size, uint16_t *out_crc)
+static int BootOTA_CalcW25Q128Md5(uint32_t address,
+                                  uint32_t size,
+                                  char out_md5[33])
 {
   uint8_t buffer[BOOT_OTA_READ_CHUNK];
+  uint8_t digest[16];
   uint32_t offset = 0UL;
-  uint16_t crc = CRC16_Init();
-  int ret;
+  MD5_Context_t md5;
 
-  if ((out_crc == 0) || (BootOTA_IsFirmwareSizeValid(size) == 0))
+  if ((out_md5 == 0) || (BootOTA_IsFirmwareSizeValid(size) == 0))
   {
     return BOOT_OTA_ERROR;
   }
 
+  MD5_Init(&md5);
   while (offset < size)
   {
     uint32_t remain = size - offset;
     uint32_t read_len = (remain > BOOT_OTA_READ_CHUNK) ? BOOT_OTA_READ_CHUNK : remain;
 
-    ret = W25Q128_ReadData(address + offset, buffer, read_len);
-    if (ret != W25Q128_OK)
+    if (W25Q128_ReadData(address + offset, buffer, read_len) != W25Q128_OK)
     {
       return BOOT_OTA_ERROR;
     }
 
-    crc = CRC16_Update(crc, buffer, read_len);
+    MD5_Update(&md5, buffer, read_len);
     offset += read_len;
   }
 
-  *out_crc = crc;
+  MD5_Final(&md5, digest);
+  MD5_ToHex(digest, out_md5);
   return BOOT_OTA_INSTALLED;
 }
 
-static uint16_t BootOTA_CalcInternalFlashCrc(uint32_t address, uint32_t size)
+static int BootOTA_CalcInternalFlashMd5(uint32_t address,
+                                        uint32_t size,
+                                        char out_md5[33])
 {
-  uint16_t crc = CRC16_Init();
+  uint8_t digest[16];
   uint32_t offset = 0UL;
+  MD5_Context_t md5;
 
-  while (offset < size)
-  {
-    uint32_t remain = size - offset;
-    uint32_t chunk = (remain > BOOT_OTA_READ_CHUNK) ? BOOT_OTA_READ_CHUNK : remain;
-
-    crc = CRC16_Update(crc, (const uint8_t *)(address + offset), chunk);
-    offset += chunk;
-  }
-
-  return crc;
-}
-
-static HAL_StatusTypeDef BootOTA_EraseFlashBank(uint32_t bank, uint32_t sector, uint32_t count)
-{
-  FLASH_EraseInitTypeDef erase = {0};
-  uint32_t sector_error = 0xFFFFFFFFUL;
-
-  erase.TypeErase = FLASH_TYPEERASE_SECTORS;
-  erase.Banks = bank;
-  erase.Sector = sector;
-  erase.NbSectors = count;
-  erase.VoltageRange = FLASH_VOLTAGE_RANGE_4;
-
-  return HAL_FLASHEx_Erase(&erase, &sector_error);
-}
-
-static int BootOTA_EraseAppFlash(void)
-{
-  HAL_StatusTypeDef status;
-
-  if (HAL_FLASH_Unlock() != HAL_OK)
+  if ((out_md5 == 0) || (BootOTA_IsFirmwareSizeValid(size) == 0))
   {
     return BOOT_OTA_ERROR;
   }
 
-  status = BootOTA_EraseFlashBank(FLASH_BANK_1, 1UL, 7UL);
-  if (status == HAL_OK)
+  MD5_Init(&md5);
+  while (offset < size)
   {
-    status = BootOTA_EraseFlashBank(FLASH_BANK_2, 0UL, 8UL);
+    uint32_t remain = size - offset;
+    uint32_t read_len = (remain > BOOT_OTA_READ_CHUNK) ? BOOT_OTA_READ_CHUNK : remain;
+
+    MD5_Update(&md5, (const uint8_t *)(address + offset), read_len);
+    offset += read_len;
   }
 
-  (void)HAL_FLASH_Lock();
-
-  return (status == HAL_OK) ? BOOT_OTA_INSTALLED : BOOT_OTA_ERROR;
+  MD5_Final(&md5, digest);
+  MD5_ToHex(digest, out_md5);
+  return BOOT_OTA_INSTALLED;
 }
 
 static int BootOTA_WriteAppFlash(uint32_t firmware_size)
 {
   uint8_t read_buffer[BOOT_OTA_READ_CHUNK];
-  uint32_t flash_word[BOOT_FLASH_WORD_U32_COUNT];
-  uint8_t *flash_bytes = (uint8_t *)flash_word;
   uint32_t written = 0UL;
-  int result = BOOT_OTA_INSTALLED;
 
   if (BootOTA_IsFirmwareSizeValid(firmware_size) == 0)
-  {
-    return BOOT_OTA_ERROR;
-  }
-
-  if (HAL_FLASH_Unlock() != HAL_OK)
   {
     return BOOT_OTA_ERROR;
   }
@@ -125,83 +91,51 @@ static int BootOTA_WriteAppFlash(uint32_t firmware_size)
   {
     uint32_t remain = firmware_size - written;
     uint32_t read_len = (remain > BOOT_OTA_READ_CHUNK) ? BOOT_OTA_READ_CHUNK : remain;
-    uint32_t offset = 0UL;
 
     if (W25Q128_ReadData(OTA_BIN_ADDR + written, read_buffer, read_len) != W25Q128_OK)
     {
-      result = BOOT_OTA_ERROR;
-      break;
+      return BOOT_OTA_ERROR;
     }
 
-    while (offset < read_len)
+    if (InternalFlash_Write(APP_FLASH_ADDR + written, read_buffer, read_len) != INTERNAL_FLASH_OK)
     {
-      uint32_t copy_len = read_len - offset;
-
-      if (copy_len > BOOT_FLASH_WORD_SIZE)
-      {
-        copy_len = BOOT_FLASH_WORD_SIZE;
-      }
-
-      memset(flash_bytes, 0xFF, BOOT_FLASH_WORD_SIZE);
-      memcpy(flash_bytes, &read_buffer[offset], copy_len);
-
-      if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD,
-                            APP_FLASH_ADDR + written + offset,
-                            (uint32_t)flash_word) != HAL_OK)
-      {
-        result = BOOT_OTA_ERROR;
-        break;
-      }
-
-      offset += copy_len;
-    }
-
-    if (result != BOOT_OTA_INSTALLED)
-    {
-      break;
+      return BOOT_OTA_ERROR;
     }
 
     written += read_len;
   }
 
-  (void)HAL_FLASH_Lock();
-  return result;
+  return BOOT_OTA_INSTALLED;
 }
 
 int BootOTA_TryInstall(void)
 {
   OTA_Info_t info;
-  uint16_t external_crc = 0U;
-  uint16_t internal_crc;
+  char external_md5[33];
+  char internal_md5[33];
 
-  if (W25Q128_ReadData(OTA_INFO_ADDR, (uint8_t *)&info, (uint32_t)sizeof(info)) != W25Q128_OK)
-  {
-    return BOOT_OTA_NO_UPDATE;
-  }
-
-  if ((info.magic != OTA_INFO_MAGIC) || (info.state != OTA_STATE_READY))
+  if (OTAInfo_Load(&info) != OTA_INFO_OK)
   {
     return BOOT_OTA_NO_UPDATE;
   }
 
   if (BootOTA_IsFirmwareSizeValid(info.firmware_size) == 0)
   {
-    (void)BootOTA_ClearInfo();
     return BOOT_OTA_NO_UPDATE;
   }
 
-  if (BootOTA_CalcW25Q128Crc(OTA_BIN_ADDR, info.firmware_size, &external_crc) != BOOT_OTA_INSTALLED)
+  memset(external_md5, 0, sizeof(external_md5));
+  if (BootOTA_CalcW25Q128Md5(OTA_BIN_ADDR, info.firmware_size, external_md5) != BOOT_OTA_INSTALLED)
   {
     return BOOT_OTA_NO_UPDATE;
   }
 
-  if (external_crc != info.firmware_crc16)
+  if (strcmp(external_md5, info.expected_md5) != 0)
   {
-    (void)BootOTA_ClearInfo();
     return BOOT_OTA_NO_UPDATE;
   }
 
-  if (BootOTA_EraseAppFlash() != BOOT_OTA_INSTALLED)
+  if (InternalFlash_EraseAppArea(APP_FLASH_ADDR, APP_FLASH_SIZE) != INTERNAL_FLASH_OK)
   {
     return BOOT_OTA_ERROR;
   }
@@ -211,13 +145,18 @@ int BootOTA_TryInstall(void)
     return BOOT_OTA_ERROR;
   }
 
-  internal_crc = BootOTA_CalcInternalFlashCrc(APP_FLASH_ADDR, info.firmware_size);
-  if (internal_crc != info.firmware_crc16)
+  memset(internal_md5, 0, sizeof(internal_md5));
+  if (BootOTA_CalcInternalFlashMd5(APP_FLASH_ADDR, info.firmware_size, internal_md5) != BOOT_OTA_INSTALLED)
   {
     return BOOT_OTA_ERROR;
   }
 
-  if (BootOTA_ClearInfo() != W25Q128_OK)
+  if (strcmp(internal_md5, info.expected_md5) != 0)
+  {
+    return BOOT_OTA_ERROR;
+  }
+
+  if (OTAInfo_Invalidate() != OTA_INFO_OK)
   {
     return BOOT_OTA_ERROR;
   }

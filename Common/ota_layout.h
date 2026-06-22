@@ -31,17 +31,24 @@ extern "C" {
 
 #define W25Q_TEST_ADDR        0x210000UL
 
-#define OTA_INFO_MAGIC        0x4F544131UL
-#define OTA_STATE_READY       0x5A5AA5A5UL
+#define OTA_INFO_MAGIC        0x4F544132UL
+#define OTA_READY_FLAG        0x5A5AA5A5UL
+#define OTA_INVALID_FLAG      0xFFFFFFFFUL
+
+#define OTA_TARGET_VERSION_LEN  32U
+#define OTA_TASK_ID_LEN         64U
+#define OTA_MD5_HEX_LEN         32U
 
 typedef struct
 {
-  uint32_t magic;
-  uint32_t state;
+  uint32_t header_magic;
+  uint32_t ready_flag;
   uint32_t firmware_size;
-  uint16_t firmware_crc16;
-  uint16_t reserved;
-  uint32_t firmware_version;
+  char target_version[OTA_TARGET_VERSION_LEN];
+  char task_id[OTA_TASK_ID_LEN];
+  char expected_md5[OTA_MD5_HEX_LEN + 1U];
+  uint8_t reserved;
+  uint16_t info_crc16;
 } OTA_Info_t;
 
 #ifdef __cplusplus

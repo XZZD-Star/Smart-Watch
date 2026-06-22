@@ -3,11 +3,7 @@
 
 #include <stdint.h>
 
-#define WIFI_SSID              "www"
-#define WIFI_PASSWORD          "www123456"
-
-#define ONENET_HOST            "mqtts.heclouds.com"
-#define ONENET_PORT            1883U
+#include "ota_config.h"
 
 #define ESP8266_INIT_STATUS_OK            0U
 #define ESP8266_INIT_STATUS_FAIL_AT       1U
@@ -30,6 +26,9 @@ uint8_t ESP8266_SendData(const uint8_t *data, uint16_t len);
 uint8_t *ESP8266_GetIPD(uint32_t timeout_ms);
 /* 初始化 WiFi、TCP 连接和 ESP8266 基本 AT 配置。 */
 uint8_t ESP8266_Init(void);
+uint8_t ESP8266_ConnectTcp(const char *host, uint16_t port);
+void ESP8266_CloseTcp(void);
+uint32_t ESP8266_GetLastIPDLength(void);
 
 /* 兼容旧逐字节接收路径：向软件缓存写入一个字节。 */
 void ESP8266_RxFeedByte(uint8_t byte);

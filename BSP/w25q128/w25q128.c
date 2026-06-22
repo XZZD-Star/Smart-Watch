@@ -394,6 +394,55 @@ int W25Q128_WriteData(uint32_t address, const uint8_t *data, uint32_t length)
   return W25Q128_OK;
 }
 
+int W25Q128_WriteDataVerified(uint32_t address, const uint8_t *data, uint32_t length)
+{
+  uint8_t verify_buffer[64];
+  uint32_t checked = 0UL;
+  int ret;
+
+  if (length == 0UL)
+  {
+    return W25Q128_OK;
+  }
+
+  if ((data == 0) || (W25Q128_IsRangeValid(address, length) == 0))
+  {
+    return W25Q128_ERR_WRITE;
+  }
+
+  ret = W25Q128_WriteData(address, data, length);
+  if (ret != W25Q128_OK)
+  {
+    return ret;
+  }
+
+  while (checked < length)
+  {
+    uint32_t remain = length - checked;
+    uint32_t chunk = (remain > (uint32_t)sizeof(verify_buffer)) ?
+                     (uint32_t)sizeof(verify_buffer) : remain;
+    uint32_t i;
+
+    ret = W25Q128_ReadData(address + checked, verify_buffer, chunk);
+    if (ret != W25Q128_OK)
+    {
+      return ret;
+    }
+
+    for (i = 0UL; i < chunk; i++)
+    {
+      if (verify_buffer[i] != data[checked + i])
+      {
+        return W25Q128_ERR_VERIFY;
+      }
+    }
+
+    checked += chunk;
+  }
+
+  return W25Q128_OK;
+}
+
 int W25Q128_Test(void)
 {
   static const uint8_t test_data[32] = {
