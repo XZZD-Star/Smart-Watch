@@ -14,7 +14,7 @@
 #define LT168B_MAX_DATA_LEN       (255U - LT168B_LEN_WITHOUT_DATA)
 
 #define LT168B_WRITE_CMD          0x10U
-#define LT168B_TEXT_END_LEN       2U
+#define LT168B_TEXT_END_LEN       1U
 #define LT168B_TOUCH_CMD          0x41U
 #define LT168B_TOUCH_LEN          0x07U
 #define LT168B_TOUCH_FRAME_LEN    10U
@@ -95,7 +95,6 @@ void LT168B_WriteText(uint16_t address, const char *text)
 
   (void)memcpy(data, text, text_len);
   data[text_len] = 0x00U;
-  data[text_len + 1U] = 0x00U;
 
   LT168B_SendStr(LT168B_WRITE_CMD,
                  address,

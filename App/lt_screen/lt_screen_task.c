@@ -5,7 +5,22 @@
 
 #define LTSCREEN_BOOT_READY_DELAY_MS 1200U
 #define LTSCREEN_POLL_INTERVAL_MS    20U
-#define LTSCREEN_HEALTH_REFRESH_MS   1000U
+#define LTSCREEN_HEALTH_REFRESH_MS   10000U
+
+#define LTSCREEN_TEXT_END_TEST_NONE  0U
+#define LTSCREEN_TEXT_END_TEST_00    1U
+#define LTSCREEN_TEXT_END_TEST_00_00 2U
+
+#ifndef APP_LTSCREEN_TEXT_END_TEST
+//#define APP_LTSCREEN_TEXT_END_TEST LTSCREEN_TEXT_END_TEST_00
+#define APP_LTSCREEN_TEXT_END_TEST LTSCREEN_TEXT_END_TEST_NONE
+#endif
+
+#if ((APP_LTSCREEN_TEXT_END_TEST != LTSCREEN_TEXT_END_TEST_NONE) && \
+     (APP_LTSCREEN_TEXT_END_TEST != LTSCREEN_TEXT_END_TEST_00) && \
+     (APP_LTSCREEN_TEXT_END_TEST != LTSCREEN_TEXT_END_TEST_00_00))
+#error "APP_LTSCREEN_TEXT_END_TEST must be NONE, 00 or 00_00"
+#endif
 
 #define LTSCREEN_HEART_RATE_ADDR     0x02B9U
 #define LTSCREEN_SPO2_ADDR           0x02CDU
@@ -13,6 +28,9 @@
 
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
 static void lt_screen_refresh_health_test(void);
+static void lt_screen_refresh_health_no_end_test(void);
+static void lt_screen_refresh_health_00_test(void);
+static void lt_screen_refresh_health_00_00_test(void);
 #elif APP_LTSCREEN_MODE == LTSCREEN_MODE_NET_DEBUG
 static void lt_screen_run_net_debug_test(void);
 #endif
@@ -72,8 +90,57 @@ void LTScreen_HandleTouchEvent(const LT168B_TouchEvent_t *event)
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
 static void lt_screen_refresh_health_test(void)
 {
-  LT168B_WriteText(LTSCREEN_HEART_RATE_ADDR, "88");
-  LT168B_WriteText(LTSCREEN_SPO2_ADDR, "88");
+  switch (APP_LTSCREEN_TEXT_END_TEST)
+  {
+  case LTSCREEN_TEXT_END_TEST_NONE:
+    lt_screen_refresh_health_no_end_test();
+    break;
+
+  case LTSCREEN_TEXT_END_TEST_00_00:
+    lt_screen_refresh_health_00_00_test();
+    break;
+
+  case LTSCREEN_TEXT_END_TEST_00:
+  default:
+    lt_screen_refresh_health_00_test();
+    break;
+  }
+}
+
+static void lt_screen_refresh_health_no_end_test(void)
+{
+  static const uint8_t heart_rate[] = {'7', '8'};
+  static const uint8_t spo2[] = {'2', '8'};
+
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_HEART_RATE_ADDR,
+                 heart_rate,
+                 (uint8_t)sizeof(heart_rate));
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_SPO2_ADDR,
+                 spo2,
+                 (uint8_t)sizeof(spo2));
+}
+
+static void lt_screen_refresh_health_00_test(void)
+{
+  LT168B_WriteText(LTSCREEN_HEART_RATE_ADDR, "78");
+  LT168B_WriteText(LTSCREEN_SPO2_ADDR, "18");
+}
+
+static void lt_screen_refresh_health_00_00_test(void)
+{
+  static const uint8_t heart_rate[] = {'7', '8', 0x00U, 0x00U};
+  static const uint8_t spo2[] = {'1', '8', 0x00U, 0x00U};
+
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_HEART_RATE_ADDR,
+                 heart_rate,
+                 (uint8_t)sizeof(heart_rate));
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_SPO2_ADDR,
+                 spo2,
+                 (uint8_t)sizeof(spo2));
 }
 
 #elif APP_LTSCREEN_MODE == LTSCREEN_MODE_NET_DEBUG

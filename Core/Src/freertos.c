@@ -138,13 +138,9 @@ void MX_FREERTOS_Init(void) {
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-#if !(APP_UART7_IS_SCREEN && APP_SCREEN_ISOLATION_ENABLED)
-  /* creation of Task1 */
-  Task1Handle = osThreadNew(StartTask1, NULL, &Task1_attributes);
-
-  /* creation of Task2 */
-  Task2Handle = osThreadNew(StartTask2, NULL, &Task2_attributes);
-#endif
+  /* LT168B touch return isolation test: pause motion and cloud tasks. */
+  /* Task1Handle = osThreadNew(StartTask1, NULL, &Task1_attributes); */
+  /* Task2Handle = osThreadNew(StartTask2, NULL, &Task2_attributes); */
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -152,9 +148,7 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
-#if !(APP_UART7_IS_SCREEN && APP_SCREEN_ISOLATION_ENABLED)
-HAL_TIM_Base_Start_IT(&htim2);
-#endif
+/* HAL_TIM_Base_Start_IT(&htim2); */
 
   /* USER CODE END RTOS_EVENTS */
 
