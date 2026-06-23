@@ -23,9 +23,8 @@
 /* USER CODE BEGIN 0 */
 #include "./usart/yuanzi_usart.h"
 #include "ESP8266.h"
+#include "lt168b.h"
 #include "string.h"
-#include "uart7_role.h"
-#include "uart_screen.h"
 
 uint8_t rx_buffer[RX_BUFFER_SIZE];
 uint16_t rx_index;
@@ -821,13 +820,11 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
         return;
     }
 
-#if APP_UART7_IS_SCREEN
     if (huart->Instance == UART7)
     {
-        Screen_Nextion_HandleRxEvent(huart, Size);
+        LT168B_HandleRxEvent(huart, Size);
         return;
     }
-#endif
 
     (void)Size;
 }

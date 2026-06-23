@@ -30,7 +30,7 @@
 #include "semphr.h"
 #include "cloud_task.h"
 #include "motion_task.h"
-#include "screen_task.h"
+#include "lt_screen_task.h"
 #include "uart7_role.h"
 
 /* USER CODE END Includes */
@@ -171,7 +171,7 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
   (void)argument;
-  ScreenTask_Run();
+  LTScreenTask_Run();
   /* USER CODE END StartDefaultTask */
 }
 

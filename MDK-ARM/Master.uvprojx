@@ -340,7 +340,7 @@
               <MiscControls>--cpu=Cortex-M7.fp.dp --fpu=FPv5_D16</MiscControls>
               <Define>USE_PWR_LDO_SUPPLY,USE_HAL_DRIVER,STM32H743xx,USER_VECT_TAB_ADDRESS</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Common;../App/motion;../App/ai;../App/cloud;../App/ota;../App/screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../BSP/w25q128;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
+              <IncludePath>../Core/Inc;../Common;../App/motion;../App/ai;../App/cloud;../App/ota;../App/screen;../App/lt_screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../BSP/w25q128;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2308,6 +2308,16 @@
               <FilePath>..\BSP\display\uart_screen.h</FilePath>
             </File>
             <File>
+              <FileName>lt168b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\display\lt168b.c</FilePath>
+            </File>
+            <File>
+              <FileName>lt168b.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\BSP\display\lt168b.h</FilePath>
+            </File>
+            <File>
               <FileName>health_monitor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\health\health_monitor.c</FilePath>
@@ -2702,6 +2712,16 @@
               <FileName>screen_task.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\App\screen\screen_task.h</FilePath>
+            </File>
+            <File>
+              <FileName>lt_screen_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\lt_screen\lt_screen_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>lt_screen_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\lt_screen\lt_screen_task.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -3147,7 +3167,7 @@
               <MiscControls>--cpu=Cortex-M7.fp.dp --fpu=FPv5_D16</MiscControls>
               <Define>USE_PWR_LDO_SUPPLY,USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Common;../App/motion;../App/ai;../App/cloud;../App/ota;../App/screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../BSP/w25q128;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
+              <IncludePath>../Core/Inc;../Common;../App/motion;../App/ai;../App/cloud;../App/ota;../App/screen;../App/lt_screen;..\App\rule action;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../SYSTEM;../BSP/debug_uart;../BSP/wifi;../BSP/cloud;../BSP/display;../BSP/health;../BSP/w25q128;../Drivers/CMSIS/RTOS2/Include;../X-CUBE-AI/App;../X-CUBE-AI;../Middlewares/ST/AI/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -6224,6 +6244,16 @@
               <FilePath>..\BSP\display\uart_screen.h</FilePath>
             </File>
             <File>
+              <FileName>lt168b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\display\lt168b.c</FilePath>
+            </File>
+            <File>
+              <FileName>lt168b.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\BSP\display\lt168b.h</FilePath>
+            </File>
+            <File>
               <FileName>health_monitor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\health\health_monitor.c</FilePath>
@@ -7179,6 +7209,16 @@
               <FileName>screen_task.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\App\screen\screen_task.h</FilePath>
+            </File>
+            <File>
+              <FileName>lt_screen_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\lt_screen\lt_screen_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>lt_screen_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\lt_screen\lt_screen_task.h</FilePath>
             </File>
           </Files>
         </Group>
