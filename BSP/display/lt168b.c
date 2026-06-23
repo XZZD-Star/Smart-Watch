@@ -11,7 +11,10 @@
 #define LT168B_FRAME_HEADER_1     0xA5U
 #define LT168B_TX_FRAME_OVERHEAD  8U
 #define LT168B_LEN_WITHOUT_DATA   5U
+#define LT168B_MAX_DATA_LEN       (255U - LT168B_LEN_WITHOUT_DATA)
 
+#define LT168B_WRITE_CMD          0x10U
+#define LT168B_TEXT_END_LEN       2U
 #define LT168B_TOUCH_CMD          0x41U
 #define LT168B_TOUCH_LEN          0x07U
 #define LT168B_TOUCH_FRAME_LEN    10U
@@ -29,6 +32,7 @@ static void LT168B_DebugUart2WriteByte(uint8_t byte);
 static void LT168B_DebugUart2WriteString(const char *text);
 static void LT168B_DebugUart2WriteDecU16(uint16_t value);
 static void LT168B_DebugUart2WriteHexU8(uint8_t value);
+static void LT168B_DebugUart2WriteHexU16(uint16_t value);
 static void LT168B_DebugPrintRawFrame(const uint8_t *data, uint16_t len);
 
 void LT168B_Init(UART_HandleTypeDef *huart)
@@ -47,7 +51,8 @@ void LT168B_SendStr(uint8_t cmd, uint16_t address, const uint8_t *data, uint8_t 
   if ((g_lt168b_huart == NULL) ||
       (g_lt168b_huart->Instance == NULL) ||
       (data == NULL) ||
-      (len == 0U))
+      (len == 0U) ||
+      (len > LT168B_MAX_DATA_LEN))
   {
     return;
   }
@@ -72,9 +77,59 @@ void LT168B_SendStr(uint8_t cmd, uint16_t address, const uint8_t *data, uint8_t 
   (void)HAL_UART_Transmit(g_lt168b_huart, frame, index, LT168B_UART_TX_TIMEOUT_MS);
 }
 
+void LT168B_WriteText(uint16_t address, const char *text)
+{
+  uint8_t data[LT168B_MAX_DATA_LEN];
+  uint16_t text_len;
+
+  if (text == NULL)
+  {
+    return;
+  }
+
+  text_len = (uint16_t)strlen(text);
+  if (text_len > (uint16_t)(LT168B_MAX_DATA_LEN - LT168B_TEXT_END_LEN))
+  {
+    text_len = (uint16_t)(LT168B_MAX_DATA_LEN - LT168B_TEXT_END_LEN);
+  }
+
+  (void)memcpy(data, text, text_len);
+  data[text_len] = 0x00U;
+  data[text_len + 1U] = 0x00U;
+
+  LT168B_SendStr(LT168B_WRITE_CMD,
+                 address,
+                 data,
+                 (uint8_t)(text_len + LT168B_TEXT_END_LEN));
+}
+
+void LT168B_WriteU16(uint16_t address, uint16_t value)
+{
+  uint8_t data[2];
+
+  data[0] = (uint8_t)(value >> 8);
+  data[1] = (uint8_t)(value & 0xFFU);
+
+  LT168B_SendStr(LT168B_WRITE_CMD, address, data, (uint8_t)sizeof(data));
+}
+
 void LT168B_DebugPrintLine(const char *text)
 {
   LT168B_DebugUart2WriteString(text);
+  LT168B_DebugUart2WriteString("\r\n");
+}
+
+void LT168B_DebugPrintKeyEvent(const LT168B_TouchEvent_t *event)
+{
+  if (event == NULL)
+  {
+    return;
+  }
+
+  LT168B_DebugUart2WriteString("[LT168B KEY] addr=0x");
+  LT168B_DebugUart2WriteHexU16(event->address);
+  LT168B_DebugUart2WriteString(" key=0x");
+  LT168B_DebugUart2WriteHexU16(event->key_value);
   LT168B_DebugUart2WriteString("\r\n");
 }
 
@@ -263,6 +318,12 @@ static void LT168B_DebugUart2WriteHexU8(uint8_t value)
 
   LT168B_DebugUart2WriteByte((uint8_t)hex[(value >> 4) & 0x0FU]);
   LT168B_DebugUart2WriteByte((uint8_t)hex[value & 0x0FU]);
+}
+
+static void LT168B_DebugUart2WriteHexU16(uint16_t value)
+{
+  LT168B_DebugUart2WriteHexU8((uint8_t)(value >> 8));
+  LT168B_DebugUart2WriteHexU8((uint8_t)(value & 0xFFU));
 }
 
 static void LT168B_DebugPrintRawFrame(const uint8_t *data, uint16_t len)
