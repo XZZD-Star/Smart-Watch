@@ -14,7 +14,7 @@
 #define LT168B_MAX_DATA_LEN       (255U - LT168B_LEN_WITHOUT_DATA)
 
 #define LT168B_WRITE_CMD          0x10U
-#define LT168B_TEXT_END_LEN       1U
+#define LT168B_TEXT_END_LEN       0U
 #define LT168B_TOUCH_CMD          0x41U
 #define LT168B_TOUCH_LEN          0x07U
 #define LT168B_TOUCH_FRAME_LEN    10U
@@ -94,7 +94,6 @@ void LT168B_WriteText(uint16_t address, const char *text)
   }
 
   (void)memcpy(data, text, text_len);
-  data[text_len] = 0x00U;
 
   LT168B_SendStr(LT168B_WRITE_CMD,
                  address,
@@ -199,12 +198,23 @@ void LT168B_HandleRxEvent(UART_HandleTypeDef *huart, uint16_t size)
     size = LT168B_RX_BUFFER_SIZE;
   }
 
-  LT168B_DebugPrintRawFrame(g_lt168b_rx_buffer, size);
+  if ((size >= 4U) &&
+      (g_lt168b_rx_buffer[0] == LT168B_FRAME_HEADER_0) &&
+      (g_lt168b_rx_buffer[1] == LT168B_FRAME_HEADER_1) &&
+      (g_lt168b_rx_buffer[3] == LT168B_WRITE_CMD))
+  {
+    LT168B_RestartRx();
+    return;
+  }
 
   if (LT168B_ParseTouchEvent(g_lt168b_rx_buffer, size, &event) != 0U)
   {
     g_lt168b_touch_event = event;
     g_lt168b_touch_pending = 1U;
+  }
+  else
+  {
+    LT168B_DebugPrintRawFrame(g_lt168b_rx_buffer, size);
   }
 
   LT168B_RestartRx();

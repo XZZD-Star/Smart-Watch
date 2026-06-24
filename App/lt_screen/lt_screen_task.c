@@ -5,7 +5,7 @@
 
 #define LTSCREEN_BOOT_READY_DELAY_MS 1200U
 #define LTSCREEN_POLL_INTERVAL_MS    20U
-#define LTSCREEN_HEALTH_REFRESH_MS   10000U
+#define LTSCREEN_HEALTH_REFRESH_MS   1000U
 
 #define LTSCREEN_TEXT_END_TEST_NONE  0U
 #define LTSCREEN_TEXT_END_TEST_00    1U
@@ -90,21 +90,17 @@ void LTScreen_HandleTouchEvent(const LT168B_TouchEvent_t *event)
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
 static void lt_screen_refresh_health_test(void)
 {
-  switch (APP_LTSCREEN_TEXT_END_TEST)
-  {
-  case LTSCREEN_TEXT_END_TEST_NONE:
-    lt_screen_refresh_health_no_end_test();
-    break;
+  static const uint8_t heart_rate[] = {'7', '8'};
+  static const uint8_t spo2[] = {'9', '8'};
 
-  case LTSCREEN_TEXT_END_TEST_00_00:
-    lt_screen_refresh_health_00_00_test();
-    break;
-
-  case LTSCREEN_TEXT_END_TEST_00:
-  default:
-    lt_screen_refresh_health_00_test();
-    break;
-  }
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_HEART_RATE_ADDR,
+                 heart_rate,
+                 (uint8_t)sizeof(heart_rate));
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_SPO2_ADDR,
+                 spo2,
+                 (uint8_t)sizeof(spo2));
 }
 
 static void lt_screen_refresh_health_no_end_test(void)
