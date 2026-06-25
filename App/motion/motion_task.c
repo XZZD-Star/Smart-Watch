@@ -20,6 +20,7 @@
 #define FALL_WARNING_INTERVAL_MS 500U
 
 static uint8_t task1_consume_ai_restart_request(void);
+static uint8_t task1_consume_ai_stop_request(void);
 static uint8_t task1_try_take_fused_frame(motion_fused_frame_t *frame);
 static uint8_t task1_try_run_model_window_test(void);
 static uint8_t task1_mode_uses_single_test(motion_output_mode_t mode);
@@ -76,6 +77,11 @@ static uint8_t task1_consume_ai_restart_request(void)
 {
   /* start 请求只在运动任务中消费，避免中断/云控直接重置 AI 状态机。 */
   return Motion_TakeRestartRequest();
+}
+
+static uint8_t task1_consume_ai_stop_request(void)
+{
+  return Motion_TakeStopRequest();
 }
 
 static uint8_t task1_mode_uses_single_test(motion_output_mode_t mode)
@@ -533,13 +539,19 @@ static void task1_output_single_once_event(
        (result->final_label == MOTION_LABEL_SHOULDER_RAISE)) &&
       (((action_kind_value / 10) % 10) != 0) ? 1U : 0U;
 
-    if (should_update_train_display != 0U)
+    if ((result->final_label == MOTION_LABEL_ELBOW_FLEX) ||
+        (result->final_label == MOTION_LABEL_FRONT_RAISE) ||
+        (result->final_label == MOTION_LABEL_SIDE_RAISE) ||
+        (result->final_label == MOTION_LABEL_SHOULDER_RAISE))
     {
-      OneNet_UpdateTrainDisplayByAction((int32_t)result->final_label);
-
 #if APP_UART7_IS_SCREEN && APP_SCREEN_IS_HEALTH_MONITOR
       MotionEvents_RequestTrainingPageRefreshByAction((int32_t)result->final_label);
 #endif
+    }
+
+    if (should_update_train_display != 0U)
+    {
+      OneNet_UpdateTrainDisplayByAction((int32_t)result->final_label);
     }
     else
     {
@@ -669,6 +681,14 @@ void MotionTask_Run(void)
   {
     motion_fused_frame_t fused_frame;
     uint8_t sensor_work_done = Motion_ProcessPendingPosePackets();
+
+    if (task1_consume_ai_stop_request())
+    {
+      g_motion_single_armed = 0U;
+      task1_reset_recognition_state();
+      fall_alarm_output_mode = 0U;
+      continue;
+    }
 
     if (task1_consume_ai_restart_request())
     {

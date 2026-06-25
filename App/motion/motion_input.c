@@ -12,6 +12,7 @@
 #include "onenet.h"
 
 static volatile uint8_t g_motion_ai_restart_req = 0U;
+static volatile uint8_t g_motion_ai_stop_req = 0U;
 
 static void reset_pose_pipeline(void)
 {
@@ -28,6 +29,9 @@ void Motion_RequestStart(void)
     if (g_motion_output_mode == MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST)
     {
         g_motion_single_armed = 0U;
+        taskENTER_CRITICAL();
+        g_motion_ai_stop_req = 0U;
+        taskEXIT_CRITICAL();
         MotionWindowTest_RequestRun();
         return;
     }
@@ -41,7 +45,19 @@ void Motion_RequestStart(void)
         (g_motion_output_mode == MOTION_OUTPUT_MODE_RUN) ? 1U : 0U;
 
     reset_pose_pipeline();
+    taskENTER_CRITICAL();
+    g_motion_ai_stop_req = 0U;
     g_motion_ai_restart_req = 1U;
+    taskEXIT_CRITICAL();
+}
+
+void Motion_RequestStop(void)
+{
+    taskENTER_CRITICAL();
+    g_motion_single_armed = 0U;
+    g_motion_ai_restart_req = 0U;
+    g_motion_ai_stop_req = 1U;
+    taskEXIT_CRITICAL();
 }
 
 void Motion_RequestClear(void)
@@ -57,6 +73,21 @@ uint8_t Motion_TakeRestartRequest(void)
     if (g_motion_ai_restart_req != 0U)
     {
         g_motion_ai_restart_req = 0U;
+        requested = 1U;
+    }
+    taskEXIT_CRITICAL();
+
+    return requested;
+}
+
+uint8_t Motion_TakeStopRequest(void)
+{
+    uint8_t requested = 0U;
+
+    taskENTER_CRITICAL();
+    if (g_motion_ai_stop_req != 0U)
+    {
+        g_motion_ai_stop_req = 0U;
         requested = 1U;
     }
     taskEXIT_CRITICAL();

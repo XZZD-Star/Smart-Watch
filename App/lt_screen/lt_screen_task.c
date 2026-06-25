@@ -4,6 +4,9 @@
 #include "cloud_task.h"
 #include "debug_uart7.h"
 #include "lt_screen_keys.h"
+#include "motion_ai.h"
+#include "motion_app_events.h"
+#include "motion_input.h"
 #include "ota_service.h"
 #include "usart.h"
 
@@ -20,9 +23,15 @@
 #define LTSCREEN_HEART_RATE_ADDR     0x02B9U
 #define LTSCREEN_SPO2_ADDR           0x02CDU
 #define LTSCREEN_FALL_ADDR           0x02E1U
+#define LTSCREEN_CALIBRATION_STATUS_ADDR 0x010CU
+#define LTSCREEN_TRAINING_FRONT_RAISE_ADDR   0x03E7U
+#define LTSCREEN_TRAINING_SIDE_RAISE_ADDR     0x03FBU
+#define LTSCREEN_TRAINING_SHOULDER_RAISE_ADDR 0x040FU
+#define LTSCREEN_TRAINING_ELBOW_FLEX_ADDR     0x0423U
 #define LTSCREEN_CURRENT_VERSION_ADDR 0x0227U
 #define LTSCREEN_LATEST_VERSION_ADDR  0x01C3U
 #define LTSCREEN_UPDATE_PROGRESS_ADDR 0x02A0U
+#define LTSCREEN_DEVICE_DOOR_ADDR     0x00F7U
 #define LTSCREEN_NET_DEBUG_TEXT_ADDR 0x0000U
 
 #define LTSCREEN_VERSION_SAME_PAGE_ID   0x0005U
@@ -30,15 +39,38 @@
 #define LTSCREEN_UPDATE_PROGRESS_MAX    0x0010U
 #define LTSCREEN_CURRENT_VERSION_TEXT_TEST "1.2"
 #define LTSCREEN_LATEST_VERSION_TEXT_TEST  "1.3"
+#define LTSCREEN_CALIBRATION_DELAY_MS   1000U
+#define LTSCREEN_TRAINING_COUNT_MAX     99U
+#define LTSCREEN_TRAINING_ACTION_COUNT  4U
+#define LTSCREEN_TRAINING_ACTION_TEST_ENABLE 1U
 
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
 static OTAService_TaskInfo_t s_lt_screen_ota_task;
 static uint8_t s_lt_screen_has_ota_task = 0U;
 static uint8_t s_lt_screen_ota_demo_active = 0U;
+static uint8_t s_device_door_open = 0U;
+static uint8_t s_device_door_icon_applied = 0U;
+static uint8_t s_lt_screen_calibration_done = 0U;
+static uint8_t s_lt_screen_training_page_entered = 0U;
+static uint8_t s_lt_screen_training_active = 0U;
+static uint8_t s_lt_screen_training_count[LTSCREEN_TRAINING_ACTION_COUNT] = {0U, 0U, 0U, 0U};
+static uint8_t s_lt_screen_training_last_written[LTSCREEN_TRAINING_ACTION_COUNT] =
+  {0xFFU, 0xFFU, 0xFFU, 0xFFU};
 
 static void lt_screen_refresh_health_test(void);
 static void lt_screen_send_version_texts(const char *current_version,
                                          const char *latest_version);
+static void lt_screen_apply_device_door_icon(uint8_t is_open);
+static void lt_screen_reset_training_counts(void);
+static void lt_screen_write_training_test_formats(void);
+static void lt_screen_sync_training_count(uint8_t action_index);
+static void lt_screen_sync_training_counts(void);
+static int8_t lt_screen_find_training_action_index(int32_t action_label);
+static void lt_screen_process_training_refresh(void);
+static void lt_screen_handle_calibration_start(void);
+static void lt_screen_handle_training_page_enter(void);
+static void lt_screen_handle_training_start(void);
+static void lt_screen_handle_training_stop(void);
 static uint8_t lt_screen_is_key(const LT168B_TouchEvent_t *event, uint16_t key_value);
 static uint8_t lt_screen_enter_ota_demo(void);
 static void lt_screen_leave_ota_demo(void);
@@ -59,6 +91,11 @@ void LTScreenTask_Run(void)
   osDelay(LTSCREEN_BOOT_READY_DELAY_MS);
 
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
+  LTScreen_SetDeviceDoorState(0U);
+  s_lt_screen_calibration_done = 0U;
+  s_lt_screen_training_page_entered = 0U;
+  s_lt_screen_training_active = 0U;
+  lt_screen_reset_training_counts();
   lt_screen_refresh_health_test();
   next_health_refresh_tick = osKernelGetTickCount() + LTSCREEN_HEALTH_REFRESH_MS;
 #elif APP_LTSCREEN_MODE == LTSCREEN_MODE_NET_DEBUG
@@ -73,6 +110,12 @@ void LTScreenTask_Run(void)
     {
       lt_screen_refresh_health_test();
       next_health_refresh_tick = osKernelGetTickCount() + LTSCREEN_HEALTH_REFRESH_MS;
+    }
+
+    if ((s_lt_screen_ota_demo_active == 0U) &&
+        (s_lt_screen_training_active != 0U))
+    {
+      lt_screen_process_training_refresh();
     }
 #endif
 
@@ -108,6 +151,36 @@ void LTScreen_HandleTouchEvent(const LT168B_TouchEvent_t *event)
     return;
   }
 
+  if (lt_screen_is_key(event, LTSCREEN_KEY_OPEN_DEVICE) != 0U)
+  {
+    LTScreen_SetDeviceDoorState(1U);
+    return;
+  }
+
+  if (lt_screen_is_key(event, LTSCREEN_KEY_START_CALIBRATION) != 0U)
+  {
+    lt_screen_handle_calibration_start();
+    return;
+  }
+
+  if (lt_screen_is_key(event, LTSCREEN_KEY_START_TRAINING) != 0U)
+  {
+    lt_screen_handle_training_page_enter();
+    return;
+  }
+
+  if (lt_screen_is_key(event, LTSCREEN_KEY_INNER_START_TRAIN) != 0U)
+  {
+    lt_screen_handle_training_start();
+    return;
+  }
+
+  if (lt_screen_is_key(event, LTSCREEN_KEY_TRAINING_BACK) != 0U)
+  {
+    lt_screen_handle_training_stop();
+    return;
+  }
+
   if (lt_screen_is_key(event, LTSCREEN_KEY_UPDATE_START) != 0U)
   {
     lt_screen_handle_update_start();
@@ -121,6 +194,18 @@ void LTScreen_HandleTouchEvent(const LT168B_TouchEvent_t *event)
     break;
   }
 }
+
+#if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
+void LTScreen_SetDeviceDoorState(uint8_t is_open)
+{
+  lt_screen_apply_device_door_icon(is_open);
+}
+#else
+void LTScreen_SetDeviceDoorState(uint8_t is_open)
+{
+  (void)is_open;
+}
+#endif
 
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
 static void lt_screen_refresh_health_test(void)
@@ -149,6 +234,216 @@ static void lt_screen_send_version_texts(const char *current_version,
 {
   LT168B_WriteText(LTSCREEN_CURRENT_VERSION_ADDR, current_version);
   LT168B_WriteText(LTSCREEN_LATEST_VERSION_ADDR, latest_version);
+}
+
+static void lt_screen_apply_device_door_icon(uint8_t is_open)
+{
+  if ((s_device_door_icon_applied != 0U) &&
+      (s_device_door_open == ((is_open != 0U) ? 1U : 0U)))
+  {
+    return;
+  }
+
+  s_device_door_open = (is_open != 0U) ? 1U : 0U;
+  s_device_door_icon_applied = 1U;
+
+  if (s_device_door_open != 0U)
+  {
+    LT168B_WriteU16(LTSCREEN_DEVICE_DOOR_ADDR, 0x0000U);
+  }
+  else
+  {
+    LT168B_WriteU16(LTSCREEN_DEVICE_DOOR_ADDR, 0x0001U);
+  }
+}
+
+static void lt_screen_handle_calibration_start(void)
+{
+  static const uint8_t text_done[] = {0xD2U, 0xD1U, 0xCDU, 0xEAU, 0xB3U, 0xC9U};
+
+  s_lt_screen_calibration_done = 0U;
+  osDelay(LTSCREEN_CALIBRATION_DELAY_MS);
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_CALIBRATION_STATUS_ADDR,
+                 text_done,
+                 (uint8_t)sizeof(text_done));
+  s_lt_screen_calibration_done = 1U;
+}
+
+static void lt_screen_reset_training_counts(void)
+{
+  uint8_t index;
+
+  for (index = 0U; index < LTSCREEN_TRAINING_ACTION_COUNT; index++)
+  {
+    s_lt_screen_training_count[index] = 0U;
+    s_lt_screen_training_last_written[index] = 0xFFU;
+  }
+}
+
+static void lt_screen_write_training_test_formats(void)
+{
+  static const uint8_t text_digit_4[] = {'4'};
+  static const uint8_t u8_digit_4 = 4U;
+
+  /* 说明：ASCII 和 GBK 的数字 4 字节一样，都是 0x34。 */
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_TRAINING_ELBOW_FLEX_ADDR,
+                 text_digit_4,
+                 (uint8_t)sizeof(text_digit_4));
+  LT168B_DebugPrintLine("[LT SCREEN] test 0x0423 ascii 4");
+  osDelay(1000U);
+
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_TRAINING_ELBOW_FLEX_ADDR,
+                 &u8_digit_4,
+                 1U);
+  LT168B_DebugPrintLine("[LT SCREEN] test 0x0423 u8 0x04");
+  osDelay(1000U);
+
+  LT168B_WriteU16(LTSCREEN_TRAINING_ELBOW_FLEX_ADDR, 4U);
+  LT168B_DebugPrintLine("[LT SCREEN] test 0x0423 u16 4");
+  osDelay(1000U);
+
+  LT168B_WriteText(LTSCREEN_TRAINING_ELBOW_FLEX_ADDR, "4");
+  LT168B_DebugPrintLine("[LT SCREEN] test 0x0423 write text 4");
+}
+
+static uint16_t lt_screen_get_training_count_addr(uint8_t action_index)
+{
+  switch (action_index)
+  {
+    case 0U:
+      return LTSCREEN_TRAINING_FRONT_RAISE_ADDR;
+    case 1U:
+      return LTSCREEN_TRAINING_SIDE_RAISE_ADDR;
+    case 2U:
+      return LTSCREEN_TRAINING_SHOULDER_RAISE_ADDR;
+    case 3U:
+      return LTSCREEN_TRAINING_ELBOW_FLEX_ADDR;
+    default:
+      return 0U;
+  }
+}
+
+static void lt_screen_sync_training_count(uint8_t action_index)
+{
+  uint16_t address;
+
+  if (action_index >= LTSCREEN_TRAINING_ACTION_COUNT)
+  {
+    return;
+  }
+
+  if (s_lt_screen_training_last_written[action_index] ==
+      s_lt_screen_training_count[action_index])
+  {
+    return;
+  }
+
+  address = lt_screen_get_training_count_addr(action_index);
+  if (address == 0U)
+  {
+    return;
+  }
+
+  LT168B_WriteU16(address, (uint16_t)s_lt_screen_training_count[action_index]);
+  s_lt_screen_training_last_written[action_index] =
+    s_lt_screen_training_count[action_index];
+}
+
+static void lt_screen_sync_training_counts(void)
+{
+  uint8_t index;
+
+  for (index = 0U; index < LTSCREEN_TRAINING_ACTION_COUNT; index++)
+  {
+    lt_screen_sync_training_count(index);
+  }
+}
+
+static int8_t lt_screen_find_training_action_index(int32_t action_label)
+{
+  switch ((motion_label_t)action_label)
+  {
+    case MOTION_LABEL_FRONT_RAISE:
+      return 0;
+    case MOTION_LABEL_SIDE_RAISE:
+      return 1;
+    case MOTION_LABEL_SHOULDER_RAISE:
+      return 2;
+    case MOTION_LABEL_ELBOW_FLEX:
+      return 3;
+    default:
+      return -1;
+  }
+}
+
+static void lt_screen_process_training_refresh(void)
+{
+  int32_t action_label;
+  int8_t action_index;
+
+  while ((s_lt_screen_training_active != 0U) &&
+         (MotionEvents_TakeTrainingPageRefreshAction(&action_label) != 0U))
+  {
+    action_index = lt_screen_find_training_action_index(action_label);
+    if (action_index < 0)
+    {
+      continue;
+    }
+
+    if (s_lt_screen_training_count[(uint8_t)action_index] < LTSCREEN_TRAINING_COUNT_MAX)
+    {
+      s_lt_screen_training_count[(uint8_t)action_index]++;
+    }
+
+    lt_screen_sync_training_count((uint8_t)action_index);
+  }
+}
+
+static void lt_screen_handle_training_page_enter(void)
+{
+  if (s_lt_screen_calibration_done == 0U)
+  {
+    LT168B_DebugPrintLine("[LT SCREEN] training page blocked");
+    return;
+  }
+
+  s_lt_screen_training_page_entered = 1U;
+  s_lt_screen_training_active = 0U;
+  LT168B_DebugPrintLine("[LT SCREEN] training page ready");
+}
+
+static void lt_screen_handle_training_start(void)
+{
+  if ((s_lt_screen_calibration_done == 0U) ||
+      (s_lt_screen_training_page_entered == 0U))
+  {
+    LT168B_DebugPrintLine("[LT SCREEN] training blocked");
+    return;
+  }
+
+  s_lt_screen_training_active = 1U;
+  lt_screen_reset_training_counts();
+  MotionEvents_ClearTrainingPageRefresh();
+  lt_screen_sync_training_counts();
+#if LTSCREEN_TRAINING_ACTION_TEST_ENABLE
+  lt_screen_write_training_test_formats();
+#endif
+  Motion_RequestStart();
+  LT168B_DebugPrintLine("[LT SCREEN] training start");
+}
+
+static void lt_screen_handle_training_stop(void)
+{
+  s_lt_screen_training_active = 0U;
+  s_lt_screen_training_page_entered = 0U;
+  lt_screen_reset_training_counts();
+  lt_screen_sync_training_counts();
+  MotionEvents_ClearTrainingPageRefresh();
+  Motion_RequestStop();
+  LT168B_DebugPrintLine("[LT SCREEN] training stop");
 }
 
 static uint8_t lt_screen_is_key(const LT168B_TouchEvent_t *event, uint16_t key_value)

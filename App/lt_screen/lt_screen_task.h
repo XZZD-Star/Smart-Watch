@@ -23,6 +23,11 @@ extern "C" {
 
 void LTScreenTask_Run(void);
 void LTScreen_HandleTouchEvent(const LT168B_TouchEvent_t *event);
+/**
+ * @brief  设置设备门状态
+ * @param  is_open    0 表示关闭，非 0 表示打开
+ */
+void LTScreen_SetDeviceDoorState(uint8_t is_open);
 
 #ifdef __cplusplus
 }
