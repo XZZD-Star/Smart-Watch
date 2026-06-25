@@ -19,6 +19,7 @@ void LT168B_Init(UART_HandleTypeDef *huart);
 void LT168B_SendStr(uint8_t cmd, uint16_t address, const uint8_t *data, uint8_t len);
 void LT168B_WriteText(uint16_t address, const char *text);
 void LT168B_WriteU16(uint16_t address, uint16_t value);
+void LT168B_GotoPage(uint16_t page_id);
 void LT168B_DebugPrintLine(const char *text);
 void LT168B_DebugPrintKeyEvent(const LT168B_TouchEvent_t *event);
 uint8_t LT168B_ParseTouchEvent(const uint8_t *frame,

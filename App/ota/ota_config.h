@@ -23,7 +23,7 @@ extern "C" {
 #define OTA_HTTP_HOST                 "iot-api.heclouds.com"
 #define OTA_HTTP_PORT                 80U
 #define OTA_AUTHORIZATION             "version=2022-05-01&res=userid%2F498339&et=1813592379&method=sha1&sign=zJumjVG6TF9IFVmhszVgKyC1qo4%3D"
-#define OTA_CURRENT_VERSION           "V1.0"
+#define OTA_CURRENT_VERSION           "V1.2"
 #define OTA_QUERY_TYPE                2U
 #define OTA_TASK_RESPONSE_TYPE        1U
 #define OTA_DOWNLOAD_CHUNK_SIZE       256U

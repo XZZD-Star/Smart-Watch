@@ -14,6 +14,8 @@
 static void cloud_reset_session(void);
 static void cloud_wait_wifi_init(void);
 static void cloud_check_ota_once(void);
+static uint8_t cloud_handle_ota_exclusive_pause(void);
+static uint8_t cloud_is_ota_exclusive_requested(void);
 static uint8_t cloud_connect_mqtt(void);
 static uint8_t cloud_send_subscribe(void);
 static void cloud_restart_session_delay(void);
@@ -27,6 +29,9 @@ static void cloud_process_downlink(
   uint32_t now);
 static uint8_t cloud_has_loop_error(void);
 
+static volatile uint8_t s_cloud_ota_exclusive_request = 0U;
+static volatile uint8_t s_cloud_ota_exclusive_ready = 0U;
+
 void CloudTask_Run(void)
 {
   /* Task2 只负责网络会话和上报，优先级低于运动识别任务。 */
@@ -35,14 +40,34 @@ void CloudTask_Run(void)
 
   for(;;)
   {
+    if (cloud_handle_ota_exclusive_pause() != 0U)
+    {
+      continue;
+    }
+
     cloud_reset_session();
     cloud_wait_wifi_init();
+    if (cloud_handle_ota_exclusive_pause() != 0U)
+    {
+      continue;
+    }
+
     cloud_check_ota_once();
 
     if (cloud_connect_mqtt() == 0U)
     {
+      if (cloud_handle_ota_exclusive_pause() != 0U)
+      {
+        continue;
+      }
+
       Debug_Printf("[TCP] RESTART FROM INIT\r\n");
       osDelay(1000);
+      continue;
+    }
+
+    if (cloud_handle_ota_exclusive_pause() != 0U)
+    {
       continue;
     }
 
@@ -52,9 +77,40 @@ void CloudTask_Run(void)
       continue;
     }
 
+    if (cloud_handle_ota_exclusive_pause() != 0U)
+    {
+      continue;
+    }
+
     cloud_service_loop();
     cloud_restart_session_delay();
   }
+}
+
+uint8_t CloudTask_RequestOtaExclusive(uint32_t timeout_ms)
+{
+  uint32_t start_tick = osKernelGetTickCount();
+
+  s_cloud_ota_exclusive_ready = 0U;
+  s_cloud_ota_exclusive_request = 1U;
+
+  while (s_cloud_ota_exclusive_ready == 0U)
+  {
+    if ((osKernelGetTickCount() - start_tick) >= timeout_ms)
+    {
+      s_cloud_ota_exclusive_request = 0U;
+      return 0U;
+    }
+
+    osDelay(20);
+  }
+
+  return 1U;
+}
+
+void CloudTask_ReleaseOtaExclusive(void)
+{
+  s_cloud_ota_exclusive_request = 0U;
 }
 
 static void cloud_reset_session(void)
@@ -72,10 +128,44 @@ static void cloud_wait_wifi_init(void)
     Debug_Printf("[TCP] INIT FAIL code=%u\r\n", (unsigned int)ESP8266_GetLastInitStatus());
     ESP8266_Clear();
     ESP8266_ClearTransportError();
+    if (cloud_is_ota_exclusive_requested() != 0U)
+    {
+      return;
+    }
     osDelay(1000);
   }
 
   Debug_Printf("[TCP] INIT OK\r\n");
+}
+
+static uint8_t cloud_handle_ota_exclusive_pause(void)
+{
+  if (cloud_is_ota_exclusive_requested() == 0U)
+  {
+    return 0U;
+  }
+
+  ESP8266_CloseTcp();
+  ESP8266_Clear();
+  ESP8266_ClearTransportError();
+  OneNet_ClearSessionError();
+  OneNet_ResetSubscribeState();
+  s_cloud_ota_exclusive_ready = 1U;
+  Debug_Printf("[CLOUD] OTA exclusive ready\r\n");
+
+  while (cloud_is_ota_exclusive_requested() != 0U)
+  {
+    osDelay(20);
+  }
+
+  s_cloud_ota_exclusive_ready = 0U;
+  Debug_Printf("[CLOUD] OTA exclusive released\r\n");
+  return 1U;
+}
+
+static uint8_t cloud_is_ota_exclusive_requested(void)
+{
+  return s_cloud_ota_exclusive_request;
 }
 
 static void cloud_check_ota_once(void)
@@ -89,15 +179,19 @@ static void cloud_check_ota_once(void)
   }
   checked = 1U;
 
-  result = OTAService_CheckOnce();
+  result = OTAService_ReportPendingSimulateVersion();
 
   if (result == OTA_SERVICE_NO_UPDATE)
   {
-    Debug_Printf("[OTA] no update, continue mqtt\r\n");
+    Debug_Printf("[OTA] no pending simulate report, continue mqtt\r\n");
+  }
+  else if (result == OTA_SERVICE_UPDATED)
+  {
+    Debug_Printf("[OTA] pending simulate report done, continue mqtt\r\n");
   }
   else if (result == OTA_SERVICE_ERROR)
   {
-    Debug_Printf("[OTA] check failed, continue mqtt\r\n");
+    Debug_Printf("[OTA] pending simulate report failed, continue mqtt\r\n");
   }
 
   ESP8266_CloseTcp();
@@ -120,6 +214,11 @@ static uint8_t cloud_connect_mqtt(void)
     Debug_Printf("[MQTT] CONNECT FAIL code=%u ack=%u\r\n",
                  (unsigned int)OneNet_GetLastStatus(),
                  (unsigned int)OneNet_GetLastConnAckCode());
+
+    if (cloud_is_ota_exclusive_requested() != 0U)
+    {
+      return 0U;
+    }
 
     if (ESP8266_HasTransportError() != 0U)
     {
@@ -158,6 +257,11 @@ static void cloud_restart_session_delay(void)
   ESP8266_Clear();
   ESP8266_ClearTransportError();
   OneNet_ClearSessionError();
+  if (cloud_handle_ota_exclusive_pause() != 0U)
+  {
+    return;
+  }
+
   Debug_Printf("[TCP] WIFI REUSE IF CONNECTED, REINIT TCP/MQTT\r\n");
   osDelay(1000);
 }
@@ -173,6 +277,12 @@ static void cloud_service_loop(void)
   for (;;)
   {
     uint32_t now = osKernelGetTickCount();
+
+    if (cloud_is_ota_exclusive_requested() != 0U)
+    {
+      Debug_Printf("[CLOUD] OTA exclusive request in mqtt loop\r\n");
+      break;
+    }
 
     if (cloud_post_motion_events(subscribe_logged) == 0U)
     {

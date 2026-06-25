@@ -15,6 +15,7 @@
 
 #define LT168B_WRITE_CMD          0x10U
 #define LT168B_TEXT_END_LEN       0U
+#define LT168B_PAGE_ADDR          0x7000U
 #define LT168B_TOUCH_CMD          0x41U
 #define LT168B_TOUCH_LEN          0x07U
 #define LT168B_TOUCH_FRAME_LEN    10U
@@ -109,6 +110,11 @@ void LT168B_WriteU16(uint16_t address, uint16_t value)
   data[1] = (uint8_t)(value & 0xFFU);
 
   LT168B_SendStr(LT168B_WRITE_CMD, address, data, (uint8_t)sizeof(data));
+}
+
+void LT168B_GotoPage(uint16_t page_id)
+{
+  LT168B_WriteU16(LT168B_PAGE_ADDR, page_id);
 }
 
 void LT168B_DebugPrintLine(const char *text)

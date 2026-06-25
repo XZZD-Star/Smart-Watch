@@ -10,6 +10,8 @@
 #define SCREEN_ISOLATION_TEST_OFF 0U
 #define SCREEN_ISOLATION_TEST_ON  1U
 
+//注意这个串口7针对的是网络调试和屏幕驱动的角色选择，不能随意更改，否则会导致串口7的功能异常。
+//串口打印往串口2
 #ifndef APP_UART7_ROLE
 #define APP_UART7_ROLE UART7_ROLE_SCREEN
 //#define APP_UART7_ROLE UART7_ROLE_DEBUG

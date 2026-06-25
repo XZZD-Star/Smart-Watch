@@ -7,6 +7,7 @@
 #include "ESP8266.h"
 #include "cmsis_os2.h"
 #include "debug_uart7.h"
+#include "lt168b.h"
 #include "main.h"
 #include "md5.h"
 #include "ota_config.h"
@@ -20,16 +21,6 @@
 #define OTA_MSG_MAX             32U
 #define OTA_SIZE_LIMIT          OTA_BIN_MAX_SIZE
 #define OTA_SIMULATE_UPGRADE_ONLY 1U
-
-typedef struct
-{
-  char target[OTA_TARGET_VERSION_LEN];
-  char tid[OTA_TASK_ID_LEN];
-  char md5[OTA_MD5_HEX_LEN + 1U];
-  uint32_t size;
-  uint32_t type;
-  uint32_t status;
-} OTA_TaskInfo_t;
 
 typedef struct
 {
@@ -269,7 +260,7 @@ static void OTAService_GetReportVersion(char *version, uint32_t version_size)
   }
 }
 
-static int OTAService_ParseTask(const char *json, OTA_TaskInfo_t *task)
+static int OTAService_ParseTask(const char *json, OTAService_TaskInfo_t *task)
 {
   if ((json == 0) || (task == 0))
   {
@@ -401,11 +392,13 @@ static int OTAService_PostPendingSimulateVersion(void)
   return OTA_SERVICE_UPDATED;
 }
 
-static int OTAService_QueryTask(OTA_TaskInfo_t *task, const char *current_version)
+static int OTAService_QueryTaskHttp(OTAService_TaskInfo_t *task,
+                                    const char *current_version)
 {
   char request[OTA_HTTP_REQ_MAX];
   char body[OTA_JSON_BODY_MAX];
   char msg[OTA_MSG_MAX];
+  char dbg_text[32];
   OTAHttp_Response_t response;
   OTA_JsonBody_t json_body = {body, (uint32_t)sizeof(body), 0UL};
   uint32_t code = 0UL;
@@ -435,15 +428,28 @@ static int OTAService_QueryTask(OTA_TaskInfo_t *task, const char *current_versio
     return OTA_SERVICE_ERROR;
   }
 
-  if ((OTAHttp_SendRequest(request,
-                           (uint32_t)request_len,
-                           &response,
-                           OTAService_CopyJsonBody,
-                           &json_body) != OTA_HTTP_OK) ||
-      (response.status_code != 200U) ||
-      (OTAService_ParseOnenetEnvelope(body, &code, msg, (uint32_t)sizeof(msg)) == 0))
+  if (OTAHttp_SendRequest(request,
+                          (uint32_t)request_len,
+                          &response,
+                          OTAService_CopyJsonBody,
+                          &json_body) != OTA_HTTP_OK)
   {
+    LT168B_DebugPrintLine("[OTA DBG] http fail");
     Debug_Printf("[OTA] task query failed\r\n");
+    return OTA_SERVICE_ERROR;
+  }
+
+  if (response.status_code != 200U)
+  {
+    LT168B_DebugPrintLine("[OTA DBG] http fail");
+    Debug_Printf("[OTA] task query status=%u\r\n", (unsigned int)response.status_code);
+    return OTA_SERVICE_ERROR;
+  }
+
+  if (OTAService_ParseOnenetEnvelope(body, &code, msg, (uint32_t)sizeof(msg)) == 0)
+  {
+    LT168B_DebugPrintLine("[OTA DBG] body parse fail");
+    Debug_Printf("[OTA] task query body parse failed\r\n");
     return OTA_SERVICE_ERROR;
   }
 
@@ -457,13 +463,30 @@ static int OTAService_QueryTask(OTA_TaskInfo_t *task, const char *current_versio
 
   if (code != 0UL)
   {
+    (void)snprintf(dbg_text,
+                   sizeof(dbg_text),
+                   "[OTA DBG] code=%lu",
+                   (unsigned long)code);
+    LT168B_DebugPrintLine(dbg_text);
+    LT168B_DebugPrintLine("[OTA DBG] msg:");
+    LT168B_DebugPrintLine(msg);
+    LT168B_DebugPrintLine("[OTA DBG] code not zero");
     Debug_Printf("[OTA] task query code=%lu msg=%s\r\n", (unsigned long)code, msg);
     return OTA_SERVICE_ERROR;
   }
 
-  if ((strcmp(msg, "succ") != 0) ||
-      (OTAService_ParseTask(OTAService_FindJsonObject(body, "data"), task) == 0))
+  if (strcmp(msg, "succ") != 0)
   {
+    LT168B_DebugPrintLine("[OTA DBG] msg:");
+    LT168B_DebugPrintLine(msg);
+    LT168B_DebugPrintLine("[OTA DBG] msg not succ");
+    Debug_Printf("[OTA] task invalid msg=%s code=%lu\r\n", msg, (unsigned long)code);
+    return OTA_SERVICE_ERROR;
+  }
+
+  if (OTAService_ParseTask(OTAService_FindJsonObject(body, "data"), task) == 0)
+  {
+    LT168B_DebugPrintLine("[OTA DBG] task invalid");
     Debug_Printf("[OTA] task invalid msg=%s code=%lu\r\n", msg, (unsigned long)code);
     return OTA_SERVICE_ERROR;
   }
@@ -477,7 +500,7 @@ static int OTAService_QueryTask(OTA_TaskInfo_t *task, const char *current_versio
   return OTA_SERVICE_UPDATED;
 }
 
-static int OTAService_DownloadRange(const OTA_TaskInfo_t *task,
+static int OTAService_DownloadRange(const OTAService_TaskInfo_t *task,
                                     uint32_t offset,
                                     uint32_t chunk_len,
                                     MD5_Context_t *md5)
@@ -538,7 +561,8 @@ static int OTAService_DownloadRange(const OTA_TaskInfo_t *task,
   return OTA_SERVICE_NO_UPDATE;
 }
 
-static int OTAService_DownloadFirmware(const OTA_TaskInfo_t *task, char out_md5[33])
+static int OTAService_DownloadFirmware(const OTAService_TaskInfo_t *task,
+                                       char out_md5[33])
 {
   MD5_Context_t md5;
   uint8_t digest[16];
@@ -584,7 +608,7 @@ static int OTAService_DownloadFirmware(const OTA_TaskInfo_t *task, char out_md5[
   return (offset == task->size) ? OTA_SERVICE_UPDATED : OTA_SERVICE_ERROR;
 }
 
-static int OTAService_SaveReadyInfo(const OTA_TaskInfo_t *task)
+static int OTAService_SaveReadyInfo(const OTAService_TaskInfo_t *task)
 {
   OTA_Info_t info;
 
@@ -602,7 +626,7 @@ static int OTAService_SaveReadyInfo(const OTA_TaskInfo_t *task)
   return OTA_SERVICE_UPDATED;
 }
 
-static int OTAService_SaveSimulateInfo(const OTA_TaskInfo_t *task)
+static int OTAService_SaveSimulateInfo(const OTAService_TaskInfo_t *task)
 {
   OTA_Info_t info;
 
@@ -620,9 +644,91 @@ static int OTAService_SaveSimulateInfo(const OTA_TaskInfo_t *task)
   return OTA_SERVICE_UPDATED;
 }
 
+int OTAService_QueryTask(OTAService_TaskInfo_t *out_task,
+                         char *out_current_version,
+                         uint32_t current_version_size,
+                         char *out_latest_version,
+                         uint32_t latest_version_size)
+{
+  OTAService_TaskInfo_t task;
+  char current_version[OTA_TARGET_VERSION_LEN];
+  int result;
+
+  if ((out_task == 0) ||
+      (out_current_version == 0) ||
+      (current_version_size == 0UL) ||
+      (out_latest_version == 0) ||
+      (latest_version_size == 0UL))
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  memset(out_task, 0, sizeof(*out_task));
+  (void)snprintf(current_version, sizeof(current_version), "%s", OTA_CURRENT_VERSION);
+  (void)snprintf(out_current_version, current_version_size, "%s", current_version);
+  (void)snprintf(out_latest_version, latest_version_size, "%s", current_version);
+
+  LT168B_DebugPrintLine("[OTA DBG] tcp connect");
+  Debug_Printf("[OTA SCREEN] query start current=%s\r\n", current_version);
+  if (ESP8266_ConnectTcp(OTA_HTTP_HOST, OTA_HTTP_PORT) == 0U)
+  {
+    LT168B_DebugPrintLine("[OTA DBG] tcp fail");
+    Debug_Printf("[OTA SCREEN] query failed tcp code=%u\r\n",
+                 (unsigned int)ESP8266_GetLastInitStatus());
+    return OTA_SERVICE_ERROR;
+  }
+
+  LT168B_DebugPrintLine("[OTA DBG] tcp ok");
+  result = OTAService_QueryTaskHttp(&task, current_version);
+  ESP8266_CloseTcp();
+
+  if (result == OTA_SERVICE_UPDATED)
+  {
+    *out_task = task;
+    (void)snprintf(out_latest_version, latest_version_size, "%s", task.target);
+    Debug_Printf("[OTA SCREEN] query updated target=%s\r\n", task.target);
+  }
+  else if (result == OTA_SERVICE_NO_UPDATE)
+  {
+    Debug_Printf("[OTA SCREEN] query no task\r\n");
+  }
+  else
+  {
+    Debug_Printf("[OTA SCREEN] query failed\r\n");
+  }
+
+  return result;
+}
+
+int OTAService_StartSimulateUpdate(const OTAService_TaskInfo_t *task)
+{
+  if ((task == 0) || (task->target[0] == '\0'))
+  {
+    return OTA_SERVICE_NO_UPDATE;
+  }
+
+  return OTAService_SaveSimulateInfo(task);
+}
+
+int OTAService_ReportPendingSimulateVersion(void)
+{
+  int result;
+
+  if (ESP8266_ConnectTcp(OTA_HTTP_HOST, OTA_HTTP_PORT) == 0U)
+  {
+    Debug_Printf("[OTA] pending simulate report tcp failed code=%u\r\n",
+                 (unsigned int)ESP8266_GetLastInitStatus());
+    return OTA_SERVICE_ERROR;
+  }
+
+  result = OTAService_PostPendingSimulateVersion();
+  ESP8266_CloseTcp();
+  return result;
+}
+
 int OTAService_CheckOnce(void)
 {
-  OTA_TaskInfo_t task;
+  OTAService_TaskInfo_t task;
   char current_version[OTA_TARGET_VERSION_LEN];
   char actual_md5[33];
   int result;
@@ -656,7 +762,7 @@ int OTAService_CheckOnce(void)
   result = OTAService_PostVersion(current_version);
   if (result == OTA_SERVICE_NO_UPDATE)
   {
-    result = OTAService_QueryTask(&task, current_version);
+    result = OTAService_QueryTaskHttp(&task, current_version);
   }
 
   if (result == OTA_SERVICE_UPDATED)
