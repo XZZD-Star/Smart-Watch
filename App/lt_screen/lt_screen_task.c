@@ -42,7 +42,7 @@
 #define LTSCREEN_CALIBRATION_DELAY_MS   1000U
 #define LTSCREEN_TRAINING_COUNT_MAX     99U
 #define LTSCREEN_TRAINING_ACTION_COUNT  4U
-#define LTSCREEN_TRAINING_ACTION_TEST_ENABLE 1U
+#define LTSCREEN_TRAINING_ACTION_TEST_ENABLE 0U
 
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
 static OTAService_TaskInfo_t s_lt_screen_ota_task;
@@ -62,6 +62,7 @@ static void lt_screen_send_version_texts(const char *current_version,
                                          const char *latest_version);
 static void lt_screen_apply_device_door_icon(uint8_t is_open);
 static void lt_screen_reset_training_counts(void);
+static void lt_screen_write_training_start_test(void);
 static void lt_screen_write_training_test_formats(void);
 static void lt_screen_sync_training_count(uint8_t action_index);
 static void lt_screen_sync_training_counts(void);
@@ -281,6 +282,34 @@ static void lt_screen_reset_training_counts(void)
   }
 }
 
+static void lt_screen_write_training_start_test(void)
+{
+  static const uint8_t value_1[2] = {'1', ' '};
+  static const uint8_t value_2[2] = {'2', ' '};
+  static const uint8_t value_3[2] = {'3', ' '};
+  static const uint8_t value_4[2] = {'4', ' '};
+
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_TRAINING_FRONT_RAISE_ADDR,
+                 value_1,
+                 (uint8_t)sizeof(value_1));
+
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_TRAINING_SIDE_RAISE_ADDR,
+                 value_2,
+                 (uint8_t)sizeof(value_2));
+
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_TRAINING_SHOULDER_RAISE_ADDR,
+                 value_3,
+                 (uint8_t)sizeof(value_3));
+
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_TRAINING_ELBOW_FLEX_ADDR,
+                 value_4,
+                 (uint8_t)sizeof(value_4));
+}
+
 static void lt_screen_write_training_test_formats(void)
 {
   static const uint8_t text_digit_4[] = {'4'};
@@ -426,8 +455,8 @@ static void lt_screen_handle_training_start(void)
 
   s_lt_screen_training_active = 1U;
   lt_screen_reset_training_counts();
+  lt_screen_write_training_start_test();
   MotionEvents_ClearTrainingPageRefresh();
-  lt_screen_sync_training_counts();
 #if LTSCREEN_TRAINING_ACTION_TEST_ENABLE
   lt_screen_write_training_test_formats();
 #endif
