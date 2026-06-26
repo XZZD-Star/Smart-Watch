@@ -42,7 +42,6 @@
 #define LTSCREEN_CALIBRATION_DELAY_MS   1000U
 #define LTSCREEN_TRAINING_COUNT_MAX     99U
 #define LTSCREEN_TRAINING_ACTION_COUNT  4U
-#define LTSCREEN_TRAINING_ACTION_TEST_ENABLE 0U
 
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
 static OTAService_TaskInfo_t s_lt_screen_ota_task;
@@ -62,8 +61,7 @@ static void lt_screen_send_version_texts(const char *current_version,
                                          const char *latest_version);
 static void lt_screen_apply_device_door_icon(uint8_t is_open);
 static void lt_screen_reset_training_counts(void);
-static void lt_screen_write_training_start_test(void);
-static void lt_screen_write_training_test_formats(void);
+static void lt_screen_write_training_count(uint16_t address, uint8_t count);
 static void lt_screen_sync_training_count(uint8_t action_index);
 static void lt_screen_sync_training_counts(void);
 static int8_t lt_screen_find_training_action_index(int32_t action_label);
@@ -282,60 +280,27 @@ static void lt_screen_reset_training_counts(void)
   }
 }
 
-static void lt_screen_write_training_start_test(void)
+static void lt_screen_write_training_count(uint16_t address, uint8_t count)
 {
-  static const uint8_t value_1[2] = {'1', ' '};
-  static const uint8_t value_2[2] = {'2', ' '};
-  static const uint8_t value_3[2] = {'3', ' '};
-  static const uint8_t value_4[2] = {'4', ' '};
+  uint8_t text[2];
 
-  LT168B_SendStr(0x10U,
-                 LTSCREEN_TRAINING_FRONT_RAISE_ADDR,
-                 value_1,
-                 (uint8_t)sizeof(value_1));
+  if (count > LTSCREEN_TRAINING_COUNT_MAX)
+  {
+    count = LTSCREEN_TRAINING_COUNT_MAX;
+  }
 
-  LT168B_SendStr(0x10U,
-                 LTSCREEN_TRAINING_SIDE_RAISE_ADDR,
-                 value_2,
-                 (uint8_t)sizeof(value_2));
+  if (count < 10U)
+  {
+    text[0] = (uint8_t)('0' + count);
+    text[1] = (uint8_t)' ';
+  }
+  else
+  {
+    text[0] = (uint8_t)('0' + (count / 10U));
+    text[1] = (uint8_t)('0' + (count % 10U));
+  }
 
-  LT168B_SendStr(0x10U,
-                 LTSCREEN_TRAINING_SHOULDER_RAISE_ADDR,
-                 value_3,
-                 (uint8_t)sizeof(value_3));
-
-  LT168B_SendStr(0x10U,
-                 LTSCREEN_TRAINING_ELBOW_FLEX_ADDR,
-                 value_4,
-                 (uint8_t)sizeof(value_4));
-}
-
-static void lt_screen_write_training_test_formats(void)
-{
-  static const uint8_t text_digit_4[] = {'4'};
-  static const uint8_t u8_digit_4 = 4U;
-
-  /* 说明：ASCII 和 GBK 的数字 4 字节一样，都是 0x34。 */
-  LT168B_SendStr(0x10U,
-                 LTSCREEN_TRAINING_ELBOW_FLEX_ADDR,
-                 text_digit_4,
-                 (uint8_t)sizeof(text_digit_4));
-  LT168B_DebugPrintLine("[LT SCREEN] test 0x0423 ascii 4");
-  osDelay(1000U);
-
-  LT168B_SendStr(0x10U,
-                 LTSCREEN_TRAINING_ELBOW_FLEX_ADDR,
-                 &u8_digit_4,
-                 1U);
-  LT168B_DebugPrintLine("[LT SCREEN] test 0x0423 u8 0x04");
-  osDelay(1000U);
-
-  LT168B_WriteU16(LTSCREEN_TRAINING_ELBOW_FLEX_ADDR, 4U);
-  LT168B_DebugPrintLine("[LT SCREEN] test 0x0423 u16 4");
-  osDelay(1000U);
-
-  LT168B_WriteText(LTSCREEN_TRAINING_ELBOW_FLEX_ADDR, "4");
-  LT168B_DebugPrintLine("[LT SCREEN] test 0x0423 write text 4");
+  LT168B_SendStr(0x10U, address, text, (uint8_t)sizeof(text));
 }
 
 static uint16_t lt_screen_get_training_count_addr(uint8_t action_index)
@@ -376,7 +341,7 @@ static void lt_screen_sync_training_count(uint8_t action_index)
     return;
   }
 
-  LT168B_WriteU16(address, (uint16_t)s_lt_screen_training_count[action_index]);
+  lt_screen_write_training_count(address, s_lt_screen_training_count[action_index]);
   s_lt_screen_training_last_written[action_index] =
     s_lt_screen_training_count[action_index];
 }
@@ -453,13 +418,10 @@ static void lt_screen_handle_training_start(void)
     return;
   }
 
-  s_lt_screen_training_active = 1U;
-  lt_screen_reset_training_counts();
-  lt_screen_write_training_start_test();
   MotionEvents_ClearTrainingPageRefresh();
-#if LTSCREEN_TRAINING_ACTION_TEST_ENABLE
-  lt_screen_write_training_test_formats();
-#endif
+  lt_screen_reset_training_counts();
+  lt_screen_sync_training_counts();
+  s_lt_screen_training_active = 1U;
   Motion_RequestStart();
   LT168B_DebugPrintLine("[LT SCREEN] training start");
 }
