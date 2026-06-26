@@ -231,8 +231,8 @@ static void lt_screen_refresh_health_test(void)
 static void lt_screen_send_version_texts(const char *current_version,
                                          const char *latest_version)
 {
-  LT168B_WriteText(LTSCREEN_CURRENT_VERSION_ADDR, current_version);
-  LT168B_WriteText(LTSCREEN_LATEST_VERSION_ADDR, latest_version);
+  (void)LT168B_WriteVersionText(LTSCREEN_CURRENT_VERSION_ADDR, current_version);
+  (void)LT168B_WriteVersionText(LTSCREEN_LATEST_VERSION_ADDR, latest_version);
 }
 
 static void lt_screen_apply_device_door_icon(uint8_t is_open)

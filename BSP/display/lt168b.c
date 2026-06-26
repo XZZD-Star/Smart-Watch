@@ -29,6 +29,10 @@ static volatile uint8_t g_lt168b_touch_pending = 0U;
 
 static void LT168B_RestartRx(void);
 static uint16_t LT168B_CalcCrc16Modbus(const uint8_t *data, uint16_t len);
+static HAL_StatusTypeDef LT168B_SendStrWithStatus(uint8_t cmd,
+                                                  uint16_t address,
+                                                  const uint8_t *data,
+                                                  uint8_t len);
 static void LT168B_DebugUart2WriteByte(uint8_t byte);
 static void LT168B_DebugUart2WriteString(const char *text);
 static void LT168B_DebugUart2WriteDecU16(uint16_t value);
@@ -44,6 +48,68 @@ void LT168B_Init(UART_HandleTypeDef *huart)
 
 void LT168B_SendStr(uint8_t cmd, uint16_t address, const uint8_t *data, uint8_t len)
 {
+  (void)LT168B_SendStrWithStatus(cmd, address, data, len);
+}
+
+/**
+ * @brief  写入版本号文本，奇数字节长度时在末尾补零
+ * @param  address    屏幕控件地址
+ * @param  text       版本号文本
+ * @return 串口发送状态
+ */
+HAL_StatusTypeDef LT168B_WriteVersionText(uint16_t address, const char *text)
+{
+  uint8_t data[LT168B_MAX_DATA_LEN];
+  size_t text_len;
+  uint16_t send_len;
+  HAL_StatusTypeDef status;
+
+  if (text == NULL)
+  {
+    return HAL_ERROR;
+  }
+
+  text_len = strlen(text);
+  if (text_len > sizeof(data))
+  {
+    return HAL_ERROR;
+  }
+
+  (void)memcpy(data, text, text_len);
+  send_len = (uint16_t)text_len;
+
+  if ((send_len & 1U) != 0U)
+  {
+    if (send_len >= sizeof(data))
+    {
+      return HAL_ERROR;
+    }
+
+    data[send_len] = 0x00U;
+    send_len++;
+  }
+
+  status = LT168B_SendStrWithStatus(LT168B_WRITE_CMD,
+                                    address,
+                                    data,
+                                    (uint8_t)send_len);
+
+  LT168B_DebugUart2WriteString("[LT168B VERSION] addr=0x");
+  LT168B_DebugUart2WriteHexU16(address);
+  LT168B_DebugUart2WriteString(" len=");
+  LT168B_DebugUart2WriteDecU16(send_len);
+  LT168B_DebugUart2WriteString(" status=");
+  LT168B_DebugUart2WriteDecU16((uint16_t)status);
+  LT168B_DebugUart2WriteString("\r\n");
+
+  return status;
+}
+
+static HAL_StatusTypeDef LT168B_SendStrWithStatus(uint8_t cmd,
+                                                  uint16_t address,
+                                                  const uint8_t *data,
+                                                  uint8_t len)
+{
   uint8_t frame[LT168B_TX_FRAME_OVERHEAD + 255U];
   uint16_t crc;
   uint16_t index = 0U;
@@ -55,7 +121,7 @@ void LT168B_SendStr(uint8_t cmd, uint16_t address, const uint8_t *data, uint8_t 
       (len == 0U) ||
       (len > LT168B_MAX_DATA_LEN))
   {
-    return;
+    return HAL_ERROR;
   }
 
   frame[index++] = LT168B_FRAME_HEADER_0;
@@ -75,7 +141,10 @@ void LT168B_SendStr(uint8_t cmd, uint16_t address, const uint8_t *data, uint8_t 
   frame[index++] = (uint8_t)(crc & 0xFFU);
   frame[index++] = (uint8_t)(crc >> 8);
 
-  (void)HAL_UART_Transmit(g_lt168b_huart, frame, index, LT168B_UART_TX_TIMEOUT_MS);
+  return HAL_UART_Transmit(g_lt168b_huart,
+                           frame,
+                           index,
+                           LT168B_UART_TX_TIMEOUT_MS);
 }
 
 void LT168B_WriteText(uint16_t address, const char *text)
