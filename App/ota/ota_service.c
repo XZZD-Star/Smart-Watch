@@ -710,6 +710,22 @@ int OTAService_StartSimulateUpdate(const OTAService_TaskInfo_t *task)
   return OTAService_SaveSimulateInfo(task);
 }
 
+int OTAService_ReportConfiguredVersion(void)
+{
+  int result;
+
+  if (ESP8266_ConnectTcp(OTA_HTTP_HOST, OTA_HTTP_PORT) == 0U)
+  {
+    Debug_Printf("[OTA] configured version report tcp failed code=%u\r\n",
+                 (unsigned int)ESP8266_GetLastInitStatus());
+    return OTA_SERVICE_ERROR;
+  }
+
+  result = OTAService_PostVersion(OTA_REPORT_VERSION);
+  ESP8266_CloseTcp();
+  return result;
+}
+
 int OTAService_ReportPendingSimulateVersion(void)
 {
   int result;

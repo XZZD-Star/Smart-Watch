@@ -179,19 +179,19 @@ static void cloud_check_ota_once(void)
   }
   checked = 1U;
 
-  result = OTAService_ReportPendingSimulateVersion();
+  result = OTAService_ReportConfiguredVersion();
 
   if (result == OTA_SERVICE_NO_UPDATE)
   {
-    Debug_Printf("[OTA] no pending simulate report, continue mqtt\r\n");
+    Debug_Printf("[OTA] configured version report done, continue mqtt\r\n");
   }
   else if (result == OTA_SERVICE_UPDATED)
   {
-    Debug_Printf("[OTA] pending simulate report done, continue mqtt\r\n");
+    Debug_Printf("[OTA] configured version updated, continue mqtt\r\n");
   }
   else if (result == OTA_SERVICE_ERROR)
   {
-    Debug_Printf("[OTA] pending simulate report failed, continue mqtt\r\n");
+    Debug_Printf("[OTA] configured version report failed, continue mqtt\r\n");
   }
 
   ESP8266_CloseTcp();

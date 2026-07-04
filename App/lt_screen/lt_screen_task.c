@@ -38,7 +38,7 @@
 #define LTSCREEN_VERSION_UPDATE_PAGE_ID 0x0002U
 #define LTSCREEN_UPDATE_PROGRESS_MAX    0x0010U
 #define LTSCREEN_CURRENT_VERSION_TEXT_TEST "1.2"
-#define LTSCREEN_LATEST_VERSION_TEXT_TEST  "1.3"
+#define LTSCREEN_LATEST_VERSION_TEXT_TEST  "1.1"
 #define LTSCREEN_CALIBRATION_DELAY_MS   1000U
 #define LTSCREEN_TRAINING_COUNT_MAX     99U
 #define LTSCREEN_TRAINING_ACTION_COUNT  4U
@@ -512,8 +512,8 @@ static void lt_screen_handle_version_query(void)
     LT168B_DebugPrintLine("[OTA SCREEN] query updated");
     LT168B_DebugPrintLine("[OTA SCREEN] latest:");
     LT168B_DebugPrintLine(latest_version);
-    lt_screen_send_version_texts(LTSCREEN_CURRENT_VERSION_TEXT_TEST,
-                                 LTSCREEN_LATEST_VERSION_TEXT_TEST);
+    (void)LT168B_WriteVersionText(LTSCREEN_LATEST_VERSION_ADDR,
+                                  LTSCREEN_LATEST_VERSION_TEXT_TEST);
     LT168B_GotoPage(LTSCREEN_VERSION_UPDATE_PAGE_ID);
     return;
   }

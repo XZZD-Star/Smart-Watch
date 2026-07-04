@@ -29,6 +29,7 @@ int OTAService_QueryTask(OTAService_TaskInfo_t *out_task,
                          char *out_latest_version,
                          uint32_t latest_version_size);
 int OTAService_StartSimulateUpdate(const OTAService_TaskInfo_t *task);
+int OTAService_ReportConfiguredVersion(void);
 int OTAService_ReportPendingSimulateVersion(void);
 int OTAService_CheckOnce(void);
 
