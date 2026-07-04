@@ -7,6 +7,7 @@
 #include "motion_ai.h"
 #include "motion_app_events.h"
 #include "motion_input.h"
+#include "onenet.h"
 #include "ota_service.h"
 #include "usart.h"
 
@@ -52,11 +53,13 @@ static uint8_t s_device_door_icon_applied = 0U;
 static uint8_t s_lt_screen_calibration_done = 0U;
 static uint8_t s_lt_screen_training_page_entered = 0U;
 static uint8_t s_lt_screen_training_active = 0U;
+static uint8_t s_lt_screen_last_fall_alarm = 0xFFU;
 static uint8_t s_lt_screen_training_count[LTSCREEN_TRAINING_ACTION_COUNT] = {0U, 0U, 0U, 0U};
 static uint8_t s_lt_screen_training_last_written[LTSCREEN_TRAINING_ACTION_COUNT] =
   {0xFFU, 0xFFU, 0xFFU, 0xFFU};
 
 static void lt_screen_refresh_health_test(void);
+static void lt_screen_refresh_fall_status(uint8_t force_update);
 static void lt_screen_send_version_texts(const char *current_version,
                                          const char *latest_version);
 static void lt_screen_apply_device_door_icon(uint8_t is_open);
@@ -94,8 +97,10 @@ void LTScreenTask_Run(void)
   s_lt_screen_calibration_done = 0U;
   s_lt_screen_training_page_entered = 0U;
   s_lt_screen_training_active = 0U;
+  s_lt_screen_last_fall_alarm = 0xFFU;
   lt_screen_reset_training_counts();
   lt_screen_refresh_health_test();
+  lt_screen_refresh_fall_status(1U);
   next_health_refresh_tick = osKernelGetTickCount() + LTSCREEN_HEALTH_REFRESH_MS;
 #elif APP_LTSCREEN_MODE == LTSCREEN_MODE_NET_DEBUG
   lt_screen_run_net_debug_test();
@@ -109,6 +114,11 @@ void LTScreenTask_Run(void)
     {
       lt_screen_refresh_health_test();
       next_health_refresh_tick = osKernelGetTickCount() + LTSCREEN_HEALTH_REFRESH_MS;
+    }
+
+    if (s_lt_screen_ota_demo_active == 0U)
+    {
+      lt_screen_refresh_fall_status(0U);
     }
 
     if ((s_lt_screen_ota_demo_active == 0U) &&
@@ -211,8 +221,6 @@ static void lt_screen_refresh_health_test(void)
 {
   static const uint8_t heart_rate[] = {'7', '8'};
   static const uint8_t spo2[] = {'9', '8'};
-  /* GBK 编码：危险，用于判断跌倒控件是否支持字符串显示。 */
-  static const uint8_t fall_status[] = {0xCEU, 0xA3U, 0xCFU, 0xD5U};
 
   LT168B_SendStr(0x10U,
                  LTSCREEN_HEART_RATE_ADDR,
@@ -222,10 +230,28 @@ static void lt_screen_refresh_health_test(void)
                  LTSCREEN_SPO2_ADDR,
                  spo2,
                  (uint8_t)sizeof(spo2));
+}
+
+static void lt_screen_refresh_fall_status(uint8_t force_update)
+{
+  static const uint8_t text_safe[] = {0xB0U, 0xB2U, 0xC8U, 0xABU};
+  static const uint8_t text_danger[] = {0xCEU, 0xA3U, 0xCFU, 0xD5U};
+  const uint8_t *status_text;
+  uint8_t fall_alarm;
+
+  fall_alarm = (OneNet_IsFallAlarmActive() != 0U) ? 1U : 0U;
+  if ((force_update == 0U) && (s_lt_screen_last_fall_alarm == fall_alarm))
+  {
+    return;
+  }
+
+  s_lt_screen_last_fall_alarm = fall_alarm;
+  status_text = (fall_alarm != 0U) ? text_danger : text_safe;
+
   LT168B_SendStr(0x10U,
                  LTSCREEN_FALL_ADDR,
-                 fall_status,
-                 (uint8_t)sizeof(fall_status));
+                 status_text,
+                 (uint8_t)sizeof(text_safe));
 }
 
 static void lt_screen_send_version_texts(const char *current_version,
