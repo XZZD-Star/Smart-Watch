@@ -1,0 +1,6630 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "9976a842e3232a5ec57f110e3580094926f94580",
+  "generatedAt": "2026-07-05T08:30:37.302Z",
+  "files": {
+    ".ai/network_action_cnn.h5_c_info.json": {
+      "filePath": ".ai/network_action_cnn.h5_c_info.json",
+      "contentHash": "2e7fc1ee1480f89d673ff4ccf7452bfbc0de0215661b0027a3364c9ccca036dd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1124,
+      "hasStructuralAnalysis": true
+    },
+    ".mxproject": {
+      "filePath": ".mxproject",
+      "contentHash": "c3c551c48ea3077e9318cffd9d0c35e89cc0aa6f4c1bb31f887f7b81688a19de",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 46,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/.understandignore": {
+      "filePath": ".understand-anything/.understandignore",
+      "contentHash": "d1db6d8572617495df0400095670fc8d21de99df44e25da15c5a7eb4d475dce0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 103,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/config.json": {
+      "filePath": ".understand-anything/config.json",
+      "contentHash": "5d2ff006cff22c68edd4776249d562ea8c73915a61c6214eb85933865a9402e7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": true
+    },
+    "说明文档.txt": {
+      "filePath": "说明文档.txt",
+      "contentHash": "b8715807b581eb86577fab0e783407973299cb15dd06da9abc0675f08c9e7be1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": false
+    },
+    "Agents.md": {
+      "filePath": "Agents.md",
+      "contentHash": "7ad8cec2b7c26a24e07d2b9a30de404c65548c94517a9000b87e746693e3cfb3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 67,
+      "hasStructuralAnalysis": true
+    },
+    "App/ai/motion_ai.c": {
+      "filePath": "App/ai/motion_ai.c",
+      "contentHash": "082514efb941e1a8c1f7147500d85a2466689e70e8bc12c78839391207a13f7f",
+      "functions": [
+        {
+          "name": "MotionAi_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "MotionAi_Reset",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionAi_SetSingleTestEnabled",
+          "params": [
+            "enabled"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionAi_SetLocalFallTriggerEnabled",
+          "params": [
+            "enabled"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "MotionAi_IsLocalFallTriggerEnabled",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionAi_SetDemoOverride",
+          "params": [
+            "test_value",
+            "action_id",
+            "score"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "MotionAi_ClearDemoOverride",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "motion_ai_reset_smoothing_history",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "motion_ai_reset_context",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "motion_ai_reset_cycle_state",
+          "params": [
+            "clear_prev_raw"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 31
+        },
+        {
+          "name": "motion_ai_frame_to_raw",
+          "params": [
+            "frame",
+            "raw"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "motion_ai_update_prev_raw",
+          "params": [
+            "raw"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "motion_ai_compute_gate_motion_energy",
+          "params": [
+            "raw"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "motion_ai_compute_frame_delta_energy",
+          "params": [
+            "raw"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "motion_ai_has_valid_baseline",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "motion_ai_update_align_fail",
+          "params": [
+            "frame"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "motion_ai_store_baseline_frame",
+          "params": [
+            "raw"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 33
+        },
+        {
+          "name": "motion_ai_finalize_baseline",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "motion_ai_begin_action_session",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "motion_ai_compute_delta",
+          "params": [
+            "raw",
+            "delta"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "motion_ai_update_motion_energy",
+          "params": [
+            "delta"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "motion_ai_compute_posture_offset",
+          "params": [
+            "delta"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "motion_ai_reset_local_fall_detection",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "motion_ai_set_local_fall_state",
+          "params": [
+            "state"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "motion_ai_update_local_fall_detection",
+          "params": [
+            "raw",
+            "delta"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 184
+        },
+        {
+          "name": "motion_ai_append_window",
+          "params": [
+            "delta"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "motion_ai_prob_index_to_label",
+          "params": [
+            "index"
+          ],
+          "returnType": "motion_label_t",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "motion_ai_action_id_to_label",
+          "params": [
+            "action_id"
+          ],
+          "returnType": "motion_label_t",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "motion_ai_update_prob_average",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "motion_ai_update_latest_from_raw",
+          "params": [
+            "probs"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "motion_ai_update_top1_from_average",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "motion_ai_update_final_label",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "motion_ai_reset_demo_runtime_state",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "motion_ai_should_apply_demo_override",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "motion_ai_activate_demo_override_if_needed",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "motion_ai_apply_demo_override",
+          "params": [
+            "infer_index",
+            "probs"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 79
+        },
+        {
+          "name": "motion_ai_log_demo_probs",
+          "params": [
+            "tag",
+            "infer_index",
+            "probs"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "motion_ai_run_inference",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 70
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "motion_ai.h",
+          "specifiers": [
+            "motion_ai.h"
+          ]
+        },
+        {
+          "source": "math.h",
+          "specifiers": [
+            "math.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "debug_uart7.h",
+          "specifiers": [
+            "debug_uart7.h"
+          ]
+        },
+        {
+          "source": "rule_action_recognizer.h",
+          "specifiers": [
+            "rule_action_recognizer.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MotionAi_Init",
+        "MotionAi_Reset",
+        "MotionAi_SetSingleTestEnabled",
+        "MotionAi_SetLocalFallTriggerEnabled",
+        "MotionAi_IsLocalFallTriggerEnabled",
+        "MotionAi_SetDemoOverride",
+        "MotionAi_ClearDemoOverride"
+      ],
+      "totalLines": 1209,
+      "hasStructuralAnalysis": true
+    },
+    "App/ai/motion_ai.h": {
+      "filePath": "App/ai/motion_ai.h",
+      "contentHash": "4dd75f84f0ada8a3dc63d39c99012724ff93767af6cc0719ffd1ffbbe53a0bc8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 124,
+      "hasStructuralAnalysis": true
+    },
+    "App/cloud/cloud_task.c": {
+      "filePath": "App/cloud/cloud_task.c",
+      "contentHash": "b9040daf5ccf8da07887ac27e485203b9fc0d151c97ebb0717928e399c350e97",
+      "functions": [
+        {
+          "name": "CloudTask_Run",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 54
+        },
+        {
+          "name": "CloudTask_RequestOtaExclusive",
+          "params": [
+            "timeout_ms"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "CloudTask_ReleaseOtaExclusive",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "cloud_reset_session",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "cloud_wait_wifi_init",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "cloud_handle_ota_exclusive_pause",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "cloud_is_ota_exclusive_requested",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "cloud_check_ota_once",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 31
+        },
+        {
+          "name": "cloud_connect_mqtt",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 37
+        },
+        {
+          "name": "cloud_send_subscribe",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "cloud_restart_session_delay",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "cloud_service_loop",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 43
+        },
+        {
+          "name": "cloud_publish_periodic",
+          "params": [
+            "now",
+            "last_publish_tick"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "cloud_post_motion_events",
+          "params": [
+            "subscribe_logged"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 51
+        },
+        {
+          "name": "cloud_post_onenet_states",
+          "params": [
+            "subscribe_logged"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "cloud_process_downlink",
+          "params": [
+            "subscribe_logged",
+            "last_publish_tick",
+            "now"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "cloud_has_loop_error",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 28
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "cloud_task.h",
+          "specifiers": [
+            "cloud_task.h"
+          ]
+        },
+        {
+          "source": "stdint.h",
+          "specifiers": [
+            "stdint.h"
+          ]
+        },
+        {
+          "source": "stddef.h",
+          "specifiers": [
+            "stddef.h"
+          ]
+        },
+        {
+          "source": "cmsis_os2.h",
+          "specifiers": [
+            "cmsis_os2.h"
+          ]
+        },
+        {
+          "source": "debug_uart7.h",
+          "specifiers": [
+            "debug_uart7.h"
+          ]
+        },
+        {
+          "source": "ESP8266.h",
+          "specifiers": [
+            "ESP8266.h"
+          ]
+        },
+        {
+          "source": "motion_app_events.h",
+          "specifiers": [
+            "motion_app_events.h"
+          ]
+        },
+        {
+          "source": "onenet.h",
+          "specifiers": [
+            "onenet.h"
+          ]
+        },
+        {
+          "source": "ota_config.h",
+          "specifiers": [
+            "ota_config.h"
+          ]
+        },
+        {
+          "source": "ota_service.h",
+          "specifiers": [
+            "ota_service.h"
+          ]
+        }
+      ],
+      "exports": [
+        "CloudTask_Run",
+        "CloudTask_RequestOtaExclusive",
+        "CloudTask_ReleaseOtaExclusive"
+      ],
+      "totalLines": 462,
+      "hasStructuralAnalysis": true
+    },
+    "App/cloud/cloud_task.h": {
+      "filePath": "App/cloud/cloud_task.h",
+      "contentHash": "a09d4e18e5f46f60a1926c1db112c0d12b8b2bdb12c5d3a5c5f3fc155bf13256",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "App/lt_screen/lt_screen_keys.h": {
+      "filePath": "App/lt_screen/lt_screen_keys.h",
+      "contentHash": "8eea156c9717854a751cdd1fb1ecccc084ed2fb9a2cac4a51ae601f298fe26ab",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "App/lt_screen/lt_screen_task.c": {
+      "filePath": "App/lt_screen/lt_screen_task.c",
+      "contentHash": "da4fb6eb5f118af5fc53066cb526bd7aeffe9776294150312aa6c15077de09a1",
+      "functions": [
+        {
+          "name": "LTScreenTask_Run",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 54
+        },
+        {
+          "name": "LTScreen_HandleTouchEvent",
+          "params": [
+            "event"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 66
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lt_screen_task.h",
+          "specifiers": [
+            "lt_screen_task.h"
+          ]
+        },
+        {
+          "source": "cmsis_os2.h",
+          "specifiers": [
+            "cmsis_os2.h"
+          ]
+        },
+        {
+          "source": "cloud_task.h",
+          "specifiers": [
+            "cloud_task.h"
+          ]
+        },
+        {
+          "source": "debug_uart7.h",
+          "specifiers": [
+            "debug_uart7.h"
+          ]
+        },
+        {
+          "source": "lt_screen_keys.h",
+          "specifiers": [
+            "lt_screen_keys.h"
+          ]
+        },
+        {
+          "source": "motion_ai.h",
+          "specifiers": [
+            "motion_ai.h"
+          ]
+        },
+        {
+          "source": "motion_app_events.h",
+          "specifiers": [
+            "motion_app_events.h"
+          ]
+        },
+        {
+          "source": "motion_input.h",
+          "specifiers": [
+            "motion_input.h"
+          ]
+        },
+        {
+          "source": "onenet.h",
+          "specifiers": [
+            "onenet.h"
+          ]
+        },
+        {
+          "source": "ota_service.h",
+          "specifiers": [
+            "ota_service.h"
+          ]
+        },
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        }
+      ],
+      "exports": [
+        "LTScreenTask_Run",
+        "LTScreen_HandleTouchEvent"
+      ],
+      "totalLines": 611,
+      "hasStructuralAnalysis": true
+    },
+    "App/lt_screen/lt_screen_task.h": {
+      "filePath": "App/lt_screen/lt_screen_task.h",
+      "contentHash": "2c7e8e424c3904422fa405feb3d4a6082462a19b7f40a12dd1da65d12d6a004b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 37,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_app_events.c": {
+      "filePath": "App/motion/motion_app_events.c",
+      "contentHash": "2c9e37797088ea7c58e5221f28b4c68e1f150384c108ef74570891a258f1f7e8",
+      "functions": [
+        {
+          "name": "MotionEvents_QueueTestConfidence",
+          "params": [
+            "test_value",
+            "confidence"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "MotionEvents_PeekTestConfidence",
+          "params": [
+            "test_value",
+            "confidence"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "MotionEvents_ClearTestConfidenceIfCurrent",
+          "params": [
+            "test_value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "MotionEvents_EncodeActionKind",
+          "params": [
+            "test_value"
+          ],
+          "returnType": "int32_t",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "MotionEvents_QueueActionKind",
+          "params": [
+            "action_kind_value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "MotionEvents_PeekActionKind",
+          "params": [
+            "action_kind_value"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "MotionEvents_ClearActionKindIfCurrent",
+          "params": [
+            "action_kind_value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "MotionEvents_HasPendingCloudPost",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "MotionEvents_RequestTrainingPageRefresh",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionEvents_RequestTrainingPageRefreshByAction",
+          "params": [
+            "action_label"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "MotionEvents_TakeTrainingPageRefresh",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionEvents_TakeTrainingPageRefreshAction",
+          "params": [
+            "action_label"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "MotionEvents_PeekTrainingPageRefreshAction",
+          "params": [
+            "action_label"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionEvents_PeekTrainingPageRefreshDirty",
+          "params": [
+            "action_label",
+            "generation"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "MotionEvents_ClearTrainingPageRefresh",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "MotionEvents_ClearTrainingPageRefreshIfCurrent",
+          "params": [
+            "generation"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "motion_app_events.h",
+          "specifiers": [
+            "motion_app_events.h"
+          ]
+        },
+        {
+          "source": "FreeRTOS.h",
+          "specifiers": [
+            "FreeRTOS.h"
+          ]
+        },
+        {
+          "source": "task.h",
+          "specifiers": [
+            "task.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MotionEvents_QueueTestConfidence",
+        "MotionEvents_PeekTestConfidence",
+        "MotionEvents_ClearTestConfidenceIfCurrent",
+        "MotionEvents_EncodeActionKind",
+        "MotionEvents_QueueActionKind",
+        "MotionEvents_PeekActionKind",
+        "MotionEvents_ClearActionKindIfCurrent",
+        "MotionEvents_HasPendingCloudPost",
+        "MotionEvents_RequestTrainingPageRefresh",
+        "MotionEvents_RequestTrainingPageRefreshByAction",
+        "MotionEvents_TakeTrainingPageRefresh",
+        "MotionEvents_TakeTrainingPageRefreshAction",
+        "MotionEvents_PeekTrainingPageRefreshAction",
+        "MotionEvents_PeekTrainingPageRefreshDirty",
+        "MotionEvents_ClearTrainingPageRefresh",
+        "MotionEvents_ClearTrainingPageRefreshIfCurrent"
+      ],
+      "totalLines": 211,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_app_events.h": {
+      "filePath": "App/motion/motion_app_events.h",
+      "contentHash": "8fab42f0e6ffc059d4b99a5663a3ae93ec5199aa913ccb387d0848b7ae420840",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 44,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_frame.h": {
+      "filePath": "App/motion/motion_frame.h",
+      "contentHash": "583d0c3687c320833755596484dd6014f15e76943dd89f1d451e5816826e3bf5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_input.c": {
+      "filePath": "App/motion/motion_input.c",
+      "contentHash": "4a44b197b621bd1c2ea24c325c796633b6c244879291cf0baba250a926b8accb",
+      "functions": [
+        {
+          "name": "reset_pose_pipeline",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "Motion_RequestStart",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "Motion_RequestStop",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "Motion_RequestClear",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Motion_TakeRestartRequest",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "Motion_TakeStopRequest",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "motion_input.h",
+          "specifiers": [
+            "motion_input.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "./usart/yuanzi_usart.h",
+          "specifiers": [
+            "./usart/yuanzi_usart.h"
+          ]
+        },
+        {
+          "source": "FreeRTOS.h",
+          "specifiers": [
+            "FreeRTOS.h"
+          ]
+        },
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        },
+        {
+          "source": "task.h",
+          "specifiers": [
+            "task.h"
+          ]
+        },
+        {
+          "source": "motion_mode.h",
+          "specifiers": [
+            "motion_mode.h"
+          ]
+        },
+        {
+          "source": "motion_sensor_pipeline.h",
+          "specifiers": [
+            "motion_sensor_pipeline.h"
+          ]
+        },
+        {
+          "source": "motion_window_test.h",
+          "specifiers": [
+            "motion_window_test.h"
+          ]
+        },
+        {
+          "source": "onenet.h",
+          "specifiers": [
+            "onenet.h"
+          ]
+        }
+      ],
+      "exports": [
+        "Motion_RequestStart",
+        "Motion_RequestStop",
+        "Motion_RequestClear",
+        "Motion_TakeRestartRequest",
+        "Motion_TakeStopRequest"
+      ],
+      "totalLines": 97,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_input.h": {
+      "filePath": "App/motion/motion_input.h",
+      "contentHash": "7e6dd76c9d65410c4f173acf48ef8b9bb23d853b5e271ff3bca48732bbac85b0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 26,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_mode.h": {
+      "filePath": "App/motion/motion_mode.h",
+      "contentHash": "9474cb4913bbdb1c58fd0cd7c6484ca9bb256b035a28ac63c91173b29005cd25",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 35,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_sensor_pipeline.c": {
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "contentHash": "7a34a8798f107f348b0cfe29d372b4f4fa4dc96142374dacc8fcdc15888cae55",
+      "functions": [
+        {
+          "name": "parse_u32_token",
+          "params": [
+            "token",
+            "out"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "parse_i32_token",
+          "params": [
+            "token",
+            "out"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "parse_float_token",
+          "params": [
+            "token",
+            "out"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "abs_diff_u64",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "uint64_t",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "get_ts_us",
+          "params": [],
+          "returnType": "uint64_t",
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "parse_pose_frame",
+          "params": [
+            "buf",
+            "len",
+            "default_sensor_id",
+            "ts_us",
+            "out"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 141
+        },
+        {
+          "name": "update_seq_stats",
+          "params": [
+            "sensor_id",
+            "seq"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 40
+        },
+        {
+          "name": "try_emit_fused",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 50
+        },
+        {
+          "name": "MotionSensorPipeline_StorePacketFromIsr",
+          "params": [
+            "sensor_id",
+            "buf",
+            "len"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "MotionSensorPipeline_TakeFusedFrame",
+          "params": [
+            "frame"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "take_pending_pose_packet",
+          "params": [
+            "packet",
+            "buf",
+            "len",
+            "ts_us"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "process_pose_packet",
+          "params": [
+            "buf",
+            "len",
+            "default_sensor_id",
+            "ts_us"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 36
+        },
+        {
+          "name": "Motion_ProcessPendingPosePackets",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "MotionSensorPipeline_Reset",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 38
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        },
+        {
+          "source": "FreeRTOS.h",
+          "specifiers": [
+            "FreeRTOS.h"
+          ]
+        },
+        {
+          "source": "task.h",
+          "specifiers": [
+            "task.h"
+          ]
+        },
+        {
+          "source": "cmsis_os2.h",
+          "specifiers": [
+            "cmsis_os2.h"
+          ]
+        },
+        {
+          "source": "./usart/yuanzi_usart.h",
+          "specifiers": [
+            "./usart/yuanzi_usart.h"
+          ]
+        },
+        {
+          "source": "motion_sensor_pipeline.h",
+          "specifiers": [
+            "motion_sensor_pipeline.h"
+          ]
+        },
+        {
+          "source": "ctype.h",
+          "specifiers": [
+            "ctype.h"
+          ]
+        },
+        {
+          "source": "stdint.h",
+          "specifiers": [
+            "stdint.h"
+          ]
+        },
+        {
+          "source": "stdlib.h",
+          "specifiers": [
+            "stdlib.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MotionSensorPipeline_StorePacketFromIsr",
+        "MotionSensorPipeline_TakeFusedFrame",
+        "Motion_ProcessPendingPosePackets",
+        "MotionSensorPipeline_Reset"
+      ],
+      "totalLines": 628,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_sensor_pipeline.h": {
+      "filePath": "App/motion/motion_sensor_pipeline.h",
+      "contentHash": "73a3bd3a0791d1b92f012a227d07ecc675c40beca0c071e79b65fcced87a5e14",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_task.c": {
+      "filePath": "App/motion/motion_task.c",
+      "contentHash": "efa9b9ff8e1ceafbf49004ec317807120dd379512594c12af053b01ba70308f2",
+      "functions": [
+        {
+          "name": "task1_consume_ai_restart_request",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "task1_consume_ai_stop_request",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "task1_mode_uses_single_test",
+          "params": [
+            "mode"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "task1_try_run_model_window_test",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "task1_encode_action_kind_value",
+          "params": [
+            "test_value"
+          ],
+          "returnType": "int32_t",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "task1_output_state_reset",
+          "params": [
+            "mode",
+            "fresh_session"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "task1_reset_recognition_state",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "task1_try_take_fused_frame",
+          "params": [
+            "frame"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "task1_process_fused_frame",
+          "params": [
+            "frame"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 102
+        },
+        {
+          "name": "task1_handle_local_fall_result",
+          "params": [
+            "result"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "task1_output_capture_csv",
+          "params": [
+            "frame"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "task1_output_bio_capture_csv",
+          "params": [
+            "frame"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "task1_output_uart_debug_once",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "task1_output_recognition_csv",
+          "params": [
+            "frame",
+            "result"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 62
+        },
+        {
+          "name": "task1_output_brief_result",
+          "params": [
+            "frame",
+            "result"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 57
+        },
+        {
+          "name": "task1_output_single_once_event",
+          "params": [
+            "frame",
+            "result"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 120
+        },
+        {
+          "name": "task1_output_rule_debug",
+          "params": [
+            "frame",
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 84
+        },
+        {
+          "name": "task1_bio_value_or_invalid",
+          "params": [
+            "value",
+            "valid"
+          ],
+          "returnType": "int32_t",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "MotionTask_Run",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 82
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "motion_task.h",
+          "specifiers": [
+            "motion_task.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "stdint.h",
+          "specifiers": [
+            "stdint.h"
+          ]
+        },
+        {
+          "source": "FreeRTOS.h",
+          "specifiers": [
+            "FreeRTOS.h"
+          ]
+        },
+        {
+          "source": "task.h",
+          "specifiers": [
+            "task.h"
+          ]
+        },
+        {
+          "source": "cmsis_os2.h",
+          "specifiers": [
+            "cmsis_os2.h"
+          ]
+        },
+        {
+          "source": "debug_uart7.h",
+          "specifiers": [
+            "debug_uart7.h"
+          ]
+        },
+        {
+          "source": "motion_ai.h",
+          "specifiers": [
+            "motion_ai.h"
+          ]
+        },
+        {
+          "source": "motion_app_events.h",
+          "specifiers": [
+            "motion_app_events.h"
+          ]
+        },
+        {
+          "source": "motion_input.h",
+          "specifiers": [
+            "motion_input.h"
+          ]
+        },
+        {
+          "source": "motion_mode.h",
+          "specifiers": [
+            "motion_mode.h"
+          ]
+        },
+        {
+          "source": "motion_sensor_pipeline.h",
+          "specifiers": [
+            "motion_sensor_pipeline.h"
+          ]
+        },
+        {
+          "source": "motion_window_test.h",
+          "specifiers": [
+            "motion_window_test.h"
+          ]
+        },
+        {
+          "source": "onenet.h",
+          "specifiers": [
+            "onenet.h"
+          ]
+        },
+        {
+          "source": "rule_action_recognizer.h",
+          "specifiers": [
+            "rule_action_recognizer.h"
+          ]
+        },
+        {
+          "source": "uart7_role.h",
+          "specifiers": [
+            "uart7_role.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MotionTask_Run"
+      ],
+      "totalLines": 751,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_task.h": {
+      "filePath": "App/motion/motion_task.h",
+      "contentHash": "f3c668ef2ec7f6847070714092b48b057ec5cf6c4727808dfa11e4705a858564",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_window_test.c": {
+      "filePath": "App/motion/motion_window_test.c",
+      "contentHash": "a18c680215b1c475ac13760612196f6908e2a812bbcc202943f420c06942d06e",
+      "functions": [
+        {
+          "name": "MotionWindowTest_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionWindowTest_Reset",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionWindowTest_RequestRun",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionWindowTest_RunPending",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "motion_window_test_try_consume_request",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "motion_window_test_print_output",
+          "params": [
+            "output"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "motion_window_test.h",
+          "specifiers": [
+            "motion_window_test.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        },
+        {
+          "source": "app_x-cube-ai.h",
+          "specifiers": [
+            "app_x-cube-ai.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MotionWindowTest_Init",
+        "MotionWindowTest_Reset",
+        "MotionWindowTest_RequestRun",
+        "MotionWindowTest_RunPending"
+      ],
+      "totalLines": 155,
+      "hasStructuralAnalysis": true
+    },
+    "App/motion/motion_window_test.h": {
+      "filePath": "App/motion/motion_window_test.h",
+      "contentHash": "8815e6458e0182cc0a18b9c09fa3de31a65a19fe110e36d12c94d803994c9904",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "App/ota/ota_config.h": {
+      "filePath": "App/ota/ota_config.h",
+      "contentHash": "4145290248dc8b6f1771e71253136c8c6f56250b50551dbd3b4ef97364a81e3e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 37,
+      "hasStructuralAnalysis": true
+    },
+    "App/ota/ota_http.c": {
+      "filePath": "App/ota/ota_http.c",
+      "contentHash": "6a4024719173ba425fe257fc85e085442079008a85641093f88f679c37433d93",
+      "functions": [
+        {
+          "name": "OTAHttp_ResetResponse",
+          "params": [
+            "response"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "OTAHttp_HeaderNameEquals",
+          "params": [
+            "line",
+            "name",
+            "name_len"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "OTAHttp_ParseHeader",
+          "params": [
+            "headers",
+            "response"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 44
+        },
+        {
+          "name": "OTAHttp_DeliverBody",
+          "params": [
+            "data",
+            "length",
+            "response",
+            "body_callback",
+            "user"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "OTAHttp_SendRequest",
+          "params": [
+            "request",
+            "request_length",
+            "response",
+            "body_callback",
+            "user"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 95
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ota_http.h",
+          "specifiers": [
+            "ota_http.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "ESP8266.h",
+          "specifiers": [
+            "ESP8266.h"
+          ]
+        }
+      ],
+      "exports": [
+        "OTAHttp_SendRequest"
+      ],
+      "totalLines": 255,
+      "hasStructuralAnalysis": true
+    },
+    "App/ota/ota_http.h": {
+      "filePath": "App/ota/ota_http.h",
+      "contentHash": "983c5e6b4f3bff21aa6afcef57a069675921d674d81c9e0f948d8c71d8f96f7c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "App/ota/ota_service.c": {
+      "filePath": "App/ota/ota_service.c",
+      "contentHash": "f0cbbd0126ffce7206552c412fec7362bc9b0c683863f14484947fedba9a302f",
+      "functions": [
+        {
+          "name": "OTAService_CopyJsonBody",
+          "params": [
+            "data",
+            "length",
+            "user"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "OTAService_WriteFirmwareBody",
+          "params": [
+            "data",
+            "length",
+            "user"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "OTAService_ParseJsonText",
+          "params": [
+            "value_start",
+            "out",
+            "out_size"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 50
+        },
+        {
+          "name": "OTAService_ParseJsonUint",
+          "params": [
+            "json",
+            "key",
+            "out"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "OTAService_ToLowerMd5",
+          "params": [
+            "md5"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "OTAService_ParseOnenetEnvelope",
+          "params": [
+            "json",
+            "code",
+            "msg",
+            "msg_size"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "OTAService_SyncRunningVersion",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "OTAService_GetReportVersion",
+          "params": [
+            "version",
+            "version_size"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "OTAService_ParseTask",
+          "params": [
+            "json",
+            "task"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 36
+        },
+        {
+          "name": "OTAService_PostVersion",
+          "params": [
+            "version"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 65
+        },
+        {
+          "name": "OTAService_PostPendingSimulateVersion",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "OTAService_QueryTaskHttp",
+          "params": [
+            "task",
+            "current_version"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 107
+        },
+        {
+          "name": "OTAService_DownloadRange",
+          "params": [
+            "task",
+            "offset",
+            "chunk_len",
+            "md5"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 60
+        },
+        {
+          "name": "OTAService_DownloadFirmware",
+          "params": [
+            "task",
+            "out_md5"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 46
+        },
+        {
+          "name": "OTAService_SaveReadyInfo",
+          "params": [
+            "task"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "OTAService_SaveSimulateInfo",
+          "params": [
+            "task"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "OTAService_QueryTask",
+          "params": [
+            "out_task",
+            "out_current_version",
+            "current_version_size",
+            "out_latest_version",
+            "latest_version_size"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 55
+        },
+        {
+          "name": "OTAService_StartSimulateUpdate",
+          "params": [
+            "task"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "OTAService_ReportConfiguredVersion",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "OTAService_ReportPendingSimulateVersion",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "OTAService_CheckOnce",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 78
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ota_service.h",
+          "specifiers": [
+            "ota_service.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "stdlib.h",
+          "specifiers": [
+            "stdlib.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "ESP8266.h",
+          "specifiers": [
+            "ESP8266.h"
+          ]
+        },
+        {
+          "source": "cmsis_os2.h",
+          "specifiers": [
+            "cmsis_os2.h"
+          ]
+        },
+        {
+          "source": "debug_uart7.h",
+          "specifiers": [
+            "debug_uart7.h"
+          ]
+        },
+        {
+          "source": "lt168b.h",
+          "specifiers": [
+            "lt168b.h"
+          ]
+        },
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        },
+        {
+          "source": "md5.h",
+          "specifiers": [
+            "md5.h"
+          ]
+        },
+        {
+          "source": "ota_config.h",
+          "specifiers": [
+            "ota_config.h"
+          ]
+        },
+        {
+          "source": "ota_device_info.h",
+          "specifiers": [
+            "ota_device_info.h"
+          ]
+        },
+        {
+          "source": "ota_http.h",
+          "specifiers": [
+            "ota_http.h"
+          ]
+        },
+        {
+          "source": "ota_info.h",
+          "specifiers": [
+            "ota_info.h"
+          ]
+        },
+        {
+          "source": "w25q128.h",
+          "specifiers": [
+            "w25q128.h"
+          ]
+        }
+      ],
+      "exports": [
+        "OTAService_QueryTask",
+        "OTAService_StartSimulateUpdate",
+        "OTAService_ReportConfiguredVersion",
+        "OTAService_ReportPendingSimulateVersion",
+        "OTAService_CheckOnce"
+      ],
+      "totalLines": 823,
+      "hasStructuralAnalysis": true
+    },
+    "App/ota/ota_service.h": {
+      "filePath": "App/ota/ota_service.h",
+      "contentHash": "bcbaa44327ffdb0fdad7eb392152d2dd3f5122dd3ae76324e6b92c0316aa4bae",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "App/rule action/rule_action_recognizer.c": {
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "contentHash": "b85742057ed9b263e4e789bc6d74c8490ec98ecf23a3d9b5374e05ef52d36fea",
+      "functions": [
+        {
+          "name": "RuleConfig_LoadDefault",
+          "params": [
+            "cfg"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "RuleEngine_Init",
+          "params": [
+            "eng",
+            "cfg"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "RuleEngine_ResetSession",
+          "params": [
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "RuleEngine_SetTemplates",
+          "params": [
+            "eng",
+            "templates",
+            "template_count"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "RuleEngine_Update",
+          "params": [
+            "eng",
+            "raw",
+            "motion_energy",
+            "now_ms"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 162
+        },
+        {
+          "name": "RuleEngine_ProcessRaw",
+          "params": [
+            "eng",
+            "raw",
+            "now_ms"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "Rule_ComputeMotionEnergy",
+          "params": [
+            "eng",
+            "raw"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "Rule_UpdateAmplitudeStats",
+          "params": [
+            "session",
+            "delta"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 45
+        },
+        {
+          "name": "Rule_UpdatePeakStats",
+          "params": [
+            "session",
+            "delta"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "Rule_ShouldEnterPeakHold",
+          "params": [
+            "eng"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 44
+        },
+        {
+          "name": "Rule_ShouldExitPeakHold",
+          "params": [
+            "eng"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 42
+        },
+        {
+          "name": "Rule_IsActionReturned",
+          "params": [
+            "eng"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "Rule_FilterTemplate",
+          "params": [
+            "session",
+            "tmpl"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 55
+        },
+        {
+          "name": "Rule_ComputeTemplateMatchScore",
+          "params": [
+            "session",
+            "tmpl",
+            "amp_distance",
+            "peak_distance"
+          ],
+          "returnType": "float",
+          "exported": true,
+          "lineCount": 58
+        },
+        {
+          "name": "Rule_RecognizeAction",
+          "params": [
+            "session",
+            "templates",
+            "template_count",
+            "out_result"
+          ],
+          "returnType": "ActionType",
+          "exported": true,
+          "lineCount": 103
+        },
+        {
+          "name": "Rule_ScoreCompleteness",
+          "params": [
+            "session"
+          ],
+          "returnType": "uint16_t",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "Rule_ScoreAmplitude",
+          "params": [
+            "session",
+            "tmpl"
+          ],
+          "returnType": "uint16_t",
+          "exported": true,
+          "lineCount": 52
+        },
+        {
+          "name": "Rule_ScorePeakHold",
+          "params": [
+            "session",
+            "tmpl"
+          ],
+          "returnType": "uint16_t",
+          "exported": true,
+          "lineCount": 55
+        },
+        {
+          "name": "Rule_EvaluateResult",
+          "params": [
+            "cfg",
+            "session",
+            "out_result"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "rule_absf",
+          "params": [
+            "value"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "rule_maxf",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "rule_minf",
+          "params": [
+            "a",
+            "b"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "rule_elapsed_ms",
+          "params": [
+            "start_ms",
+            "now_ms"
+          ],
+          "returnType": "uint32_t",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "rule_normalize_linear",
+          "params": [
+            "value",
+            "min_value",
+            "max_value"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "rule_scale_score",
+          "params": [
+            "value",
+            "in_min",
+            "in_max",
+            "out_min",
+            "out_max"
+          ],
+          "returnType": "uint16_t",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "rule_value_in_range",
+          "params": [
+            "value",
+            "min_value",
+            "max_value"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "rule_reset_result",
+          "params": [
+            "result"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "rule_copy_result_features",
+          "params": [
+            "result",
+            "session"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "rule_reset_static_accumulator",
+          "params": [
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "rule_compute_delta",
+          "params": [
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "rule_lock_baseline",
+          "params": [
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "rule_update_static_candidate",
+          "params": [
+            "eng",
+            "raw"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "rule_store_session_frame",
+          "params": [
+            "session",
+            "raw",
+            "delta"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "rule_begin_action",
+          "params": [
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "rule_finalize_action",
+          "params": [
+            "eng",
+            "returned_to_static"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 43
+        },
+        {
+          "name": "rule_session_timed_out",
+          "params": [
+            "eng"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "rule_find_dominant_axis",
+          "params": [
+            "session"
+          ],
+          "returnType": "AxisIndex",
+          "exported": false,
+          "lineCount": 25
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "rule_action_recognizer.h",
+          "specifiers": [
+            "rule_action_recognizer.h"
+          ]
+        },
+        {
+          "source": "stddef.h",
+          "specifiers": [
+            "stddef.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        }
+      ],
+      "exports": [
+        "RuleConfig_LoadDefault",
+        "RuleEngine_Init",
+        "RuleEngine_ResetSession",
+        "RuleEngine_SetTemplates",
+        "RuleEngine_Update",
+        "RuleEngine_ProcessRaw",
+        "Rule_ComputeMotionEnergy",
+        "Rule_UpdateAmplitudeStats",
+        "Rule_UpdatePeakStats",
+        "Rule_ShouldEnterPeakHold",
+        "Rule_ShouldExitPeakHold",
+        "Rule_IsActionReturned",
+        "Rule_FilterTemplate",
+        "Rule_ComputeTemplateMatchScore",
+        "Rule_RecognizeAction",
+        "Rule_ScoreCompleteness",
+        "Rule_ScoreAmplitude",
+        "Rule_ScorePeakHold",
+        "Rule_EvaluateResult"
+      ],
+      "totalLines": 1412,
+      "hasStructuralAnalysis": true
+    },
+    "App/rule action/rule_action_recognizer.h": {
+      "filePath": "App/rule action/rule_action_recognizer.h",
+      "contentHash": "53c46e54440891347a1785a0ca1ce95f01def73463284b38d7e728fa66c04c2f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 332,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/cloud/MqttKit.c": {
+      "filePath": "BSP/cloud/MqttKit.c",
+      "contentHash": "41438342c234e2a261376995aeca6a3ac820ebd55391d9b358b62227b220bf41",
+      "functions": [
+        {
+          "name": "MQTT_NewBuffer",
+          "params": [
+            "mqttPacket",
+            "size"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 33
+        },
+        {
+          "name": "MQTT_DumpLength",
+          "params": [
+            "len",
+            "buf"
+          ],
+          "returnType": "int32_t",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "MQTT_ReadLength",
+          "params": [
+            "stream",
+            "size",
+            "len"
+          ],
+          "returnType": "int32_t",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "MQTT_WriteString",
+          "params": [
+            "packet",
+            "text",
+            "length"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "MQTT_DeleteBuffer",
+          "params": [
+            "mqttPacket"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "MQTT_UnPacketRecv",
+          "params": [
+            "dataPtr"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "MQTT_PacketConnect",
+          "params": [
+            "user",
+            "password",
+            "devid",
+            "keep_alive",
+            "clean_session",
+            "qos",
+            "will_topic",
+            "will_msg",
+            "will_retain",
+            "mqttPacket"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 92
+        },
+        {
+          "name": "MQTT_UnPacketConnectAck",
+          "params": [
+            "rev_data"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "MQTT_PacketSubscribe",
+          "params": [
+            "pkt_id",
+            "qos",
+            "topics",
+            "topics_cnt",
+            "mqttPacket"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 50
+        },
+        {
+          "name": "MQTT_UnPacketSubscribe",
+          "params": [
+            "rev_data"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 29
+        },
+        {
+          "name": "MQTT_PacketPublish",
+          "params": [
+            "pkt_id",
+            "topic",
+            "payload",
+            "payload_len",
+            "qos",
+            "retain",
+            "own",
+            "mqttPacket"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 63
+        },
+        {
+          "name": "MQTT_UnPacketPublish",
+          "params": [
+            "rev_data",
+            "topic",
+            "topic_len",
+            "payload",
+            "payload_len",
+            "qos",
+            "pkt_id"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 82
+        },
+        {
+          "name": "MQTT_UnPacketPublishAck",
+          "params": [
+            "rev_data"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "MQTT_PacketPing",
+          "params": [
+            "mqttPacket"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "MqttKit.h",
+          "specifiers": [
+            "MqttKit.h"
+          ]
+        },
+        {
+          "source": "stdlib.h",
+          "specifiers": [
+            "stdlib.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MQTT_DeleteBuffer",
+        "MQTT_UnPacketRecv",
+        "MQTT_PacketConnect",
+        "MQTT_UnPacketConnectAck",
+        "MQTT_PacketSubscribe",
+        "MQTT_UnPacketSubscribe",
+        "MQTT_PacketPublish",
+        "MQTT_UnPacketPublish",
+        "MQTT_UnPacketPublishAck",
+        "MQTT_PacketPing"
+      ],
+      "totalLines": 521,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/cloud/MqttKit.h": {
+      "filePath": "BSP/cloud/MqttKit.h",
+      "contentHash": "b07248095340a83af3cfab15421e1372129cc55038e492b8353908000a50d28f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 99,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/cloud/onenet.c": {
+      "filePath": "BSP/cloud/onenet.c",
+      "contentHash": "63717662d45de15c5342e9f593bd8b316a12bb5c8a57f40624effdec1470a19c",
+      "functions": [
+        {
+          "name": "OneNet_ResetTrainDisplayFromPlan",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "OneNet_PostIntPropertyValue",
+          "params": [
+            "property_key",
+            "value",
+            "log_tag"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 51
+        },
+        {
+          "name": "OneNet_PostTrainPlan",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 46
+        },
+        {
+          "name": "OneNet_TopicMatches",
+          "params": [
+            "topic",
+            "topic_len",
+            "expected"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "OneNet_CopyTextForLog",
+          "params": [
+            "src",
+            "src_len",
+            "dst",
+            "dst_size"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "OneNet_CopyDownlink",
+          "params": [
+            "topic",
+            "topic_len",
+            "payload",
+            "payload_len"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 33
+        },
+        {
+          "name": "OneNet_ParseJsonTextValue",
+          "params": [
+            "value_start",
+            "output",
+            "output_size"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 52
+        },
+        {
+          "name": "OneNet_ParseJsonIntValue",
+          "params": [
+            "value_start",
+            "value"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 25
+        },
+        {
+          "name": "OneNet_ParseRequestId",
+          "params": [
+            "json",
+            "request_id",
+            "request_id_size"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "OneNet_ParsePropertyIntValue",
+          "params": [
+            "json",
+            "property_key",
+            "value"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 37
+        },
+        {
+          "name": "OneNet_ParseTestValue",
+          "params": [
+            "json",
+            "test_value"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "OneNet_IsDecodedTestValueValid",
+          "params": [
+            "action_id",
+            "score"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "OneNet_PublishRaw",
+          "params": [
+            "topic",
+            "payload",
+            "payload_len",
+            "packet_fail_status",
+            "send_fail_status"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "OneNet_SendPropertySetReply",
+          "params": [
+            "request_id",
+            "code",
+            "message"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 45
+        },
+        {
+          "name": "OneNet_PostTestConfidenceValue",
+          "params": [
+            "test_value",
+            "confidence_value"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 44
+        },
+        {
+          "name": "OneNet_PostActionKindValue",
+          "params": [
+            "action_kind_value"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "OneNet_PostFallAlarmValue",
+          "params": [
+            "fall_alarm_value"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "OneNet_TakeLastValidTestValue",
+          "params": [
+            "test_value"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "OneNet_ActivateFallAlarm",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "OneNet_ClearFallAlarm",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "OneNet_IsFallAlarmActive",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "OneNet_GetTrainPlanSnapshot",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "OneNet_GetTrainDisplaySnapshot",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "OneNet_UpdateTrainDisplayByAction",
+          "params": [
+            "action_label"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "OneNet_PostPendingTrainPlan",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "OneNet_PostPendingDoorState",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "OneNet_PostPendingFallAlarm",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "OneNet_InitPropSetContext",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "OneNet_HandleTrainPlanProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 52
+        },
+        {
+          "name": "OneNet_HandleDoorProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "OneNet_HandleFallAlarmProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "OneNet_HandleStartProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "OneNet_HandleTestProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "OneNet_LogPropertySetSummary",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 38
+        },
+        {
+          "name": "OneNet_ApplyDoorProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "OneNet_ApplyFallAlarmProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "OneNet_ApplyStartProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "OneNet_ApplyTestProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 33
+        },
+        {
+          "name": "OneNet_ApplyTrainPlanProperty",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "OneNet_ApplyPropertySetActions",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "OneNet_HandlePropertySet",
+          "params": [
+            "topic",
+            "topic_len",
+            "payload",
+            "payload_len"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 41
+        },
+        {
+          "name": "OneNet_HandlePublishPacket",
+          "params": [
+            "packet"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 49
+        },
+        {
+          "name": "OneNet_DevLink",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 59
+        },
+        {
+          "name": "OneNet_Subscribe",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "OneNet_Publish",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "OneNet_RevPro",
+          "params": [
+            "packet"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 63
+        },
+        {
+          "name": "OneNet_HasSessionError",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "OneNet_ClearSessionError",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "OneNet_ResetSubscribeState",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "OneNet_IsSubscribeReady",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "OneNet_GetLastStatus",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "OneNet_GetLastConnAckCode",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "onenet.h",
+          "specifiers": [
+            "onenet.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "stdlib.h",
+          "specifiers": [
+            "stdlib.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "ESP8266.h",
+          "specifiers": [
+            "ESP8266.h"
+          ]
+        },
+        {
+          "source": "MqttKit.h",
+          "specifiers": [
+            "MqttKit.h"
+          ]
+        },
+        {
+          "source": "debug_uart7.h",
+          "specifiers": [
+            "debug_uart7.h"
+          ]
+        },
+        {
+          "source": "motion_ai.h",
+          "specifiers": [
+            "motion_ai.h"
+          ]
+        },
+        {
+          "source": "motion_app_events.h",
+          "specifiers": [
+            "motion_app_events.h"
+          ]
+        },
+        {
+          "source": "motion_input.h",
+          "specifiers": [
+            "motion_input.h"
+          ]
+        },
+        {
+          "source": "tim.h",
+          "specifiers": [
+            "tim.h"
+          ]
+        }
+      ],
+      "exports": [
+        "OneNet_PostTestConfidenceValue",
+        "OneNet_PostActionKindValue",
+        "OneNet_PostFallAlarmValue",
+        "OneNet_TakeLastValidTestValue",
+        "OneNet_ActivateFallAlarm",
+        "OneNet_ClearFallAlarm",
+        "OneNet_IsFallAlarmActive",
+        "OneNet_GetTrainPlanSnapshot",
+        "OneNet_GetTrainDisplaySnapshot",
+        "OneNet_UpdateTrainDisplayByAction",
+        "OneNet_PostPendingTrainPlan",
+        "OneNet_PostPendingDoorState",
+        "OneNet_PostPendingFallAlarm",
+        "OneNet_DevLink",
+        "OneNet_Subscribe",
+        "OneNet_Publish",
+        "OneNet_RevPro",
+        "OneNet_HasSessionError",
+        "OneNet_ClearSessionError",
+        "OneNet_ResetSubscribeState",
+        "OneNet_IsSubscribeReady",
+        "OneNet_GetLastStatus",
+        "OneNet_GetLastConnAckCode"
+      ],
+      "totalLines": 1395,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/cloud/onenet.h": {
+      "filePath": "BSP/cloud/onenet.h",
+      "contentHash": "7b60570911eb42d94c6d45c1563f790005b7fba6306dfc882e77fffced912172",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 110,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/debug_uart/debug_uart7.c": {
+      "filePath": "BSP/debug_uart/debug_uart7.c",
+      "contentHash": "5125989b7a2e8c15204d0a6b7ba34db149ac9127cddddc18fcd1fcba7c12889d",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "debug_uart7.h",
+          "specifiers": [
+            "debug_uart7.h"
+          ]
+        },
+        {
+          "source": "uart7_role.h",
+          "specifiers": [
+            "uart7_role.h"
+          ]
+        },
+        {
+          "source": "stdarg.h",
+          "specifiers": [
+            "stdarg.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 136,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/debug_uart/debug_uart7.h": {
+      "filePath": "BSP/debug_uart/debug_uart7.h",
+      "contentHash": "fa5a9e17c10934aa767ce32eb22671fa96858a1f53c03029ad2eb971a1bd317d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/debug_uart/uart7_role.h": {
+      "filePath": "BSP/debug_uart/uart7_role.h",
+      "contentHash": "3f7cedd64099bcc2bc621559f7bd8aa093b9d5b99ec08533eedf9315315ec8a4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/display/lt168b.c": {
+      "filePath": "BSP/display/lt168b.c",
+      "contentHash": "8e9c08d06366c27e6b199a6fa73214a198515606e6438a5762e6acc7c20ca83c",
+      "functions": [
+        {
+          "name": "LT168B_Init",
+          "params": [
+            "huart"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "LT168B_SendStr",
+          "params": [
+            "cmd",
+            "address",
+            "data",
+            "len"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "LT168B_WriteVersionText",
+          "params": [
+            "address",
+            "text"
+          ],
+          "returnType": "HAL_StatusTypeDef",
+          "exported": true,
+          "lineCount": 47
+        },
+        {
+          "name": "LT168B_SendStrWithStatus",
+          "params": [
+            "cmd",
+            "address",
+            "data",
+            "len"
+          ],
+          "returnType": "HAL_StatusTypeDef",
+          "exported": false,
+          "lineCount": 41
+        },
+        {
+          "name": "LT168B_WriteText",
+          "params": [
+            "address",
+            "text"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "LT168B_WriteU16",
+          "params": [
+            "address",
+            "value"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "LT168B_GotoPage",
+          "params": [
+            "page_id"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "LT168B_DebugPrintLine",
+          "params": [
+            "text"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "LT168B_DebugPrintKeyEvent",
+          "params": [
+            "event"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "LT168B_ParseTouchEvent",
+          "params": [
+            "frame",
+            "frame_len",
+            "event"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "LT168B_HandleRxEvent",
+          "params": [
+            "huart",
+            "size"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 41
+        },
+        {
+          "name": "LT168B_TakeTouchEvent",
+          "params": [
+            "event"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "LT168B_RestartRx",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "LT168B_CalcCrc16Modbus",
+          "params": [
+            "data",
+            "len"
+          ],
+          "returnType": "uint16_t",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "LT168B_DebugUart2WriteByte",
+          "params": [
+            "byte"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "LT168B_DebugUart2WriteString",
+          "params": [
+            "text"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "LT168B_DebugUart2WriteDecU16",
+          "params": [
+            "value"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "LT168B_DebugUart2WriteHexU8",
+          "params": [
+            "value"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "LT168B_DebugUart2WriteHexU16",
+          "params": [
+            "value"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "LT168B_DebugPrintRawFrame",
+          "params": [
+            "data",
+            "len"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 24
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lt168b.h",
+          "specifiers": [
+            "lt168b.h"
+          ]
+        },
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        }
+      ],
+      "exports": [
+        "LT168B_Init",
+        "LT168B_SendStr",
+        "LT168B_WriteVersionText",
+        "LT168B_WriteText",
+        "LT168B_WriteU16",
+        "LT168B_GotoPage",
+        "LT168B_DebugPrintLine",
+        "LT168B_DebugPrintKeyEvent",
+        "LT168B_ParseTouchEvent",
+        "LT168B_HandleRxEvent",
+        "LT168B_TakeTouchEvent"
+      ],
+      "totalLines": 437,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/display/lt168b.h": {
+      "filePath": "BSP/display/lt168b.h",
+      "contentHash": "3e3dbdbf75abd206cfc906e7e78ffe00de26f25bb0e11e9c5298293895df8e0a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 37,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/w25q128/w25q128.c": {
+      "filePath": "BSP/w25q128/w25q128.c",
+      "contentHash": "ce5a38f61c189dad3c3402a074f934c442bb6cbfd4e3eeb344b515bc1608369b",
+      "functions": [
+        {
+          "name": "W25Q128_SpiDelay",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "W25Q128_DelayTiny",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "W25Q128_WriteCS",
+          "params": [
+            "state"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "W25Q128_WriteSCK",
+          "params": [
+            "state"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "W25Q128_WriteMOSI",
+          "params": [
+            "state"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "W25Q128_ReadMISO",
+          "params": [],
+          "returnType": "GPIO_PinState",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "W25Q128_Start",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "W25Q128_Stop",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "W25Q128_SwapByte",
+          "params": [
+            "byte"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "W25Q128_SendAddress",
+          "params": [
+            "address"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "W25Q128_IsRangeValid",
+          "params": [
+            "address",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "W25Q128_ReadStatusReg1",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "W25Q128_WaitBusy",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "W25Q128_WriteEnable",
+          "params": [],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "W25Q128_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "W25Q128_ReadID",
+          "params": [
+            "out_mid",
+            "out_type",
+            "out_capacity"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "W25Q128_ReadIDLoopTest",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "W25Q128_SectorErase4KB",
+          "params": [
+            "address"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 29
+        },
+        {
+          "name": "W25Q128_PageProgram",
+          "params": [
+            "address",
+            "data",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 42
+        },
+        {
+          "name": "W25Q128_ReadData",
+          "params": [
+            "address",
+            "data",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "W25Q128_EraseRange",
+          "params": [
+            "address",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "W25Q128_WriteData",
+          "params": [
+            "address",
+            "data",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "W25Q128_WriteDataVerified",
+          "params": [
+            "address",
+            "data",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 48
+        },
+        {
+          "name": "W25Q128_Test",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 55
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "w25q128.h",
+          "specifiers": [
+            "w25q128.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        }
+      ],
+      "exports": [
+        "W25Q128_Init",
+        "W25Q128_ReadID",
+        "W25Q128_ReadIDLoopTest",
+        "W25Q128_SectorErase4KB",
+        "W25Q128_PageProgram",
+        "W25Q128_ReadData",
+        "W25Q128_EraseRange",
+        "W25Q128_WriteData",
+        "W25Q128_WriteDataVerified",
+        "W25Q128_Test"
+      ],
+      "totalLines": 501,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/w25q128/w25q128.h": {
+      "filePath": "BSP/w25q128/w25q128.h",
+      "contentHash": "7effc43a704095b84e4ddcc7635e2699c70de19bc4716725427ff7b94be3bf71",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 86,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/wifi/ESP8266.c": {
+      "filePath": "BSP/wifi/ESP8266.c",
+      "contentHash": "f05fe716907e445d6a21f61c95a8c61a8d06567143011ac2a977886c03b2584f",
+      "functions": [
+        {
+          "name": "ESP8266_GetTickMs",
+          "params": [],
+          "returnType": "uint32_t",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "ESP8266_SleepMs",
+          "params": [
+            "delay_ms"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "ESP8266_SendRaw",
+          "params": [
+            "data",
+            "len"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "ESP8266_GetRxCountSnapshot",
+          "params": [],
+          "returnType": "uint16_t",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "ESP8266_GetRxLastTickSnapshot",
+          "params": [],
+          "returnType": "uint32_t",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "ESP8266_DebugPrintHexPrefix",
+          "params": [
+            "data",
+            "len",
+            "limit"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "ESP8266_BufferContains",
+          "params": [
+            "buffer",
+            "length",
+            "needle"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "ESP8266_CurrentBufferContains",
+          "params": [
+            "needle"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "ESP8266_WaitForPattern",
+          "params": [
+            "expect",
+            "timeout_ms"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 36
+        },
+        {
+          "name": "ESP8266_IsTargetWifiConnected",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "ESP8266_WaitForEitherPattern",
+          "params": [
+            "expect",
+            "alt_expect",
+            "timeout_ms"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 44
+        },
+        {
+          "name": "ESP8266_TryCloseSocket",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "ESP8266_TryExitTransparentMode",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "ESP8266_CheckIPDPayload",
+          "params": [
+            "ipd_len",
+            "payload_offset",
+            "available_len",
+            "payload_ptr"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 88
+        },
+        {
+          "name": "ESP8266_IsTxAckBuffer",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "ESP8266_SendCmdInternal",
+          "params": [
+            "cmd",
+            "expect",
+            "alt_expect",
+            "timeout_ms"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "ESP8266_ResetModule",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 36
+        },
+        {
+          "name": "ESP8266_Clear",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "ESP8266_WaitReceive",
+          "params": [
+            "timeout_ms"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "ESP8266_SendCmd",
+          "params": [
+            "cmd",
+            "expect",
+            "timeout_ms"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "ESP8266_SendData",
+          "params": [
+            "data",
+            "len"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "ESP8266_InitCommands",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 74
+        },
+        {
+          "name": "ESP8266_Init",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "ESP8266_ConnectTcp",
+          "params": [
+            "host",
+            "port"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "ESP8266_CloseTcp",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "ESP8266_GetLastIPDLength",
+          "params": [],
+          "returnType": "uint32_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "ESP8266_UpdateTransportError",
+          "params": [
+            "count"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "ESP8266_RxFeedBlock",
+          "params": [
+            "data",
+            "len"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 38
+        },
+        {
+          "name": "ESP8266_RxFeedByte",
+          "params": [
+            "byte"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "ESP8266_HasTransportError",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "ESP8266_ClearTransportError",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "ESP8266_GetLastInitStatus",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "ESP8266_DebugDumpCurrentRx",
+          "params": [
+            "tag",
+            "limit"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 25
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ESP8266.h",
+          "specifiers": [
+            "ESP8266.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "cmsis_os2.h",
+          "specifiers": [
+            "cmsis_os2.h"
+          ]
+        },
+        {
+          "source": "debug_uart7.h",
+          "specifiers": [
+            "debug_uart7.h"
+          ]
+        },
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
+        }
+      ],
+      "exports": [
+        "ESP8266_Clear",
+        "ESP8266_WaitReceive",
+        "ESP8266_SendCmd",
+        "ESP8266_SendData",
+        "ESP8266_Init",
+        "ESP8266_ConnectTcp",
+        "ESP8266_CloseTcp",
+        "ESP8266_GetLastIPDLength",
+        "ESP8266_RxFeedBlock",
+        "ESP8266_RxFeedByte",
+        "ESP8266_HasTransportError",
+        "ESP8266_ClearTransportError",
+        "ESP8266_GetLastInitStatus",
+        "ESP8266_DebugDumpCurrentRx"
+      ],
+      "totalLines": 870,
+      "hasStructuralAnalysis": true
+    },
+    "BSP/wifi/ESP8266.h": {
+      "filePath": "BSP/wifi/ESP8266.h",
+      "contentHash": "39a2552f99854fdd609505c233c7554d9e11ca975fe692ebf45b28ff768730bf",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": true
+    },
+    "Common/crc16.c": {
+      "filePath": "Common/crc16.c",
+      "contentHash": "a9abdec4ca44fb85cd88bcc96f4ca650edc96fb4365a05f12508a9d77579d22d",
+      "functions": [
+        {
+          "name": "CRC16_Init",
+          "params": [],
+          "returnType": "uint16_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "CRC16_Update",
+          "params": [
+            "crc",
+            "data",
+            "length"
+          ],
+          "returnType": "uint16_t",
+          "exported": true,
+          "lineCount": 29
+        },
+        {
+          "name": "CRC16_Calculate",
+          "params": [
+            "data",
+            "length"
+          ],
+          "returnType": "uint16_t",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "crc16.h",
+          "specifiers": [
+            "crc16.h"
+          ]
+        }
+      ],
+      "exports": [
+        "CRC16_Init",
+        "CRC16_Update",
+        "CRC16_Calculate"
+      ],
+      "totalLines": 45,
+      "hasStructuralAnalysis": true
+    },
+    "Common/crc16.h": {
+      "filePath": "Common/crc16.h",
+      "contentHash": "7a7828c1a7c699e9ae65b1d6551504a026c6efdc46f843fba4f9c095c34f6dd9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "Common/md5.c": {
+      "filePath": "Common/md5.c",
+      "contentHash": "27658cd295032e4ca628f3b8c58d01112fa0e33c50d2ecbd2cb2d1b29a565daa",
+      "functions": [
+        {
+          "name": "MD5_DecodeWord",
+          "params": [
+            "input"
+          ],
+          "returnType": "uint32_t",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "MD5_EncodeWord",
+          "params": [
+            "value",
+            "output"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "MD5_Transform",
+          "params": [
+            "state",
+            "block"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 87
+        },
+        {
+          "name": "MD5_Init",
+          "params": [
+            "ctx"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "MD5_Update",
+          "params": [
+            "ctx",
+            "data",
+            "length"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "MD5_Final",
+          "params": [
+            "ctx",
+            "digest"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "MD5_ToHex",
+          "params": [
+            "digest",
+            "out_hex"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "MD5_IsHexString",
+          "params": [
+            "text"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "md5.h",
+          "specifiers": [
+            "md5.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MD5_Init",
+        "MD5_Update",
+        "MD5_Final",
+        "MD5_ToHex",
+        "MD5_IsHexString"
+      ],
+      "totalLines": 242,
+      "hasStructuralAnalysis": true
+    },
+    "Common/md5.h": {
+      "filePath": "Common/md5.h",
+      "contentHash": "9a1927197ec5d5769652a9068907f0357904811aea620bac5c34adb169c35f65",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "Common/ota_device_info.c": {
+      "filePath": "Common/ota_device_info.c",
+      "contentHash": "865f2221e6a4fbac2283588b2defefc50a897c00a52948d70d54ea9dfa6b8a77",
+      "functions": [
+        {
+          "name": "OTADeviceInfo_CalcCrc16",
+          "params": [
+            "info"
+          ],
+          "returnType": "uint16_t",
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "OTADeviceInfo_IsValid",
+          "params": [
+            "info"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "OTADeviceInfo_ReadSlot",
+          "params": [
+            "address",
+            "info"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "OTADeviceInfo_LoadBest",
+          "params": [
+            "info",
+            "slot_addr"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 41
+        },
+        {
+          "name": "OTADeviceInfo_Load",
+          "params": [
+            "info"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "OTADeviceInfo_GetCurrentVersion",
+          "params": [
+            "out",
+            "out_size"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "OTADeviceInfo_WriteSlot",
+          "params": [
+            "address",
+            "info"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "OTADeviceInfo_SaveRunningVersion",
+          "params": [
+            "version"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 50
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ota_device_info.h",
+          "specifiers": [
+            "ota_device_info.h"
+          ]
+        },
+        {
+          "source": "stddef.h",
+          "specifiers": [
+            "stddef.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "crc16.h",
+          "specifiers": [
+            "crc16.h"
+          ]
+        },
+        {
+          "source": "w25q128.h",
+          "specifiers": [
+            "w25q128.h"
+          ]
+        }
+      ],
+      "exports": [
+        "OTADeviceInfo_IsValid",
+        "OTADeviceInfo_Load",
+        "OTADeviceInfo_GetCurrentVersion",
+        "OTADeviceInfo_SaveRunningVersion"
+      ],
+      "totalLines": 197,
+      "hasStructuralAnalysis": true
+    },
+    "Common/ota_device_info.h": {
+      "filePath": "Common/ota_device_info.h",
+      "contentHash": "cdd3a8079a1ad723369ab59e7e75f1b189cfa57bf8842952f17bc820a56a7706",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "Common/ota_info.c": {
+      "filePath": "Common/ota_info.c",
+      "contentHash": "958de000d184a0ebea9d1e13a3d849e41f39f7530173b95b77f121c02f27e40b",
+      "functions": [
+        {
+          "name": "OTAInfo_CalcCrc16",
+          "params": [
+            "info"
+          ],
+          "returnType": "uint16_t",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "OTAInfo_IsReadyValid",
+          "params": [
+            "info"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "OTAInfo_IsSimulateValid",
+          "params": [
+            "info"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "OTAInfo_Load",
+          "params": [
+            "info"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "OTAInfo_LoadSimulate",
+          "params": [
+            "info"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "OTAInfo_SaveReady",
+          "params": [
+            "info"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "OTAInfo_SaveSimulate",
+          "params": [
+            "info"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "OTAInfo_Invalidate",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ota_info.h",
+          "specifiers": [
+            "ota_info.h"
+          ]
+        },
+        {
+          "source": "stddef.h",
+          "specifiers": [
+            "stddef.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "crc16.h",
+          "specifiers": [
+            "crc16.h"
+          ]
+        },
+        {
+          "source": "md5.h",
+          "specifiers": [
+            "md5.h"
+          ]
+        },
+        {
+          "source": "w25q128.h",
+          "specifiers": [
+            "w25q128.h"
+          ]
+        }
+      ],
+      "exports": [
+        "OTAInfo_CalcCrc16",
+        "OTAInfo_IsReadyValid",
+        "OTAInfo_IsSimulateValid",
+        "OTAInfo_Load",
+        "OTAInfo_LoadSimulate",
+        "OTAInfo_SaveReady",
+        "OTAInfo_SaveSimulate",
+        "OTAInfo_Invalidate"
+      ],
+      "totalLines": 151,
+      "hasStructuralAnalysis": true
+    },
+    "Common/ota_info.h": {
+      "filePath": "Common/ota_info.h",
+      "contentHash": "dc906e27168cbb799e55d819c1bf8813177cf4daebcc13b7d901084e53e32140",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "Common/ota_layout.h": {
+      "filePath": "Common/ota_layout.h",
+      "contentHash": "56043f715d552677205f19ed019017162c07eff6625af3149a52c09a00fe67a7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 75,
+      "hasStructuralAnalysis": true
+    },
+    "Common/ring_buffer.c": {
+      "filePath": "Common/ring_buffer.c",
+      "contentHash": "7b4b492f5a2b3393a78daf2a6545d7313b284defce1c0a438e5fba61bea59f5b",
+      "functions": [
+        {
+          "name": "RingBuffer_NextIndex",
+          "params": [
+            "rb",
+            "index"
+          ],
+          "returnType": "uint16_t",
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "RingBuffer_Init",
+          "params": [
+            "out_rb",
+            "buffer",
+            "size"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "RingBuffer_Reset",
+          "params": [
+            "rb"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "RingBuffer_Write",
+          "params": [
+            "rb",
+            "data",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "RingBuffer_Read",
+          "params": [
+            "rb",
+            "out_data",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "RingBuffer_Available",
+          "params": [
+            "rb"
+          ],
+          "returnType": "uint16_t",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "RingBuffer_Space",
+          "params": [
+            "rb"
+          ],
+          "returnType": "uint16_t",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "RingBuffer_IsEmpty",
+          "params": [
+            "rb"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "RingBuffer_IsFull",
+          "params": [
+            "rb"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ring_buffer.h",
+          "specifiers": [
+            "ring_buffer.h"
+          ]
+        }
+      ],
+      "exports": [
+        "RingBuffer_Init",
+        "RingBuffer_Reset",
+        "RingBuffer_Write",
+        "RingBuffer_Read",
+        "RingBuffer_Available",
+        "RingBuffer_Space",
+        "RingBuffer_IsEmpty",
+        "RingBuffer_IsFull"
+      ],
+      "totalLines": 126,
+      "hasStructuralAnalysis": true
+    },
+    "Common/ring_buffer.h": {
+      "filePath": "Common/ring_buffer.h",
+      "contentHash": "7fc8aa9cfe4530f1cbfa85cc5b804d9f416d4495ac95b704b5c2d716e8b62957",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 86,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/bootloader_ota.h": {
+      "filePath": "Core/Inc/bootloader_ota.h",
+      "contentHash": "cdec24e17f99c224c5b6d11057d72c647d87496c4b317cdf4ad73c2a7eee6df0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/crc.h": {
+      "filePath": "Core/Inc/crc.h",
+      "contentHash": "31293073b10e7d1c0194f936ec3d19b4b80327aaa9760a5272376d8385aa30f9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/dma.h": {
+      "filePath": "Core/Inc/dma.h",
+      "contentHash": "4800df9bb60edf45f266a060814fd4199270adcfe90c635f4a3d1d3fa10b4f3a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/FreeRTOSConfig.h": {
+      "filePath": "Core/Inc/FreeRTOSConfig.h",
+      "contentHash": "7122cf587e5df09d6f621f40af34a19ac04e8eb73dc2d3f73f02733bcd58d094",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 175,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/gpio.h": {
+      "filePath": "Core/Inc/gpio.h",
+      "contentHash": "92b391aae985f5b7b6fcbfc37daf922842a683a44045b4d55712007e860ec0ef",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/internal_flash.h": {
+      "filePath": "Core/Inc/internal_flash.h",
+      "contentHash": "976ba0b4939515fe419d01732cb893ed5b89cf244635f6511074f8d62b2d8c57",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/main.h": {
+      "filePath": "Core/Inc/main.h",
+      "contentHash": "7e143bf57a71b36095574d67552177240f257686d146e64d44d3ecce4f637d9b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 74,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/RTE_Components.h": {
+      "filePath": "Core/Inc/RTE_Components.h",
+      "contentHash": "75be3e0df1192707333d0592dcf416246b2ac36f94fa0367c8d9249c0bbc22d4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/stm32h7xx_hal_conf.h": {
+      "filePath": "Core/Inc/stm32h7xx_hal_conf.h",
+      "contentHash": "f318fe30867517a3aec92885381361988e2cf9c97106f6380f2c140a347210c2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 515,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/stm32h7xx_it.h": {
+      "filePath": "Core/Inc/stm32h7xx_it.h",
+      "contentHash": "bc24f49926a4daf37f45aa02feeb1926350f17a56b8cc1b01e31338f6d44d782",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 76,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/tim.h": {
+      "filePath": "Core/Inc/tim.h",
+      "contentHash": "14301febf2c5745a8a7c518a3ba445caaf3aa7d8fce1e340ced706912ea01a55",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 62,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Inc/usart.h": {
+      "filePath": "Core/Inc/usart.h",
+      "contentHash": "ee697bcd8d2bf922cdc63d732f2750df58005f7c06e077875924ca3b6159f001",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 70,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/bootloader_main.c": {
+      "filePath": "Core/Src/bootloader_main.c",
+      "contentHash": "f5293e1dd8cb702f9ccd1878274a07bfdcc0f71a970880b7f50901cfcdae7797",
+      "functions": [
+        {
+          "name": "main",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 39
+        },
+        {
+          "name": "Boot_IsRamAddress",
+          "params": [
+            "address"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "Boot_AppIsValid",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "Boot_DeInit",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 31
+        },
+        {
+          "name": "Boot_JumpToApp",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "MX_USART2_UART_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "HAL_UART_MspInit",
+          "params": [
+            "uartHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "SysTick_Handler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "SystemClock_Config",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "Error_Handler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "bootloader_ota.h",
+          "specifiers": [
+            "bootloader_ota.h"
+          ]
+        },
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        },
+        {
+          "source": "ota_layout.h",
+          "specifiers": [
+            "ota_layout.h"
+          ]
+        },
+        {
+          "source": "w25q128.h",
+          "specifiers": [
+            "w25q128.h"
+          ]
+        },
+        {
+          "source": "stdio.h",
+          "specifiers": [
+            "stdio.h"
+          ]
+        }
+      ],
+      "exports": [
+        "main",
+        "MX_USART2_UART_Init",
+        "HAL_UART_MspInit",
+        "SysTick_Handler",
+        "SystemClock_Config",
+        "Error_Handler"
+      ],
+      "totalLines": 300,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/bootloader_ota.c": {
+      "filePath": "Core/Src/bootloader_ota.c",
+      "contentHash": "c8784822818a8bfccd02a26d932c87f2d74e461ca1e6cc126902341d5bff5a09",
+      "functions": [
+        {
+          "name": "BootOTA_IsFirmwareSizeValid",
+          "params": [
+            "firmware_size"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "BootOTA_CalcW25Q128Md5",
+          "params": [
+            "address",
+            "size",
+            "out_md5"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 33
+        },
+        {
+          "name": "BootOTA_CalcInternalFlashMd5",
+          "params": [
+            "address",
+            "size",
+            "out_md5"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "BootOTA_WriteAppFlash",
+          "params": [
+            "firmware_size"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "BootOTA_TryInstall",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 60
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "bootloader_ota.h",
+          "specifiers": [
+            "bootloader_ota.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "internal_flash.h",
+          "specifiers": [
+            "internal_flash.h"
+          ]
+        },
+        {
+          "source": "md5.h",
+          "specifiers": [
+            "md5.h"
+          ]
+        },
+        {
+          "source": "ota_info.h",
+          "specifiers": [
+            "ota_info.h"
+          ]
+        },
+        {
+          "source": "ota_layout.h",
+          "specifiers": [
+            "ota_layout.h"
+          ]
+        },
+        {
+          "source": "w25q128.h",
+          "specifiers": [
+            "w25q128.h"
+          ]
+        }
+      ],
+      "exports": [
+        "BootOTA_TryInstall"
+      ],
+      "totalLines": 171,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/crc.c": {
+      "filePath": "Core/Src/crc.c",
+      "contentHash": "4fc62189707ce5c2e98568da7c2307a37a28806439c43dfac5498c2b10956151",
+      "functions": [
+        {
+          "name": "MX_CRC_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "HAL_CRC_MspInit",
+          "params": [
+            "crcHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "HAL_CRC_MspDeInit",
+          "params": [
+            "crcHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "crc.h",
+          "specifiers": [
+            "crc.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MX_CRC_Init",
+        "HAL_CRC_MspInit",
+        "HAL_CRC_MspDeInit"
+      ],
+      "totalLines": 92,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/dma.c": {
+      "filePath": "Core/Src/dma.c",
+      "contentHash": "bc378bb61bca89bd9ea68fea7da595cd5f636811aeff04b16f4c93115c25b2c9",
+      "functions": [
+        {
+          "name": "MX_DMA_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 21
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "dma.h",
+          "specifiers": [
+            "dma.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MX_DMA_Init"
+      ],
+      "totalLines": 65,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/freertos.c": {
+      "filePath": "Core/Src/freertos.c",
+      "contentHash": "b31afdbfdeb521baff6ab1fc6c347c6ec6dde0cd1e8ec341c2709f621461c313",
+      "functions": [
+        {
+          "name": "MX_FREERTOS_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 56
+        },
+        {
+          "name": "StartDefaultTask",
+          "params": [
+            "argument"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "StartTask1",
+          "params": [
+            "argument"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "StartTask2",
+          "params": [
+            "argument"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "FreeRTOS.h",
+          "specifiers": [
+            "FreeRTOS.h"
+          ]
+        },
+        {
+          "source": "task.h",
+          "specifiers": [
+            "task.h"
+          ]
+        },
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        },
+        {
+          "source": "FreeRTOS.h",
+          "specifiers": [
+            "FreeRTOS.h"
+          ]
+        },
+        {
+          "source": "cmsis_os2.h",
+          "specifiers": [
+            "cmsis_os2.h"
+          ]
+        },
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
+        },
+        {
+          "source": "semphr.h",
+          "specifiers": [
+            "semphr.h"
+          ]
+        },
+        {
+          "source": "cloud_task.h",
+          "specifiers": [
+            "cloud_task.h"
+          ]
+        },
+        {
+          "source": "motion_task.h",
+          "specifiers": [
+            "motion_task.h"
+          ]
+        },
+        {
+          "source": "lt_screen_task.h",
+          "specifiers": [
+            "lt_screen_task.h"
+          ]
+        },
+        {
+          "source": "uart7_role.h",
+          "specifiers": [
+            "uart7_role.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MX_FREERTOS_Init",
+        "StartDefaultTask",
+        "StartTask1",
+        "StartTask2"
+      ],
+      "totalLines": 212,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/gpio.c": {
+      "filePath": "Core/Src/gpio.c",
+      "contentHash": "265ee0c59baf1e038d0a2e5ec98204992f95c7247f8075c12888c44cf4edd72e",
+      "functions": [
+        {
+          "name": "MX_GPIO_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "gpio.h",
+          "specifiers": [
+            "gpio.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MX_GPIO_Init"
+      ],
+      "totalLines": 54,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/internal_flash.c": {
+      "filePath": "Core/Src/internal_flash.c",
+      "contentHash": "78b2eff269309baea02933628bdbadee17d2a3fa75fc7d0d1e5dedb996e7eef9",
+      "functions": [
+        {
+          "name": "InternalFlash_GetBankSector",
+          "params": [
+            "address",
+            "bank",
+            "sector"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "InternalFlash_EraseSector",
+          "params": [
+            "bank",
+            "sector"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "InternalFlash_EraseAppArea",
+          "params": [
+            "app_start",
+            "app_size"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 38
+        },
+        {
+          "name": "InternalFlash_Write",
+          "params": [
+            "address",
+            "data",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 58
+        },
+        {
+          "name": "InternalFlash_Verify",
+          "params": [
+            "address",
+            "data",
+            "length"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "internal_flash.h",
+          "specifiers": [
+            "internal_flash.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        },
+        {
+          "source": "ota_layout.h",
+          "specifiers": [
+            "ota_layout.h"
+          ]
+        }
+      ],
+      "exports": [
+        "InternalFlash_EraseAppArea",
+        "InternalFlash_Write",
+        "InternalFlash_Verify"
+      ],
+      "totalLines": 163,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/main.c": {
+      "filePath": "Core/Src/main.c",
+      "contentHash": "a46492dd6ac43d1d1368d9a75b217eb3053b73c4157dfa613c28ce029f119c61",
+      "functions": [
+        {
+          "name": "main",
+          "params": [],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 79
+        },
+        {
+          "name": "SystemClock_Config",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 53
+        },
+        {
+          "name": "MPU_Config",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "HAL_TIM_PeriodElapsedCallback",
+          "params": [
+            "htim"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "Error_Handler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        },
+        {
+          "source": "FreeRTOS.h",
+          "specifiers": [
+            "FreeRTOS.h"
+          ]
+        },
+        {
+          "source": "cmsis_os2.h",
+          "specifiers": [
+            "cmsis_os2.h"
+          ]
+        },
+        {
+          "source": "crc.h",
+          "specifiers": [
+            "crc.h"
+          ]
+        },
+        {
+          "source": "dma.h",
+          "specifiers": [
+            "dma.h"
+          ]
+        },
+        {
+          "source": "tim.h",
+          "specifiers": [
+            "tim.h"
+          ]
+        },
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
+        },
+        {
+          "source": "gpio.h",
+          "specifiers": [
+            "gpio.h"
+          ]
+        },
+        {
+          "source": "app_x-cube-ai.h",
+          "specifiers": [
+            "app_x-cube-ai.h"
+          ]
+        },
+        {
+          "source": "w25q128.h",
+          "specifiers": [
+            "w25q128.h"
+          ]
+        },
+        {
+          "source": "./usart/yuanzi_usart.h",
+          "specifiers": [
+            "./usart/yuanzi_usart.h"
+          ]
+        },
+        {
+          "source": "debug_uart7.h",
+          "specifiers": [
+            "debug_uart7.h"
+          ]
+        },
+        {
+          "source": "./delay/delay.h",
+          "specifiers": [
+            "./delay/delay.h"
+          ]
+        }
+      ],
+      "exports": [
+        "main",
+        "SystemClock_Config",
+        "MPU_Config",
+        "HAL_TIM_PeriodElapsedCallback",
+        "Error_Handler"
+      ],
+      "totalLines": 299,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/stm32h7xx_hal_msp.c": {
+      "filePath": "Core/Src/stm32h7xx_hal_msp.c",
+      "contentHash": "f52b96f949f89758351748ac4dbc83c58307b04fc766eabca317012d73783cd2",
+      "functions": [
+        {
+          "name": "HAL_MspInit",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        }
+      ],
+      "exports": [
+        "HAL_MspInit"
+      ],
+      "totalLines": 83,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/stm32h7xx_hal_timebase_tim.c": {
+      "filePath": "Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "contentHash": "fa8835ed66d055f2b556089acf4a8930b621a9b7d038279ea6c5b2dcc1a18923",
+      "functions": [
+        {
+          "name": "HAL_InitTick",
+          "params": [
+            "TickPriority"
+          ],
+          "returnType": "HAL_StatusTypeDef",
+          "exported": true,
+          "lineCount": 57
+        },
+        {
+          "name": "HAL_SuspendTick",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "HAL_ResumeTick",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "stm32h7xx_hal.h",
+          "specifiers": [
+            "stm32h7xx_hal.h"
+          ]
+        },
+        {
+          "source": "stm32h7xx_hal_tim.h",
+          "specifiers": [
+            "stm32h7xx_hal_tim.h"
+          ]
+        }
+      ],
+      "exports": [
+        "HAL_InitTick",
+        "HAL_SuspendTick",
+        "HAL_ResumeTick"
+      ],
+      "totalLines": 123,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/stm32h7xx_it.c": {
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "contentHash": "3c7e571fceb5a69468a7c9b3a14f032d8d7c8628ab1bfa48d2caf6fedc751e75",
+      "functions": [
+        {
+          "name": "NMI_Handler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "HardFault_Handler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "MemManage_Handler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "BusFault_Handler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "UsageFault_Handler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "DebugMon_Handler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "DMA1_Stream0_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "DMA1_Stream1_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "DMA1_Stream2_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "DMA1_Stream3_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "TIM1_UP_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "TIM2_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "USART1_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "USART2_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "USART3_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "UART4_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "USART6_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "UART7_IRQHandler",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "motion_uart4_handle_command",
+          "params": [
+            "buf",
+            "len"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 47
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "main.h",
+          "specifiers": [
+            "main.h"
+          ]
+        },
+        {
+          "source": "stm32h7xx_it.h",
+          "specifiers": [
+            "stm32h7xx_it.h"
+          ]
+        },
+        {
+          "source": "./usart/yuanzi_usart.h",
+          "specifiers": [
+            "./usart/yuanzi_usart.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        },
+        {
+          "source": "ctype.h",
+          "specifiers": [
+            "ctype.h"
+          ]
+        },
+        {
+          "source": "stdint.h",
+          "specifiers": [
+            "stdint.h"
+          ]
+        },
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
+        },
+        {
+          "source": "motion_input.h",
+          "specifiers": [
+            "motion_input.h"
+          ]
+        },
+        {
+          "source": "motion_sensor_pipeline.h",
+          "specifiers": [
+            "motion_sensor_pipeline.h"
+          ]
+        }
+      ],
+      "exports": [
+        "NMI_Handler",
+        "HardFault_Handler",
+        "MemManage_Handler",
+        "BusFault_Handler",
+        "UsageFault_Handler",
+        "DebugMon_Handler",
+        "DMA1_Stream0_IRQHandler",
+        "DMA1_Stream1_IRQHandler",
+        "DMA1_Stream2_IRQHandler",
+        "DMA1_Stream3_IRQHandler",
+        "TIM1_UP_IRQHandler",
+        "TIM2_IRQHandler",
+        "USART1_IRQHandler",
+        "USART2_IRQHandler",
+        "USART3_IRQHandler",
+        "UART4_IRQHandler",
+        "USART6_IRQHandler",
+        "UART7_IRQHandler"
+      ],
+      "totalLines": 469,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/system_stm32h7xx.c": {
+      "filePath": "Core/Src/system_stm32h7xx.c",
+      "contentHash": "929282f9aae4fcf001589fc3844e944987cd0a9aec9d43e9838e884d93281b23",
+      "functions": [
+        {
+          "name": "SystemInit",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 136
+        },
+        {
+          "name": "SystemCoreClockUpdate",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 98
+        },
+        {
+          "name": "ExitRun0Mode",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 69
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "stm32h7xx.h",
+          "specifiers": [
+            "stm32h7xx.h"
+          ]
+        },
+        {
+          "source": "math.h",
+          "specifiers": [
+            "math.h"
+          ]
+        }
+      ],
+      "exports": [
+        "SystemInit",
+        "SystemCoreClockUpdate",
+        "ExitRun0Mode"
+      ],
+      "totalLines": 557,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/tim.c": {
+      "filePath": "Core/Src/tim.c",
+      "contentHash": "b546a7640952836c20400b25619d02e89bedfe8f104e9580d7be131a84b3c419",
+      "functions": [
+        {
+          "name": "Servo_AngleToPulseUs",
+          "params": [
+            "angle_deg"
+          ],
+          "returnType": "uint32_t",
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "Servo_SetChannelAngleDeg",
+          "params": [
+            "channel",
+            "angle_deg"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "MX_TIM2_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 39
+        },
+        {
+          "name": "MX_TIM3_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 48
+        },
+        {
+          "name": "HAL_TIM_Base_MspInit",
+          "params": [
+            "tim_baseHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "HAL_TIM_PWM_MspInit",
+          "params": [
+            "tim_pwmHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "HAL_TIM_Base_MspDeInit",
+          "params": [
+            "tim_baseHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "HAL_TIM_PWM_MspDeInit",
+          "params": [
+            "tim_pwmHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "HAL_TIM_MspPostInit",
+          "params": [
+            "timHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "Servo_DoorInit",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "Servo_SetAngleDeg",
+          "params": [
+            "angle_deg"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "Servo_SetDoorOpen",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "Servo_SetDoorClosed",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "Servo_SetDoorByCloudValue",
+          "params": [
+            "open_value"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "Servo_GetDoorState",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "tim.h",
+          "specifiers": [
+            "tim.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MX_TIM2_Init",
+        "MX_TIM3_Init",
+        "HAL_TIM_Base_MspInit",
+        "HAL_TIM_PWM_MspInit",
+        "HAL_TIM_Base_MspDeInit",
+        "HAL_TIM_PWM_MspDeInit",
+        "HAL_TIM_MspPostInit",
+        "Servo_DoorInit",
+        "Servo_SetAngleDeg",
+        "Servo_SetDoorOpen",
+        "Servo_SetDoorClosed",
+        "Servo_SetDoorByCloudValue",
+        "Servo_GetDoorState"
+      ],
+      "totalLines": 323,
+      "hasStructuralAnalysis": true
+    },
+    "Core/Src/usart.c": {
+      "filePath": "Core/Src/usart.c",
+      "contentHash": "8066ccaebd766a172ff28f6f0e8e000fc52d96f4545319cd146daf673de5de86",
+      "functions": [
+        {
+          "name": "USART6_FeedRxDmaRing",
+          "params": [
+            "dma_pos",
+            "event_type"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 38
+        },
+        {
+          "name": "MX_UART4_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 42
+        },
+        {
+          "name": "MX_USART1_UART_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 43
+        },
+        {
+          "name": "MX_USART2_UART_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 42
+        },
+        {
+          "name": "MX_USART3_UART_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 42
+        },
+        {
+          "name": "MX_USART6_UART_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 50
+        },
+        {
+          "name": "MX_UART7_Init",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 41
+        },
+        {
+          "name": "HAL_UART_MspInit",
+          "params": [
+            "uartHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 304
+        },
+        {
+          "name": "HAL_UART_MspDeInit",
+          "params": [
+            "uartHandle"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 136
+        },
+        {
+          "name": "HAL_UART_RxCpltCallback",
+          "params": [
+            "huart"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "HAL_UARTEx_RxEventCallback",
+          "params": [
+            "huart",
+            "Size"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
+        },
+        {
+          "source": "./usart/yuanzi_usart.h",
+          "specifiers": [
+            "./usart/yuanzi_usart.h"
+          ]
+        },
+        {
+          "source": "ESP8266.h",
+          "specifiers": [
+            "ESP8266.h"
+          ]
+        },
+        {
+          "source": "lt168b.h",
+          "specifiers": [
+            "lt168b.h"
+          ]
+        },
+        {
+          "source": "string.h",
+          "specifiers": [
+            "string.h"
+          ]
+        }
+      ],
+      "exports": [
+        "MX_UART4_Init",
+        "MX_USART1_UART_Init",
+        "MX_USART2_UART_Init",
+        "MX_USART3_UART_Init",
+        "MX_USART6_UART_Init",
+        "MX_UART7_Init",
+        "HAL_UART_MspInit",
+        "HAL_UART_MspDeInit",
+        "HAL_UART_RxCpltCallback",
+        "HAL_UARTEx_RxEventCallback"
+      ],
+      "totalLines": 832,
+      "hasStructuralAnalysis": true
+    },
+    "docs/2026-05-31-H743项目脉络补充.md": {
+      "filePath": "docs/2026-05-31-H743项目脉络补充.md",
+      "contentHash": "cdb02f3e7fb1e1d8dde51e868bdb4b88cdbcec39ea6169178a3d553e12fbe632",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 446,
+      "hasStructuralAnalysis": true
+    },
+    "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx": {
+      "filePath": "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "contentHash": "4db851f4ea3dbb41661ddfb4de0086d0b2a53b53b98239a7236ec05b3dd61cdb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": false
+    },
+    "docs/H743资料包/note/参考手册重点部分.md": {
+      "filePath": "docs/H743资料包/note/参考手册重点部分.md",
+      "contentHash": "ad91649dee23e32186681c82a4723a9654c24c011fedf7793b631d7b73c501f8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 457,
+      "hasStructuralAnalysis": true
+    },
+    "docs/H743资料包/note/快速上手.md": {
+      "filePath": "docs/H743资料包/note/快速上手.md",
+      "contentHash": "6199f8d2afc2886ba06e4bc4d3833700a2d3a71db24c3ffe2786708ab42b3095",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1050,
+      "hasStructuralAnalysis": true
+    },
+    "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md": {
+      "filePath": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+      "contentHash": "c5ce8c5ef4a672b5d65528de5da3020aa1b2424543c4d5c4baf192e1de5a5927",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 304,
+      "hasStructuralAnalysis": true
+    },
+    "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx": {
+      "filePath": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+      "contentHash": "7a57ca004a1a7930fb885c1348ea2fd51d81ebcbe76353b8bdbc911546843478",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 106,
+      "hasStructuralAnalysis": false
+    },
+    "docs/lt168b_ota_mqtt_change_plan_2026-06-25.md": {
+      "filePath": "docs/lt168b_ota_mqtt_change_plan_2026-06-25.md",
+      "contentHash": "29ae32ae0ee6dc45173fae8b90c0886e9d57b68576afb4ef593d71abe4d61017",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 179,
+      "hasStructuralAnalysis": true
+    },
+    "docs/W25Q128_Bootloader_App_第一版最小跑通方案.md": {
+      "filePath": "docs/W25Q128_Bootloader_App_第一版最小跑通方案.md",
+      "contentHash": "aed98eff86f36ef300f245a813de73fd1a55020140063937d276718b4becc68f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 371,
+      "hasStructuralAnalysis": true
+    },
+    "LICENSE_X-CUBE-AI.txt": {
+      "filePath": "LICENSE_X-CUBE-AI.txt",
+      "contentHash": "5db16866e0d240442f8382ee5b76eac16ed02912fd51ef2be55817b7cadd703b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 87,
+      "hasStructuralAnalysis": false
+    },
+    "Master.ioc": {
+      "filePath": "Master.ioc",
+      "contentHash": "9fa984c1f2acaeb0aea3d24b25356eda8158be5ddccb7b790746614aeed88145",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 568,
+      "hasStructuralAnalysis": false
+    },
+    "SYSTEM/delay/delay.c": {
+      "filePath": "SYSTEM/delay/delay.c",
+      "contentHash": "97e24d6aa9205a9fad40e23350da943a57ad4b2d1e251d5a2997a5c2886164c5",
+      "functions": [
+        {
+          "name": "delay_init",
+          "params": [
+            "sysclk"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./sys/sys.h",
+          "specifiers": [
+            "./sys/sys.h"
+          ]
+        },
+        {
+          "source": "./delay/delay.h",
+          "specifiers": [
+            "./delay/delay.h"
+          ]
+        }
+      ],
+      "exports": [
+        "delay_init"
+      ],
+      "totalLines": 201,
+      "hasStructuralAnalysis": true
+    },
+    "SYSTEM/delay/delay.h": {
+      "filePath": "SYSTEM/delay/delay.h",
+      "contentHash": "2511f6d6ecd3e8476dd309da9d2ee28e4fa4b851ac4d339cbe303b8830c396a0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": true
+    },
+    "SYSTEM/readme.txt": {
+      "filePath": "SYSTEM/readme.txt",
+      "contentHash": "cd4f44b9c8b014695004c46b2c15242bb9d865dcd81e57d1c7dc30354a55edaa",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": false
+    },
+    "SYSTEM/sys/sys.c": {
+      "filePath": "SYSTEM/sys/sys.c",
+      "contentHash": "e89311456abf02492f4f332cf1216499d3dc1def51a06eb72d9c5eed8dfd3e49",
+      "functions": [
+        {
+          "name": "get_icahce_sta",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "get_dcahce_sta",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "sys_nvic_set_vector_table",
+          "params": [
+            "baseaddr",
+            "offset"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "sys_wfi_set",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "sys_intx_disable",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "sys_intx_enable",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "sys_msr_msp",
+          "params": [
+            "addr"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "sys_cache_enable",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "sys_stm32_clock_init",
+          "params": [
+            "plln",
+            "pllm",
+            "pllp",
+            "pllq"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 67
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./sys/sys.h",
+          "specifiers": [
+            "./sys/sys.h"
+          ]
+        }
+      ],
+      "exports": [
+        "get_icahce_sta",
+        "get_dcahce_sta",
+        "sys_nvic_set_vector_table",
+        "sys_wfi_set",
+        "sys_intx_disable",
+        "sys_intx_enable",
+        "sys_msr_msp",
+        "sys_cache_enable",
+        "sys_stm32_clock_init"
+      ],
+      "totalLines": 237,
+      "hasStructuralAnalysis": true
+    },
+    "SYSTEM/sys/sys.h": {
+      "filePath": "SYSTEM/sys/sys.h",
+      "contentHash": "90993ff02a49d80319bab7648efc622621a8177864399f7f2618a1b458ac765e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 60,
+      "hasStructuralAnalysis": true
+    },
+    "SYSTEM/usart/yuanzi_usart.c": {
+      "filePath": "SYSTEM/usart/yuanzi_usart.c",
+      "contentHash": "3a1bbcaf4559775121a949b2a2430a4e2ca89d5e3b53d07cb1ab9602f83e5b9c",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./sys/sys.h",
+          "specifiers": [
+            "./sys/sys.h"
+          ]
+        },
+        {
+          "source": "./usart/yuanzi_usart.h",
+          "specifiers": [
+            "./usart/yuanzi_usart.h"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 197,
+      "hasStructuralAnalysis": true
+    },
+    "SYSTEM/usart/yuanzi_usart.h": {
+      "filePath": "SYSTEM/usart/yuanzi_usart.h",
+      "contentHash": "e1969a36c425b9b768e504c93598a8e7ed9eef612d05a1cc4283cd1632427b06",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 78,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

@@ -458,6 +458,7 @@ static void task1_output_single_once_event(
   int32_t test_value = 0;
   uint64_t ts_ms;
   uint8_t infer_changed;
+  uint8_t has_valid_cloud_test = 0U;
   uint8_t should_update_train_display = 0U;
 
   if ((frame == NULL) || (result == NULL))
@@ -511,6 +512,7 @@ static void task1_output_single_once_event(
     /* 识别完成后只排队上报，实际 MQTT 发送由低优先级网络任务处理。 */
     if (OneNet_TakeLastValidTestValue(&test_value) != 0U)
     {
+      has_valid_cloud_test = 1U;
       MotionEvents_QueueTestConfidence(test_value, result->top1_prob_avg);
 
       action_kind_value = task1_encode_action_kind_value(test_value);
@@ -533,24 +535,18 @@ static void task1_output_single_once_event(
     }
 
     should_update_train_display =
+      (has_valid_cloud_test != 0U) &&
       ((result->final_label == MOTION_LABEL_ELBOW_FLEX) ||
        (result->final_label == MOTION_LABEL_FRONT_RAISE) ||
        (result->final_label == MOTION_LABEL_SIDE_RAISE) ||
        (result->final_label == MOTION_LABEL_SHOULDER_RAISE)) &&
       (((action_kind_value / 10) % 10) != 0) ? 1U : 0U;
 
-    if ((result->final_label == MOTION_LABEL_ELBOW_FLEX) ||
-        (result->final_label == MOTION_LABEL_FRONT_RAISE) ||
-        (result->final_label == MOTION_LABEL_SIDE_RAISE) ||
-        (result->final_label == MOTION_LABEL_SHOULDER_RAISE))
+    if (should_update_train_display != 0U)
     {
 #if APP_UART7_IS_SCREEN && APP_SCREEN_IS_HEALTH_MONITOR
       MotionEvents_RequestTrainingPageRefreshByAction((int32_t)result->final_label);
 #endif
-    }
-
-    if (should_update_train_display != 0U)
-    {
       OneNet_UpdateTrainDisplayByAction((int32_t)result->final_label);
     }
     else

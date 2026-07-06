@@ -150,11 +150,15 @@ uint8_t MotionAi_IsLocalFallTriggerEnabled(void)
 
 void MotionAi_SetDemoOverride(int32_t test_value, int32_t action_id, int32_t score)
 {
+  uint8_t was_active = g_motion_ai_demo.active;
+
   if (g_motion_ai_demo.active != 0U)
   {
-    Debug_Printf("[MOTION][DEMO][WARN] active session keeps current target, ignore new test=%ld\r\n",
+    motion_ai_reset_smoothing_history();
+    g_motion_ai.result.infer_count = 0U;
+    g_motion_ai.result.test_done = 0U;
+    Debug_Printf("[MOTION][DEMO] active target replaced by latest test=%ld\r\n",
                  (long)test_value);
-    return;
   }
 
   g_motion_ai_demo.pending = 1U;
@@ -168,6 +172,10 @@ void MotionAi_SetDemoOverride(int32_t test_value, int32_t action_id, int32_t sco
                (long)action_id,
                (long)score,
                MotionAi_LabelName(motion_ai_action_id_to_label(action_id)));
+  if (was_active != 0U)
+  {
+    Debug_Printf("[MOTION][DEMO] smoothing reset for latest test\r\n");
+  }
 }
 
 void MotionAi_ClearDemoOverride(void)
@@ -1082,7 +1090,12 @@ static void motion_ai_apply_demo_override(uint8_t infer_index,
     return;
   }
 
-  if (g_motion_ai_demo.score <= 0)
+  if ((g_motion_ai_demo.action_id == 1) && (g_motion_ai_demo.score <= 0))
+  {
+    /* 10 明确表示静止，不按低分动作降成 unknown。 */
+    target_prob = k_target_good[slot];
+  }
+  else if (g_motion_ai_demo.score <= 0)
   {
     target_prob = k_target_poor[slot];
   }

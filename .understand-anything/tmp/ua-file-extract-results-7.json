@@ -1,0 +1,89 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "Agents.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 67,
+      "nonEmptyLines": 57,
+      "sections": [
+        {
+          "heading": "代码规范",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "开发原则",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "适用范围",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "文件命名",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "函数命名",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "参数命名",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "变量命名",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "返回值",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "注释",
+          "level": 2,
+          "line": 49
+        },
+        {
+          "heading": "总体要求",
+          "level": 2,
+          "line": 65
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "LICENSE_X-CUBE-AI.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 86,
+      "nonEmptyLines": 69,
+      "metrics": {}
+    },
+    {
+      "path": "说明文档.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "metrics": {}
+    }
+  ]
+}

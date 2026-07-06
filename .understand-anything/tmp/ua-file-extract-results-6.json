@@ -1,0 +1,123 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "BSP/debug_uart/debug_uart7.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 135,
+      "nonEmptyLines": 107,
+      "callGraph": [
+        {
+          "caller": "Debug_Uart7_Write",
+          "callee": "HAL_UART_Transmit",
+          "lineNumber": 21
+        },
+        {
+          "caller": "Debug_Write",
+          "callee": "Debug_Uart7_Write",
+          "lineNumber": 31
+        },
+        {
+          "caller": "Debug_Uart7_WriteString",
+          "callee": "Debug_Write",
+          "lineNumber": 41
+        },
+        {
+          "caller": "Debug_Uart7_WriteString",
+          "callee": "strlen",
+          "lineNumber": 41
+        },
+        {
+          "caller": "Debug_Printf",
+          "callee": "va_start",
+          "lineNumber": 55
+        },
+        {
+          "caller": "Debug_Printf",
+          "callee": "vsnprintf",
+          "lineNumber": 56
+        },
+        {
+          "caller": "Debug_Printf",
+          "callee": "va_end",
+          "lineNumber": 57
+        },
+        {
+          "caller": "Debug_Printf",
+          "callee": "Debug_Write",
+          "lineNumber": 69
+        },
+        {
+          "caller": "Debug_LogEspTx",
+          "callee": "Debug_Printf",
+          "lineNumber": 76
+        },
+        {
+          "caller": "Debug_LogEspTx",
+          "callee": "Debug_Printf",
+          "lineNumber": 80
+        },
+        {
+          "caller": "Debug_LogEspRx",
+          "callee": "Debug_Printf",
+          "lineNumber": 87
+        },
+        {
+          "caller": "Debug_LogEspRx",
+          "callee": "Debug_Uart7_WriteString",
+          "lineNumber": 91
+        },
+        {
+          "caller": "Debug_LogEspRx",
+          "callee": "Debug_Write",
+          "lineNumber": 92
+        },
+        {
+          "caller": "Debug_LogEspRx",
+          "callee": "Debug_Uart7_WriteString",
+          "lineNumber": 96
+        },
+        {
+          "caller": "Debug_LogBio",
+          "callee": "Debug_Printf",
+          "lineNumber": 102
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "BSP/debug_uart/debug_uart7.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 12,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "BSP/debug_uart/uart7_role.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 48,
+      "nonEmptyLines": 37,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

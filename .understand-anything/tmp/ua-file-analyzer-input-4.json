@@ -1,0 +1,40 @@
+{
+  "projectRoot": "D:/Qian Start/Smart Watch/H743",
+  "batchFiles": [
+    {
+      "path": "BSP/cloud/MqttKit.c",
+      "language": "c",
+      "sizeLines": 520,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/cloud/MqttKit.h",
+      "language": "c",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/cloud/onenet.c",
+      "language": "c",
+      "sizeLines": 1394,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/cloud/onenet.h",
+      "language": "c",
+      "sizeLines": 109,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "BSP/cloud/MqttKit.c": [
+      "BSP/cloud/MqttKit.h"
+    ],
+    "BSP/cloud/MqttKit.h": [],
+    "BSP/cloud/onenet.c": [
+      "BSP/cloud/MqttKit.h",
+      "BSP/cloud/onenet.h"
+    ],
+    "BSP/cloud/onenet.h": []
+  }
+}

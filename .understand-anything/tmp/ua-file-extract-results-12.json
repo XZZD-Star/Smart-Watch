@@ -1,0 +1,250 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "SYSTEM/delay/delay.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 31,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "SYSTEM/readme.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 21,
+      "nonEmptyLines": 18,
+      "metrics": {}
+    },
+    {
+      "path": "SYSTEM/sys/sys.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 236,
+      "nonEmptyLines": 213,
+      "functions": [
+        {
+          "name": "get_icahce_sta",
+          "startLine": 33,
+          "endLine": 38,
+          "params": []
+        },
+        {
+          "name": "get_dcahce_sta",
+          "startLine": 45,
+          "endLine": 50,
+          "params": []
+        },
+        {
+          "name": "sys_nvic_set_vector_table",
+          "startLine": 58,
+          "endLine": 62,
+          "params": [
+            "baseaddr",
+            "offset"
+          ]
+        },
+        {
+          "name": "sys_wfi_set",
+          "startLine": 69,
+          "endLine": 72,
+          "params": []
+        },
+        {
+          "name": "sys_intx_disable",
+          "startLine": 79,
+          "endLine": 82,
+          "params": []
+        },
+        {
+          "name": "sys_intx_enable",
+          "startLine": 89,
+          "endLine": 92,
+          "params": []
+        },
+        {
+          "name": "sys_msr_msp",
+          "startLine": 100,
+          "endLine": 103,
+          "params": [
+            "addr"
+          ]
+        },
+        {
+          "name": "sys_cache_enable",
+          "startLine": 110,
+          "endLine": 115,
+          "params": []
+        },
+        {
+          "name": "sys_stm32_clock_init",
+          "startLine": 149,
+          "endLine": 215,
+          "params": [
+            "plln",
+            "pllm",
+            "pllp",
+            "pllq"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "get_icahce_sta",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "get_dcahce_sta",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "sys_nvic_set_vector_table",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "sys_wfi_set",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "sys_intx_disable",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "sys_intx_enable",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "sys_msr_msp",
+          "line": 100,
+          "isDefault": false
+        },
+        {
+          "name": "sys_cache_enable",
+          "line": 110,
+          "isDefault": false
+        },
+        {
+          "name": "sys_stm32_clock_init",
+          "line": 149,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "sys_msr_msp",
+          "callee": "__set_MSP",
+          "lineNumber": 102
+        },
+        {
+          "caller": "sys_cache_enable",
+          "callee": "SCB_EnableICache",
+          "lineNumber": 112
+        },
+        {
+          "caller": "sys_cache_enable",
+          "callee": "SCB_EnableDCache",
+          "lineNumber": 113
+        },
+        {
+          "caller": "sys_stm32_clock_init",
+          "callee": "MODIFY_REG",
+          "lineNumber": 155
+        },
+        {
+          "caller": "sys_stm32_clock_init",
+          "callee": "__HAL_PWR_VOLTAGESCALING_CONFIG",
+          "lineNumber": 156
+        },
+        {
+          "caller": "sys_stm32_clock_init",
+          "callee": "HAL_RCC_OscConfig",
+          "lineNumber": 174
+        },
+        {
+          "caller": "sys_stm32_clock_init",
+          "callee": "HAL_RCC_ClockConfig",
+          "lineNumber": 204
+        },
+        {
+          "caller": "sys_stm32_clock_init",
+          "callee": "HAL_PWREx_EnableUSBVoltageDetector",
+          "lineNumber": 210
+        },
+        {
+          "caller": "sys_stm32_clock_init",
+          "callee": "__HAL_RCC_CSI_ENABLE",
+          "lineNumber": 211
+        },
+        {
+          "caller": "sys_stm32_clock_init",
+          "callee": "__HAL_RCC_SYSCFG_CLK_ENABLE",
+          "lineNumber": 212
+        },
+        {
+          "caller": "sys_stm32_clock_init",
+          "callee": "HAL_EnableCompensationCell",
+          "lineNumber": 213
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 9,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "SYSTEM/sys/sys.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 47,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "SYSTEM/usart/yuanzi_usart.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 196,
+      "nonEmptyLines": 159,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "SYSTEM/usart/yuanzi_usart.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 77,
+      "nonEmptyLines": 58,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

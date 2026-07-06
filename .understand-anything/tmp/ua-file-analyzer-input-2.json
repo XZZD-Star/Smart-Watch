@@ -1,0 +1,74 @@
+{
+  "projectRoot": "D:/Qian Start/Smart Watch/H743",
+  "batchFiles": [
+    {
+      "path": "Common/crc16.c",
+      "language": "c",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/crc16.h",
+      "language": "c",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/md5.c",
+      "language": "c",
+      "sizeLines": 241,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/md5.h",
+      "language": "c",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/ota_device_info.c",
+      "language": "c",
+      "sizeLines": 196,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/ota_device_info.h",
+      "language": "c",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/ota_info.c",
+      "language": "c",
+      "sizeLines": 150,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/ota_info.h",
+      "language": "c",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "Common/crc16.c": [
+      "Common/crc16.h"
+    ],
+    "Common/crc16.h": [],
+    "Common/md5.c": [
+      "Common/md5.h"
+    ],
+    "Common/md5.h": [],
+    "Common/ota_device_info.c": [
+      "Common/crc16.h",
+      "Common/ota_device_info.h"
+    ],
+    "Common/ota_device_info.h": [],
+    "Common/ota_info.c": [
+      "Common/crc16.h",
+      "Common/md5.h",
+      "Common/ota_info.h"
+    ],
+    "Common/ota_info.h": []
+  }
+}

@@ -1,0 +1,1050 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "Common/crc16.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "CRC16_Init",
+          "startLine": 6,
+          "endLine": 9,
+          "params": []
+        },
+        {
+          "name": "CRC16_Update",
+          "startLine": 11,
+          "endLine": 39,
+          "params": [
+            "crc",
+            "data",
+            "length"
+          ]
+        },
+        {
+          "name": "CRC16_Calculate",
+          "startLine": 41,
+          "endLine": 44,
+          "params": [
+            "data",
+            "length"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CRC16_Init",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "CRC16_Update",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "CRC16_Calculate",
+          "line": 41,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CRC16_Calculate",
+          "callee": "CRC16_Update",
+          "lineNumber": 43
+        },
+        {
+          "caller": "CRC16_Calculate",
+          "callee": "CRC16_Init",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Common/crc16.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 13,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Common/md5.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 241,
+      "nonEmptyLines": 208,
+      "functions": [
+        {
+          "name": "MD5_DecodeWord",
+          "startLine": 19,
+          "endLine": 25,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "MD5_EncodeWord",
+          "startLine": 27,
+          "endLine": 33,
+          "params": [
+            "value",
+            "output"
+          ]
+        },
+        {
+          "name": "MD5_Transform",
+          "startLine": 35,
+          "endLine": 121,
+          "params": [
+            "state",
+            "block"
+          ]
+        },
+        {
+          "name": "MD5_Init",
+          "startLine": 123,
+          "endLine": 137,
+          "params": [
+            "ctx"
+          ]
+        },
+        {
+          "name": "MD5_Update",
+          "startLine": 139,
+          "endLine": 172,
+          "params": [
+            "ctx",
+            "data",
+            "length"
+          ]
+        },
+        {
+          "name": "MD5_Final",
+          "startLine": 174,
+          "endLine": 200,
+          "params": [
+            "ctx",
+            "digest"
+          ]
+        },
+        {
+          "name": "MD5_ToHex",
+          "startLine": 202,
+          "endLine": 218,
+          "params": [
+            "digest",
+            "out_hex"
+          ]
+        },
+        {
+          "name": "MD5_IsHexString",
+          "startLine": 220,
+          "endLine": 241,
+          "params": [
+            "text"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MD5_Init",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "MD5_Update",
+          "line": 139,
+          "isDefault": false
+        },
+        {
+          "name": "MD5_Final",
+          "line": 174,
+          "isDefault": false
+        },
+        {
+          "name": "MD5_ToHex",
+          "line": 202,
+          "isDefault": false
+        },
+        {
+          "name": "MD5_IsHexString",
+          "line": 220,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_DecodeWord",
+          "lineNumber": 46
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 49
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 50
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 51
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 52
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 53
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 54
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 55
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 56
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 57
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 58
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 59
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 60
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 61
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 62
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 63
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 64
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 66
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 67
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 68
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 69
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 70
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 71
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 72
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 73
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 74
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 75
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 76
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 77
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 78
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 79
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 80
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 81
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 83
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 84
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 85
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 86
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 87
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 88
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 89
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 90
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 91
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 92
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 93
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 94
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 95
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 96
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 97
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 98
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 100
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 101
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 102
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 103
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 104
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 105
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 106
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 107
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 108
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 109
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 110
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 111
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 112
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 113
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 114
+        },
+        {
+          "caller": "MD5_Transform",
+          "callee": "MD5_STEP",
+          "lineNumber": 115
+        },
+        {
+          "caller": "MD5_Init",
+          "callee": "memset",
+          "lineNumber": 136
+        },
+        {
+          "caller": "MD5_Update",
+          "callee": "memcpy",
+          "lineNumber": 161
+        },
+        {
+          "caller": "MD5_Update",
+          "callee": "MD5_Transform",
+          "lineNumber": 162
+        },
+        {
+          "caller": "MD5_Update",
+          "callee": "MD5_Transform",
+          "lineNumber": 166
+        },
+        {
+          "caller": "MD5_Update",
+          "callee": "memcpy",
+          "lineNumber": 171
+        },
+        {
+          "caller": "MD5_Final",
+          "callee": "MD5_EncodeWord",
+          "lineNumber": 186
+        },
+        {
+          "caller": "MD5_Final",
+          "callee": "MD5_EncodeWord",
+          "lineNumber": 187
+        },
+        {
+          "caller": "MD5_Final",
+          "callee": "MD5_Update",
+          "lineNumber": 191
+        },
+        {
+          "caller": "MD5_Final",
+          "callee": "MD5_Update",
+          "lineNumber": 192
+        },
+        {
+          "caller": "MD5_Final",
+          "callee": "MD5_EncodeWord",
+          "lineNumber": 196
+        },
+        {
+          "caller": "MD5_Final",
+          "callee": "memset",
+          "lineNumber": 199
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 8,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Common/md5.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 21,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Common/ota_device_info.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 196,
+      "nonEmptyLines": 164,
+      "functions": [
+        {
+          "name": "OTADeviceInfo_CalcCrc16",
+          "startLine": 10,
+          "endLine": 19,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTADeviceInfo_IsValid",
+          "startLine": 21,
+          "endLine": 35,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTADeviceInfo_ReadSlot",
+          "startLine": 37,
+          "endLine": 51,
+          "params": [
+            "address",
+            "info"
+          ]
+        },
+        {
+          "name": "OTADeviceInfo_LoadBest",
+          "startLine": 53,
+          "endLine": 93,
+          "params": [
+            "info",
+            "slot_addr"
+          ]
+        },
+        {
+          "name": "OTADeviceInfo_Load",
+          "startLine": 95,
+          "endLine": 104,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTADeviceInfo_GetCurrentVersion",
+          "startLine": 106,
+          "endLine": 123,
+          "params": [
+            "out",
+            "out_size"
+          ]
+        },
+        {
+          "name": "OTADeviceInfo_WriteSlot",
+          "startLine": 125,
+          "endLine": 145,
+          "params": [
+            "address",
+            "info"
+          ]
+        },
+        {
+          "name": "OTADeviceInfo_SaveRunningVersion",
+          "startLine": 147,
+          "endLine": 196,
+          "params": [
+            "version"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "OTADeviceInfo_IsValid",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "OTADeviceInfo_Load",
+          "line": 95,
+          "isDefault": false
+        },
+        {
+          "name": "OTADeviceInfo_GetCurrentVersion",
+          "line": 106,
+          "isDefault": false
+        },
+        {
+          "name": "OTADeviceInfo_SaveRunningVersion",
+          "line": 147,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "OTADeviceInfo_CalcCrc16",
+          "callee": "CRC16_Calculate",
+          "lineNumber": 17
+        },
+        {
+          "caller": "OTADeviceInfo_IsValid",
+          "callee": "OTADeviceInfo_CalcCrc16",
+          "lineNumber": 34
+        },
+        {
+          "caller": "OTADeviceInfo_ReadSlot",
+          "callee": "memset",
+          "lineNumber": 44
+        },
+        {
+          "caller": "OTADeviceInfo_ReadSlot",
+          "callee": "W25Q128_ReadData",
+          "lineNumber": 45
+        },
+        {
+          "caller": "OTADeviceInfo_ReadSlot",
+          "callee": "OTADeviceInfo_IsValid",
+          "lineNumber": 50
+        },
+        {
+          "caller": "OTADeviceInfo_LoadBest",
+          "callee": "OTADeviceInfo_ReadSlot",
+          "lineNumber": 57
+        },
+        {
+          "caller": "OTADeviceInfo_LoadBest",
+          "callee": "OTADeviceInfo_ReadSlot",
+          "lineNumber": 58
+        },
+        {
+          "caller": "OTADeviceInfo_Load",
+          "callee": "memset",
+          "lineNumber": 102
+        },
+        {
+          "caller": "OTADeviceInfo_Load",
+          "callee": "OTADeviceInfo_LoadBest",
+          "lineNumber": 103
+        },
+        {
+          "caller": "OTADeviceInfo_GetCurrentVersion",
+          "callee": "OTADeviceInfo_Load",
+          "lineNumber": 116
+        },
+        {
+          "caller": "OTADeviceInfo_GetCurrentVersion",
+          "callee": "snprintf",
+          "lineNumber": 121
+        },
+        {
+          "caller": "OTADeviceInfo_WriteSlot",
+          "callee": "W25Q128_EraseRange",
+          "lineNumber": 132
+        },
+        {
+          "caller": "OTADeviceInfo_WriteSlot",
+          "callee": "W25Q128_WriteDataVerified",
+          "lineNumber": 137
+        },
+        {
+          "caller": "OTADeviceInfo_SaveRunningVersion",
+          "callee": "OTADeviceInfo_LoadBest",
+          "lineNumber": 160
+        },
+        {
+          "caller": "OTADeviceInfo_SaveRunningVersion",
+          "callee": "strcmp",
+          "lineNumber": 162
+        },
+        {
+          "caller": "OTADeviceInfo_SaveRunningVersion",
+          "callee": "memset",
+          "lineNumber": 167
+        },
+        {
+          "caller": "OTADeviceInfo_SaveRunningVersion",
+          "callee": "snprintf",
+          "lineNumber": 171
+        },
+        {
+          "caller": "OTADeviceInfo_SaveRunningVersion",
+          "callee": "snprintf",
+          "lineNumber": 176
+        },
+        {
+          "caller": "OTADeviceInfo_SaveRunningVersion",
+          "callee": "OTADeviceInfo_CalcCrc16",
+          "lineNumber": 188
+        },
+        {
+          "caller": "OTADeviceInfo_SaveRunningVersion",
+          "callee": "OTADeviceInfo_WriteSlot",
+          "lineNumber": 189
+        },
+        {
+          "caller": "OTADeviceInfo_SaveRunningVersion",
+          "callee": "OTADeviceInfo_IsValid",
+          "lineNumber": 194
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 4,
+        "functionCount": 8,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Common/ota_device_info.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 20,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Common/ota_info.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 150,
+      "nonEmptyLines": 121,
+      "functions": [
+        {
+          "name": "OTAInfo_CalcCrc16",
+          "startLine": 10,
+          "endLine": 18,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTAInfo_IsReadyValid",
+          "startLine": 20,
+          "endLine": 37,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTAInfo_IsSimulateValid",
+          "startLine": 39,
+          "endLine": 54,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTAInfo_Load",
+          "startLine": 56,
+          "endLine": 70,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTAInfo_LoadSimulate",
+          "startLine": 72,
+          "endLine": 86,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTAInfo_SaveReady",
+          "startLine": 88,
+          "endLine": 115,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTAInfo_SaveSimulate",
+          "startLine": 117,
+          "endLine": 144,
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "name": "OTAInfo_Invalidate",
+          "startLine": 146,
+          "endLine": 150,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "OTAInfo_CalcCrc16",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "OTAInfo_IsReadyValid",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "OTAInfo_IsSimulateValid",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "OTAInfo_Load",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "OTAInfo_LoadSimulate",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "OTAInfo_SaveReady",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "OTAInfo_SaveSimulate",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "OTAInfo_Invalidate",
+          "line": 146,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "OTAInfo_CalcCrc16",
+          "callee": "CRC16_Calculate",
+          "lineNumber": 17
+        },
+        {
+          "caller": "OTAInfo_IsReadyValid",
+          "callee": "MD5_IsHexString",
+          "lineNumber": 31
+        },
+        {
+          "caller": "OTAInfo_IsReadyValid",
+          "callee": "OTAInfo_CalcCrc16",
+          "lineNumber": 36
+        },
+        {
+          "caller": "OTAInfo_IsSimulateValid",
+          "callee": "OTAInfo_CalcCrc16",
+          "lineNumber": 53
+        },
+        {
+          "caller": "OTAInfo_Load",
+          "callee": "memset",
+          "lineNumber": 63
+        },
+        {
+          "caller": "OTAInfo_Load",
+          "callee": "W25Q128_ReadData",
+          "lineNumber": 64
+        },
+        {
+          "caller": "OTAInfo_Load",
+          "callee": "OTAInfo_IsReadyValid",
+          "lineNumber": 69
+        },
+        {
+          "caller": "OTAInfo_LoadSimulate",
+          "callee": "memset",
+          "lineNumber": 79
+        },
+        {
+          "caller": "OTAInfo_LoadSimulate",
+          "callee": "W25Q128_ReadData",
+          "lineNumber": 80
+        },
+        {
+          "caller": "OTAInfo_LoadSimulate",
+          "callee": "OTAInfo_IsSimulateValid",
+          "lineNumber": 85
+        },
+        {
+          "caller": "OTAInfo_SaveReady",
+          "callee": "OTAInfo_CalcCrc16",
+          "lineNumber": 100
+        },
+        {
+          "caller": "OTAInfo_SaveReady",
+          "callee": "W25Q128_EraseRange",
+          "lineNumber": 102
+        },
+        {
+          "caller": "OTAInfo_SaveReady",
+          "callee": "W25Q128_WriteDataVerified",
+          "lineNumber": 107
+        },
+        {
+          "caller": "OTAInfo_SaveReady",
+          "callee": "OTAInfo_IsReadyValid",
+          "lineNumber": 114
+        },
+        {
+          "caller": "OTAInfo_SaveSimulate",
+          "callee": "OTAInfo_CalcCrc16",
+          "lineNumber": 129
+        },
+        {
+          "caller": "OTAInfo_SaveSimulate",
+          "callee": "W25Q128_EraseRange",
+          "lineNumber": 131
+        },
+        {
+          "caller": "OTAInfo_SaveSimulate",
+          "callee": "W25Q128_WriteDataVerified",
+          "lineNumber": 136
+        },
+        {
+          "caller": "OTAInfo_SaveSimulate",
+          "callee": "OTAInfo_IsSimulateValid",
+          "lineNumber": 143
+        },
+        {
+          "caller": "OTAInfo_Invalidate",
+          "callee": "W25Q128_EraseRange",
+          "lineNumber": 148
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 8,
+        "functionCount": 8,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Common/ota_info.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 22,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

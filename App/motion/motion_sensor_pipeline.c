@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define ALIGN_THRESHOLD_US 65000ULL
+#define ALIGN_THRESHOLD_US 3000000ULL
 
 typedef struct
 {

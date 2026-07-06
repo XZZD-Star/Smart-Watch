@@ -1,0 +1,480 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 303,
+      "nonEmptyLines": 290,
+      "sections": [
+        {
+          "heading": "STM32H743ZIT6 引脚与排针精华笔记",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. 先看结论",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "2. 原理图排针速查表（CN7/CN8/CN9/CN10）",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "3. 板载资源占用/容易踩坑的引脚",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "4. LQFP144 引脚 + 复用功能总表",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "5. 快速使用方法",
+          "level": 2,
+          "line": 290
+        },
+        {
+          "heading": "6. 初学开发优先避开的引脚",
+          "level": 2,
+          "line": 297
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "docs/H743资料包/note/参考手册重点部分.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 457,
+      "nonEmptyLines": 299,
+      "sections": [
+        {
+          "heading": "STM32H743 参考手册精华笔记：时钟 + DMA/Cache 坑点",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "1. 参考手册主要看什么？",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "2. 时钟 RCC：重点不是背寄存器，而是理解“时钟树”",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "3. 时钟需要重点理解的几个概念",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "3.1 时钟源",
+          "level": 3,
+          "line": 48
+        },
+        {
+          "heading": "3.2 PLL：用来倍频，不是外设本身",
+          "level": 3,
+          "line": 70
+        },
+        {
+          "heading": "3.3 SYSCLK、HCLK、PCLK 的关系",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "3.4 外设时钟有两层：总线时钟 + 内核时钟",
+          "level": 3,
+          "line": 113
+        },
+        {
+          "heading": "4. H743 的内存和总线结构：DMA/Cache 坑点的根源",
+          "level": 2,
+          "line": 140
+        },
+        {
+          "heading": "5. 最大坑点 1：DMA 不能随便访问所有内存",
+          "level": 2,
+          "line": 158
+        },
+        {
+          "heading": "6. 最大坑点 2：DTCM CPU 很快，但 DMA1/DMA2 不能用",
+          "level": 2,
+          "line": 199
+        },
+        {
+          "heading": "7. 最大坑点 3：Cache 开启后，DMA 数据可能“不一致”",
+          "level": 2,
+          "line": 233
+        },
+        {
+          "heading": "情况 1：DMA 接收数据，CPU 读不到最新值",
+          "level": 3,
+          "line": 246
+        },
+        {
+          "heading": "情况 2：DMA 发送数据，外设发出去的是旧数据",
+          "level": 3,
+          "line": 267
+        },
+        {
+          "heading": "8. Clean 和 Invalidate 怎么记？",
+          "level": 2,
+          "line": 290
+        },
+        {
+          "heading": "9. DMA Buffer 推荐放哪里？",
+          "level": 2,
+          "line": 309
+        },
+        {
+          "heading": "推荐 1：放 AXI SRAM",
+          "level": 3,
+          "line": 311
+        },
+        {
+          "heading": "推荐 2：放 SRAM1/2/3",
+          "level": 3,
+          "line": 325
+        },
+        {
+          "heading": "不推荐：DTCM",
+          "level": 3,
+          "line": 337
+        },
+        {
+          "heading": "10. 不同 DMA 的简单区别",
+          "level": 2,
+          "line": 347
+        },
+        {
+          "heading": "11. 开发时最实用的检查清单",
+          "level": 2,
+          "line": 370
+        },
+        {
+          "heading": "1. 外设时钟开了吗？",
+          "level": 3,
+          "line": 374
+        },
+        {
+          "heading": "2. DMA 时钟开了吗？",
+          "level": 3,
+          "line": 384
+        },
+        {
+          "heading": "3. DMAMUX 配对对了吗？",
+          "level": 3,
+          "line": 393
+        },
+        {
+          "heading": "4. Buffer 有没有放到 DTCM？",
+          "level": 3,
+          "line": 400
+        },
+        {
+          "heading": "5. Cache 有没有处理？",
+          "level": 3,
+          "line": 412
+        },
+        {
+          "heading": "6. 地址和长度有没有按 Cache Line 对齐？",
+          "level": 3,
+          "line": 428
+        },
+        {
+          "heading": "12. 一句话总结",
+          "level": 2,
+          "line": 440
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 28
+      }
+    },
+    {
+      "path": "docs/H743资料包/note/快速上手.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1049,
+      "nonEmptyLines": 727,
+      "sections": [
+        {
+          "heading": "一、你现在应该怎么快速上手 H743 开发？",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "二、最推荐的学习路线",
+          "level": 1,
+          "line": 28
+        },
+        {
+          "heading": "第一步：先用 CubeMX 建工程",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "第二步：先学最小几个外设",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "第三步：每学一个外设，都按这个流程查资料",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "三、你手里的几个资料分别是干什么的？",
+          "level": 1,
+          "line": 93
+        },
+        {
+          "heading": "1. 数据手册 Datasheet",
+          "level": 1,
+          "line": 108
+        },
+        {
+          "heading": "它是干什么的？",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "你重点看哪里？",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "实际怎么用？",
+          "level": 2,
+          "line": 156
+        },
+        {
+          "heading": "一句话总结数据手册",
+          "level": 2,
+          "line": 185
+        },
+        {
+          "heading": "2. 参考手册 Reference Manual",
+          "level": 1,
+          "line": 199
+        },
+        {
+          "heading": "它是干什么的？",
+          "level": 2,
+          "line": 201
+        },
+        {
+          "heading": "你重点看哪里？",
+          "level": 2,
+          "line": 225
+        },
+        {
+          "heading": "实际怎么用？",
+          "level": 2,
+          "line": 246
+        },
+        {
+          "heading": "一句话总结参考手册",
+          "level": 2,
+          "line": 295
+        },
+        {
+          "heading": "3. 原理图 Schematic",
+          "level": 1,
+          "line": 311
+        },
+        {
+          "heading": "它是干什么的？",
+          "level": 2,
+          "line": 313
+        },
+        {
+          "heading": "你重点看哪里？",
+          "level": 2,
+          "line": 331
+        },
+        {
+          "heading": "实际怎么用？",
+          "level": 2,
+          "line": 351
+        },
+        {
+          "heading": "一句话总结原理图",
+          "level": 2,
+          "line": 380
+        },
+        {
+          "heading": "4. 硬件参考 / 硬件设计指南",
+          "level": 1,
+          "line": 399
+        },
+        {
+          "heading": "它是干什么的？",
+          "level": 2,
+          "line": 401
+        },
+        {
+          "heading": "你现在重点看哪里？",
+          "level": 2,
+          "line": 427
+        },
+        {
+          "heading": "一句话总结硬件参考",
+          "level": 2,
+          "line": 443
+        },
+        {
+          "heading": "四、这几个资料应该怎么配合着看？",
+          "level": 1,
+          "line": 451
+        },
+        {
+          "heading": "例子：我要用 USART1 串口",
+          "level": 2,
+          "line": 466
+        },
+        {
+          "heading": "1. 先看原理图",
+          "level": 3,
+          "line": 468
+        },
+        {
+          "heading": "2. 再看数据手册",
+          "level": 3,
+          "line": 487
+        },
+        {
+          "heading": "3. 再用 CubeMX 配置",
+          "level": 3,
+          "line": 506
+        },
+        {
+          "heading": "4. 出问题再看参考手册",
+          "level": 3,
+          "line": 520
+        },
+        {
+          "heading": "五、H743 开发特别注意事项",
+          "level": 1,
+          "line": 534
+        },
+        {
+          "heading": "1. 注意 Cache 和 DMA 的问题",
+          "level": 2,
+          "line": 540
+        },
+        {
+          "heading": "2. 注意 H7 的内存区域",
+          "level": 2,
+          "line": 594
+        },
+        {
+          "heading": "3. 注意时钟树比 F1/F4 复杂很多",
+          "level": 2,
+          "line": 629
+        },
+        {
+          "heading": "4. 注意电源配置影响主频",
+          "level": 2,
+          "line": 667
+        },
+        {
+          "heading": "5. 注意 Flash ART / Cache / MPU",
+          "level": 2,
+          "line": 696
+        },
+        {
+          "heading": "6. 注意 GPIO 速度和电平",
+          "level": 2,
+          "line": 721
+        },
+        {
+          "heading": "7. 注意串口调试非常重要",
+          "level": 2,
+          "line": 750
+        },
+        {
+          "heading": "六、你应该怎么查手册？不要逐字看",
+          "level": 1,
+          "line": 770
+        },
+        {
+          "heading": "你可以这样查",
+          "level": 2,
+          "line": 786
+        },
+        {
+          "heading": "查引脚",
+          "level": 3,
+          "line": 788
+        },
+        {
+          "heading": "查开发板连线",
+          "level": 3,
+          "line": 807
+        },
+        {
+          "heading": "查外设原理",
+          "level": 3,
+          "line": 829
+        },
+        {
+          "heading": "查硬件基础问题",
+          "level": 3,
+          "line": 850
+        },
+        {
+          "heading": "七、建议你先做的 5 个小实验",
+          "level": 1,
+          "line": 871
+        },
+        {
+          "heading": "八、开发时遇到问题应该怎么排查？",
+          "level": 1,
+          "line": 896
+        },
+        {
+          "heading": "九、你现在最应该重点关注什么？",
+          "level": 1,
+          "line": 924
+        },
+        {
+          "heading": "十、简单记忆版",
+          "level": 1,
+          "line": 950
+        },
+        {
+          "heading": "十一 prompt",
+          "level": 1,
+          "line": 997
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 50
+      }
+    }
+  ]
+}

@@ -25,8 +25,10 @@
 #define ONENET_DP_SHOULDER_RAISE_COUNT_KEY "shoulder_raise_count"
 #define ONENET_DP_SIDE_RAISE_COUNT_KEY  "side_raise_count"
 
-#define ONENET_FIXED_HEART_RATE          78U
-#define ONENET_FIXED_SPO2                98U
+#define ONENET_NORMAL_HEART_RATE         78U
+#define ONENET_NORMAL_SPO2               98U
+#define ONENET_FALL_HEART_RATE           92U
+#define ONENET_FALL_SPO2                 97U
 
 #define ONENET_TOPIC_PROP_POST          "$sys/" ONENET_PRODUCT_ID "/" ONENET_DEVICE_NAME "/thing/property/post"
 #define ONENET_TOPIC_PROP_SET           "$sys/" ONENET_PRODUCT_ID "/" ONENET_DEVICE_NAME "/thing/property/set"

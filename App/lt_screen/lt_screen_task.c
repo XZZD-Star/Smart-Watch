@@ -40,7 +40,7 @@
 #define LTSCREEN_UPDATE_PROGRESS_MAX    0x0010U
 #define LTSCREEN_CURRENT_VERSION_TEXT_TEST "1.2"
 #define LTSCREEN_LATEST_VERSION_TEXT_TEST  "1.1"
-#define LTSCREEN_CALIBRATION_DELAY_MS   1000U
+#define LTSCREEN_CALIBRATION_DELAY_MS   3000U
 #define LTSCREEN_TRAINING_COUNT_MAX     99U
 #define LTSCREEN_TRAINING_ACTION_COUNT  4U
 
@@ -219,17 +219,27 @@ void LTScreen_SetDeviceDoorState(uint8_t is_open)
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
 static void lt_screen_refresh_health_test(void)
 {
-  static const uint8_t heart_rate[] = {'7', '8'};
-  static const uint8_t spo2[] = {'9', '8'};
+  static const uint8_t heart_rate_normal[] = {'7', '8'};
+  static const uint8_t spo2_normal[] = {'9', '8'};
+  static const uint8_t heart_rate_fall[] = {'9', '2'};
+  static const uint8_t spo2_fall[] = {'9', '7'};
+  const uint8_t *heart_rate = heart_rate_normal;
+  const uint8_t *spo2 = spo2_normal;
+
+  if (OneNet_IsFallAlarmActive() != 0U)
+  {
+    heart_rate = heart_rate_fall;
+    spo2 = spo2_fall;
+  }
 
   LT168B_SendStr(0x10U,
                  LTSCREEN_HEART_RATE_ADDR,
                  heart_rate,
-                 (uint8_t)sizeof(heart_rate));
+                 (uint8_t)sizeof(heart_rate_normal));
   LT168B_SendStr(0x10U,
                  LTSCREEN_SPO2_ADDR,
                  spo2,
-                 (uint8_t)sizeof(spo2));
+                 (uint8_t)sizeof(spo2_normal));
 }
 
 static void lt_screen_refresh_fall_status(uint8_t force_update)
@@ -247,6 +257,7 @@ static void lt_screen_refresh_fall_status(uint8_t force_update)
 
   s_lt_screen_last_fall_alarm = fall_alarm;
   status_text = (fall_alarm != 0U) ? text_danger : text_safe;
+  lt_screen_refresh_health_test();
 
   LT168B_SendStr(0x10U,
                  LTSCREEN_FALL_ADDR,

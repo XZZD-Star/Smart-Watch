@@ -1,0 +1,3353 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "Core/Inc/internal_flash.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 15,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Inc/main.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 54,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Inc/RTE_Components.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 26,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Inc/stm32h7xx_hal_conf.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 514,
+      "nonEmptyLines": 430,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Inc/stm32h7xx_it.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 75,
+      "nonEmptyLines": 61,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Inc/tim.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 48,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Inc/usart.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 69,
+      "nonEmptyLines": 52,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/bootloader_main.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 299,
+      "nonEmptyLines": 252,
+      "functions": [
+        {
+          "name": "main",
+          "startLine": 32,
+          "endLine": 70,
+          "params": []
+        },
+        {
+          "name": "Boot_IsRamAddress",
+          "startLine": 72,
+          "endLine": 95,
+          "params": [
+            "address"
+          ]
+        },
+        {
+          "name": "Boot_AppIsValid",
+          "startLine": 97,
+          "endLine": 124,
+          "params": []
+        },
+        {
+          "name": "Boot_DeInit",
+          "startLine": 126,
+          "endLine": 156,
+          "params": []
+        },
+        {
+          "name": "Boot_JumpToApp",
+          "startLine": 158,
+          "endLine": 174,
+          "params": []
+        },
+        {
+          "name": "MX_USART2_UART_Init",
+          "startLine": 176,
+          "endLine": 205,
+          "params": []
+        },
+        {
+          "name": "HAL_UART_MspInit",
+          "startLine": 207,
+          "endLine": 231,
+          "params": [
+            "uartHandle"
+          ]
+        },
+        {
+          "name": "SysTick_Handler",
+          "startLine": 233,
+          "endLine": 236,
+          "params": []
+        },
+        {
+          "name": "SystemClock_Config",
+          "startLine": 238,
+          "endLine": 283,
+          "params": []
+        },
+        {
+          "name": "Error_Handler",
+          "startLine": 285,
+          "endLine": 291,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "main",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "MX_USART2_UART_Init",
+          "line": 176,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_UART_MspInit",
+          "line": 207,
+          "isDefault": false
+        },
+        {
+          "name": "SysTick_Handler",
+          "line": 233,
+          "isDefault": false
+        },
+        {
+          "name": "SystemClock_Config",
+          "line": 238,
+          "isDefault": false
+        },
+        {
+          "name": "Error_Handler",
+          "line": 285,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "main",
+          "callee": "HAL_Init",
+          "lineNumber": 36
+        },
+        {
+          "caller": "main",
+          "callee": "SystemClock_Config",
+          "lineNumber": 37
+        },
+        {
+          "caller": "main",
+          "callee": "MX_USART2_UART_Init",
+          "lineNumber": 38
+        },
+        {
+          "caller": "main",
+          "callee": "W25Q128_Init",
+          "lineNumber": 39
+        },
+        {
+          "caller": "main",
+          "callee": "printf",
+          "lineNumber": 41
+        },
+        {
+          "caller": "main",
+          "callee": "HAL_Delay",
+          "lineNumber": 42
+        },
+        {
+          "caller": "main",
+          "callee": "BootOTA_TryInstall",
+          "lineNumber": 44
+        },
+        {
+          "caller": "main",
+          "callee": "printf",
+          "lineNumber": 47
+        },
+        {
+          "caller": "main",
+          "callee": "HAL_Delay",
+          "lineNumber": 48
+        },
+        {
+          "caller": "main",
+          "callee": "NVIC_SystemReset",
+          "lineNumber": 49
+        },
+        {
+          "caller": "main",
+          "callee": "printf",
+          "lineNumber": 55
+        },
+        {
+          "caller": "main",
+          "callee": "HAL_Delay",
+          "lineNumber": 56
+        },
+        {
+          "caller": "main",
+          "callee": "Boot_AppIsValid",
+          "lineNumber": 60
+        },
+        {
+          "caller": "main",
+          "callee": "Boot_JumpToApp",
+          "lineNumber": 62
+        },
+        {
+          "caller": "main",
+          "callee": "printf",
+          "lineNumber": 67
+        },
+        {
+          "caller": "main",
+          "callee": "HAL_Delay",
+          "lineNumber": 68
+        },
+        {
+          "caller": "Boot_AppIsValid",
+          "callee": "Boot_IsRamAddress",
+          "lineNumber": 108
+        },
+        {
+          "caller": "Boot_DeInit",
+          "callee": "HAL_GPIO_WritePin",
+          "lineNumber": 130
+        },
+        {
+          "caller": "Boot_DeInit",
+          "callee": "HAL_UART_DeInit",
+          "lineNumber": 131
+        },
+        {
+          "caller": "Boot_DeInit",
+          "callee": "SCB_CleanInvalidateDCache",
+          "lineNumber": 147
+        },
+        {
+          "caller": "Boot_DeInit",
+          "callee": "SCB_DisableDCache",
+          "lineNumber": 148
+        },
+        {
+          "caller": "Boot_DeInit",
+          "callee": "SCB_InvalidateICache",
+          "lineNumber": 153
+        },
+        {
+          "caller": "Boot_DeInit",
+          "callee": "SCB_DisableICache",
+          "lineNumber": 154
+        },
+        {
+          "caller": "Boot_JumpToApp",
+          "callee": "__disable_irq",
+          "lineNumber": 163
+        },
+        {
+          "caller": "Boot_JumpToApp",
+          "callee": "Boot_DeInit",
+          "lineNumber": 164
+        },
+        {
+          "caller": "Boot_JumpToApp",
+          "callee": "__set_CONTROL",
+          "lineNumber": 167
+        },
+        {
+          "caller": "Boot_JumpToApp",
+          "callee": "__ISB",
+          "lineNumber": 168
+        },
+        {
+          "caller": "Boot_JumpToApp",
+          "callee": "__set_MSP",
+          "lineNumber": 169
+        },
+        {
+          "caller": "Boot_JumpToApp",
+          "callee": "__DSB",
+          "lineNumber": 170
+        },
+        {
+          "caller": "Boot_JumpToApp",
+          "callee": "__ISB",
+          "lineNumber": 171
+        },
+        {
+          "caller": "Boot_JumpToApp",
+          "callee": "((app_entry_t)app_reset)",
+          "lineNumber": 173
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "HAL_UART_Init",
+          "lineNumber": 189
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 191
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "HAL_UARTEx_SetTxFifoThreshold",
+          "lineNumber": 193
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 195
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "HAL_UARTEx_SetRxFifoThreshold",
+          "lineNumber": 197
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 199
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "HAL_UARTEx_DisableFifoMode",
+          "lineNumber": 201
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 203
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_RCCEx_PeriphCLKConfig",
+          "lineNumber": 216
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 218
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_USART2_CLK_ENABLE",
+          "lineNumber": 221
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_GPIOA_CLK_ENABLE",
+          "lineNumber": 222
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_GPIO_Init",
+          "lineNumber": 229
+        },
+        {
+          "caller": "SysTick_Handler",
+          "callee": "HAL_IncTick",
+          "lineNumber": 235
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "HAL_PWREx_ConfigSupply",
+          "lineNumber": 243
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "__HAL_PWR_VOLTAGESCALING_CONFIG",
+          "lineNumber": 245
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "__HAL_PWR_GET_FLAG",
+          "lineNumber": 247
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "HAL_RCC_OscConfig",
+          "lineNumber": 263
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "Error_Handler",
+          "lineNumber": 265
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "HAL_RCC_ClockConfig",
+          "lineNumber": 279
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "Error_Handler",
+          "lineNumber": 281
+        },
+        {
+          "caller": "Error_Handler",
+          "callee": "__disable_irq",
+          "lineNumber": 287
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 10,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/bootloader_ota.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 170,
+      "nonEmptyLines": 136,
+      "functions": [
+        {
+          "name": "BootOTA_IsFirmwareSizeValid",
+          "startLine": 13,
+          "endLine": 16,
+          "params": [
+            "firmware_size"
+          ]
+        },
+        {
+          "name": "BootOTA_CalcW25Q128Md5",
+          "startLine": 18,
+          "endLine": 50,
+          "params": [
+            "address",
+            "size",
+            "out_md5"
+          ]
+        },
+        {
+          "name": "BootOTA_CalcInternalFlashMd5",
+          "startLine": 52,
+          "endLine": 78,
+          "params": [
+            "address",
+            "size",
+            "out_md5"
+          ]
+        },
+        {
+          "name": "BootOTA_WriteAppFlash",
+          "startLine": 80,
+          "endLine": 109,
+          "params": [
+            "firmware_size"
+          ]
+        },
+        {
+          "name": "BootOTA_TryInstall",
+          "startLine": 111,
+          "endLine": 170,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BootOTA_TryInstall",
+          "line": 111,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "BootOTA_CalcW25Q128Md5",
+          "callee": "BootOTA_IsFirmwareSizeValid",
+          "lineNumber": 27
+        },
+        {
+          "caller": "BootOTA_CalcW25Q128Md5",
+          "callee": "MD5_Init",
+          "lineNumber": 32
+        },
+        {
+          "caller": "BootOTA_CalcW25Q128Md5",
+          "callee": "W25Q128_ReadData",
+          "lineNumber": 38
+        },
+        {
+          "caller": "BootOTA_CalcW25Q128Md5",
+          "callee": "MD5_Update",
+          "lineNumber": 43
+        },
+        {
+          "caller": "BootOTA_CalcW25Q128Md5",
+          "callee": "MD5_Final",
+          "lineNumber": 47
+        },
+        {
+          "caller": "BootOTA_CalcW25Q128Md5",
+          "callee": "MD5_ToHex",
+          "lineNumber": 48
+        },
+        {
+          "caller": "BootOTA_CalcInternalFlashMd5",
+          "callee": "BootOTA_IsFirmwareSizeValid",
+          "lineNumber": 60
+        },
+        {
+          "caller": "BootOTA_CalcInternalFlashMd5",
+          "callee": "MD5_Init",
+          "lineNumber": 65
+        },
+        {
+          "caller": "BootOTA_CalcInternalFlashMd5",
+          "callee": "MD5_Update",
+          "lineNumber": 71
+        },
+        {
+          "caller": "BootOTA_CalcInternalFlashMd5",
+          "callee": "MD5_Final",
+          "lineNumber": 75
+        },
+        {
+          "caller": "BootOTA_CalcInternalFlashMd5",
+          "callee": "MD5_ToHex",
+          "lineNumber": 76
+        },
+        {
+          "caller": "BootOTA_WriteAppFlash",
+          "callee": "BootOTA_IsFirmwareSizeValid",
+          "lineNumber": 85
+        },
+        {
+          "caller": "BootOTA_WriteAppFlash",
+          "callee": "W25Q128_ReadData",
+          "lineNumber": 95
+        },
+        {
+          "caller": "BootOTA_WriteAppFlash",
+          "callee": "InternalFlash_Write",
+          "lineNumber": 100
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "OTAInfo_LoadSimulate",
+          "lineNumber": 117
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "OTAInfo_Load",
+          "lineNumber": 122
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "BootOTA_IsFirmwareSizeValid",
+          "lineNumber": 127
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "memset",
+          "lineNumber": 132
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "BootOTA_CalcW25Q128Md5",
+          "lineNumber": 133
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "strcmp",
+          "lineNumber": 138
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "InternalFlash_EraseAppArea",
+          "lineNumber": 143
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "BootOTA_WriteAppFlash",
+          "lineNumber": 148
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "memset",
+          "lineNumber": 153
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "BootOTA_CalcInternalFlashMd5",
+          "lineNumber": 154
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "strcmp",
+          "lineNumber": 159
+        },
+        {
+          "caller": "BootOTA_TryInstall",
+          "callee": "OTAInfo_Invalidate",
+          "lineNumber": 164
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/crc.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 91,
+      "nonEmptyLines": 70,
+      "functions": [
+        {
+          "name": "MX_CRC_Init",
+          "startLine": 30,
+          "endLine": 54,
+          "params": []
+        },
+        {
+          "name": "HAL_CRC_MspInit",
+          "startLine": 56,
+          "endLine": 70,
+          "params": [
+            "crcHandle"
+          ]
+        },
+        {
+          "name": "HAL_CRC_MspDeInit",
+          "startLine": 72,
+          "endLine": 86,
+          "params": [
+            "crcHandle"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MX_CRC_Init",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_CRC_MspInit",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_CRC_MspDeInit",
+          "line": 72,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MX_CRC_Init",
+          "callee": "HAL_CRC_Init",
+          "lineNumber": 46
+        },
+        {
+          "caller": "MX_CRC_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 48
+        },
+        {
+          "caller": "HAL_CRC_MspInit",
+          "callee": "__HAL_RCC_CRC_CLK_ENABLE",
+          "lineNumber": 65
+        },
+        {
+          "caller": "HAL_CRC_MspDeInit",
+          "callee": "__HAL_RCC_CRC_CLK_DISABLE",
+          "lineNumber": 81
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/dma.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 51,
+      "functions": [
+        {
+          "name": "MX_DMA_Init",
+          "startLine": 39,
+          "endLine": 59,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MX_DMA_Init",
+          "line": 39,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MX_DMA_Init",
+          "callee": "__HAL_RCC_DMA1_CLK_ENABLE",
+          "lineNumber": 43
+        },
+        {
+          "caller": "MX_DMA_Init",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 47
+        },
+        {
+          "caller": "MX_DMA_Init",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 48
+        },
+        {
+          "caller": "MX_DMA_Init",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 50
+        },
+        {
+          "caller": "MX_DMA_Init",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 51
+        },
+        {
+          "caller": "MX_DMA_Init",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 53
+        },
+        {
+          "caller": "MX_DMA_Init",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 54
+        },
+        {
+          "caller": "MX_DMA_Init",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 56
+        },
+        {
+          "caller": "MX_DMA_Init",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/freertos.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 211,
+      "nonEmptyLines": 176,
+      "functions": [
+        {
+          "name": "MX_FREERTOS_Init",
+          "startLine": 106,
+          "endLine": 161,
+          "params": []
+        },
+        {
+          "name": "StartDefaultTask",
+          "startLine": 170,
+          "endLine": 176,
+          "params": [
+            "argument"
+          ]
+        },
+        {
+          "name": "StartTask1",
+          "startLine": 185,
+          "endLine": 191,
+          "params": [
+            "argument"
+          ]
+        },
+        {
+          "name": "StartTask2",
+          "startLine": 200,
+          "endLine": 206,
+          "params": [
+            "argument"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MX_FREERTOS_Init",
+          "line": 106,
+          "isDefault": false
+        },
+        {
+          "name": "StartDefaultTask",
+          "line": 170,
+          "isDefault": false
+        },
+        {
+          "name": "StartTask1",
+          "line": 185,
+          "isDefault": false
+        },
+        {
+          "name": "StartTask2",
+          "line": 200,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MX_FREERTOS_Init",
+          "callee": "xSemaphoreCreateBinary",
+          "lineNumber": 109
+        },
+        {
+          "caller": "MX_FREERTOS_Init",
+          "callee": "osSemaphoreNew",
+          "lineNumber": 119
+        },
+        {
+          "caller": "MX_FREERTOS_Init",
+          "callee": "osMessageQueueNew",
+          "lineNumber": 131
+        },
+        {
+          "caller": "MX_FREERTOS_Init",
+          "callee": "osThreadNew",
+          "lineNumber": 139
+        },
+        {
+          "caller": "MX_FREERTOS_Init",
+          "callee": "osThreadNew",
+          "lineNumber": 143
+        },
+        {
+          "caller": "MX_FREERTOS_Init",
+          "callee": "osThreadNew",
+          "lineNumber": 146
+        },
+        {
+          "caller": "MX_FREERTOS_Init",
+          "callee": "HAL_TIM_Base_Start_IT",
+          "lineNumber": 156
+        },
+        {
+          "caller": "StartDefaultTask",
+          "callee": "LTScreenTask_Run",
+          "lineNumber": 174
+        },
+        {
+          "caller": "StartTask1",
+          "callee": "MotionTask_Run",
+          "lineNumber": 189
+        },
+        {
+          "caller": "StartTask2",
+          "callee": "CloudTask_Run",
+          "lineNumber": 204
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/gpio.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 43,
+      "functions": [
+        {
+          "name": "MX_GPIO_Init",
+          "startLine": 40,
+          "endLine": 49,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MX_GPIO_Init",
+          "line": 40,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MX_GPIO_Init",
+          "callee": "__HAL_RCC_GPIOC_CLK_ENABLE",
+          "lineNumber": 44
+        },
+        {
+          "caller": "MX_GPIO_Init",
+          "callee": "__HAL_RCC_GPIOH_CLK_ENABLE",
+          "lineNumber": 45
+        },
+        {
+          "caller": "MX_GPIO_Init",
+          "callee": "__HAL_RCC_GPIOA_CLK_ENABLE",
+          "lineNumber": 46
+        },
+        {
+          "caller": "MX_GPIO_Init",
+          "callee": "__HAL_RCC_GPIOB_CLK_ENABLE",
+          "lineNumber": 47
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/internal_flash.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 162,
+      "nonEmptyLines": 134,
+      "functions": [
+        {
+          "name": "InternalFlash_GetBankSector",
+          "startLine": 14,
+          "endLine": 35,
+          "params": [
+            "address",
+            "bank",
+            "sector"
+          ]
+        },
+        {
+          "name": "InternalFlash_EraseSector",
+          "startLine": 37,
+          "endLine": 50,
+          "params": [
+            "bank",
+            "sector"
+          ]
+        },
+        {
+          "name": "InternalFlash_EraseAppArea",
+          "startLine": 52,
+          "endLine": 89,
+          "params": [
+            "app_start",
+            "app_size"
+          ]
+        },
+        {
+          "name": "InternalFlash_Write",
+          "startLine": 91,
+          "endLine": 148,
+          "params": [
+            "address",
+            "data",
+            "length"
+          ]
+        },
+        {
+          "name": "InternalFlash_Verify",
+          "startLine": 150,
+          "endLine": 162,
+          "params": [
+            "address",
+            "data",
+            "length"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "InternalFlash_EraseAppArea",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "InternalFlash_Write",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "InternalFlash_Verify",
+          "line": 150,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "InternalFlash_EraseSector",
+          "callee": "HAL_FLASHEx_Erase",
+          "lineNumber": 48
+        },
+        {
+          "caller": "InternalFlash_EraseAppArea",
+          "callee": "HAL_FLASH_Unlock",
+          "lineNumber": 67
+        },
+        {
+          "caller": "InternalFlash_EraseAppArea",
+          "callee": "InternalFlash_GetBankSector",
+          "lineNumber": 77
+        },
+        {
+          "caller": "InternalFlash_EraseAppArea",
+          "callee": "InternalFlash_EraseSector",
+          "lineNumber": 78
+        },
+        {
+          "caller": "InternalFlash_EraseAppArea",
+          "callee": "HAL_FLASH_Lock",
+          "lineNumber": 85
+        },
+        {
+          "caller": "InternalFlash_EraseAppArea",
+          "callee": "SCB_CleanInvalidateDCache",
+          "lineNumber": 86
+        },
+        {
+          "caller": "InternalFlash_EraseAppArea",
+          "callee": "SCB_InvalidateICache",
+          "lineNumber": 87
+        },
+        {
+          "caller": "InternalFlash_Write",
+          "callee": "HAL_FLASH_Unlock",
+          "lineNumber": 108
+        },
+        {
+          "caller": "InternalFlash_Write",
+          "callee": "memset",
+          "lineNumber": 124
+        },
+        {
+          "caller": "InternalFlash_Write",
+          "callee": "memcpy",
+          "lineNumber": 125
+        },
+        {
+          "caller": "InternalFlash_Write",
+          "callee": "HAL_FLASH_Program",
+          "lineNumber": 127
+        },
+        {
+          "caller": "InternalFlash_Write",
+          "callee": "InternalFlash_Verify",
+          "lineNumber": 135
+        },
+        {
+          "caller": "InternalFlash_Write",
+          "callee": "HAL_FLASH_Lock",
+          "lineNumber": 144
+        },
+        {
+          "caller": "InternalFlash_Write",
+          "callee": "SCB_CleanInvalidateDCache",
+          "lineNumber": 145
+        },
+        {
+          "caller": "InternalFlash_Write",
+          "callee": "SCB_InvalidateICache",
+          "lineNumber": 146
+        },
+        {
+          "caller": "InternalFlash_Verify",
+          "callee": "memcmp",
+          "lineNumber": 160
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/main.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 298,
+      "nonEmptyLines": 244,
+      "functions": [
+        {
+          "name": "main",
+          "startLine": 76,
+          "endLine": 154,
+          "params": []
+        },
+        {
+          "name": "SystemClock_Config",
+          "startLine": 160,
+          "endLine": 212,
+          "params": []
+        },
+        {
+          "name": "MPU_Config",
+          "startLine": 220,
+          "endLine": 245,
+          "params": []
+        },
+        {
+          "name": "HAL_TIM_PeriodElapsedCallback",
+          "startLine": 255,
+          "endLine": 267,
+          "params": [
+            "htim"
+          ]
+        },
+        {
+          "name": "Error_Handler",
+          "startLine": 273,
+          "endLine": 282,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "main",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "SystemClock_Config",
+          "line": 160,
+          "isDefault": false
+        },
+        {
+          "name": "MPU_Config",
+          "line": 220,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_TIM_PeriodElapsedCallback",
+          "line": 255,
+          "isDefault": false
+        },
+        {
+          "name": "Error_Handler",
+          "line": 273,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "main",
+          "callee": "MPU_Config",
+          "lineNumber": 84
+        },
+        {
+          "caller": "main",
+          "callee": "HAL_Init",
+          "lineNumber": 89
+        },
+        {
+          "caller": "main",
+          "callee": "SystemClock_Config",
+          "lineNumber": 96
+        },
+        {
+          "caller": "main",
+          "callee": "delay_init",
+          "lineNumber": 98
+        },
+        {
+          "caller": "main",
+          "callee": "MX_GPIO_Init",
+          "lineNumber": 102
+        },
+        {
+          "caller": "main",
+          "callee": "MX_DMA_Init",
+          "lineNumber": 103
+        },
+        {
+          "caller": "main",
+          "callee": "MX_USART1_UART_Init",
+          "lineNumber": 104
+        },
+        {
+          "caller": "main",
+          "callee": "MX_USART2_UART_Init",
+          "lineNumber": 105
+        },
+        {
+          "caller": "main",
+          "callee": "MX_USART3_UART_Init",
+          "lineNumber": 107
+        },
+        {
+          "caller": "main",
+          "callee": "MX_TIM2_Init",
+          "lineNumber": 108
+        },
+        {
+          "caller": "main",
+          "callee": "MX_TIM3_Init",
+          "lineNumber": 109
+        },
+        {
+          "caller": "main",
+          "callee": "MX_UART4_Init",
+          "lineNumber": 110
+        },
+        {
+          "caller": "main",
+          "callee": "MX_USART6_UART_Init",
+          "lineNumber": 111
+        },
+        {
+          "caller": "main",
+          "callee": "MX_UART7_Init",
+          "lineNumber": 112
+        },
+        {
+          "caller": "main",
+          "callee": "MX_CRC_Init",
+          "lineNumber": 113
+        },
+        {
+          "caller": "main",
+          "callee": "MX_X_CUBE_AI_Init",
+          "lineNumber": 114
+        },
+        {
+          "caller": "main",
+          "callee": "Servo_DoorInit",
+          "lineNumber": 116
+        },
+        {
+          "caller": "main",
+          "callee": "printf",
+          "lineNumber": 118
+        },
+        {
+          "caller": "main",
+          "callee": "W25Q128_Init",
+          "lineNumber": 121
+        },
+        {
+          "caller": "main",
+          "callee": "osKernelInitialize",
+          "lineNumber": 133
+        },
+        {
+          "caller": "main",
+          "callee": "MX_FREERTOS_Init",
+          "lineNumber": 134
+        },
+        {
+          "caller": "main",
+          "callee": "osKernelStart",
+          "lineNumber": 137
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "HAL_PWREx_ConfigSupply",
+          "lineNumber": 167
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "__HAL_PWR_VOLTAGESCALING_CONFIG",
+          "lineNumber": 171
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "__HAL_PWR_GET_FLAG",
+          "lineNumber": 173
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "HAL_RCC_OscConfig",
+          "lineNumber": 190
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "Error_Handler",
+          "lineNumber": 192
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "HAL_RCC_ClockConfig",
+          "lineNumber": 208
+        },
+        {
+          "caller": "SystemClock_Config",
+          "callee": "Error_Handler",
+          "lineNumber": 210
+        },
+        {
+          "caller": "MPU_Config",
+          "callee": "HAL_MPU_Disable",
+          "lineNumber": 225
+        },
+        {
+          "caller": "MPU_Config",
+          "callee": "HAL_MPU_ConfigRegion",
+          "lineNumber": 241
+        },
+        {
+          "caller": "MPU_Config",
+          "callee": "HAL_MPU_Enable",
+          "lineNumber": 243
+        },
+        {
+          "caller": "HAL_TIM_PeriodElapsedCallback",
+          "callee": "HAL_IncTick",
+          "lineNumber": 262
+        },
+        {
+          "caller": "Error_Handler",
+          "callee": "__disable_irq",
+          "lineNumber": 277
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/stm32h7xx_hal_msp.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 82,
+      "nonEmptyLines": 59,
+      "functions": [
+        {
+          "name": "HAL_MspInit",
+          "startLine": 62,
+          "endLine": 78,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "HAL_MspInit",
+          "line": 62,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "HAL_MspInit",
+          "callee": "__HAL_RCC_SYSCFG_CLK_ENABLE",
+          "lineNumber": 69
+        },
+        {
+          "caller": "HAL_MspInit",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 73
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 122,
+      "nonEmptyLines": 105,
+      "functions": [
+        {
+          "name": "HAL_InitTick",
+          "startLine": 41,
+          "endLine": 97,
+          "params": [
+            "TickPriority"
+          ]
+        },
+        {
+          "name": "HAL_SuspendTick",
+          "startLine": 105,
+          "endLine": 109,
+          "params": []
+        },
+        {
+          "name": "HAL_ResumeTick",
+          "startLine": 117,
+          "endLine": 121,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "HAL_InitTick",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_SuspendTick",
+          "line": 105,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_ResumeTick",
+          "line": 117,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "HAL_InitTick",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 51
+        },
+        {
+          "caller": "HAL_InitTick",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 54
+        },
+        {
+          "caller": "HAL_InitTick",
+          "callee": "__HAL_RCC_TIM1_CLK_ENABLE",
+          "lineNumber": 63
+        },
+        {
+          "caller": "HAL_InitTick",
+          "callee": "HAL_RCC_GetClockConfig",
+          "lineNumber": 66
+        },
+        {
+          "caller": "HAL_InitTick",
+          "callee": "HAL_RCC_GetPCLK2Freq",
+          "lineNumber": 69
+        },
+        {
+          "caller": "HAL_InitTick",
+          "callee": "HAL_TIM_Base_Init",
+          "lineNumber": 88
+        },
+        {
+          "caller": "HAL_InitTick",
+          "callee": "HAL_TIM_Base_Start_IT",
+          "lineNumber": 92
+        },
+        {
+          "caller": "HAL_SuspendTick",
+          "callee": "__HAL_TIM_DISABLE_IT",
+          "lineNumber": 108
+        },
+        {
+          "caller": "HAL_ResumeTick",
+          "callee": "__HAL_TIM_ENABLE_IT",
+          "lineNumber": 120
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/stm32h7xx_it.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 468,
+      "nonEmptyLines": 402,
+      "functions": [
+        {
+          "name": "NMI_Handler",
+          "startLine": 86,
+          "endLine": 96,
+          "params": []
+        },
+        {
+          "name": "HardFault_Handler",
+          "startLine": 101,
+          "endLine": 111,
+          "params": []
+        },
+        {
+          "name": "MemManage_Handler",
+          "startLine": 116,
+          "endLine": 126,
+          "params": []
+        },
+        {
+          "name": "BusFault_Handler",
+          "startLine": 131,
+          "endLine": 141,
+          "params": []
+        },
+        {
+          "name": "UsageFault_Handler",
+          "startLine": 146,
+          "endLine": 156,
+          "params": []
+        },
+        {
+          "name": "DebugMon_Handler",
+          "startLine": 161,
+          "endLine": 169,
+          "params": []
+        },
+        {
+          "name": "DMA1_Stream0_IRQHandler",
+          "startLine": 181,
+          "endLine": 190,
+          "params": []
+        },
+        {
+          "name": "DMA1_Stream1_IRQHandler",
+          "startLine": 195,
+          "endLine": 204,
+          "params": []
+        },
+        {
+          "name": "DMA1_Stream2_IRQHandler",
+          "startLine": 209,
+          "endLine": 218,
+          "params": []
+        },
+        {
+          "name": "DMA1_Stream3_IRQHandler",
+          "startLine": 223,
+          "endLine": 232,
+          "params": []
+        },
+        {
+          "name": "TIM1_UP_IRQHandler",
+          "startLine": 237,
+          "endLine": 246,
+          "params": []
+        },
+        {
+          "name": "TIM2_IRQHandler",
+          "startLine": 251,
+          "endLine": 259,
+          "params": []
+        },
+        {
+          "name": "USART1_IRQHandler",
+          "startLine": 264,
+          "endLine": 289,
+          "params": []
+        },
+        {
+          "name": "USART2_IRQHandler",
+          "startLine": 294,
+          "endLine": 303,
+          "params": []
+        },
+        {
+          "name": "USART3_IRQHandler",
+          "startLine": 308,
+          "endLine": 332,
+          "params": []
+        },
+        {
+          "name": "UART4_IRQHandler",
+          "startLine": 337,
+          "endLine": 369,
+          "params": []
+        },
+        {
+          "name": "USART6_IRQHandler",
+          "startLine": 374,
+          "endLine": 383,
+          "params": []
+        },
+        {
+          "name": "UART7_IRQHandler",
+          "startLine": 388,
+          "endLine": 397,
+          "params": []
+        },
+        {
+          "name": "motion_uart4_handle_command",
+          "startLine": 420,
+          "endLine": 466,
+          "params": [
+            "buf",
+            "len"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NMI_Handler",
+          "line": 86,
+          "isDefault": false
+        },
+        {
+          "name": "HardFault_Handler",
+          "line": 101,
+          "isDefault": false
+        },
+        {
+          "name": "MemManage_Handler",
+          "line": 116,
+          "isDefault": false
+        },
+        {
+          "name": "BusFault_Handler",
+          "line": 131,
+          "isDefault": false
+        },
+        {
+          "name": "UsageFault_Handler",
+          "line": 146,
+          "isDefault": false
+        },
+        {
+          "name": "DebugMon_Handler",
+          "line": 161,
+          "isDefault": false
+        },
+        {
+          "name": "DMA1_Stream0_IRQHandler",
+          "line": 181,
+          "isDefault": false
+        },
+        {
+          "name": "DMA1_Stream1_IRQHandler",
+          "line": 195,
+          "isDefault": false
+        },
+        {
+          "name": "DMA1_Stream2_IRQHandler",
+          "line": 209,
+          "isDefault": false
+        },
+        {
+          "name": "DMA1_Stream3_IRQHandler",
+          "line": 223,
+          "isDefault": false
+        },
+        {
+          "name": "TIM1_UP_IRQHandler",
+          "line": 237,
+          "isDefault": false
+        },
+        {
+          "name": "TIM2_IRQHandler",
+          "line": 251,
+          "isDefault": false
+        },
+        {
+          "name": "USART1_IRQHandler",
+          "line": 264,
+          "isDefault": false
+        },
+        {
+          "name": "USART2_IRQHandler",
+          "line": 294,
+          "isDefault": false
+        },
+        {
+          "name": "USART3_IRQHandler",
+          "line": 308,
+          "isDefault": false
+        },
+        {
+          "name": "UART4_IRQHandler",
+          "line": 337,
+          "isDefault": false
+        },
+        {
+          "name": "USART6_IRQHandler",
+          "line": 374,
+          "isDefault": false
+        },
+        {
+          "name": "UART7_IRQHandler",
+          "line": 388,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "DMA1_Stream0_IRQHandler",
+          "callee": "HAL_DMA_IRQHandler",
+          "lineNumber": 186
+        },
+        {
+          "caller": "DMA1_Stream1_IRQHandler",
+          "callee": "HAL_DMA_IRQHandler",
+          "lineNumber": 200
+        },
+        {
+          "caller": "DMA1_Stream2_IRQHandler",
+          "callee": "HAL_DMA_IRQHandler",
+          "lineNumber": 214
+        },
+        {
+          "caller": "DMA1_Stream3_IRQHandler",
+          "callee": "HAL_DMA_IRQHandler",
+          "lineNumber": 228
+        },
+        {
+          "caller": "TIM1_UP_IRQHandler",
+          "callee": "HAL_TIM_IRQHandler",
+          "lineNumber": 242
+        },
+        {
+          "caller": "TIM2_IRQHandler",
+          "callee": "HAL_TIM_IRQHandler",
+          "lineNumber": 255
+        },
+        {
+          "caller": "USART1_IRQHandler",
+          "callee": "__HAL_UART_GET_FLAG",
+          "lineNumber": 269
+        },
+        {
+          "caller": "USART1_IRQHandler",
+          "callee": "__HAL_DMA_GET_COUNTER",
+          "lineNumber": 273
+        },
+        {
+          "caller": "USART1_IRQHandler",
+          "callee": "__HAL_UART_CLEAR_IDLEFLAG",
+          "lineNumber": 278
+        },
+        {
+          "caller": "USART1_IRQHandler",
+          "callee": "HAL_UART_DMAStop",
+          "lineNumber": 279
+        },
+        {
+          "caller": "USART1_IRQHandler",
+          "callee": "MotionSensorPipeline_StorePacketFromIsr",
+          "lineNumber": 280
+        },
+        {
+          "caller": "USART1_IRQHandler",
+          "callee": "HAL_UART_IRQHandler",
+          "lineNumber": 285
+        },
+        {
+          "caller": "USART1_IRQHandler",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 287
+        },
+        {
+          "caller": "USART2_IRQHandler",
+          "callee": "HAL_UART_IRQHandler",
+          "lineNumber": 299
+        },
+        {
+          "caller": "USART3_IRQHandler",
+          "callee": "__HAL_UART_GET_FLAG",
+          "lineNumber": 313
+        },
+        {
+          "caller": "USART3_IRQHandler",
+          "callee": "__HAL_DMA_GET_COUNTER",
+          "lineNumber": 317
+        },
+        {
+          "caller": "USART3_IRQHandler",
+          "callee": "__HAL_UART_CLEAR_IDLEFLAG",
+          "lineNumber": 322
+        },
+        {
+          "caller": "USART3_IRQHandler",
+          "callee": "HAL_UART_DMAStop",
+          "lineNumber": 323
+        },
+        {
+          "caller": "USART3_IRQHandler",
+          "callee": "MotionSensorPipeline_StorePacketFromIsr",
+          "lineNumber": 324
+        },
+        {
+          "caller": "USART3_IRQHandler",
+          "callee": "HAL_UART_IRQHandler",
+          "lineNumber": 328
+        },
+        {
+          "caller": "USART3_IRQHandler",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 330
+        },
+        {
+          "caller": "UART4_IRQHandler",
+          "callee": "__HAL_UART_GET_FLAG",
+          "lineNumber": 342
+        },
+        {
+          "caller": "UART4_IRQHandler",
+          "callee": "__HAL_UART_CLEAR_IDLEFLAG",
+          "lineNumber": 345
+        },
+        {
+          "caller": "UART4_IRQHandler",
+          "callee": "__HAL_DMA_GET_COUNTER",
+          "lineNumber": 349
+        },
+        {
+          "caller": "UART4_IRQHandler",
+          "callee": "HAL_UART_DMAStop",
+          "lineNumber": 354
+        },
+        {
+          "caller": "UART4_IRQHandler",
+          "callee": "motion_uart4_handle_command",
+          "lineNumber": 355
+        },
+        {
+          "caller": "UART4_IRQHandler",
+          "callee": "memset",
+          "lineNumber": 356
+        },
+        {
+          "caller": "UART4_IRQHandler",
+          "callee": "HAL_UART_IRQHandler",
+          "lineNumber": 365
+        },
+        {
+          "caller": "UART4_IRQHandler",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 367
+        },
+        {
+          "caller": "USART6_IRQHandler",
+          "callee": "HAL_UART_IRQHandler",
+          "lineNumber": 379
+        },
+        {
+          "caller": "UART7_IRQHandler",
+          "callee": "HAL_UART_IRQHandler",
+          "lineNumber": 393
+        },
+        {
+          "caller": "motion_uart4_handle_command",
+          "callee": "trim_spaces",
+          "lineNumber": 451
+        },
+        {
+          "caller": "motion_uart4_handle_command",
+          "callee": "strcmp",
+          "lineNumber": 458
+        },
+        {
+          "caller": "motion_uart4_handle_command",
+          "callee": "Motion_RequestStart",
+          "lineNumber": 460
+        },
+        {
+          "caller": "motion_uart4_handle_command",
+          "callee": "strcmp",
+          "lineNumber": 462
+        },
+        {
+          "caller": "motion_uart4_handle_command",
+          "callee": "Motion_RequestClear",
+          "lineNumber": 464
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 18,
+        "functionCount": 19,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/system_stm32h7xx.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 556,
+      "nonEmptyLines": 478,
+      "functions": [
+        {
+          "name": "SystemInit",
+          "startLine": 180,
+          "endLine": 315,
+          "params": []
+        },
+        {
+          "name": "SystemCoreClockUpdate",
+          "startLine": 354,
+          "endLine": 451,
+          "params": []
+        },
+        {
+          "name": "ExitRun0Mode",
+          "startLine": 476,
+          "endLine": 544,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "SystemInit",
+          "line": 180,
+          "isDefault": false
+        },
+        {
+          "name": "SystemCoreClockUpdate",
+          "line": 354,
+          "isDefault": false
+        },
+        {
+          "name": "ExitRun0Mode",
+          "line": 476,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SystemInit",
+          "callee": "READ_BIT",
+          "lineNumber": 193
+        },
+        {
+          "caller": "SystemInit",
+          "callee": "MODIFY_REG",
+          "lineNumber": 196
+        },
+        {
+          "caller": "SystemInit",
+          "callee": "READ_BIT",
+          "lineNumber": 209
+        },
+        {
+          "caller": "SystemInit",
+          "callee": "MODIFY_REG",
+          "lineNumber": 212
+        },
+        {
+          "caller": "SystemInit",
+          "callee": "READ_BIT",
+          "lineNumber": 293
+        },
+        {
+          "caller": "SystemInit",
+          "callee": "SET_BIT",
+          "lineNumber": 296
+        },
+        {
+          "caller": "SystemInit",
+          "callee": "CLEAR_BIT",
+          "lineNumber": 306
+        },
+        {
+          "caller": "SystemCoreClockUpdate",
+          "callee": "(float_t)",
+          "lineNumber": 412
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/tim.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 322,
+      "nonEmptyLines": 260,
+      "functions": [
+        {
+          "name": "Servo_AngleToPulseUs",
+          "startLine": 44,
+          "endLine": 57,
+          "params": [
+            "angle_deg"
+          ]
+        },
+        {
+          "name": "Servo_SetChannelAngleDeg",
+          "startLine": 59,
+          "endLine": 62,
+          "params": [
+            "channel",
+            "angle_deg"
+          ]
+        },
+        {
+          "name": "MX_TIM2_Init",
+          "startLine": 70,
+          "endLine": 108,
+          "params": []
+        },
+        {
+          "name": "MX_TIM3_Init",
+          "startLine": 111,
+          "endLine": 158,
+          "params": []
+        },
+        {
+          "name": "HAL_TIM_Base_MspInit",
+          "startLine": 160,
+          "endLine": 178,
+          "params": [
+            "tim_baseHandle"
+          ]
+        },
+        {
+          "name": "HAL_TIM_PWM_MspInit",
+          "startLine": 180,
+          "endLine": 194,
+          "params": [
+            "tim_pwmHandle"
+          ]
+        },
+        {
+          "name": "HAL_TIM_Base_MspDeInit",
+          "startLine": 196,
+          "endLine": 213,
+          "params": [
+            "tim_baseHandle"
+          ]
+        },
+        {
+          "name": "HAL_TIM_PWM_MspDeInit",
+          "startLine": 215,
+          "endLine": 229,
+          "params": [
+            "tim_pwmHandle"
+          ]
+        },
+        {
+          "name": "HAL_TIM_MspPostInit",
+          "startLine": 231,
+          "endLine": 262,
+          "params": [
+            "timHandle"
+          ]
+        },
+        {
+          "name": "Servo_DoorInit",
+          "startLine": 265,
+          "endLine": 278,
+          "params": []
+        },
+        {
+          "name": "Servo_SetAngleDeg",
+          "startLine": 280,
+          "endLine": 283,
+          "params": [
+            "angle_deg"
+          ]
+        },
+        {
+          "name": "Servo_SetDoorOpen",
+          "startLine": 285,
+          "endLine": 290,
+          "params": []
+        },
+        {
+          "name": "Servo_SetDoorClosed",
+          "startLine": 292,
+          "endLine": 297,
+          "params": []
+        },
+        {
+          "name": "Servo_SetDoorByCloudValue",
+          "startLine": 299,
+          "endLine": 314,
+          "params": [
+            "open_value"
+          ]
+        },
+        {
+          "name": "Servo_GetDoorState",
+          "startLine": 316,
+          "endLine": 319,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MX_TIM2_Init",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "MX_TIM3_Init",
+          "line": 111,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_TIM_Base_MspInit",
+          "line": 160,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_TIM_PWM_MspInit",
+          "line": 180,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_TIM_Base_MspDeInit",
+          "line": 196,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_TIM_PWM_MspDeInit",
+          "line": 215,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_TIM_MspPostInit",
+          "line": 231,
+          "isDefault": false
+        },
+        {
+          "name": "Servo_DoorInit",
+          "line": 265,
+          "isDefault": false
+        },
+        {
+          "name": "Servo_SetAngleDeg",
+          "line": 280,
+          "isDefault": false
+        },
+        {
+          "name": "Servo_SetDoorOpen",
+          "line": 285,
+          "isDefault": false
+        },
+        {
+          "name": "Servo_SetDoorClosed",
+          "line": 292,
+          "isDefault": false
+        },
+        {
+          "name": "Servo_SetDoorByCloudValue",
+          "line": 299,
+          "isDefault": false
+        },
+        {
+          "name": "Servo_GetDoorState",
+          "line": 316,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Servo_SetChannelAngleDeg",
+          "callee": "__HAL_TIM_SET_COMPARE",
+          "lineNumber": 61
+        },
+        {
+          "caller": "Servo_SetChannelAngleDeg",
+          "callee": "Servo_AngleToPulseUs",
+          "lineNumber": 61
+        },
+        {
+          "caller": "MX_TIM2_Init",
+          "callee": "HAL_TIM_Base_Init",
+          "lineNumber": 89
+        },
+        {
+          "caller": "MX_TIM2_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 91
+        },
+        {
+          "caller": "MX_TIM2_Init",
+          "callee": "HAL_TIM_ConfigClockSource",
+          "lineNumber": 94
+        },
+        {
+          "caller": "MX_TIM2_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 96
+        },
+        {
+          "caller": "MX_TIM2_Init",
+          "callee": "HAL_TIMEx_MasterConfigSynchronization",
+          "lineNumber": 100
+        },
+        {
+          "caller": "MX_TIM2_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 102
+        },
+        {
+          "caller": "MX_TIM3_Init",
+          "callee": "HAL_TIM_PWM_Init",
+          "lineNumber": 130
+        },
+        {
+          "caller": "MX_TIM3_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 132
+        },
+        {
+          "caller": "MX_TIM3_Init",
+          "callee": "HAL_TIMEx_MasterConfigSynchronization",
+          "lineNumber": 136
+        },
+        {
+          "caller": "MX_TIM3_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 138
+        },
+        {
+          "caller": "MX_TIM3_Init",
+          "callee": "HAL_TIM_PWM_ConfigChannel",
+          "lineNumber": 144
+        },
+        {
+          "caller": "MX_TIM3_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 146
+        },
+        {
+          "caller": "MX_TIM3_Init",
+          "callee": "HAL_TIM_PWM_ConfigChannel",
+          "lineNumber": 149
+        },
+        {
+          "caller": "MX_TIM3_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 151
+        },
+        {
+          "caller": "MX_TIM3_Init",
+          "callee": "HAL_TIM_MspPostInit",
+          "lineNumber": 156
+        },
+        {
+          "caller": "HAL_TIM_Base_MspInit",
+          "callee": "__HAL_RCC_TIM2_CLK_ENABLE",
+          "lineNumber": 169
+        },
+        {
+          "caller": "HAL_TIM_Base_MspInit",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 172
+        },
+        {
+          "caller": "HAL_TIM_Base_MspInit",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 173
+        },
+        {
+          "caller": "HAL_TIM_PWM_MspInit",
+          "callee": "__HAL_RCC_TIM3_CLK_ENABLE",
+          "lineNumber": 189
+        },
+        {
+          "caller": "HAL_TIM_Base_MspDeInit",
+          "callee": "__HAL_RCC_TIM2_CLK_DISABLE",
+          "lineNumber": 205
+        },
+        {
+          "caller": "HAL_TIM_Base_MspDeInit",
+          "callee": "HAL_NVIC_DisableIRQ",
+          "lineNumber": 208
+        },
+        {
+          "caller": "HAL_TIM_PWM_MspDeInit",
+          "callee": "__HAL_RCC_TIM3_CLK_DISABLE",
+          "lineNumber": 224
+        },
+        {
+          "caller": "HAL_TIM_MspPostInit",
+          "callee": "__HAL_RCC_GPIOA_CLK_ENABLE",
+          "lineNumber": 241
+        },
+        {
+          "caller": "HAL_TIM_MspPostInit",
+          "callee": "__HAL_RCC_GPIOB_CLK_ENABLE",
+          "lineNumber": 242
+        },
+        {
+          "caller": "HAL_TIM_MspPostInit",
+          "callee": "HAL_GPIO_Init",
+          "lineNumber": 252
+        },
+        {
+          "caller": "HAL_TIM_MspPostInit",
+          "callee": "HAL_GPIO_Init",
+          "lineNumber": 255
+        },
+        {
+          "caller": "Servo_DoorInit",
+          "callee": "HAL_TIM_PWM_Start",
+          "lineNumber": 267
+        },
+        {
+          "caller": "Servo_DoorInit",
+          "callee": "Error_Handler",
+          "lineNumber": 269
+        },
+        {
+          "caller": "Servo_DoorInit",
+          "callee": "HAL_TIM_PWM_Start",
+          "lineNumber": 272
+        },
+        {
+          "caller": "Servo_DoorInit",
+          "callee": "Error_Handler",
+          "lineNumber": 274
+        },
+        {
+          "caller": "Servo_DoorInit",
+          "callee": "Servo_SetDoorClosed",
+          "lineNumber": 277
+        },
+        {
+          "caller": "Servo_SetAngleDeg",
+          "callee": "Servo_SetChannelAngleDeg",
+          "lineNumber": 282
+        },
+        {
+          "caller": "Servo_SetDoorOpen",
+          "callee": "Servo_SetChannelAngleDeg",
+          "lineNumber": 287
+        },
+        {
+          "caller": "Servo_SetDoorOpen",
+          "callee": "Servo_SetChannelAngleDeg",
+          "lineNumber": 288
+        },
+        {
+          "caller": "Servo_SetDoorClosed",
+          "callee": "Servo_SetChannelAngleDeg",
+          "lineNumber": 294
+        },
+        {
+          "caller": "Servo_SetDoorClosed",
+          "callee": "Servo_SetChannelAngleDeg",
+          "lineNumber": 295
+        },
+        {
+          "caller": "Servo_SetDoorByCloudValue",
+          "callee": "Servo_SetDoorOpen",
+          "lineNumber": 303
+        },
+        {
+          "caller": "Servo_SetDoorByCloudValue",
+          "callee": "Servo_SetDoorClosed",
+          "lineNumber": 309
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 13,
+        "functionCount": 15,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "Core/Src/usart.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 831,
+      "nonEmptyLines": 703,
+      "functions": [
+        {
+          "name": "USART6_FeedRxDmaRing",
+          "startLine": 35,
+          "endLine": 72,
+          "params": [
+            "dma_pos",
+            "event_type"
+          ]
+        },
+        {
+          "name": "MX_UART4_Init",
+          "startLine": 87,
+          "endLine": 128,
+          "params": []
+        },
+        {
+          "name": "MX_USART1_UART_Init",
+          "startLine": 131,
+          "endLine": 173,
+          "params": []
+        },
+        {
+          "name": "MX_USART2_UART_Init",
+          "startLine": 176,
+          "endLine": 217,
+          "params": []
+        },
+        {
+          "name": "MX_USART3_UART_Init",
+          "startLine": 220,
+          "endLine": 261,
+          "params": []
+        },
+        {
+          "name": "MX_USART6_UART_Init",
+          "startLine": 264,
+          "endLine": 313,
+          "params": []
+        },
+        {
+          "name": "MX_UART7_Init",
+          "startLine": 316,
+          "endLine": 356,
+          "params": []
+        },
+        {
+          "name": "HAL_UART_MspInit",
+          "startLine": 358,
+          "endLine": 661,
+          "params": [
+            "uartHandle"
+          ]
+        },
+        {
+          "name": "HAL_UART_MspDeInit",
+          "startLine": 663,
+          "endLine": 798,
+          "params": [
+            "uartHandle"
+          ]
+        },
+        {
+          "name": "HAL_UART_RxCpltCallback",
+          "startLine": 801,
+          "endLine": 813,
+          "params": [
+            "huart"
+          ]
+        },
+        {
+          "name": "HAL_UARTEx_RxEventCallback",
+          "startLine": 815,
+          "endLine": 830,
+          "params": [
+            "huart",
+            "Size"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MX_UART4_Init",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "MX_USART1_UART_Init",
+          "line": 131,
+          "isDefault": false
+        },
+        {
+          "name": "MX_USART2_UART_Init",
+          "line": 176,
+          "isDefault": false
+        },
+        {
+          "name": "MX_USART3_UART_Init",
+          "line": 220,
+          "isDefault": false
+        },
+        {
+          "name": "MX_USART6_UART_Init",
+          "line": 264,
+          "isDefault": false
+        },
+        {
+          "name": "MX_UART7_Init",
+          "line": 316,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_UART_MspInit",
+          "line": 358,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_UART_MspDeInit",
+          "line": 663,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_UART_RxCpltCallback",
+          "line": 801,
+          "isDefault": false
+        },
+        {
+          "name": "HAL_UARTEx_RxEventCallback",
+          "line": 815,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "USART6_FeedRxDmaRing",
+          "callee": "ESP8266_RxFeedBlock",
+          "lineNumber": 58
+        },
+        {
+          "caller": "USART6_FeedRxDmaRing",
+          "callee": "ESP8266_RxFeedBlock",
+          "lineNumber": 63
+        },
+        {
+          "caller": "USART6_FeedRxDmaRing",
+          "callee": "ESP8266_RxFeedBlock",
+          "lineNumber": 67
+        },
+        {
+          "caller": "MX_UART4_Init",
+          "callee": "HAL_UART_Init",
+          "lineNumber": 108
+        },
+        {
+          "caller": "MX_UART4_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 110
+        },
+        {
+          "caller": "MX_UART4_Init",
+          "callee": "HAL_UARTEx_SetTxFifoThreshold",
+          "lineNumber": 112
+        },
+        {
+          "caller": "MX_UART4_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 114
+        },
+        {
+          "caller": "MX_UART4_Init",
+          "callee": "HAL_UARTEx_SetRxFifoThreshold",
+          "lineNumber": 116
+        },
+        {
+          "caller": "MX_UART4_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 118
+        },
+        {
+          "caller": "MX_UART4_Init",
+          "callee": "HAL_UARTEx_DisableFifoMode",
+          "lineNumber": 120
+        },
+        {
+          "caller": "MX_UART4_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 122
+        },
+        {
+          "caller": "MX_UART4_Init",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 125
+        },
+        {
+          "caller": "MX_USART1_UART_Init",
+          "callee": "HAL_UART_Init",
+          "lineNumber": 152
+        },
+        {
+          "caller": "MX_USART1_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 154
+        },
+        {
+          "caller": "MX_USART1_UART_Init",
+          "callee": "HAL_UARTEx_SetTxFifoThreshold",
+          "lineNumber": 156
+        },
+        {
+          "caller": "MX_USART1_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 158
+        },
+        {
+          "caller": "MX_USART1_UART_Init",
+          "callee": "HAL_UARTEx_SetRxFifoThreshold",
+          "lineNumber": 160
+        },
+        {
+          "caller": "MX_USART1_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 162
+        },
+        {
+          "caller": "MX_USART1_UART_Init",
+          "callee": "HAL_UARTEx_DisableFifoMode",
+          "lineNumber": 164
+        },
+        {
+          "caller": "MX_USART1_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 166
+        },
+        {
+          "caller": "MX_USART1_UART_Init",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 170
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "HAL_UART_Init",
+          "lineNumber": 197
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 199
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "HAL_UARTEx_SetTxFifoThreshold",
+          "lineNumber": 201
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 203
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "HAL_UARTEx_SetRxFifoThreshold",
+          "lineNumber": 205
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 207
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "HAL_UARTEx_DisableFifoMode",
+          "lineNumber": 209
+        },
+        {
+          "caller": "MX_USART2_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 211
+        },
+        {
+          "caller": "MX_USART3_UART_Init",
+          "callee": "HAL_UART_Init",
+          "lineNumber": 241
+        },
+        {
+          "caller": "MX_USART3_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 243
+        },
+        {
+          "caller": "MX_USART3_UART_Init",
+          "callee": "HAL_UARTEx_SetTxFifoThreshold",
+          "lineNumber": 245
+        },
+        {
+          "caller": "MX_USART3_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 247
+        },
+        {
+          "caller": "MX_USART3_UART_Init",
+          "callee": "HAL_UARTEx_SetRxFifoThreshold",
+          "lineNumber": 249
+        },
+        {
+          "caller": "MX_USART3_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 251
+        },
+        {
+          "caller": "MX_USART3_UART_Init",
+          "callee": "HAL_UARTEx_DisableFifoMode",
+          "lineNumber": 253
+        },
+        {
+          "caller": "MX_USART3_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 255
+        },
+        {
+          "caller": "MX_USART3_UART_Init",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 258
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "HAL_UART_Init",
+          "lineNumber": 285
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 287
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "HAL_UARTEx_SetTxFifoThreshold",
+          "lineNumber": 289
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 291
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "HAL_UARTEx_SetRxFifoThreshold",
+          "lineNumber": 293
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 295
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "HAL_UARTEx_DisableFifoMode",
+          "lineNumber": 297
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 299
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 303
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 307
+        },
+        {
+          "caller": "MX_USART6_UART_Init",
+          "callee": "__HAL_DMA_DISABLE_IT",
+          "lineNumber": 309
+        },
+        {
+          "caller": "MX_UART7_Init",
+          "callee": "HAL_UART_Init",
+          "lineNumber": 337
+        },
+        {
+          "caller": "MX_UART7_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 339
+        },
+        {
+          "caller": "MX_UART7_Init",
+          "callee": "HAL_UARTEx_SetTxFifoThreshold",
+          "lineNumber": 341
+        },
+        {
+          "caller": "MX_UART7_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 343
+        },
+        {
+          "caller": "MX_UART7_Init",
+          "callee": "HAL_UARTEx_SetRxFifoThreshold",
+          "lineNumber": 345
+        },
+        {
+          "caller": "MX_UART7_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 347
+        },
+        {
+          "caller": "MX_UART7_Init",
+          "callee": "HAL_UARTEx_DisableFifoMode",
+          "lineNumber": 349
+        },
+        {
+          "caller": "MX_UART7_Init",
+          "callee": "Error_Handler",
+          "lineNumber": 351
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_RCCEx_PeriphCLKConfig",
+          "lineNumber": 373
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 375
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_UART4_CLK_ENABLE",
+          "lineNumber": 379
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_GPIOC_CLK_ENABLE",
+          "lineNumber": 381
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_GPIO_Init",
+          "lineNumber": 391
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_DMA_Init",
+          "lineNumber": 405
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 407
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_LINKDMA",
+          "lineNumber": 410
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 413
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 414
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_RCCEx_PeriphCLKConfig",
+          "lineNumber": 429
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 431
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_USART1_CLK_ENABLE",
+          "lineNumber": 435
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_GPIOB_CLK_ENABLE",
+          "lineNumber": 437
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_GPIO_Init",
+          "lineNumber": 447
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_DMA_Init",
+          "lineNumber": 461
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 463
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_LINKDMA",
+          "lineNumber": 466
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 469
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 470
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_RCCEx_PeriphCLKConfig",
+          "lineNumber": 485
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 487
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_USART2_CLK_ENABLE",
+          "lineNumber": 491
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_GPIOA_CLK_ENABLE",
+          "lineNumber": 493
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_GPIO_Init",
+          "lineNumber": 503
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 506
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 507
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_RCCEx_PeriphCLKConfig",
+          "lineNumber": 522
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 524
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_USART3_CLK_ENABLE",
+          "lineNumber": 528
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_GPIOB_CLK_ENABLE",
+          "lineNumber": 530
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_GPIO_Init",
+          "lineNumber": 540
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_DMA_Init",
+          "lineNumber": 554
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 556
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_LINKDMA",
+          "lineNumber": 559
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 562
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 563
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_RCCEx_PeriphCLKConfig",
+          "lineNumber": 578
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 580
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_USART6_CLK_ENABLE",
+          "lineNumber": 584
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_GPIOC_CLK_ENABLE",
+          "lineNumber": 586
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_GPIO_Init",
+          "lineNumber": 596
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_DMA_Init",
+          "lineNumber": 610
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 612
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_LINKDMA",
+          "lineNumber": 615
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 618
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 619
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_RCCEx_PeriphCLKConfig",
+          "lineNumber": 634
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "Error_Handler",
+          "lineNumber": 636
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_UART7_CLK_ENABLE",
+          "lineNumber": 640
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "__HAL_RCC_GPIOF_CLK_ENABLE",
+          "lineNumber": 642
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_GPIO_Init",
+          "lineNumber": 652
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_SetPriority",
+          "lineNumber": 655
+        },
+        {
+          "caller": "HAL_UART_MspInit",
+          "callee": "HAL_NVIC_EnableIRQ",
+          "lineNumber": 656
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "__HAL_RCC_UART4_CLK_DISABLE",
+          "lineNumber": 672
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_GPIO_DeInit",
+          "lineNumber": 678
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_DMA_DeInit",
+          "lineNumber": 681
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_NVIC_DisableIRQ",
+          "lineNumber": 684
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "__HAL_RCC_USART1_CLK_DISABLE",
+          "lineNumber": 695
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_GPIO_DeInit",
+          "lineNumber": 701
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_DMA_DeInit",
+          "lineNumber": 704
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_NVIC_DisableIRQ",
+          "lineNumber": 707
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "__HAL_RCC_USART2_CLK_DISABLE",
+          "lineNumber": 718
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_GPIO_DeInit",
+          "lineNumber": 724
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_NVIC_DisableIRQ",
+          "lineNumber": 727
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "__HAL_RCC_USART3_CLK_DISABLE",
+          "lineNumber": 738
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_GPIO_DeInit",
+          "lineNumber": 744
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_DMA_DeInit",
+          "lineNumber": 747
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_NVIC_DisableIRQ",
+          "lineNumber": 750
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "__HAL_RCC_USART6_CLK_DISABLE",
+          "lineNumber": 761
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_GPIO_DeInit",
+          "lineNumber": 767
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_DMA_DeInit",
+          "lineNumber": 770
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_NVIC_DisableIRQ",
+          "lineNumber": 773
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "__HAL_RCC_UART7_CLK_DISABLE",
+          "lineNumber": 784
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_GPIO_DeInit",
+          "lineNumber": 790
+        },
+        {
+          "caller": "HAL_UART_MspDeInit",
+          "callee": "HAL_NVIC_DisableIRQ",
+          "lineNumber": 793
+        },
+        {
+          "caller": "HAL_UART_RxCpltCallback",
+          "callee": "memset",
+          "lineNumber": 805
+        },
+        {
+          "caller": "HAL_UART_RxCpltCallback",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 806
+        },
+        {
+          "caller": "HAL_UART_RxCpltCallback",
+          "callee": "memset",
+          "lineNumber": 810
+        },
+        {
+          "caller": "HAL_UART_RxCpltCallback",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 811
+        },
+        {
+          "caller": "HAL_UARTEx_RxEventCallback",
+          "callee": "USART6_FeedRxDmaRing",
+          "lineNumber": 819
+        },
+        {
+          "caller": "HAL_UARTEx_RxEventCallback",
+          "callee": "HAL_UARTEx_GetRxEventType",
+          "lineNumber": 819
+        },
+        {
+          "caller": "HAL_UARTEx_RxEventCallback",
+          "callee": "LT168B_HandleRxEvent",
+          "lineNumber": 825
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 10,
+        "functionCount": 11,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "language": "xlsx",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+      "language": "xlsx",
+      "fileCategory": "code",
+      "totalLines": 106,
+      "nonEmptyLines": 105,
+      "metrics": {}
+    },
+    {
+      "path": "Master.ioc",
+      "language": "ioc",
+      "fileCategory": "code",
+      "totalLines": 567,
+      "nonEmptyLines": 567,
+      "metrics": {}
+    },
+    {
+      "path": "SYSTEM/delay/delay.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 200,
+      "nonEmptyLines": 171,
+      "functions": [
+        {
+          "name": "delay_init",
+          "startLine": 55,
+          "endLine": 74,
+          "params": [
+            "sysclk"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "delay_init",
+          "line": 55,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "delay_init",
+          "callee": "HAL_SYSTICK_CLKSourceConfig",
+          "lineNumber": 60
+        },
+        {
+          "caller": "delay_ms",
+          "callee": "delay_us",
+          "lineNumber": 126
+        },
+        {
+          "caller": "delay_ms",
+          "callee": "delay_us",
+          "lineNumber": 181
+        },
+        {
+          "caller": "delay_ms",
+          "callee": "delay_us",
+          "lineNumber": 187
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

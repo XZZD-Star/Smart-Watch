@@ -1,0 +1,102 @@
+# .understandignore — patterns for files/dirs to exclude from analysis
+# Syntax: same as .gitignore (globs, # comments, ! negation, trailing / for dirs)
+# Lines below are suggestions — uncomment to activate.
+# Use ! prefix to force-include something excluded by defaults.
+#
+# Built-in defaults (always excluded unless negated):
+#   node_modules/, .git/, dist/, build/, obj/, *.lock, *.min.js, etc.
+#
+
+# --- Embedded external/generated content ---
+
+Drivers/
+Middlewares/
+MDK-ARM/
+X-CUBE-AI/
+Listings/
+.waylog/
+.understand-anything/intermediate/
+.understand-anything/tmp/
+*.uvguix.*
+*.uvgui.*
+*.uvoptx
+*.axf
+*.elf
+*.hex
+*.bin
+*.lst
+*.crf
+*.o
+*.d
+*.dep
+*.lnp
+*.build_log.htm
+
+# --- From .gitignore (uncomment to exclude) ---
+
+# .DS_Store
+# Thumbs.db
+# desktop.ini
+# *.swp
+# *.swo
+# *~
+# *.tmp
+# *.temp
+# *.cache
+# .waylog/
+# *.uvguix.*
+# *.uvgui.*
+# *.uvoptx
+# MDK-ARM/Master/
+# MDK-ARM/Objects/
+# MDK-ARM/Listings/
+# Listings/
+# *.axf
+# *.elf
+# *.hex
+# *.bin
+# *.lst
+# *.crf
+# *.o
+# *.d
+# *.dep
+# *.lnp
+# *.build_log.htm
+# MDK-ARM/**/*.htm
+# cmake-build-*/
+# *.py[cod]
+# .waylog/
+
+# --- Detected directories (uncomment to exclude) ---
+
+# docs/
+
+# --- Test file patterns (uncomment to exclude) ---
+
+# JS / TS
+# *.test.*
+# *.spec.*
+# *.snap
+# C# / .NET
+# **/*Tests.cs
+# **/*Test.cs
+# **/*Fixture.cs
+# **/*.Tests.csproj
+# Java / Kotlin
+# **/src/test/**
+# **/*Test.java
+# **/*IT.java
+# **/*Spec.kt
+# Go
+# **/*_test.go
+# C++
+# **/*_test.cc
+# **/*_test.cpp
+# **/*_test.cxx
+# **/*Test.cc
+# **/*Test.cpp
+# **/*_unittest.cc
+# **/*_unittest.cpp
+# **/*_browsertest.cc
+# **/*_benchmark.cc
+# **/*Benchmark.cpp

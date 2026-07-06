@@ -1,0 +1,31 @@
+{
+  "projectRoot": "D:/Qian Start/Smart Watch/H743",
+  "batchFiles": [
+    {
+      "path": "BSP/debug_uart/debug_uart7.c",
+      "language": "c",
+      "sizeLines": 135,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/debug_uart/debug_uart7.h",
+      "language": "c",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/debug_uart/uart7_role.h",
+      "language": "c",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "BSP/debug_uart/debug_uart7.c": [
+      "BSP/debug_uart/debug_uart7.h",
+      "BSP/debug_uart/uart7_role.h"
+    ],
+    "BSP/debug_uart/debug_uart7.h": [],
+    "BSP/debug_uart/uart7_role.h": []
+  }
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "order": 1,
+    "title": "项目约定入口",
+    "description": "先从项目约定、CubeMX 工程配置和图谱配置看起，可以快速理解这个仓库的边界：当前图谱聚焦自编固件代码，排除了 HAL/CMSIS 和中间件库。这个步骤帮助新人先建立“哪些文件值得读、哪些是生成或外部依赖”的判断。",
+    "nodeIds": [
+      "document:Agents.md",
+      "config:.understand-anything/config.json"
+    ]
+  },
+  {
+    "order": 2,
+    "title": "固件启动主线",
+    "description": "Core 层负责 MCU 启动后的主控路径，包括主入口、FreeRTOS 调度和关键外设初始化。理解这里能知道应用任务何时开始运行，以及后续屏幕、运动、云端任务依赖哪些底层句柄。",
+    "nodeIds": [
+      "file:Core/Src/main.c",
+      "file:Core/Src/freertos.c",
+      "file:Core/Src/usart.c",
+      "file:Core/Src/gpio.c"
+    ]
+  },
+  {
+    "order": 3,
+    "title": "传感器输入链路",
+    "description": "运动帧结构和融合管线描述了上层如何接收、缓存并对齐姿态数据。这个步骤连接底层采样结果和动作识别任务，是排查数据时序、采样缺失和融合阈值问题的起点。",
+    "nodeIds": [
+      "file:App/motion/motion_frame.h",
+      "file:App/motion/motion_sensor_pipeline.c",
+      "file:App/motion/motion_sensor_pipeline.h"
+    ]
+  },
+  {
+    "order": 4,
+    "title": "运动任务调度",
+    "description": "运动任务把输入请求、融合帧、窗口测试和结果事件串在一起。它是本项目运动识别链路的调度中心，理解它可以看清本地训练结果、云端测试值和屏幕刷新事件之间的控制关系。",
+    "nodeIds": [
+      "file:App/motion/motion_task.c",
+      "file:App/motion/motion_input.c",
+      "file:App/motion/motion_window_test.c",
+      "file:App/motion/motion_app_events.c"
+    ]
+  },
+  {
+    "order": 5,
+    "title": "AI 与规则识别",
+    "description": "AI 推理模块和规则识别器共同决定动作识别结果：一个负责模型推理控制，一个负责模板匹配、峰值保持和完整度评分等规则判断。读这一组文件可以理解动作标签如何从原始窗口数据变成业务结果。",
+    "nodeIds": [
+      "file:App/ai/motion_ai.c",
+      "file:App/rule action/rule_action_recognizer.c"
+    ]
+  },
+  {
+    "order": 6,
+    "title": "LT168B 屏幕显示",
+    "description": "屏幕任务集中处理触摸键值、页面状态和业务结果渲染，底层 LT168B 驱动负责协议帧发送和地址写入。这里是运动、OTA、跌倒告警等状态最终呈现给用户的出口。",
+    "nodeIds": [
+      "file:App/lt_screen/lt_screen_task.c",
+      "file:App/lt_screen/lt_screen_keys.h",
+      "file:BSP/display/lt168b.c"
+    ]
+  },
+  {
+    "order": 7,
+    "title": "云端通信路径",
+    "description": "云端任务、OneNET 封装和 MQTT 报文工具共同构成联网链路。这个步骤适合顺着“属性上报、命令下发、连接保持”的方向阅读，定位云端状态如何进入本地业务。",
+    "nodeIds": [
+      "file:App/cloud/cloud_task.c",
+      "file:BSP/cloud/onenet.c",
+      "file:BSP/cloud/MqttKit.c"
+    ]
+  },
+  {
+    "order": 8,
+    "title": "OTA 版本流程",
+    "description": "OTA 服务负责版本查询、模拟升级和升级状态，HTTP 模块则处理请求发送。它与屏幕层和云端独占状态相互配合，是理解版本页、升级按钮和联网升级流程的关键路径。",
+    "nodeIds": [
+      "file:App/ota/ota_service.c",
+      "file:App/ota/ota_http.c",
+      "file:App/ota/ota_config.h"
+    ]
+  },
+  {
+    "order": 9,
+    "title": "系统支撑与工具",
+    "description": "SYSTEM 和 Common 中的文件提供延时、调试、内存或轻量工具能力，虽然不直接表达业务，但会影响所有上层模块的运行稳定性。最后读这一层，有助于把应用逻辑和底层支撑条件对应起来。",
+    "nodeIds": [
+      "file:SYSTEM/delay/delay.c",
+      "file:SYSTEM/usart/yuanzi_usart.c",
+      "file:Common/ring_buffer.c",
+      "file:Common/crc16.c"
+    ]
+  }
+]

@@ -21,6 +21,7 @@
 #define ONENET_SUBSCRIBE_GROUP_NAME      ONENET_TOPIC_PROP_SET
 #define ONENET_REPLY_CODE_OK            200U
 #define ONENET_REPLY_CODE_BAD_REQUEST   400U
+#define ONENET_TEST_ACTION_ID_UNKNOWN     0
 #define ONENET_TEST_ACTION_ID_MIN         1
 #define ONENET_TEST_ACTION_ID_MAX         6
 #define ONENET_TEST_SCORE_MIN             0
@@ -471,6 +472,11 @@ static uint8_t OneNet_ParseTestValue(const char *json, int32_t *test_value)
 
 static uint8_t OneNet_IsDecodedTestValueValid(int32_t action_id, int32_t score)
 {
+  if ((action_id == ONENET_TEST_ACTION_ID_UNKNOWN) && (score == 0))
+  {
+    return 1U;
+  }
+
   if ((action_id < ONENET_TEST_ACTION_ID_MIN) || (action_id > ONENET_TEST_ACTION_ID_MAX))
   {
     return 0U;
@@ -1048,8 +1054,10 @@ static void OneNet_ApplyTestProperty(onenet_prop_set_context_t *ctx)
   }
   else
   {
+    g_onenet_last_valid_test_value = 0;
+    g_onenet_has_valid_test_value = 0U;
     MotionAi_ClearDemoOverride();
-    Debug_Printf("[MQTT][WARN] PROP SET invalid test=%ld, demo override cleared\r\n",
+    Debug_Printf("[MQTT][WARN] PROP SET invalid test=%ld, demo override and cache cleared\r\n",
                  (long)ctx->test_value);
   }
 
@@ -1266,15 +1274,23 @@ uint8_t OneNet_Publish(void)
 {
   char payload[160];
   int payload_len = 0;
+  uint32_t heart_rate = ONENET_NORMAL_HEART_RATE;
+  uint32_t spo2 = ONENET_NORMAL_SPO2;
+
+  if (g_onenet_fall_alarm_active != 0U)
+  {
+    heart_rate = ONENET_FALL_HEART_RATE;
+    spo2 = ONENET_FALL_SPO2;
+  }
 
   payload_len = snprintf(payload,
                          sizeof(payload),
                          "{\"id\":\"%lu\",\"params\":{\"%s\":{\"value\":%d},\"%s\":{\"value\":%d}}}",
                          (unsigned long)g_onenet_publish_seq,
                          ONENET_DP_HEART_RATE_KEY,
-                         ONENET_FIXED_HEART_RATE,
+                         (int)heart_rate,
                          ONENET_DP_BLOOD_OXYGEN_KEY,
-                         ONENET_FIXED_SPO2);
+                         (int)spo2);
   if ((payload_len <= 0) || ((size_t)payload_len >= sizeof(payload)))
   {
     g_onenet_last_status = ONENET_STATUS_FAIL_PUBLISH_PACKET;
