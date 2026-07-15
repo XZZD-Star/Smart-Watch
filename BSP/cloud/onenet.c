@@ -11,7 +11,6 @@
 #include "motion_app_events.h"
 #include "motion_input.h"
 #include "tim.h"
-#include "uart7_role.h"
 
 #define ONENET_PACKET_TIMEOUT_MS       3000U
 #define ONENET_DOWNLINK_TOPIC_SIZE      128U
@@ -107,50 +106,6 @@ static int32_t *OneNet_GetTrainDisplaySlotByAction(int32_t action_label)
     default:
       return NULL;
   }
-}
-
-static motion_label_t OneNet_DecodeTestActionLabel(int32_t action_id)
-{
-  switch (action_id)
-  {
-    case 1:
-      return MOTION_LABEL_REST;
-    case 2:
-      return MOTION_LABEL_ELBOW_FLEX;
-    case 3:
-      return MOTION_LABEL_FRONT_RAISE;
-    case 4:
-      return MOTION_LABEL_SIDE_RAISE;
-    case 5:
-      return MOTION_LABEL_SHOULDER_RAISE;
-    default:
-      return MOTION_LABEL_UNKNOWN;
-  }
-}
-
-static void OneNet_UpdateTrainDisplayFromTest(int32_t action_id, int32_t score)
-{
-  motion_label_t action_label = OneNet_DecodeTestActionLabel(action_id);
-
-  if (score <= 0)
-  {
-    Debug_Printf("[MQTT] TRAIN DISPLAY skip cloud action=%s score=%ld\r\n",
-                 MotionAi_LabelName(action_label),
-                 (long)score);
-    return;
-  }
-
-  if (OneNet_GetTrainDisplaySlotByAction((int32_t)action_label) == NULL)
-  {
-    Debug_Printf("[MQTT] TRAIN DISPLAY skip cloud action=%s\r\n",
-                 MotionAi_LabelName(action_label));
-    return;
-  }
-
-#if APP_UART7_IS_SCREEN && APP_SCREEN_IS_HEALTH_MONITOR
-  MotionEvents_RequestTrainingPageRefreshByAction((int32_t)action_label);
-#endif
-  OneNet_UpdateTrainDisplayByAction((int32_t)action_label);
 }
 
 static uint8_t OneNet_PublishRaw(const char *topic,
@@ -512,12 +467,7 @@ static uint8_t OneNet_ParsePropertyIntValue(const char *json,
 
 static uint8_t OneNet_ParseTestValue(const char *json, int32_t *test_value)
 {
-  if (OneNet_ParsePropertyIntValue(json, ONENET_DP_TEST_KEY, test_value) != 0U)
-  {
-    return 1U;
-  }
-
-  return OneNet_ParsePropertyIntValue(json, ONENET_DP_TEST_DONE_KEY, test_value);
+  return OneNet_ParsePropertyIntValue(json, ONENET_DP_TEST_KEY, test_value);
 }
 
 static uint8_t OneNet_IsDecodedTestValueValid(int32_t action_id, int32_t score)
@@ -1101,8 +1051,6 @@ static void OneNet_ApplyTestProperty(onenet_prop_set_context_t *ctx)
     MotionAi_SetDemoOverride(ctx->test_value,
                              ctx->decoded_action_id,
                              ctx->decoded_score);
-    OneNet_UpdateTrainDisplayFromTest(ctx->decoded_action_id,
-                                      ctx->decoded_score);
   }
   else
   {
@@ -1113,7 +1061,7 @@ static void OneNet_ApplyTestProperty(onenet_prop_set_context_t *ctx)
                  (long)ctx->test_value);
   }
 
-  Debug_Printf("[MQTT] PROP SET test cached, train display handled, defer post until TEST_DONE\r\n");
+  Debug_Printf("[MQTT] PROP SET test cached, defer post until TEST_DONE\r\n");
 }
 
 static void OneNet_ApplyTrainPlanProperty(const onenet_prop_set_context_t *ctx)

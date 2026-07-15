@@ -15,7 +15,6 @@
 #define ONENET_DP_HEART_RATE_KEY        "HeartRate"
 #define ONENET_DP_BLOOD_OXYGEN_KEY      "BloodOxygen"
 #define ONENET_DP_TEST_KEY              "test"
-#define ONENET_DP_TEST_DONE_KEY         "testdone"
 #define ONENET_DP_OPEN_KEY              "open"
 #define ONENET_DP_ACTION_KIND_KEY       "action_kind"
 #define ONENET_DP_CONFIDENCE_KEY        "confidence"
