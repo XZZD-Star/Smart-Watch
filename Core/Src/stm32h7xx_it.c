@@ -457,7 +457,7 @@ static void motion_uart4_handle_command(const uint8_t *buf, uint16_t len)
     /* UART4 只解析本地命令文本，真正控制动作交给 App/motion。 */
     if (strcmp(command, "start") == 0)
     {
-        Motion_RequestStart();
+        Motion_RequestStartFromIsr();
     }
     else if (strcmp(command, "clear") == 0)
     {

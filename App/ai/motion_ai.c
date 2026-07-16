@@ -4,10 +4,11 @@
 #include <string.h>
 
 #include "debug_uart7.h"
-#include "rule_action_recognizer.h"
 
 #define MOTION_AI_STATIC_ENERGY_TH      (6.0f)
 #define MOTION_AI_STATIC_CONFIRM_FRAMES (10U)
+#define MOTION_AI_START_ENERGY_TH       (40.0f)
+#define MOTION_AI_START_CONFIRM_FRAMES  (4U)
 #define MOTION_AI_FALL_SUDDEN_ENERGY_TH (120.0f)
 #define MOTION_AI_FALL_STILL_ENERGY_TH  (3.0f)
 #define MOTION_AI_FALL_POSTURE_OFFSET_TH (28.0f)
@@ -253,14 +254,14 @@ const motion_ai_result_t* MotionAi_ProcessFusedFrame(const motion_fused_frame_t 
 
     if (g_motion_ai.result.ai_state == MOTION_AI_STATE_READY)
     {
-      if (g_motion_ai.result.motion_energy > RULE_DEFAULT_START_ENERGY_TH)
+      if (g_motion_ai.result.motion_energy > MOTION_AI_START_ENERGY_TH)
       {
         if (g_motion_ai.start_confirm_count < 0xFFFFU)
         {
           g_motion_ai.start_confirm_count++;
         }
 
-        if (g_motion_ai.start_confirm_count >= RULE_DEFAULT_START_CONFIRM_FRAMES)
+        if (g_motion_ai.start_confirm_count >= MOTION_AI_START_CONFIRM_FRAMES)
         {
           motion_ai_begin_action_session();
         }

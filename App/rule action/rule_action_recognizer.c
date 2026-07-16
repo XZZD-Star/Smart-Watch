@@ -3,167 +3,146 @@
 #include <stddef.h>
 #include <string.h>
 
-#define RULE_INVALID_TEMPLATE_INDEX   (0xFFFFFFFFUL)
-#define RULE_DISTANCE_INVALID         (1000000.0f)
-#define RULE_ALT_AXIS_EXTRA_WEIGHT    (0.35f)
-#define RULE_AMPLITUDE_FULL_SCORE     (35U)
-#define RULE_PEAK_HOLD_FULL_SCORE     (25U)
-#define RULE_COMPLETENESS_FULL_SCORE  (40U)
+#define RULE_DISTANCE_INVALID (1000000.0f)
+
+typedef struct
+{
+  ActionType action;
+  float center[RULE_UPPER_AXIS_COUNT];
+  float tolerance[RULE_UPPER_AXIS_COUNT];
+  float weight[RULE_UPPER_AXIS_COUNT];
+} RuleActionTemplate;
 
 static const char * const g_rule_state_names[] = {
-  "STATIC_WAIT",
+  "WAIT_STATICS",
+  "WAIT_STATIC",
   "READY",
-  "ACTION_RISING",
-  "PEAK_HOLD",
-  "ACTION_FALLING",
-  "ACTION_DONE"
+  "RECORDING",
+  "ANALYZE",
+  "DONE"
 };
 
 static const char * const g_rule_action_names[] = {
-  "unknown",
+  "none",
   "elbow_flex",
   "front_raise",
   "side_raise",
-  "shoulder_raise"
+  "shoulder_raise",
+  "unknown1",
+  "unknown2"
 };
 
-static const char * const g_rule_grade_names[] = {
-  "fail",
-  "pass",
-  "good",
-  "excellent"
-};
-
-static const char * const g_rule_axis_names[] = {
-  "upper_yaw",
-  "upper_pitch",
-  "upper_roll",
-  "fore_yaw",
-  "fore_pitch",
-  "fore_roll"
-};
-
-static const ActionTemplate g_rule_default_templates[] = {
+static const RuleActionTemplate g_rule_templates[] = {
   {
-    "elbow_flex",
     ACTION_ELBOW_FLEX,
-    AXIS_FORE_PITCH,
-    AXIS_UPPER_ROLL,
-    AXIS_UPPER_YAW,
-    { -140.4f,  10.7f,  65.7f, -38.1f, 107.8f,  70.4f },
-    {  -67.3f,  31.0f, 139.9f, -13.6f, 141.9f,  96.4f },
-    {   0U,      1U,     1U,     0U,     1U,     1U   },
-    {   0.0f,  -73.3f,  69.2f,   0.0f,  35.0f, 144.7f },
-    {   0.0f,  -51.8f,  82.1f,   0.0f,  63.4f, 155.7f },
-    { -115.2f,  24.6f, 109.0f, -27.4f, 130.6f,  81.6f },
-    {   99.6f, -59.8f,  74.7f, 115.5f,  52.8f, 149.4f },
-    {    1.4f,   1.2f,   2.8f,   1.0f,   3.8f,   1.2f },
-    {    0.4f,   2.0f,   3.2f,   0.4f,   4.5f,   1.8f },
-    108.0f,
-    124.0f,
-    141.0f,
-    RULE_DEFAULT_PEAK_HOLD_MIN_MS,
-    RULE_DEFAULT_PEAK_HOLD_IDEAL_MIN_MS,
-    RULE_DEFAULT_PEAK_HOLD_IDEAL_MAX_MS,
-    RULE_DEFAULT_PEAK_HOLD_MAX_MS
+    {
+      RULE_TEMPLATE_ELBOW_YAW_CENTER_DEG,
+      RULE_TEMPLATE_ELBOW_PITCH_CENTER_DEG,
+      RULE_TEMPLATE_ELBOW_ROLL_CENTER_DEG
+    },
+    {
+      RULE_TEMPLATE_ELBOW_YAW_TOL_DEG,
+      RULE_TEMPLATE_ELBOW_PITCH_TOL_DEG,
+      RULE_TEMPLATE_ELBOW_ROLL_TOL_DEG
+    },
+    {1.0f, 1.0f, 1.0f}
   },
   {
-    "front_raise",
     ACTION_FRONT_RAISE,
-    AXIS_UPPER_YAW,
-    AXIS_UPPER_ROLL,
-    AXIS_FORE_PITCH,
-    { -128.7f,  78.4f,  81.8f, -24.9f,  83.3f, 14.4f },
-    {  -97.1f, 101.8f, 114.5f, -15.2f, 105.7f, 28.2f },
-    {    1U,     1U,     1U,     1U,     0U,    1U   },
-    { -100.4f,  -5.4f,  59.9f, -36.6f,   0.0f, 91.8f },
-    {  -91.9f,  18.1f,  65.1f,  33.5f,   0.0f, 95.5f },
-    { -114.7f,  83.4f,  98.6f, -17.2f,  88.0f, 18.2f },
-    {  -97.0f,   0.0f,  63.0f,  -2.4f,   7.6f, 93.9f },
-    {    3.8f,   1.0f,   2.8f,   0.8f,   1.3f,  0.8f },
-    {    4.5f,   1.6f,   3.2f,   1.0f,   0.4f,  1.8f },
-    97.0f,
-    109.0f,
-    124.0f,
-    RULE_DEFAULT_PEAK_HOLD_MIN_MS,
-    RULE_DEFAULT_PEAK_HOLD_IDEAL_MIN_MS,
-    RULE_DEFAULT_PEAK_HOLD_IDEAL_MAX_MS,
-    RULE_DEFAULT_PEAK_HOLD_MAX_MS
+    {
+      RULE_TEMPLATE_FRONT_YAW_CENTER_DEG,
+      RULE_TEMPLATE_FRONT_PITCH_CENTER_DEG,
+      RULE_TEMPLATE_FRONT_ROLL_CENTER_DEG
+    },
+    {
+      RULE_TEMPLATE_FRONT_YAW_TOL_DEG,
+      RULE_TEMPLATE_FRONT_PITCH_TOL_DEG,
+      RULE_TEMPLATE_FRONT_ROLL_TOL_DEG
+    },
+    {1.0f, 1.0f, 1.0f}
   },
   {
-    "shoulder_raise",
-    ACTION_SHOULDER_RAISE,
-    AXIS_FORE_PITCH,
-    AXIS_UPPER_PITCH,
-    AXIS_UPPER_PITCH,
-    { -79.6f, 133.7f, 55.0f,  -5.7f, 139.5f, -15.1f },
-    { -56.5f, 144.8f, 78.1f,  13.1f, 150.9f,  32.6f },
-    {   1U,     1U,    1U,     1U,     1U,     1U    },
-    { -51.0f,  53.5f, 21.1f, -71.3f,  63.0f,  37.0f },
-    {  12.3f,  62.9f, 28.3f,  19.0f,  71.6f,  52.6f },
-    { -68.1f, 139.3f, 62.5f,   3.4f, 143.8f,   7.6f },
-    { -23.2f,  57.8f, 26.0f, -34.4f,  69.3f,  42.4f },
-    {   0.9f,   3.0f,  1.2f,   0.8f,   3.8f,   0.7f },
-    {   1.0f,   3.8f,  1.4f,   0.8f,   4.5f,   1.0f },
-    140.0f,
-    142.0f,
-    149.0f,
-    RULE_DEFAULT_PEAK_HOLD_MIN_MS,
-    RULE_DEFAULT_PEAK_HOLD_IDEAL_MIN_MS,
-    RULE_DEFAULT_PEAK_HOLD_IDEAL_MAX_MS,
-    RULE_DEFAULT_PEAK_HOLD_MAX_MS
-  },
-  {
-    "side_raise",
     ACTION_SIDE_RAISE,
-    AXIS_UPPER_PITCH,
-    AXIS_FORE_PITCH,
-    AXIS_FORE_PITCH,
-    { -46.6f, 84.5f, 37.2f, 57.3f, 78.6f, -62.1f },
-    { -17.3f, 89.1f, 69.3f, 73.4f, 89.6f, -36.8f },
-    {   1U,    1U,    1U,    1U,    1U,    1U    },
-    { -33.8f,  0.5f,  4.2f, -59.2f, 3.0f, 14.8f },
-    {  53.9f,  5.7f, 10.7f,  63.1f, 8.4f, 23.3f },
-    { -35.5f, 87.7f, 53.5f,  67.4f, 84.8f, -53.5f },
-    {   1.5f,  4.5f,  7.5f,  -3.7f, 6.8f,  18.4f },
-    {   0.8f,  3.6f,  1.2f,   1.0f, 3.0f,   1.0f },
-    {   1.0f,  4.5f,  1.2f,   0.9f, 3.6f,   1.3f },
-    84.5f,
-    86.0f,
-    89.0f,
-    RULE_DEFAULT_PEAK_HOLD_MIN_MS,
-    RULE_DEFAULT_PEAK_HOLD_IDEAL_MIN_MS,
-    RULE_DEFAULT_PEAK_HOLD_IDEAL_MAX_MS,
-    RULE_DEFAULT_PEAK_HOLD_MAX_MS
+    {
+      RULE_TEMPLATE_SIDE_YAW_CENTER_DEG,
+      RULE_TEMPLATE_SIDE_PITCH_CENTER_DEG,
+      RULE_TEMPLATE_SIDE_ROLL_CENTER_DEG
+    },
+    {
+      RULE_TEMPLATE_SIDE_YAW_TOL_DEG,
+      RULE_TEMPLATE_SIDE_PITCH_TOL_DEG,
+      RULE_TEMPLATE_SIDE_ROLL_TOL_DEG
+    },
+    {1.0f, 1.0f, 1.0f}
+  },
+  {
+    ACTION_SHOULDER_RAISE,
+    {
+      RULE_TEMPLATE_SHOULDER_YAW_CENTER_DEG,
+      RULE_TEMPLATE_SHOULDER_PITCH_CENTER_DEG,
+      RULE_TEMPLATE_SHOULDER_ROLL_CENTER_DEG
+    },
+    {
+      RULE_TEMPLATE_SHOULDER_YAW_TOL_DEG,
+      RULE_TEMPLATE_SHOULDER_PITCH_TOL_DEG,
+      RULE_TEMPLATE_SHOULDER_ROLL_TOL_DEG
+    },
+    {1.0f, 1.0f, 1.0f}
   }
 };
 
+static float s_rule_median_scratch[RULE_MAX_RECORD_FRAMES];
+
 static float rule_absf(float value);
 static float rule_maxf(float a, float b);
-static float rule_minf(float a, float b);
+static float rule_normalize_angle_delta(float value);
 static uint32_t rule_elapsed_ms(uint32_t start_ms, uint32_t now_ms);
-static float rule_normalize_linear(float value, float min_value, float max_value);
-static uint16_t rule_scale_score(
-  float value,
-  float in_min,
-  float in_max,
-  uint16_t out_min,
-  uint16_t out_max);
-static uint8_t rule_value_in_range(float value, float min_value, float max_value);
+static uint8_t rule_time_in_range(uint32_t value, uint32_t min_value, uint32_t max_value);
+static float rule_median_values(const float *values, uint16_t count);
+static float rule_pose_offset(
+  const float pose[RULE_UPPER_AXIS_COUNT],
+  const float base[RULE_UPPER_AXIS_COUNT]);
 static void rule_reset_result(ActionResult *result);
-static void rule_copy_result_features(ActionResult *result, const ActionSession *session);
-static void rule_reset_static_accumulator(RuleEngine *eng);
-static void rule_compute_delta(RuleEngine *eng);
-static void rule_lock_baseline(RuleEngine *eng);
-static void rule_update_static_candidate(RuleEngine *eng, const float raw[AXIS_COUNT]);
-static void rule_store_session_frame(
-  ActionSession *session,
+static void rule_reset_static_window(RuleEngine *eng, uint32_t now_ms);
+static void rule_enter_state(RuleEngine *eng, RuleState state);
+static void rule_enter_recover(RuleEngine *eng);
+static void rule_enter_wait_static(RuleEngine *eng);
+static void rule_update_pose(
+  RuleEngine *eng,
   const float raw[AXIS_COUNT],
-  const float delta[AXIS_COUNT]);
-static void rule_begin_action(RuleEngine *eng);
-static void rule_finalize_action(RuleEngine *eng, uint8_t returned_to_static);
-static uint8_t rule_session_timed_out(const RuleEngine *eng);
-static AxisIndex rule_find_dominant_axis(const ActionSession *session);
+  uint32_t now_ms);
+static void rule_update_delta(RuleEngine *eng);
+static void rule_lock_baseline(RuleEngine *eng);
+static void rule_store_pretrigger(RuleEngine *eng);
+static uint8_t rule_append_session_sample(
+  ActionSession *session,
+  const RulePoseSample *sample);
+static void rule_begin_recording(RuleEngine *eng);
+static float rule_sample_offset(
+  const RulePoseSample *sample,
+  const float base[RULE_UPPER_AXIS_COUNT]);
+static float rule_median_axis(
+  const ActionSession *session,
+  uint16_t start_index,
+  uint16_t end_index,
+  uint32_t axis);
+static uint8_t rule_find_top_window(
+  const RuleEngine *eng,
+  uint16_t *out_start_index,
+  uint16_t *out_end_index);
+static uint8_t rule_side_direction_match(const ActionSession *session);
+static float rule_template_distance(
+  const ActionSession *session,
+  const RuleActionTemplate *tmpl);
+static ActionType rule_classify_action(
+  const ActionSession *session,
+  float *out_best_distance,
+  float *out_second_distance);
+static uint8_t rule_timing_is_valid(const ActionSession *session);
+static void rule_copy_result(
+  const ActionSession *session,
+  ActionResult *result);
+static void rule_analyze_session(RuleEngine *eng);
 
 void RuleConfig_LoadDefault(RuleConfig *cfg)
 {
@@ -172,23 +151,27 @@ void RuleConfig_LoadDefault(RuleConfig *cfg)
     return;
   }
 
-  cfg->static_energy_th = 6.0f;
-  cfg->n_static_frames = 10U;
-  cfg->start_energy_th = RULE_DEFAULT_START_ENERGY_TH;
-  cfg->start_confirm_frames = RULE_DEFAULT_START_CONFIRM_FRAMES;
-
-  cfg->peak_enter_amp_th = 18.0f;
-  cfg->peak_stable_delta_th = 1.5f;
-  cfg->peak_stable_frames = 3U;
-  cfg->peak_exit_drop_th = 2.0f;
-  cfg->peak_exit_min_hold_ms = RULE_DEFAULT_PEAK_EXIT_MIN_HOLD_MS;
-  cfg->peak_exit_confirm_frames = RULE_DEFAULT_PEAK_EXIT_CONFIRM_FRAMES;
-
-  cfg->return_energy_th = 8.0f;
-  cfg->return_axis_th = 5.0f;
-  cfg->return_stable_frames = 4U;
-
-  cfg->action_timeout_ms = 4500U;
+  cfg->recover_stable_speed_dps = RULE_CFG_RECOVER_STABLE_SPEED_DPS;
+  cfg->recover_stable_ms = RULE_CFG_RECOVER_STABLE_MS;
+  cfg->static_accept_speed_dps = RULE_CFG_STATIC_ACCEPT_SPEED_DPS;
+  cfg->static_break_speed_dps = RULE_CFG_STATIC_BREAK_SPEED_DPS;
+  cfg->static_break_confirm_ms = RULE_CFG_STATIC_BREAK_CONFIRM_MS;
+  cfg->static_window_ms = RULE_CFG_STATIC_WINDOW_MS;
+  cfg->static_min_accept_ratio = RULE_CFG_STATIC_MIN_ACCEPT_RATIO;
+  cfg->static_min_accept_frames = RULE_CFG_STATIC_MIN_ACCEPT_FRAMES;
+  cfg->start_speed_dps = RULE_CFG_START_SPEED_DPS;
+  cfg->start_offset_deg = RULE_CFG_START_OFFSET_DEG;
+  cfg->start_confirm_ms = RULE_CFG_START_CONFIRM_MS;
+  cfg->pretrigger_ms = RULE_CFG_PRETRIGGER_MS;
+  cfg->record_min_ms = RULE_CFG_RECORD_MIN_MS;
+  cfg->action_timeout_ms = RULE_CFG_ACTION_TIMEOUT_MS;
+  cfg->action_min_peak_offset_deg = RULE_CFG_ACTION_MIN_PEAK_OFFSET_DEG;
+  cfg->return_offset_deg = RULE_CFG_RETURN_OFFSET_DEG;
+  cfg->return_speed_dps = RULE_CFG_RETURN_SPEED_DPS;
+  cfg->return_stable_ms = RULE_CFG_RETURN_STABLE_MS;
+  cfg->top_near_max_deg = RULE_CFG_TOP_NEAR_MAX_DEG;
+  cfg->top_stable_speed_dps = RULE_CFG_TOP_STABLE_SPEED_DPS;
+  cfg->top_min_hold_ms = RULE_CFG_TOP_MIN_HOLD_MS;
 }
 
 void RuleEngine_Init(RuleEngine *eng, const RuleConfig *cfg)
@@ -200,13 +183,12 @@ void RuleEngine_Init(RuleEngine *eng, const RuleConfig *cfg)
     return;
   }
 
-  memset(eng, 0, sizeof(*eng));
   RuleConfig_LoadDefault(&default_cfg);
+  memset(eng, 0, sizeof(*eng));
   eng->cfg = (cfg != NULL) ? (*cfg) : default_cfg;
-  eng->state = RULE_STATE_STATIC_WAIT;
-  RuleEngine_SetTemplates(eng, NULL, 0U);
-  RuleEngine_ResetSession(eng);
+  eng->state = RULE_STATE_WAIT_STATICS;
   eng->initialized = 1U;
+  rule_reset_result(&eng->result);
 }
 
 void RuleEngine_ResetSession(RuleEngine *eng)
@@ -217,42 +199,20 @@ void RuleEngine_ResetSession(RuleEngine *eng)
   }
 
   memset(&eng->session, 0, sizeof(eng->session));
-  eng->session.dominant_axis = AXIS_UPPER_YAW;
-  eng->start_confirm_count = 0U;
-  eng->peak_stable_count = 0U;
-  eng->peak_exit_confirm_count = 0U;
-  eng->return_stable_count = 0U;
   rule_reset_result(&eng->result);
+  eng->pretrigger_head = 0U;
+  eng->pretrigger_count = 0U;
+  eng->ready_start_timer_active = 0U;
+  eng->return_timer_active = 0U;
 }
 
-void RuleEngine_SetTemplates(
-  RuleEngine *eng,
-  const ActionTemplate *templates,
-  uint32_t template_count)
-{
-  if (eng == NULL)
-  {
-    return;
-  }
-
-  if ((templates == NULL) || (template_count == 0U))
-  {
-    eng->templates = g_rule_default_templates;
-    eng->template_count =
-      (uint32_t)(sizeof(g_rule_default_templates) / sizeof(g_rule_default_templates[0]));
-    return;
-  }
-
-  eng->templates = templates;
-  eng->template_count = template_count;
-}
-
-void RuleEngine_Update(
+void RuleEngine_ProcessRaw(
   RuleEngine *eng,
   const float raw[AXIS_COUNT],
-  float motion_energy,
   uint32_t now_ms)
 {
+  uint32_t elapsed_ms;
+
   if ((eng == NULL) || (raw == NULL))
   {
     return;
@@ -263,793 +223,202 @@ void RuleEngine_Update(
     RuleEngine_Init(eng, NULL);
   }
 
-  memcpy(eng->raw, raw, sizeof(eng->raw));
-  eng->motion_energy = motion_energy;
   eng->now_ms = now_ms;
+  rule_update_pose(eng, raw, now_ms);
+  rule_update_delta(eng);
 
-  if (eng->baseline_valid != 0U)
+  if ((eng->state == RULE_STATE_DONE) &&
+      (rule_elapsed_ms(eng->state_enter_ms, now_ms) > 0U))
   {
-    rule_compute_delta(eng);
-  }
-  else
-  {
-    memset(eng->delta, 0, sizeof(eng->delta));
-  }
-
-  if (eng->state == RULE_STATE_ACTION_DONE)
-  {
-    eng->state = RULE_STATE_STATIC_WAIT;
-    eng->baseline_valid = 0U;
-    rule_reset_static_accumulator(eng);
     RuleEngine_ResetSession(eng);
-    memset(eng->delta, 0, sizeof(eng->delta));
+    eng->baseline_valid = 0U;
+    rule_enter_wait_static(eng);
+    return;
   }
 
   switch (eng->state)
   {
-    case RULE_STATE_STATIC_WAIT:
-      if (motion_energy < eng->cfg.static_energy_th)
+    case RULE_STATE_WAIT_STATICS:
+      if (eng->motion_speed_dps <= eng->cfg.recover_stable_speed_dps)
       {
-        rule_update_static_candidate(eng, raw);
-        if (eng->static_frame_count >= eng->cfg.n_static_frames)
+        if (eng->recover_timer_active == 0U)
         {
-          rule_lock_baseline(eng);
-          eng->state = RULE_STATE_READY;
+          eng->recover_timer_active = 1U;
+          eng->recover_stable_start_ms = now_ms;
+        }
+        else if (rule_elapsed_ms(eng->recover_stable_start_ms, now_ms) >=
+                 eng->cfg.recover_stable_ms)
+        {
+          eng->recover_timer_active = 0U;
+          rule_enter_wait_static(eng);
         }
       }
       else
       {
-        rule_reset_static_accumulator(eng);
+        eng->recover_timer_active = 0U;
+      }
+      break;
+
+    case RULE_STATE_WAIT_STATIC:
+      if (eng->static_total_frames < 0xFFFFU)
+      {
+        eng->static_total_frames++;
+      }
+
+      if (eng->motion_speed_dps <= eng->cfg.static_accept_speed_dps)
+      {
+        uint32_t axis;
+        uint16_t baseline_index = eng->static_baseline_frame_count;
+
+        if (eng->static_accept_frames < 0xFFFFU)
+        {
+          eng->static_accept_frames++;
+        }
+        for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
+        {
+          eng->static_sum[axis] += eng->pose[axis];
+        }
+        if (baseline_index < RULE_STATIC_BASELINE_MAX_FRAMES)
+        {
+          for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
+          {
+            eng->static_baseline_frames[baseline_index][axis] =
+              eng->pose[axis];
+          }
+          eng->static_baseline_frame_count++;
+        }
+      }
+
+      if (eng->motion_speed_dps >= eng->cfg.static_break_speed_dps)
+      {
+        if (eng->static_break_timer_active == 0U)
+        {
+          eng->static_break_timer_active = 1U;
+          eng->static_break_start_ms = now_ms;
+        }
+        else if (rule_elapsed_ms(eng->static_break_start_ms, now_ms) >=
+                 eng->cfg.static_break_confirm_ms)
+        {
+          rule_enter_recover(eng);
+          break;
+        }
+      }
+      else
+      {
+        eng->static_break_timer_active = 0U;
+      }
+
+      elapsed_ms = rule_elapsed_ms(eng->static_window_start_ms, now_ms);
+      if (elapsed_ms >= eng->cfg.static_window_ms)
+      {
+        float accept_ratio = 0.0f;
+
+        if (eng->static_total_frames > 0U)
+        {
+          accept_ratio =
+            (float)eng->static_accept_frames / (float)eng->static_total_frames;
+        }
+
+        if ((eng->static_accept_frames >= eng->cfg.static_min_accept_frames) &&
+            (accept_ratio >= eng->cfg.static_min_accept_ratio))
+        {
+          rule_lock_baseline(eng);
+          rule_enter_state(eng, RULE_STATE_READY);
+        }
+        else
+        {
+          rule_reset_static_window(eng, now_ms);
+        }
       }
       break;
 
     case RULE_STATE_READY:
-      if (motion_energy > eng->cfg.start_energy_th)
-      {
-        if (eng->start_confirm_count < 0xFFFFU)
-        {
-          eng->start_confirm_count++;
-        }
+      rule_store_pretrigger(eng);
 
-        if (eng->start_confirm_count >= eng->cfg.start_confirm_frames)
+      if ((eng->motion_speed_dps >= eng->cfg.start_speed_dps) &&
+          (eng->pose_offset_deg >= eng->cfg.start_offset_deg))
+      {
+        if (eng->ready_start_timer_active == 0U)
         {
-          eng->start_confirm_count = 0U;
-          rule_begin_action(eng);
+          eng->ready_start_timer_active = 1U;
+          eng->ready_start_ms = now_ms;
+        }
+        else if (rule_elapsed_ms(eng->ready_start_ms, now_ms) >=
+                 eng->cfg.start_confirm_ms)
+        {
+          rule_begin_recording(eng);
         }
       }
       else
       {
-        eng->start_confirm_count = 0U;
+        eng->ready_start_timer_active = 0U;
       }
       break;
 
-    case RULE_STATE_ACTION_RISING:
-      Rule_UpdateAmplitudeStats(&eng->session, eng->delta);
-      eng->session.rise_time_ms = rule_elapsed_ms(
-        eng->session.rise_start_ms,
-        eng->now_ms);
-      eng->session.total_time_ms = rule_elapsed_ms(
-        eng->session.start_ms,
-        eng->now_ms);
-      rule_store_session_frame(&eng->session, eng->raw, eng->delta);
-
-      if (Rule_ShouldEnterPeakHold(eng) != 0U)
+    case RULE_STATE_RECORDING:
       {
-        eng->session.has_peak_hold = 1U;
-        eng->session.peak_enter_ms = eng->now_ms;
-        eng->session.peak_hold_ms = 0U;
-        eng->peak_exit_confirm_count = 0U;
-        Rule_UpdatePeakStats(&eng->session, eng->delta);
-        eng->state = RULE_STATE_PEAK_HOLD;
-      }
-      else if ((motion_energy < eng->cfg.return_energy_th) &&
-               (eng->session.dominant_amp >= (eng->cfg.peak_enter_amp_th * 0.5f)))
-      {
-        eng->session.has_falling_phase = 1U;
-        eng->session.fall_start_ms = eng->now_ms;
-        eng->session.fall_time_ms = 0U;
-        eng->state = RULE_STATE_ACTION_FALLING;
-      }
-      break;
+        RulePoseSample sample;
 
-    case RULE_STATE_PEAK_HOLD:
-      Rule_UpdateAmplitudeStats(&eng->session, eng->delta);
-      Rule_UpdatePeakStats(&eng->session, eng->delta);
-      eng->session.peak_hold_ms = rule_elapsed_ms(
-        eng->session.peak_enter_ms,
-        eng->now_ms);
-      eng->session.total_time_ms = rule_elapsed_ms(
-        eng->session.start_ms,
-        eng->now_ms);
-      rule_store_session_frame(&eng->session, eng->raw, eng->delta);
+        sample.ts_ms = now_ms;
+        sample.speed_dps = eng->motion_speed_dps;
+        memcpy(sample.pose, eng->pose, sizeof(sample.pose));
 
-      if (Rule_ShouldExitPeakHold(eng) != 0U)
-      {
-        eng->session.has_falling_phase = 1U;
-        eng->session.fall_start_ms = eng->now_ms;
-        eng->session.fall_time_ms = 0U;
-        eng->state = RULE_STATE_ACTION_FALLING;
-      }
-      break;
+        if (rule_append_session_sample(&eng->session, &sample) == 0U)
+        {
+          eng->session.timed_out = 1U;
+          eng->session.end_ms = now_ms;
+          rule_enter_state(eng, RULE_STATE_ANALYZE);
+          break;
+        }
 
-    case RULE_STATE_ACTION_FALLING:
-      Rule_UpdateAmplitudeStats(&eng->session, eng->delta);
-      eng->session.fall_time_ms = rule_elapsed_ms(
-        eng->session.fall_start_ms,
-        eng->now_ms);
-      eng->session.total_time_ms = rule_elapsed_ms(
-        eng->session.start_ms,
-        eng->now_ms);
-      rule_store_session_frame(&eng->session, eng->raw, eng->delta);
+        eng->session.return_error_deg = eng->pose_offset_deg;
+        eng->session.max_offset_deg = rule_maxf(
+          eng->session.max_offset_deg,
+          eng->pose_offset_deg);
+        elapsed_ms = rule_elapsed_ms(eng->session.start_ms, now_ms);
 
-      if (Rule_IsActionReturned(eng) != 0U)
-      {
-        rule_finalize_action(eng, 1U);
-        eng->state = RULE_STATE_ACTION_DONE;
+        if ((elapsed_ms >= eng->cfg.record_min_ms) &&
+            (eng->session.max_offset_deg >= eng->cfg.action_min_peak_offset_deg) &&
+            (eng->pose_offset_deg <= eng->cfg.return_offset_deg) &&
+            (eng->motion_speed_dps <= eng->cfg.return_speed_dps))
+        {
+          if (eng->return_timer_active == 0U)
+          {
+            eng->return_timer_active = 1U;
+            eng->return_stable_start_ms = now_ms;
+          }
+          else if (rule_elapsed_ms(eng->return_stable_start_ms, now_ms) >=
+                   eng->cfg.return_stable_ms)
+          {
+            eng->session.returned_to_static = 1U;
+            eng->session.end_ms = eng->return_stable_start_ms;
+            rule_enter_state(eng, RULE_STATE_ANALYZE);
+            break;
+          }
+        }
+        else
+        {
+          eng->return_timer_active = 0U;
+        }
+
+        if (elapsed_ms >= eng->cfg.action_timeout_ms)
+        {
+          eng->session.timed_out = 1U;
+          eng->session.end_ms = now_ms;
+          rule_enter_state(eng, RULE_STATE_ANALYZE);
+        }
       }
       break;
 
-    case RULE_STATE_ACTION_DONE:
+    case RULE_STATE_ANALYZE:
+      rule_analyze_session(eng);
+      rule_enter_state(eng, RULE_STATE_DONE);
+      break;
+
+    case RULE_STATE_DONE:
     default:
       break;
   }
-
-  if ((eng->state == RULE_STATE_ACTION_RISING) ||
-      (eng->state == RULE_STATE_PEAK_HOLD) ||
-      (eng->state == RULE_STATE_ACTION_FALLING))
-  {
-    if (rule_session_timed_out(eng) != 0U)
-    {
-      eng->result.timed_out = 1U;
-      rule_finalize_action(eng, 0U);
-      eng->state = RULE_STATE_ACTION_DONE;
-    }
-  }
-
-  memcpy(eng->prev_delta, eng->delta, sizeof(eng->prev_delta));
-  eng->has_prev_raw = 1U;
-}
-
-void RuleEngine_ProcessRaw(
-  RuleEngine *eng,
-  const float raw[AXIS_COUNT],
-  uint32_t now_ms)
-{
-  float motion_energy;
-
-  if ((eng == NULL) || (raw == NULL))
-  {
-    return;
-  }
-
-  motion_energy = Rule_ComputeMotionEnergy(eng, raw);
-  RuleEngine_Update(eng, raw, motion_energy, now_ms);
-}
-
-float Rule_ComputeMotionEnergy(const RuleEngine *eng, const float raw[AXIS_COUNT])
-{
-  const float *reference = NULL;
-  float energy = 0.0f;
-  uint32_t axis;
-
-  if ((eng == NULL) || (raw == NULL))
-  {
-    return 0.0f;
-  }
-
-  if (eng->baseline_valid != 0U)
-  {
-    reference = eng->base_mean;
-  }
-  else if (eng->has_prev_raw != 0U)
-  {
-    reference = eng->raw;
-  }
-  else
-  {
-    return 0.0f;
-  }
-
-  for (axis = 0U; axis < AXIS_COUNT; axis++)
-  {
-    float diff = raw[axis] - reference[axis];
-    energy += diff * diff;
-  }
-
-  return energy / (float)AXIS_COUNT;
-}
-
-void Rule_UpdateAmplitudeStats(ActionSession *session, const float delta[AXIS_COUNT])
-{
-  uint32_t axis;
-
-  if ((session == NULL) || (delta == NULL))
-  {
-    return;
-  }
-
-  for (axis = 0U; axis < AXIS_COUNT; axis++)
-  {
-    if (session->frame_count == 0U)
-    {
-      session->delta_max[axis] = delta[axis];
-      session->delta_min[axis] = delta[axis];
-    }
-    else
-    {
-      if (delta[axis] > session->delta_max[axis])
-      {
-        session->delta_max[axis] = delta[axis];
-      }
-
-      if (delta[axis] < session->delta_min[axis])
-      {
-        session->delta_min[axis] = delta[axis];
-      }
-    }
-
-    if (rule_absf(session->delta_max[axis]) >= rule_absf(session->delta_min[axis]))
-    {
-      session->amp[axis] = session->delta_max[axis];
-    }
-    else
-    {
-      session->amp[axis] = session->delta_min[axis];
-    }
-
-    session->amp_abs[axis] = rule_absf(session->amp[axis]);
-  }
-
-  session->frame_count++;
-  session->dominant_axis = rule_find_dominant_axis(session);
-  session->dominant_amp = session->amp_abs[(uint32_t)session->dominant_axis];
-}
-
-void Rule_UpdatePeakStats(ActionSession *session, const float delta[AXIS_COUNT])
-{
-  uint32_t axis;
-  float divisor;
-
-  if ((session == NULL) || (delta == NULL))
-  {
-    return;
-  }
-
-  session->peak_count++;
-  divisor = (float)session->peak_count;
-
-  for (axis = 0U; axis < AXIS_COUNT; axis++)
-  {
-    session->peak_sum[axis] += delta[axis];
-    session->peak_mean[axis] = session->peak_sum[axis] / divisor;
-  }
-}
-
-uint8_t Rule_ShouldEnterPeakHold(RuleEngine *eng)
-{
-  AxisIndex main_axis;
-  float current_abs;
-  float prev_abs;
-  float diff_abs;
-
-  if ((eng == NULL) || (eng->session.active == 0U))
-  {
-    return 0U;
-  }
-
-  if (eng->session.frame_count < 2U)
-  {
-    eng->peak_stable_count = 0U;
-    return 0U;
-  }
-
-  main_axis = eng->session.dominant_axis;
-  current_abs = rule_absf(eng->delta[(uint32_t)main_axis]);
-  prev_abs = rule_absf(eng->prev_delta[(uint32_t)main_axis]);
-  diff_abs = rule_absf(current_abs - prev_abs);
-
-  if ((eng->session.dominant_amp >= eng->cfg.peak_enter_amp_th) &&
-      (diff_abs <= eng->cfg.peak_stable_delta_th))
-  {
-    if (eng->peak_stable_count < 0xFFFFU)
-    {
-      eng->peak_stable_count++;
-    }
-  }
-  else
-  {
-    eng->peak_stable_count = 0U;
-  }
-
-  if (eng->peak_stable_count >= eng->cfg.peak_stable_frames)
-  {
-    eng->peak_stable_count = 0U;
-    return 1U;
-  }
-
-  return 0U;
-}
-
-uint8_t Rule_ShouldExitPeakHold(RuleEngine *eng)
-{
-  AxisIndex main_axis;
-  float current_abs;
-  float prev_abs;
-
-  if ((eng == NULL) || (eng->session.active == 0U))
-  {
-    return 0U;
-  }
-
-  main_axis = eng->session.dominant_axis;
-  current_abs = rule_absf(eng->delta[(uint32_t)main_axis]);
-  prev_abs = rule_absf(eng->prev_delta[(uint32_t)main_axis]);
-
-  if (eng->session.peak_hold_ms < eng->cfg.peak_exit_min_hold_ms)
-  {
-    eng->peak_exit_confirm_count = 0U;
-    return 0U;
-  }
-
-  if ((prev_abs > current_abs) &&
-      ((prev_abs - current_abs) >= eng->cfg.peak_exit_drop_th))
-  {
-    if (eng->peak_exit_confirm_count < 0xFFFFU)
-    {
-      eng->peak_exit_confirm_count++;
-    }
-
-    if (eng->peak_exit_confirm_count >= eng->cfg.peak_exit_confirm_frames)
-    {
-      eng->peak_exit_confirm_count = 0U;
-      return 1U;
-    }
-  }
-  else
-  {
-    eng->peak_exit_confirm_count = 0U;
-  }
-
-  return 0U;
-}
-
-uint8_t Rule_IsActionReturned(RuleEngine *eng)
-{
-  AxisIndex main_axis;
-  float axis_abs;
-
-  if ((eng == NULL) || (eng->session.active == 0U))
-  {
-    return 0U;
-  }
-
-  main_axis = eng->session.dominant_axis;
-  axis_abs = rule_absf(eng->delta[(uint32_t)main_axis]);
-
-  if ((eng->motion_energy <= eng->cfg.return_energy_th) &&
-      (axis_abs <= eng->cfg.return_axis_th))
-  {
-    if (eng->return_stable_count < 0xFFFFU)
-    {
-      eng->return_stable_count++;
-    }
-  }
-  else
-  {
-    eng->return_stable_count = 0U;
-  }
-
-  if (eng->return_stable_count >= eng->cfg.return_stable_frames)
-  {
-    eng->return_stable_count = 0U;
-    return 1U;
-  }
-
-  return 0U;
-}
-
-uint8_t Rule_FilterTemplate(
-  const ActionSession *session,
-  const ActionTemplate *tmpl)
-{
-  uint32_t axis;
-
-  if ((session == NULL) || (tmpl == NULL))
-  {
-    return 0U;
-  }
-
-  if (session->frame_count == 0U)
-  {
-    return 0U;
-  }
-
-  if (rule_value_in_range(
-        session->amp[(uint32_t)tmpl->main_axis],
-        tmpl->amp_min[(uint32_t)tmpl->main_axis],
-        tmpl->amp_max[(uint32_t)tmpl->main_axis]) == 0U)
-  {
-    return 0U;
-  }
-
-  if (rule_value_in_range(
-        session->amp[(uint32_t)tmpl->sub_axis],
-        tmpl->amp_min[(uint32_t)tmpl->sub_axis],
-        tmpl->amp_max[(uint32_t)tmpl->sub_axis]) == 0U)
-  {
-    return 0U;
-  }
-
-  for (axis = 0U; axis < AXIS_COUNT; axis++)
-  {
-    if (tmpl->peak_range_enabled[axis] == 0U)
-    {
-      continue;
-    }
-
-    if (session->peak_count == 0U)
-    {
-      return 0U;
-    }
-
-    if (rule_value_in_range(
-          session->peak_mean[axis],
-          tmpl->peak_mean_min[axis],
-          tmpl->peak_mean_max[axis]) == 0U)
-    {
-      return 0U;
-    }
-  }
-
-  return 1U;
-}
-
-float Rule_ComputeTemplateMatchScore(
-  const ActionSession *session,
-  const ActionTemplate *tmpl,
-  float *amp_distance,
-  float *peak_distance)
-{
-  float dist_amp = 0.0f;
-  float dist_peak = 0.0f;
-  uint32_t axis;
-
-  if ((session == NULL) || (tmpl == NULL))
-  {
-    if (amp_distance != NULL)
-    {
-      *amp_distance = RULE_DISTANCE_INVALID;
-    }
-    if (peak_distance != NULL)
-    {
-      *peak_distance = RULE_DISTANCE_INVALID;
-    }
-    return RULE_DISTANCE_INVALID;
-  }
-
-  for (axis = 0U; axis < AXIS_COUNT; axis++)
-  {
-    dist_amp += tmpl->amp_weight[axis] *
-      rule_absf(session->amp[axis] - tmpl->amp_ref[axis]);
-
-    if (session->peak_count != 0U)
-    {
-      dist_peak += tmpl->peak_weight[axis] *
-        rule_absf(session->peak_mean[axis] - tmpl->peak_mean_ref[axis]);
-    }
-  }
-
-  dist_amp += RULE_ALT_AXIS_EXTRA_WEIGHT *
-    rule_absf(session->amp[(uint32_t)tmpl->alt_main_axis] -
-              tmpl->amp_ref[(uint32_t)tmpl->alt_main_axis]);
-
-  if (session->peak_count != 0U)
-  {
-    dist_peak += (RULE_ALT_AXIS_EXTRA_WEIGHT * 0.5f) *
-      rule_absf(session->peak_mean[(uint32_t)tmpl->alt_main_axis] -
-                tmpl->peak_mean_ref[(uint32_t)tmpl->alt_main_axis]);
-  }
-
-  if (amp_distance != NULL)
-  {
-    *amp_distance = dist_amp;
-  }
-
-  if (peak_distance != NULL)
-  {
-    *peak_distance = dist_peak;
-  }
-
-  return dist_amp + dist_peak;
-}
-
-ActionType Rule_RecognizeAction(
-  const ActionSession *session,
-  const ActionTemplate *templates,
-  uint32_t template_count,
-  ActionResult *out_result)
-{
-  uint32_t idx;
-  uint32_t debug_count;
-  float best_distance = RULE_DISTANCE_INVALID;
-  uint32_t best_index = RULE_INVALID_TEMPLATE_INDEX;
-
-  if ((session == NULL) || (templates == NULL) || (template_count == 0U))
-  {
-    if (out_result != NULL)
-    {
-      rule_reset_result(out_result);
-      rule_copy_result_features(out_result, session);
-    }
-    return ACTION_UNKNOWN;
-  }
-
-  if (out_result != NULL)
-  {
-    rule_copy_result_features(out_result, session);
-    out_result->action = ACTION_UNKNOWN;
-    out_result->matched_template_name = NULL;
-    out_result->matched_template = NULL;
-    out_result->matched_template_index = RULE_INVALID_TEMPLATE_INDEX;
-    out_result->match_score = RULE_DISTANCE_INVALID;
-    out_result->primary_axis = session->dominant_axis;
-    out_result->secondary_axis = session->dominant_axis;
-    out_result->alt_primary_axis = session->dominant_axis;
-    out_result->primary_axis_amp =
-      session->amp_abs[(uint32_t)session->dominant_axis];
-    out_result->template_debug_count = 0U;
-  }
-
-  debug_count = (uint32_t)rule_minf(
-    (float)template_count,
-    (float)RULE_TEMPLATE_DEBUG_MAX_COUNT);
-
-  for (idx = 0U; idx < template_count; idx++)
-  {
-    uint8_t passed;
-    float amp_distance = RULE_DISTANCE_INVALID;
-    float peak_distance = RULE_DISTANCE_INVALID;
-    float total_distance = RULE_DISTANCE_INVALID;
-
-    passed = Rule_FilterTemplate(session, &templates[idx]);
-    if (passed != 0U)
-    {
-      total_distance = Rule_ComputeTemplateMatchScore(
-        session,
-        &templates[idx],
-        &amp_distance,
-        &peak_distance);
-
-      if (total_distance < best_distance)
-      {
-        best_distance = total_distance;
-        best_index = idx;
-      }
-    }
-
-    if ((out_result != NULL) && (idx < debug_count))
-    {
-      out_result->template_debug[idx].name = templates[idx].name;
-      out_result->template_debug[idx].action_type = templates[idx].action_type;
-      out_result->template_debug[idx].filter_passed = passed;
-      out_result->template_debug[idx].distance_score = total_distance;
-      out_result->template_debug[idx].amp_distance = amp_distance;
-      out_result->template_debug[idx].peak_distance = peak_distance;
-    }
-  }
-
-  if (out_result != NULL)
-  {
-    out_result->template_debug_count = debug_count;
-  }
-
-  if (best_index == RULE_INVALID_TEMPLATE_INDEX)
-  {
-    return ACTION_UNKNOWN;
-  }
-
-  if (out_result != NULL)
-  {
-    const ActionTemplate *best_template = &templates[best_index];
-
-    out_result->action = best_template->action_type;
-    out_result->matched_template_name = best_template->name;
-    out_result->matched_template = best_template;
-    out_result->matched_template_index = best_index;
-    out_result->match_score = best_distance;
-    out_result->primary_axis = best_template->main_axis;
-    out_result->secondary_axis = best_template->sub_axis;
-    out_result->alt_primary_axis = best_template->alt_main_axis;
-    out_result->primary_axis_amp =
-      session->amp_abs[(uint32_t)best_template->main_axis];
-  }
-
-  return templates[best_index].action_type;
-}
-
-uint16_t Rule_ScoreCompleteness(const ActionSession *session)
-{
-  if (session == NULL)
-  {
-    return 0U;
-  }
-
-  if ((session->has_static_start != 0U) &&
-      (session->has_rising_phase != 0U) &&
-      (session->has_peak_hold != 0U) &&
-      (session->has_falling_phase != 0U) &&
-      (session->returned_to_static != 0U))
-  {
-    return RULE_COMPLETENESS_FULL_SCORE;
-  }
-
-  return 0U;
-}
-
-uint16_t Rule_ScoreAmplitude(
-  const ActionSession *session,
-  const ActionTemplate *tmpl)
-{
-  float axis_amp;
-  float overshoot_margin;
-
-  if ((session == NULL) || (tmpl == NULL))
-  {
-    return 0U;
-  }
-
-  axis_amp = session->amp_abs[(uint32_t)tmpl->main_axis];
-  overshoot_margin = rule_maxf(12.0f, tmpl->amp_ideal_max * 0.20f);
-
-  if (axis_amp < tmpl->amp_min_required)
-  {
-    return rule_scale_score(
-      axis_amp,
-      0.0f,
-      tmpl->amp_min_required,
-      0U,
-      12U);
-  }
-
-  if (axis_amp < tmpl->amp_ideal_min)
-  {
-    return rule_scale_score(
-      axis_amp,
-      tmpl->amp_min_required,
-      tmpl->amp_ideal_min,
-      15U,
-      30U);
-  }
-
-  if (axis_amp <= tmpl->amp_ideal_max)
-  {
-    return RULE_AMPLITUDE_FULL_SCORE;
-  }
-
-  if (axis_amp <= (tmpl->amp_ideal_max + overshoot_margin))
-  {
-    return rule_scale_score(
-      axis_amp,
-      tmpl->amp_ideal_max,
-      tmpl->amp_ideal_max + overshoot_margin,
-      RULE_AMPLITUDE_FULL_SCORE,
-      24U);
-  }
-
-  return 18U;
-}
-
-uint16_t Rule_ScorePeakHold(
-  const ActionSession *session,
-  const ActionTemplate *tmpl)
-{
-  float hold_ms;
-
-  if ((session == NULL) || (tmpl == NULL))
-  {
-    return 0U;
-  }
-
-  if (session->peak_count == 0U)
-  {
-    return 0U;
-  }
-
-  hold_ms = (float)session->peak_hold_ms;
-
-  if (hold_ms < (float)tmpl->peak_hold_min_ms)
-  {
-    return rule_scale_score(
-      hold_ms,
-      0.0f,
-      (float)tmpl->peak_hold_min_ms,
-      0U,
-      8U);
-  }
-
-  if (hold_ms < (float)tmpl->peak_hold_ideal_min_ms)
-  {
-    return rule_scale_score(
-      hold_ms,
-      (float)tmpl->peak_hold_min_ms,
-      (float)tmpl->peak_hold_ideal_min_ms,
-      10U,
-      22U);
-  }
-
-  if (hold_ms <= (float)tmpl->peak_hold_ideal_max_ms)
-  {
-    return RULE_PEAK_HOLD_FULL_SCORE;
-  }
-
-  if (hold_ms <= (float)tmpl->peak_hold_max_ms)
-  {
-    return rule_scale_score(
-      hold_ms,
-      (float)tmpl->peak_hold_ideal_max_ms,
-      (float)tmpl->peak_hold_max_ms,
-      22U,
-      12U);
-  }
-
-  return 6U;
-}
-
-void Rule_EvaluateResult(
-  const RuleConfig *cfg,
-  const ActionSession *session,
-  ActionResult *out_result)
-{
-  const ActionTemplate *tmpl;
-  uint16_t total_score;
-
-  (void)cfg;
-
-  if ((session == NULL) || (out_result == NULL))
-  {
-    return;
-  }
-
-  tmpl = out_result->matched_template;
-
-  out_result->completeness_score = Rule_ScoreCompleteness(session);
-  out_result->amplitude_score = Rule_ScoreAmplitude(session, tmpl);
-  out_result->peak_hold_score = Rule_ScorePeakHold(session, tmpl);
-  out_result->complete =
-    (out_result->completeness_score >= RULE_COMPLETENESS_FULL_SCORE) ? 1U : 0U;
-
-  total_score = (uint16_t)(
-    out_result->completeness_score +
-    out_result->amplitude_score +
-    out_result->peak_hold_score);
-  out_result->score = total_score;
-
-  if (total_score >= 85U)
-  {
-    out_result->grade = RULE_GRADE_EXCELLENT;
-  }
-  else if (total_score >= 70U)
-  {
-    out_result->grade = RULE_GRADE_GOOD;
-  }
-  else if (total_score >= 60U)
-  {
-    out_result->grade = RULE_GRADE_PASS;
-  }
-  else
-  {
-    out_result->grade = RULE_GRADE_FAIL;
-  }
-}
-
-const ActionTemplate* Rule_GetDefaultTemplates(uint32_t *count)
-{
-  if (count != NULL)
-  {
-    *count = (uint32_t)(sizeof(g_rule_default_templates) / sizeof(g_rule_default_templates[0]));
-  }
-
-  return g_rule_default_templates;
 }
 
 const ActionResult* RuleEngine_GetResult(const RuleEngine *eng)
@@ -1074,7 +443,8 @@ const ActionSession* RuleEngine_GetSession(const RuleEngine *eng)
 
 const char* Rule_StateName(RuleState state)
 {
-  if ((uint32_t)state < (sizeof(g_rule_state_names) / sizeof(g_rule_state_names[0])))
+  if ((uint32_t)state <
+      (sizeof(g_rule_state_names) / sizeof(g_rule_state_names[0])))
   {
     return g_rule_state_names[(uint32_t)state];
   }
@@ -1084,32 +454,13 @@ const char* Rule_StateName(RuleState state)
 
 const char* Rule_ActionName(ActionType action)
 {
-  if ((uint32_t)action < (sizeof(g_rule_action_names) / sizeof(g_rule_action_names[0])))
+  if ((uint32_t)action <
+      (sizeof(g_rule_action_names) / sizeof(g_rule_action_names[0])))
   {
     return g_rule_action_names[(uint32_t)action];
   }
 
-  return "unknown";
-}
-
-const char* Rule_GradeName(RuleGrade grade)
-{
-  if ((uint32_t)grade < (sizeof(g_rule_grade_names) / sizeof(g_rule_grade_names[0])))
-  {
-    return g_rule_grade_names[(uint32_t)grade];
-  }
-
-  return "fail";
-}
-
-const char* Rule_AxisName(AxisIndex axis)
-{
-  if ((uint32_t)axis < (sizeof(g_rule_axis_names) / sizeof(g_rule_axis_names[0])))
-  {
-    return g_rule_axis_names[(uint32_t)axis];
-  }
-
-  return "unknown_axis";
+  return "unknown2";
 }
 
 static float rule_absf(float value)
@@ -1119,12 +470,21 @@ static float rule_absf(float value)
 
 static float rule_maxf(float a, float b)
 {
-  return (a > b) ? a : b;
+  return (a >= b) ? a : b;
 }
 
-static float rule_minf(float a, float b)
+static float rule_normalize_angle_delta(float value)
 {
-  return (a < b) ? a : b;
+  while (value > 180.0f)
+  {
+    value -= 360.0f;
+  }
+  while (value < -180.0f)
+  {
+    value += 360.0f;
+  }
+
+  return value;
 }
 
 static uint32_t rule_elapsed_ms(uint32_t start_ms, uint32_t now_ms)
@@ -1132,66 +492,68 @@ static uint32_t rule_elapsed_ms(uint32_t start_ms, uint32_t now_ms)
   return now_ms - start_ms;
 }
 
-static float rule_normalize_linear(float value, float min_value, float max_value)
+static uint8_t rule_time_in_range(
+  uint32_t value,
+  uint32_t min_value,
+  uint32_t max_value)
 {
-  if (max_value <= min_value)
-  {
-    return 1.0f;
-  }
+  return ((value >= min_value) && (value <= max_value)) ? 1U : 0U;
+}
 
-  if (value <= min_value)
+static float rule_median_values(const float *values, uint16_t count)
+{
+  uint16_t i;
+
+  if ((values == NULL) || (count == 0U))
   {
     return 0.0f;
   }
 
-  if (value >= max_value)
+  if (count > RULE_MAX_RECORD_FRAMES)
   {
-    return 1.0f;
+    count = RULE_MAX_RECORD_FRAMES;
   }
 
-  return (value - min_value) / (max_value - min_value);
+  for (i = 0U; i < count; i++)
+  {
+    s_rule_median_scratch[i] = values[i];
+  }
+
+  for (i = 1U; i < count; i++)
+  {
+    float value = s_rule_median_scratch[i];
+    uint16_t j = i;
+
+    while ((j > 0U) && (s_rule_median_scratch[j - 1U] > value))
+    {
+      s_rule_median_scratch[j] = s_rule_median_scratch[j - 1U];
+      j--;
+    }
+    s_rule_median_scratch[j] = value;
+  }
+
+  if ((count & 1U) != 0U)
+  {
+    return s_rule_median_scratch[count / 2U];
+  }
+
+  return (s_rule_median_scratch[(count / 2U) - 1U] +
+          s_rule_median_scratch[count / 2U]) * 0.5f;
 }
 
-static uint16_t rule_scale_score(
-  float value,
-  float in_min,
-  float in_max,
-  uint16_t out_min,
-  uint16_t out_max)
+static float rule_pose_offset(
+  const float pose[RULE_UPPER_AXIS_COUNT],
+  const float base[RULE_UPPER_AXIS_COUNT])
 {
-  float ratio;
-  float score;
+  uint32_t axis;
+  float offset = 0.0f;
 
-  ratio = rule_normalize_linear(value, in_min, in_max);
-  score = (float)out_min + ratio * (float)((int32_t)out_max - (int32_t)out_min);
-
-  if (score < 0.0f)
+  for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
   {
-    score = 0.0f;
+    offset = rule_maxf(offset, rule_absf(pose[axis] - base[axis]));
   }
 
-  if (score > 100.0f)
-  {
-    score = 100.0f;
-  }
-
-  return (uint16_t)(score + 0.5f);
-}
-
-static uint8_t rule_value_in_range(float value, float min_value, float max_value)
-{
-  float low;
-  float high;
-
-  low = rule_minf(min_value, max_value);
-  high = rule_maxf(min_value, max_value);
-
-  if ((value < low) || (value > high))
-  {
-    return 0U;
-  }
-
-  return 1U;
+  return offset;
 }
 
 static void rule_reset_result(ActionResult *result)
@@ -1202,210 +564,584 @@ static void rule_reset_result(ActionResult *result)
   }
 
   memset(result, 0, sizeof(*result));
-  result->action = ACTION_UNKNOWN;
-  result->grade = RULE_GRADE_FAIL;
-  result->matched_template_index = RULE_INVALID_TEMPLATE_INDEX;
-  result->match_score = RULE_DISTANCE_INVALID;
-  result->primary_axis = AXIS_UPPER_YAW;
-  result->secondary_axis = AXIS_UPPER_YAW;
-  result->alt_primary_axis = AXIS_UPPER_YAW;
+  result->action = ACTION_NONE;
+  result->best_distance = RULE_DISTANCE_INVALID;
+  result->second_distance = RULE_DISTANCE_INVALID;
 }
 
-static void rule_copy_result_features(ActionResult *result, const ActionSession *session)
-{
-  if ((result == NULL) || (session == NULL))
-  {
-    return;
-  }
-
-  memcpy(result->amp, session->amp, sizeof(result->amp));
-  memcpy(result->peak_mean, session->peak_mean, sizeof(result->peak_mean));
-  result->peak_hold_ms = session->peak_hold_ms;
-  result->total_time_ms = session->total_time_ms;
-}
-
-static void rule_reset_static_accumulator(RuleEngine *eng)
+static void rule_reset_static_window(RuleEngine *eng, uint32_t now_ms)
 {
   if (eng == NULL)
   {
     return;
   }
 
+  eng->static_window_start_ms = now_ms;
+  eng->static_total_frames = 0U;
+  eng->static_accept_frames = 0U;
+  eng->static_baseline_frame_count = 0U;
+  eng->static_break_timer_active = 0U;
   memset(eng->static_sum, 0, sizeof(eng->static_sum));
-  eng->static_frame_count = 0U;
 }
 
-static void rule_compute_delta(RuleEngine *eng)
+static void rule_enter_state(RuleEngine *eng, RuleState state)
+{
+  eng->state = state;
+  eng->state_enter_ms = eng->now_ms;
+}
+
+static void rule_enter_recover(RuleEngine *eng)
+{
+  eng->baseline_valid = 0U;
+  eng->recover_timer_active = 0U;
+  rule_reset_static_window(eng, eng->now_ms);
+  rule_enter_state(eng, RULE_STATE_WAIT_STATICS);
+}
+
+static void rule_enter_wait_static(RuleEngine *eng)
+{
+  eng->baseline_valid = 0U;
+  eng->recover_timer_active = 0U;
+  rule_reset_static_window(eng, eng->now_ms);
+  rule_enter_state(eng, RULE_STATE_WAIT_STATIC);
+}
+
+static void rule_update_pose(
+  RuleEngine *eng,
+  const float raw[AXIS_COUNT],
+  uint32_t now_ms)
+{
+  uint32_t axis;
+  uint32_t dt_ms;
+  float max_speed = 0.0f;
+
+  if (eng->has_prev_raw == 0U)
+  {
+    for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
+    {
+      eng->raw[axis] = raw[axis];
+      eng->prev_raw[axis] = raw[axis];
+      eng->pose[axis] = raw[axis];
+    }
+    eng->prev_ms = now_ms;
+    eng->motion_speed_dps = 0.0f;
+    eng->has_prev_raw = 1U;
+    return;
+  }
+
+  dt_ms = rule_elapsed_ms(eng->prev_ms, now_ms);
+  for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
+  {
+    float frame_delta = rule_normalize_angle_delta(raw[axis] - eng->prev_raw[axis]);
+    float axis_speed = 0.0f;
+
+    eng->raw[axis] = raw[axis];
+    eng->pose[axis] += frame_delta;
+    eng->prev_raw[axis] = raw[axis];
+
+    if (dt_ms > 0U)
+    {
+      axis_speed = rule_absf(frame_delta) * 1000.0f / (float)dt_ms;
+    }
+    max_speed = rule_maxf(max_speed, axis_speed);
+  }
+
+  eng->prev_ms = now_ms;
+  eng->motion_speed_dps = max_speed;
+}
+
+static void rule_update_delta(RuleEngine *eng)
 {
   uint32_t axis;
 
-  for (axis = 0U; axis < AXIS_COUNT; axis++)
+  if (eng->baseline_valid == 0U)
   {
-    eng->delta[axis] = eng->raw[axis] - eng->base_mean[axis];
+    memset(eng->delta, 0, sizeof(eng->delta));
+    eng->pose_offset_deg = 0.0f;
+    return;
   }
+
+  for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
+  {
+    eng->delta[axis] = eng->pose[axis] - eng->base_pose[axis];
+  }
+  eng->pose_offset_deg = rule_pose_offset(eng->pose, eng->base_pose);
 }
 
 static void rule_lock_baseline(RuleEngine *eng)
 {
   uint32_t axis;
-  float divisor;
 
-  if ((eng == NULL) || (eng->static_frame_count == 0U))
+  if ((eng == NULL) || (eng->static_accept_frames == 0U) ||
+      (eng->static_baseline_frame_count == 0U))
   {
     return;
   }
 
-  divisor = (float)eng->static_frame_count;
-  for (axis = 0U; axis < AXIS_COUNT; axis++)
+  for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
   {
-    eng->base_mean[axis] = eng->static_sum[axis] / divisor;
-  }
+    uint16_t index;
 
+    for (index = 0U; index < eng->static_baseline_frame_count; index++)
+    {
+      s_rule_median_scratch[index] =
+        eng->static_baseline_frames[index][axis];
+    }
+    eng->base_pose[axis] = rule_median_values(
+      s_rule_median_scratch,
+      eng->static_baseline_frame_count);
+  }
   eng->baseline_valid = 1U;
-  rule_compute_delta(eng);
+  eng->pose_offset_deg = rule_pose_offset(eng->pose, eng->base_pose);
+  eng->pretrigger_head = 0U;
+  eng->pretrigger_count = 0U;
 }
 
-static void rule_update_static_candidate(RuleEngine *eng, const float raw[AXIS_COUNT])
+static void rule_store_pretrigger(RuleEngine *eng)
 {
-  uint32_t axis;
+  RulePoseSample *sample;
 
-  if ((eng == NULL) || (raw == NULL))
-  {
-    return;
-  }
+  sample = &eng->pretrigger[eng->pretrigger_head];
+  sample->ts_ms = eng->now_ms;
+  sample->speed_dps = eng->motion_speed_dps;
+  memcpy(sample->pose, eng->pose, sizeof(sample->pose));
 
-  if (eng->static_frame_count == 0U)
+  eng->pretrigger_head =
+    (uint16_t)((eng->pretrigger_head + 1U) % RULE_PRETRIGGER_MAX_FRAMES);
+  if (eng->pretrigger_count < RULE_PRETRIGGER_MAX_FRAMES)
   {
-    memset(eng->static_sum, 0, sizeof(eng->static_sum));
-  }
-
-  for (axis = 0U; axis < AXIS_COUNT; axis++)
-  {
-    eng->static_sum[axis] += raw[axis];
-  }
-
-  if (eng->static_frame_count < 0xFFFFU)
-  {
-    eng->static_frame_count++;
+    eng->pretrigger_count++;
   }
 }
 
-static void rule_store_session_frame(
+static uint8_t rule_append_session_sample(
   ActionSession *session,
-  const float raw[AXIS_COUNT],
-  const float delta[AXIS_COUNT])
+  const RulePoseSample *sample)
 {
-  if ((session == NULL) || (raw == NULL) || (delta == NULL))
-  {
-    return;
-  }
-
-  memcpy(session->last_raw, raw, sizeof(session->last_raw));
-  memcpy(session->last_delta, delta, sizeof(session->last_delta));
-}
-
-static void rule_begin_action(RuleEngine *eng)
-{
-  if (eng == NULL)
-  {
-    return;
-  }
-
-  RuleEngine_ResetSession(eng);
-
-  eng->session.active = 1U;
-  eng->session.has_static_start = (eng->baseline_valid != 0U) ? 1U : 0U;
-  eng->session.has_rising_phase = 1U;
-  eng->session.start_ms = eng->now_ms;
-  eng->session.rise_start_ms = eng->now_ms;
-  memcpy(eng->session.base_mean, eng->base_mean, sizeof(eng->session.base_mean));
-
-  Rule_UpdateAmplitudeStats(&eng->session, eng->delta);
-  rule_store_session_frame(&eng->session, eng->raw, eng->delta);
-  eng->state = RULE_STATE_ACTION_RISING;
-}
-
-static void rule_finalize_action(RuleEngine *eng, uint8_t returned_to_static)
-{
-  ActionType action_type;
-
-  if (eng == NULL)
-  {
-    return;
-  }
-
-  eng->session.active = 0U;
-  eng->session.returned_to_static = returned_to_static;
-  eng->session.end_ms = eng->now_ms;
-  eng->session.total_time_ms = rule_elapsed_ms(
-    eng->session.start_ms,
-    eng->session.end_ms);
-
-  if ((eng->session.has_peak_hold != 0U) &&
-      (eng->session.fall_start_ms >= eng->session.peak_enter_ms))
-  {
-    eng->session.peak_hold_ms = rule_elapsed_ms(
-      eng->session.peak_enter_ms,
-      eng->session.fall_start_ms);
-  }
-
-  if ((eng->session.has_falling_phase != 0U) &&
-      (eng->session.end_ms >= eng->session.fall_start_ms))
-  {
-    eng->session.fall_time_ms = rule_elapsed_ms(
-      eng->session.fall_start_ms,
-      eng->session.end_ms);
-  }
-
-  eng->result.valid = 1U;
-  rule_copy_result_features(&eng->result, &eng->session);
-
-  action_type = Rule_RecognizeAction(
-    &eng->session,
-    eng->templates,
-    eng->template_count,
-    &eng->result);
-  eng->result.action = action_type;
-  Rule_EvaluateResult(&eng->cfg, &eng->session, &eng->result);
-}
-
-static uint8_t rule_session_timed_out(const RuleEngine *eng)
-{
-  if ((eng == NULL) || (eng->session.start_ms == 0U))
+  if ((session == NULL) || (sample == NULL) ||
+      (session->frame_count >= RULE_MAX_RECORD_FRAMES))
   {
     return 0U;
   }
 
-  if (rule_elapsed_ms(eng->session.start_ms, eng->now_ms) >= eng->cfg.action_timeout_ms)
-  {
-    return 1U;
-  }
-
-  return 0U;
+  session->frames[session->frame_count] = *sample;
+  session->frame_count++;
+  return 1U;
 }
 
-static AxisIndex rule_find_dominant_axis(const ActionSession *session)
+static void rule_begin_recording(RuleEngine *eng)
 {
-  AxisIndex best_axis;
-  uint32_t axis;
-  float best_amp;
+  uint16_t index;
+  uint16_t oldest;
 
-  if (session == NULL)
+  memset(&eng->session, 0, sizeof(eng->session));
+  rule_reset_result(&eng->result);
+  eng->session.active = 1U;
+  memcpy(eng->session.base_pose, eng->base_pose, sizeof(eng->session.base_pose));
+
+  oldest = (uint16_t)(
+    (eng->pretrigger_head + RULE_PRETRIGGER_MAX_FRAMES -
+     eng->pretrigger_count) % RULE_PRETRIGGER_MAX_FRAMES);
+
+  for (index = 0U; index < eng->pretrigger_count; index++)
   {
-    return AXIS_UPPER_YAW;
-  }
+    uint16_t sample_index =
+      (uint16_t)((oldest + index) % RULE_PRETRIGGER_MAX_FRAMES);
+    const RulePoseSample *sample = &eng->pretrigger[sample_index];
 
-  best_axis = AXIS_UPPER_YAW;
-  best_amp = session->amp_abs[(uint32_t)best_axis];
-
-  for (axis = 1U; axis < AXIS_COUNT; axis++)
-  {
-    if (session->amp_abs[axis] > best_amp)
+    if (rule_elapsed_ms(sample->ts_ms, eng->now_ms) <= eng->cfg.pretrigger_ms)
     {
-      best_amp = session->amp_abs[axis];
-      best_axis = (AxisIndex)axis;
+      (void)rule_append_session_sample(&eng->session, sample);
     }
   }
 
-  return best_axis;
+  eng->session.start_ms = eng->ready_start_ms;
+
+  eng->ready_start_timer_active = 0U;
+  eng->return_timer_active = 0U;
+  rule_enter_state(eng, RULE_STATE_RECORDING);
+}
+
+static float rule_sample_offset(
+  const RulePoseSample *sample,
+  const float base[RULE_UPPER_AXIS_COUNT])
+{
+  return rule_pose_offset(sample->pose, base);
+}
+
+static float rule_median_axis(
+  const ActionSession *session,
+  uint16_t start_index,
+  uint16_t end_index,
+  uint32_t axis)
+{
+  uint16_t count;
+  uint16_t i;
+
+  count = (uint16_t)(end_index - start_index + 1U);
+  for (i = 0U; i < count; i++)
+  {
+    s_rule_median_scratch[i] =
+      session->frames[(uint16_t)(start_index + i)].pose[axis];
+  }
+
+  for (i = 1U; i < count; i++)
+  {
+    float value = s_rule_median_scratch[i];
+    uint16_t j = i;
+
+    while ((j > 0U) && (s_rule_median_scratch[j - 1U] > value))
+    {
+      s_rule_median_scratch[j] = s_rule_median_scratch[j - 1U];
+      j--;
+    }
+    s_rule_median_scratch[j] = value;
+  }
+
+  if ((count & 1U) != 0U)
+  {
+    return s_rule_median_scratch[count / 2U];
+  }
+
+  return (s_rule_median_scratch[(count / 2U) - 1U] +
+          s_rule_median_scratch[count / 2U]) * 0.5f;
+}
+
+static uint8_t rule_find_top_window(
+  const RuleEngine *eng,
+  uint16_t *out_start_index,
+  uint16_t *out_end_index)
+{
+  const ActionSession *session = &eng->session;
+  float max_offset = 0.0f;
+  uint16_t index;
+  uint16_t run_start = 0U;
+  uint16_t best_start = 0U;
+  uint16_t best_end = 0U;
+  uint32_t best_duration = 0U;
+  uint8_t in_run = 0U;
+
+  if ((session->frame_count == 0U) ||
+      (out_start_index == NULL) || (out_end_index == NULL))
+  {
+    return 0U;
+  }
+
+  for (index = 0U; index < session->frame_count; index++)
+  {
+    max_offset = rule_maxf(
+      max_offset,
+      rule_sample_offset(&session->frames[index], session->base_pose));
+  }
+
+  for (index = 0U; index < session->frame_count; index++)
+  {
+    float offset =
+      rule_sample_offset(&session->frames[index], session->base_pose);
+    uint8_t is_top =
+      ((offset >= (max_offset - eng->cfg.top_near_max_deg)) &&
+       (session->frames[index].speed_dps <= eng->cfg.top_stable_speed_dps)) ?
+      1U : 0U;
+
+    if ((is_top != 0U) && (in_run == 0U))
+    {
+      run_start = index;
+      in_run = 1U;
+    }
+
+    if ((in_run != 0U) &&
+        ((is_top == 0U) || (index == (uint16_t)(session->frame_count - 1U))))
+    {
+      uint16_t run_end = (is_top != 0U) ? index : (uint16_t)(index - 1U);
+      uint32_t duration = rule_elapsed_ms(
+        session->frames[run_start].ts_ms,
+        session->frames[run_end].ts_ms);
+
+      if (duration > best_duration)
+      {
+        best_duration = duration;
+        best_start = run_start;
+        best_end = run_end;
+      }
+      in_run = 0U;
+    }
+  }
+
+  if (best_duration < eng->cfg.top_min_hold_ms)
+  {
+    return 0U;
+  }
+
+  *out_start_index = best_start;
+  *out_end_index = best_end;
+  return 1U;
+}
+
+static uint8_t rule_side_direction_match(const ActionSession *session)
+{
+  float abs_yaw;
+  float abs_pitch;
+  float abs_roll;
+  float total_sq;
+  float pitch_ratio_sq;
+
+  if ((session == NULL) || (session->top_valid == 0U))
+  {
+    return 0U;
+  }
+
+  abs_yaw = rule_absf(session->top_delta[AXIS_UPPER_YAW]);
+  abs_pitch = rule_absf(session->top_delta[AXIS_UPPER_PITCH]);
+  abs_roll = rule_absf(session->top_delta[AXIS_UPPER_ROLL]);
+
+  if ((abs_pitch < RULE_SIDE_DIRECTION_MIN_PITCH_DELTA_DEG) ||
+      (abs_pitch > RULE_SIDE_DIRECTION_MAX_PITCH_DELTA_DEG))
+  {
+    return 0U;
+  }
+
+  total_sq =
+    (abs_yaw * abs_yaw) +
+    (abs_pitch * abs_pitch) +
+    (abs_roll * abs_roll);
+  if (total_sq <= 0.0f)
+  {
+    return 0U;
+  }
+
+  pitch_ratio_sq =
+    RULE_SIDE_DIRECTION_MIN_PITCH_RATIO *
+    RULE_SIDE_DIRECTION_MIN_PITCH_RATIO;
+  if ((abs_pitch * abs_pitch) < (pitch_ratio_sq * total_sq))
+  {
+    return 0U;
+  }
+
+  if ((abs_yaw + abs_roll) >
+      (RULE_SIDE_DIRECTION_MAX_YR_RATIO * abs_pitch))
+  {
+    return 0U;
+  }
+
+  return 1U;
+}
+
+static float rule_template_distance(
+  const ActionSession *session,
+  const RuleActionTemplate *tmpl)
+{
+  uint32_t axis;
+  float weighted_distance = 0.0f;
+  float weight_sum = 0.0f;
+
+  if ((tmpl->action == ACTION_SIDE_RAISE) &&
+      (rule_side_direction_match(session) == 0U))
+  {
+    return RULE_DISTANCE_INVALID;
+  }
+
+  for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
+  {
+    float tolerance = tmpl->tolerance[axis];
+
+    if (tolerance <= 0.0f)
+    {
+      continue;
+    }
+
+    weighted_distance += tmpl->weight[axis] *
+      rule_absf(rule_absf(session->top_delta[axis]) - tmpl->center[axis]) /
+      tolerance;
+    weight_sum += tmpl->weight[axis];
+  }
+
+  if (weight_sum <= 0.0f)
+  {
+    return RULE_DISTANCE_INVALID;
+  }
+
+  return weighted_distance / weight_sum;
+}
+
+static ActionType rule_classify_action(
+  const ActionSession *session,
+  float *out_best_distance,
+  float *out_second_distance)
+{
+  uint32_t index;
+  float best_distance = RULE_DISTANCE_INVALID;
+  float second_distance = RULE_DISTANCE_INVALID;
+  ActionType best_action = ACTION_UNKNOWN2;
+
+  for (index = 0U;
+       index < (sizeof(g_rule_templates) / sizeof(g_rule_templates[0]));
+       index++)
+  {
+    float distance = rule_template_distance(session, &g_rule_templates[index]);
+
+    if (distance < best_distance)
+    {
+      second_distance = best_distance;
+      best_distance = distance;
+      best_action = g_rule_templates[index].action;
+    }
+    else if (distance < second_distance)
+    {
+      second_distance = distance;
+    }
+  }
+
+  if (out_best_distance != NULL)
+  {
+    *out_best_distance = best_distance;
+  }
+  if (out_second_distance != NULL)
+  {
+    *out_second_distance = second_distance;
+  }
+
+  if (best_distance > RULE_TEMPLATE_ACCEPT_DISTANCE)
+  {
+    return ACTION_UNKNOWN2;
+  }
+  if ((second_distance - best_distance) < RULE_TEMPLATE_MIN_SEPARATION)
+  {
+    return ACTION_UNKNOWN1;
+  }
+
+  return best_action;
+}
+
+static uint8_t rule_timing_is_valid(const ActionSession *session)
+{
+  return
+    (rule_time_in_range(
+       session->rise_time_ms,
+       RULE_CFG_RISE_MIN_MS,
+       RULE_CFG_RISE_MAX_MS) != 0U) &&
+    (rule_time_in_range(
+       session->hold_time_ms,
+       RULE_CFG_HOLD_MIN_MS,
+       RULE_CFG_HOLD_MAX_MS) != 0U) &&
+    (rule_time_in_range(
+       session->fall_time_ms,
+       RULE_CFG_FALL_MIN_MS,
+       RULE_CFG_FALL_MAX_MS) != 0U) &&
+    (rule_time_in_range(
+       session->total_time_ms,
+       RULE_CFG_TOTAL_MIN_MS,
+       RULE_CFG_TOTAL_MAX_MS) != 0U) ? 1U : 0U;
+}
+
+static void rule_copy_result(
+  const ActionSession *session,
+  ActionResult *result)
+{
+  result->valid = 1U;
+  result->returned_to_static = session->returned_to_static;
+  result->timed_out = session->timed_out;
+  result->rise_time_ms = session->rise_time_ms;
+  result->hold_time_ms = session->hold_time_ms;
+  result->fall_time_ms = session->fall_time_ms;
+  result->total_time_ms = session->total_time_ms;
+  result->return_error_deg = session->return_error_deg;
+  memcpy(result->top_pose, session->top_pose, sizeof(result->top_pose));
+  memcpy(result->top_delta, session->top_delta, sizeof(result->top_delta));
+}
+
+static void rule_analyze_session(RuleEngine *eng)
+{
+  ActionSession *session = &eng->session;
+  uint16_t top_start_index = 0U;
+  uint16_t top_end_index = 0U;
+  uint16_t index;
+  uint32_t axis;
+
+  rule_reset_result(&eng->result);
+  session->active = 0U;
+  session->total_time_ms = rule_elapsed_ms(session->start_ms, session->end_ms);
+
+  if (session->frame_count < 3U)
+  {
+    eng->result.valid = 1U;
+    eng->result.action = ACTION_UNKNOWN2;
+    return;
+  }
+
+  for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
+  {
+    float first_delta =
+      session->frames[0].pose[axis] - session->base_pose[axis];
+
+    session->max_delta[axis] = first_delta;
+    session->min_delta[axis] = first_delta;
+  }
+
+  session->max_offset_deg = 0.0f;
+  for (index = 0U; index < session->frame_count; index++)
+  {
+    float offset =
+      rule_sample_offset(&session->frames[index], session->base_pose);
+
+    session->max_offset_deg = rule_maxf(session->max_offset_deg, offset);
+    for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
+    {
+      float delta =
+        session->frames[index].pose[axis] - session->base_pose[axis];
+
+      if (delta > session->max_delta[axis])
+      {
+        session->max_delta[axis] = delta;
+      }
+      if (delta < session->min_delta[axis])
+      {
+        session->min_delta[axis] = delta;
+      }
+    }
+  }
+
+  if (rule_find_top_window(eng, &top_start_index, &top_end_index) == 0U)
+  {
+    eng->result.valid = 1U;
+    eng->result.action = ACTION_UNKNOWN2;
+    return;
+  }
+
+  session->top_valid = 1U;
+  for (axis = 0U; axis < RULE_UPPER_AXIS_COUNT; axis++)
+  {
+    session->top_pose[axis] =
+      rule_median_axis(session, top_start_index, top_end_index, axis);
+    session->top_delta[axis] =
+      session->top_pose[axis] - session->base_pose[axis];
+    session->rise_direction[axis] =
+      (session->top_delta[axis] > 0.0f) ? 1.0f :
+      ((session->top_delta[axis] < 0.0f) ? -1.0f : 0.0f);
+  }
+
+  session->rise_time_ms = rule_elapsed_ms(
+    session->start_ms,
+    session->frames[top_start_index].ts_ms);
+  session->hold_time_ms = rule_elapsed_ms(
+    session->frames[top_start_index].ts_ms,
+    session->frames[top_end_index].ts_ms);
+  session->fall_time_ms = rule_elapsed_ms(
+    session->frames[top_end_index].ts_ms,
+    session->end_ms);
+
+  rule_copy_result(session, &eng->result);
+
+  if ((session->returned_to_static == 0U) ||
+      (session->timed_out != 0U) ||
+      (session->max_offset_deg < eng->cfg.action_min_peak_offset_deg) ||
+      (rule_timing_is_valid(session) == 0U))
+  {
+    eng->result.action = ACTION_UNKNOWN2;
+    return;
+  }
+
+  eng->result.action = rule_classify_action(
+    session,
+    &eng->result.best_distance,
+    &eng->result.second_distance);
 }

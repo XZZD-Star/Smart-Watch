@@ -465,8 +465,15 @@ static void lt_screen_handle_training_start(void)
 
 static void lt_screen_handle_training_stop(void)
 {
+  static const uint8_t text_not_done[] = {0xCEU, 0xB4U, 0xCDU, 0xEAU, 0xB3U, 0xC9U};
+
   s_lt_screen_training_active = 0U;
   s_lt_screen_training_page_entered = 0U;
+  s_lt_screen_calibration_done = 0U;
+  LT168B_SendStr(0x10U,
+                 LTSCREEN_CALIBRATION_STATUS_ADDR,
+                 text_not_done,
+                 (uint8_t)sizeof(text_not_done));
   lt_screen_reset_training_counts();
   lt_screen_sync_training_counts();
   MotionEvents_ClearTrainingPageRefresh();

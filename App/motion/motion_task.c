@@ -24,11 +24,14 @@ static uint8_t task1_consume_ai_stop_request(void);
 static uint8_t task1_try_take_fused_frame(motion_fused_frame_t *frame);
 static uint8_t task1_try_run_model_window_test(void);
 static uint8_t task1_mode_uses_single_test(motion_output_mode_t mode);
+static uint8_t task1_mode_uses_upper_only(motion_output_mode_t mode);
+static void task1_upper_capture_output_reset(void);
 static void task1_output_state_reset(motion_output_mode_t mode, uint8_t fresh_session);
 static void task1_reset_recognition_state(void);
 static int32_t task1_encode_action_kind_value(int32_t test_value);
 static void task1_process_fused_frame(const motion_fused_frame_t *frame);
 static void task1_handle_local_fall_result(const motion_ai_result_t *result);
+static void task1_output_upper_capture_csv(const motion_fused_frame_t *frame);
 static void task1_output_capture_csv(const motion_fused_frame_t *frame);
 static void task1_output_bio_capture_csv(const motion_fused_frame_t *frame);
 static void task1_output_uart_debug_once(void);
@@ -42,11 +45,15 @@ static RuleEngine g_task1_rule_engine;
 typedef struct
 {
   motion_output_mode_t last_mode;
+  uint8_t upper_capture_header_printed;
+  uint8_t upper_capture_epoch_valid;
+  uint64_t upper_capture_epoch_us;
   uint8_t capture_header_printed;
   uint8_t bio_capture_header_printed;
   uint8_t uart_debug_reported;
   uint8_t recognition_header_printed;
   uint8_t rule_header_printed;
+  RuleState rule_last_state;
   uint8_t recognition_done_reported;
   uint8_t brief_last_infer_count;
   uint8_t brief_final_reported;
@@ -60,17 +67,9 @@ volatile uint8_t g_motion_single_armed = 0U;
 
 static motion_output_state_t g_task1_output_state =
 {
-  (motion_output_mode_t)0xFF,
-  0U,
-  0U,
-  0U,
-  0U,
-  0U,
-  0U,
-  0U,
-  0U,
-  0U,
-  (motion_ai_state_t)0xFF
+  .last_mode = (motion_output_mode_t)0xFF,
+  .rule_last_state = (RuleState)0xFF,
+  .single_once_last_state = (motion_ai_state_t)0xFF
 };
 
 static uint8_t task1_consume_ai_restart_request(void)
@@ -89,6 +88,12 @@ static uint8_t task1_mode_uses_single_test(motion_output_mode_t mode)
   return (mode == MOTION_OUTPUT_MODE_RUN) ? 1U : 0U;
 }
 
+static uint8_t task1_mode_uses_upper_only(motion_output_mode_t mode)
+{
+  return ((mode == MOTION_OUTPUT_MODE_UPPER_CAPTURE) ||
+          (mode == MOTION_OUTPUT_MODE_RULE_DEBUG)) ? 1U : 0U;
+}
+
 static uint8_t task1_try_run_model_window_test(void)
 {
   if (g_motion_output_mode != MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST)
@@ -104,16 +109,25 @@ static int32_t task1_encode_action_kind_value(int32_t test_value)
   return MotionEvents_EncodeActionKind(test_value);
 }
 
+static void task1_upper_capture_output_reset(void)
+{
+  g_task1_output_state.upper_capture_header_printed = 0U;
+  g_task1_output_state.upper_capture_epoch_valid = 0U;
+  g_task1_output_state.upper_capture_epoch_us = 0ULL;
+}
+
 static void task1_output_state_reset(motion_output_mode_t mode, uint8_t fresh_session)
 {
   const motion_ai_result_t *result = MotionAi_GetResult();
 
   g_task1_output_state.last_mode = mode;
+  task1_upper_capture_output_reset();
   g_task1_output_state.capture_header_printed = 0U;
   g_task1_output_state.bio_capture_header_printed = 0U;
   g_task1_output_state.uart_debug_reported = 0U;
   g_task1_output_state.recognition_header_printed = 0U;
   g_task1_output_state.rule_header_printed = 0U;
+  g_task1_output_state.rule_last_state = (RuleState)0xFF;
 
   if (mode == MOTION_OUTPUT_MODE_UART_DEBUG)
   {
@@ -171,7 +185,8 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
       (current_mode != MOTION_OUTPUT_MODE_BIO_CAPTURE) &&
       (current_mode != MOTION_OUTPUT_MODE_UART_DEBUG) &&
       (current_mode != MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST) &&
-      (current_mode != MOTION_OUTPUT_MODE_RULE_DEBUG))
+      (current_mode != MOTION_OUTPUT_MODE_RULE_DEBUG) &&
+      (current_mode != MOTION_OUTPUT_MODE_UPPER_CAPTURE))
   {
     current_mode = MOTION_OUTPUT_MODE_RUN;
   }
@@ -210,6 +225,10 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
       task1_output_single_once_event(frame, result);
       break;
 
+    case MOTION_OUTPUT_MODE_UPPER_CAPTURE:
+      task1_output_upper_capture_csv(frame);
+      break;
+
     case MOTION_OUTPUT_MODE_CAPTURE:
       task1_output_capture_csv(frame);
       break;
@@ -228,6 +247,11 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
     case MOTION_OUTPUT_MODE_RULE_DEBUG:
       {
         float raw[AXIS_COUNT];
+
+        if (g_motion_single_armed == 0U)
+        {
+          return;
+        }
 
         raw[AXIS_UPPER_YAW] = frame->upper_yaw;
         raw[AXIS_UPPER_PITCH] = frame->upper_pitch;
@@ -254,6 +278,37 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
       task1_output_single_once_event(frame, result);
       break;
   }
+}
+
+static void task1_output_upper_capture_csv(const motion_fused_frame_t *frame)
+{
+  uint64_t relative_ts_ms;
+
+  if (frame == NULL)
+  {
+    return;
+  }
+
+  if (g_task1_output_state.upper_capture_epoch_valid == 0U)
+  {
+    g_task1_output_state.upper_capture_epoch_us = frame->ts_us;
+    g_task1_output_state.upper_capture_epoch_valid = 1U;
+  }
+
+  relative_ts_ms =
+    (frame->ts_us - g_task1_output_state.upper_capture_epoch_us) / 1000ULL;
+
+  if (g_task1_output_state.upper_capture_header_printed == 0U)
+  {
+    printf("ts_ms,upper_yaw,upper_pitch,upper_roll\r\n");
+    g_task1_output_state.upper_capture_header_printed = 1U;
+  }
+
+  printf("%llu,  %.2f,  %.2f,  %.2f\r\n",
+         (unsigned long long)relative_ts_ms,
+         frame->upper_yaw,
+         frame->upper_pitch,
+         frame->upper_roll);
 }
 
 static void task1_handle_local_fall_result(const motion_ai_result_t *result)
@@ -571,85 +626,38 @@ static void task1_output_rule_debug(
   const motion_fused_frame_t *frame,
   const RuleEngine *eng)
 {
-  const ActionSession *session;
-  const ActionResult *latched_result;
-  const ActionTemplate *templates;
-  const ActionResult *display_result;
-  ActionType preview_action;
-  AxisIndex main_axis;
-  float main_amp;
-  uint32_t peak_hold_ms;
-  uint32_t total_time_ms;
-  uint32_t template_count;
+  const ActionResult *result;
+  const char *result_name = "none";
 
   if ((frame == NULL) || (eng == NULL))
   {
     return;
   }
 
-  session = RuleEngine_GetSession(eng);
-  latched_result = RuleEngine_GetResult(eng);
-  template_count = eng->template_count;
-  templates = eng->templates;
-  preview_action = ACTION_UNKNOWN;
-  main_axis = AXIS_UPPER_YAW;
-  main_amp = 0.0f;
-  peak_hold_ms = 0U;
-  total_time_ms = 0U;
-
-  if ((templates == NULL) || (template_count == 0U))
-  {
-    templates = Rule_GetDefaultTemplates(&template_count);
-  }
-
-  preview_action = Rule_RecognizeAction(session, templates, template_count, NULL);
-
-  if ((latched_result != NULL) && (latched_result->valid != 0U))
-  {
-    display_result = latched_result;
-    main_axis = latched_result->primary_axis;
-    main_amp = latched_result->primary_axis_amp;
-    peak_hold_ms = latched_result->peak_hold_ms;
-    total_time_ms = latched_result->total_time_ms;
-  }
-  else
-  {
-    display_result = NULL;
-    if (session != NULL)
-    {
-      main_axis = session->dominant_axis;
-      main_amp = session->dominant_amp;
-      peak_hold_ms = session->peak_hold_ms;
-      total_time_ms = session->total_time_ms;
-    }
-  }
-
   if (g_task1_output_state.rule_header_printed == 0U)
   {
-    printf("ts_ms,state,motion_energy,baseline_valid,session_active,preview_action,final_action,matched_template,match_score,score,grade,complete,timed_out,main_axis,main_axis_amp,peak_hold_ms,total_time_ms\r\n");
+    printf("ts_ms,state,result\r\n");
     g_task1_output_state.rule_header_printed = 1U;
   }
 
-  printf("%llu,%s,%.4f,%u,%u,%s,%s,%s,%.4f,%u,%s,%u,%u,%s,%.4f,%lu,%lu\r\n",
+  if (g_task1_output_state.rule_last_state == eng->state)
+  {
+    return;
+  }
+
+  result = RuleEngine_GetResult(eng);
+  if ((eng->state == RULE_STATE_DONE) &&
+      (result != NULL) &&
+      (result->valid != 0U))
+  {
+    result_name = Rule_ActionName(result->action);
+  }
+
+  printf("%llu,%s,%s\r\n",
          (unsigned long long)(frame->ts_us / 1000ULL),
          Rule_StateName(eng->state),
-         eng->motion_energy,
-         (unsigned int)eng->baseline_valid,
-         (unsigned int)((session != NULL) ? session->active : 0U),
-         Rule_ActionName(preview_action),
-         Rule_ActionName((display_result != NULL) ? display_result->action : ACTION_UNKNOWN),
-         ((display_result != NULL) && (display_result->matched_template_name != NULL)) ?
-           display_result->matched_template_name : "unknown",
-         ((display_result != NULL) && (display_result->matched_template != NULL)) ?
-           display_result->match_score : -1.0f,
-         (unsigned int)((display_result != NULL) ? display_result->score : 0U),
-         Rule_GradeName((display_result != NULL) ? display_result->grade : RULE_GRADE_FAIL),
-         (unsigned int)((display_result != NULL) ? display_result->complete : 0U),
-         (unsigned int)((display_result != NULL) ? display_result->timed_out : 0U),
-         Rule_AxisName(main_axis),
-         main_amp,
-         (unsigned long)peak_hold_ms,
-         (unsigned long)total_time_ms);
+         result_name);
+  g_task1_output_state.rule_last_state = eng->state;
 }
 
 static int32_t task1_bio_value_or_invalid(int32_t value, int8_t valid)
@@ -671,12 +679,28 @@ void MotionTask_Run(void)
   MotionWindowTest_Init();
   RuleEngine_Init(&g_task1_rule_engine, NULL);
   MotionAi_SetSingleTestEnabled(task1_mode_uses_single_test(g_motion_output_mode));
+  MotionSensorPipeline_SetUpperOnly(task1_mode_uses_upper_only(g_motion_output_mode));
   task1_output_state_reset(g_motion_output_mode, 1U);
   /* 持续处理传感器帧和识别结果。 */
   for(;;)
   {
     motion_fused_frame_t fused_frame;
-    uint8_t sensor_work_done = Motion_ProcessPendingPosePackets();
+    uint8_t sensor_work_done;
+
+    if (Motion_TakeUpperCaptureResetRequest() != 0U)
+    {
+      Motion_ResetUpperCaptureInput();
+      task1_upper_capture_output_reset();
+      continue;
+    }
+
+    if (Motion_TakeStartFromIsrRequest() != 0U)
+    {
+      Motion_RequestStart();
+    }
+
+    MotionSensorPipeline_SetUpperOnly(task1_mode_uses_upper_only(g_motion_output_mode));
+    sensor_work_done = Motion_ProcessPendingPosePackets();
 
     if (task1_consume_ai_stop_request())
     {

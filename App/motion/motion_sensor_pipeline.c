@@ -74,6 +74,7 @@ float roll2 = 0.0f;
 
 static volatile uint8_t fused_row_ready = 0U;
 static motion_fused_frame_t fused_frame = {0};
+static uint8_t upper_only_enabled = 0U;
 
 static char *trim_spaces(char *s);
 static int parse_u32_token(char *token, uint32_t *out);
@@ -397,6 +398,35 @@ static void try_emit_fused(void)
 {
     uint64_t diff = 0ULL;
 
+    if (upper_only_enabled != 0U)
+    {
+        if (!upper_frame.valid)
+        {
+            return;
+        }
+
+        fused_frame = (motion_fused_frame_t){0};
+        fused_frame.ts_us = upper_frame.ts_us;
+        fused_frame.upper_yaw = upper_frame.yaw;
+        fused_frame.upper_pitch = upper_frame.pitch;
+        fused_frame.upper_roll = upper_frame.roll;
+        fused_frame.seq_u = upper_frame.seq;
+        fused_frame.lost_u = lost_u;
+        fused_frame.upper_bio.heart_rate = upper_frame.heart_rate;
+        fused_frame.upper_bio.spo2 = upper_frame.spo2;
+        fused_frame.upper_bio.hr_valid = upper_frame.hr_valid;
+        fused_frame.upper_bio.spo2_valid = upper_frame.spo2_valid;
+        fused_frame.upper_bio.ppg_fill = upper_frame.ppg_fill;
+        fused_frame.upper_bio.ppg_calc_count = upper_frame.ppg_calc_count;
+        fused_frame.upper_bio.ppg_pending = upper_frame.ppg_pending;
+        fused_frame.upper_bio.ppg_part_id = upper_frame.ppg_part_id;
+        fused_frame.upper_bio.ppg_rev_id = upper_frame.ppg_rev_id;
+        fused_frame.upper_bio.ppg_int_level = upper_frame.ppg_int_level;
+        fused_row_ready = 1U;
+        upper_frame.valid = 0U;
+        return;
+    }
+
     if (!upper_frame.valid || !fore_frame.valid)
     {
         return;
@@ -536,6 +566,12 @@ static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t defaul
         return;
     }
 
+    if ((upper_only_enabled != 0U) &&
+        (frame.sensor_id != MOTION_SENSOR_ID_UPPER))
+    {
+        return;
+    }
+
     update_seq_stats(frame.sensor_id, frame.seq);
 
     if (frame.sensor_id == MOTION_SENSOR_ID_UPPER)
@@ -585,6 +621,47 @@ uint8_t Motion_ProcessPendingPosePackets(void)
     }
 
     return processed;
+}
+
+/**
+ * @brief  配置单上臂输入模式，切换时清空旧的管线数据
+ * @param  enable  1 启用单上臂输入，0 恢复双传感器对齐
+ * @return 无
+ */
+void MotionSensorPipeline_SetUpperOnly(uint8_t enable)
+{
+    uint8_t normalized_enable = (enable != 0U) ? 1U : 0U;
+
+    if (upper_only_enabled == normalized_enable)
+    {
+        return;
+    }
+
+    taskENTER_CRITICAL();
+    upper_only_enabled = normalized_enable;
+    MotionSensorPipeline_Reset();
+    taskEXIT_CRITICAL();
+}
+
+void MotionSensorPipeline_ResetUpperCapture(void)
+{
+    upper_frame = (pose_frame_t){0};
+    upper_pending_packet.pending = 0U;
+    upper_pending_packet.len = 0U;
+    upper_pending_packet.ts_us = 0ULL;
+    upper_pending_packet.dropped = 0U;
+
+    has_last_seq_u = 0U;
+    last_seq_u = 0U;
+    lost_u = 0U;
+    disorder_u = 0U;
+
+    yaw = 0.0f;
+    pitch = 0.0f;
+    roll = 0.0f;
+
+    fused_row_ready = 0U;
+    fused_frame = (motion_fused_frame_t){0};
 }
 
 void MotionSensorPipeline_Reset(void)
