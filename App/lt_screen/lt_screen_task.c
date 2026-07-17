@@ -569,6 +569,7 @@ static void lt_screen_handle_version_query(void)
   }
   LT168B_DebugPrintLine("[OTA SCREEN] query no task");
   lt_screen_send_version_texts(current_version, current_version);
+  lt_screen_leave_ota_demo();
   LT168B_GotoPage(LTSCREEN_VERSION_SAME_PAGE_ID);
 }
 

@@ -239,6 +239,34 @@ static int OTAService_ParseOnenetEnvelope(const char *json, uint32_t *code, char
   return 1;
 }
 
+static uint8_t OTAService_IsVersionTextValid(const char *version)
+{
+  const char *minor_text;
+
+  if ((version == 0) || (strncmp(version, "V1.", 3U) != 0))
+  {
+    return 0U;
+  }
+
+  minor_text = version + 3;
+  if (*minor_text == '\0')
+  {
+    return 0U;
+  }
+
+  while (*minor_text != '\0')
+  {
+    if ((*minor_text < '0') || (*minor_text > '9'))
+    {
+      return 0U;
+    }
+
+    minor_text++;
+  }
+
+  return 1U;
+}
+
 static int OTAService_LoadRunningVersion(char *out_version, uint32_t version_size)
 {
   if ((out_version == 0) || (version_size == 0UL))
@@ -246,7 +274,8 @@ static int OTAService_LoadRunningVersion(char *out_version, uint32_t version_siz
     return OTA_SERVICE_ERROR;
   }
 
-  if (OTADeviceInfo_GetCurrentVersion(out_version, version_size) == OTA_DEVICE_INFO_OK)
+  if ((OTADeviceInfo_GetCurrentVersion(out_version, version_size) == OTA_DEVICE_INFO_OK) &&
+      (OTAService_IsVersionTextValid(out_version) != 0U))
   {
     return OTA_SERVICE_UPDATED;
   }
@@ -281,7 +310,7 @@ static int OTAService_MakeNextSimulateVersion(const char *current_version,
   if ((current_version == 0) ||
       (out_version == 0) ||
       (version_size == 0UL) ||
-      (strncmp(current_version, "V1.", 3U) != 0))
+      (OTAService_IsVersionTextValid(current_version) == 0U))
   {
     return 0;
   }
