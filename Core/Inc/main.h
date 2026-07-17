@@ -63,6 +63,10 @@ void Error_Handler(void);
 #define SERVO_LEFT_PWM_GPIO_Port GPIOA
 #define SERVO_RIGHT_PWM_Pin GPIO_PIN_1
 #define SERVO_RIGHT_PWM_GPIO_Port GPIOB
+#define BRACELET_LEFT_DO_Pin GPIO_PIN_11
+#define BRACELET_LEFT_DO_GPIO_Port GPIOG
+#define BRACELET_RIGHT_DO_Pin GPIO_PIN_9
+#define BRACELET_RIGHT_DO_GPIO_Port GPIOD
 
 /* USER CODE END Private defines */
 

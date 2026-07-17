@@ -10,6 +10,7 @@
 #include "motion_sensor_pipeline.h"
 #include "onenet.h"
 #include "ota_service.h"
+#include "tim.h"
 #include "usart.h"
 
 #include <stdio.h>
@@ -17,6 +18,7 @@
 
 #define LTSCREEN_BOOT_READY_DELAY_MS 1200U
 #define LTSCREEN_POLL_INTERVAL_MS    20U
+#define BRACELET_AUTO_CLOSE_DELAY_MS 4000U
 #define LTSCREEN_HEALTH_REFRESH_MS   1000U
 #define LTSCREEN_VERSION_PAGE_DELAY_MS 50U
 #define LTSCREEN_UPDATE_PROGRESS_TOTAL_MS 25000U
@@ -64,6 +66,8 @@ static void lt_screen_refresh_fall_status(uint8_t force_update);
 static void lt_screen_send_version_texts(const char *current_version,
                                          const char *latest_version);
 static void lt_screen_apply_device_door_icon(uint8_t is_open);
+static void lt_screen_handle_open_device(void);
+static void lt_screen_process_bracelet_auto_close(void);
 static void lt_screen_reset_training_counts(void);
 static void lt_screen_write_training_count(uint16_t address, uint8_t count);
 static void lt_screen_sync_training_count(uint8_t action_index);
@@ -110,6 +114,8 @@ void LTScreenTask_Run(void)
   for (;;)
   {
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
+    lt_screen_process_bracelet_auto_close();
+
     if ((s_lt_screen_ota_demo_active == 0U) &&
         ((int32_t)(osKernelGetTickCount() - next_health_refresh_tick) >= 0))
     {
@@ -163,7 +169,7 @@ void LTScreen_HandleTouchEvent(const LT168B_TouchEvent_t *event)
 
   if (lt_screen_is_key(event, LTSCREEN_KEY_OPEN_DEVICE) != 0U)
   {
-    LTScreen_SetDeviceDoorState(1U);
+    lt_screen_handle_open_device();
     return;
   }
 
@@ -294,17 +300,72 @@ static void lt_screen_apply_device_door_icon(uint8_t is_open)
   }
 }
 
+static void lt_screen_handle_open_device(void)
+{
+  uint8_t door_state;
+
+  if (Servo_SetDoorByCloudValue(1) == 0U)
+  {
+    return;
+  }
+
+  door_state = Servo_GetDoorState();
+  LTScreen_SetDeviceDoorState(door_state);
+  OneNet_RequestDoorStatePost(door_state);
+}
+
+static void lt_screen_process_bracelet_auto_close(void)
+{
+  static uint8_t s_bracelet_auto_close_timing = 0U;
+  static uint32_t s_bracelet_both_removed_tick = 0U;
+  uint8_t is_left_removed;
+  uint8_t is_right_removed;
+  uint8_t door_state;
+  uint32_t now_tick;
+
+  is_left_removed =
+      (HAL_GPIO_ReadPin(BRACELET_LEFT_DO_GPIO_Port, BRACELET_LEFT_DO_Pin) == GPIO_PIN_SET) ? 1U : 0U;
+  is_right_removed =
+      (HAL_GPIO_ReadPin(BRACELET_RIGHT_DO_GPIO_Port, BRACELET_RIGHT_DO_Pin) == GPIO_PIN_SET) ? 1U : 0U;
+
+  if ((is_left_removed == 0U) || (is_right_removed == 0U) || (Servo_GetDoorState() == 0U))
+  {
+    s_bracelet_auto_close_timing = 0U;
+    return;
+  }
+
+  now_tick = osKernelGetTickCount();
+  if (s_bracelet_auto_close_timing == 0U)
+  {
+    s_bracelet_both_removed_tick = now_tick;
+    s_bracelet_auto_close_timing = 1U;
+    return;
+  }
+
+  if ((uint32_t)(now_tick - s_bracelet_both_removed_tick) < BRACELET_AUTO_CLOSE_DELAY_MS)
+  {
+    return;
+  }
+
+  Servo_SetDoorClosed();
+  door_state = Servo_GetDoorState();
+  LTScreen_SetDeviceDoorState(door_state);
+  OneNet_RequestDoorStatePost(door_state);
+  s_bracelet_auto_close_timing = 0U;
+}
+
 static void lt_screen_handle_calibration_start(void)
 {
   static const uint8_t text_done[] = {0xD2U, 0xD1U, 0xCDU, 0xEAU, 0xB3U, 0xC9U};
-  static const uint8_t text_not_done[] = {0xCEU, 0xB4U, 0xCDU, 0xEAU, 0xB3U, 0xC9U};
+  static const uint8_t text_calibrating[] = {0xD5U, 0xFDU, 0xD4U, 0xDAU, 0xD0U, 0xA3U, 0xD7U, 0xBCU};
+  static const uint8_t text_failed[] = {0xD0U, 0xA3U, 0xD7U, 0xBCU, 0xCAU, 0xA7U, 0xB0U, 0xDCU};
   uint32_t waited_ms = 0U;
 
   s_lt_screen_calibration_done = 0U;
   LT168B_SendStr(0x10U,
                  LTSCREEN_CALIBRATION_STATUS_ADDR,
-                 text_not_done,
-                 (uint8_t)sizeof(text_not_done));
+                 text_calibrating,
+                 (uint8_t)sizeof(text_calibrating));
 
   MotionSensorPipeline_RequestUpperCalibration();
   while ((MotionSensorPipeline_IsUpperCalibrationActive() != 0U) &&
@@ -326,8 +387,8 @@ static void lt_screen_handle_calibration_start(void)
   {
     LT168B_SendStr(0x10U,
                    LTSCREEN_CALIBRATION_STATUS_ADDR,
-                   text_not_done,
-                   (uint8_t)sizeof(text_not_done));
+                   text_failed,
+                   (uint8_t)sizeof(text_failed));
   }
 }
 

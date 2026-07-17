@@ -755,6 +755,12 @@ uint8_t OneNet_PostPendingDoorState(void)
   return 1U;
 }
 
+void OneNet_RequestDoorStatePost(uint8_t is_open)
+{
+  g_onenet_pending_door_state_value = (is_open != 0U) ? 1 : 0;
+  g_onenet_door_state_post_pending = 1U;
+}
+
 uint8_t OneNet_PostPendingFallAlarm(void)
 {
   int32_t pending_value = g_onenet_pending_fall_alarm_value;
@@ -991,8 +997,7 @@ static void OneNet_ApplyDoorProperty(const onenet_prop_set_context_t *ctx)
     return;
   }
 
-  g_onenet_pending_door_state_value = (int32_t)Servo_GetDoorState();
-  g_onenet_door_state_post_pending = 1U;
+  OneNet_RequestDoorStatePost(Servo_GetDoorState());
   Debug_Printf("[MQTT] open cached, defer post to net task value=%ld\r\n",
                (long)g_onenet_pending_door_state_value);
 }

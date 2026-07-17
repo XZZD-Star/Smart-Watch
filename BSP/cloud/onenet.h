@@ -76,6 +76,8 @@ uint8_t OneNet_PostPendingFallAlarm(void);
 uint8_t OneNet_PostPendingTrainPlan(void);
 /* 网络任务调用：若有待上报门状态则发送。 */
 uint8_t OneNet_PostPendingDoorState(void);
+/* 屏幕/本地控制调用：记录门状态，等待网络任务上报。 */
+void OneNet_RequestDoorStatePost(uint8_t is_open);
 /* 运动任务调用：取走最近一次云端下发且合法的 test 值。 */
 uint8_t OneNet_TakeLastValidTestValue(int32_t *test_value);
 /* 运动/云控调用：置位本地跌倒告警并排队上报。 */

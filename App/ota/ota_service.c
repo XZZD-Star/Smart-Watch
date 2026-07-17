@@ -22,6 +22,10 @@
 #define OTA_SIZE_LIMIT          OTA_BIN_MAX_SIZE
 #define OTA_SIMULATE_UPGRADE_ONLY 1U
 
+#ifdef OTA_FORCE_INIT_VERSION_ONCE
+static uint8_t s_ota_force_init_done = 0U;
+#endif
+
 typedef struct
 {
   char *buffer;
@@ -281,14 +285,18 @@ static int OTAService_LoadRunningVersion(char *out_version, uint32_t version_siz
     return OTA_SERVICE_ERROR;
   }
 
-#ifdef OTA_FORCE_RESET_STORED_VERSION
-  (void)snprintf(out_version, version_size, "%s", OTA_CURRENT_VERSION);
-  if (OTADeviceInfo_SaveRunningVersion(out_version) != OTA_DEVICE_INFO_OK)
+#ifdef OTA_FORCE_INIT_VERSION_ONCE
+  if (s_ota_force_init_done == 0U)
   {
-    return OTA_SERVICE_ERROR;
-  }
+    s_ota_force_init_done = 1U;
+    (void)snprintf(out_version, version_size, "%s", OTA_CURRENT_VERSION);
+    if (OTADeviceInfo_SaveRunningVersion(out_version) != OTA_DEVICE_INFO_OK)
+    {
+      return OTA_SERVICE_ERROR;
+    }
 
-  return OTA_SERVICE_UPDATED;
+    return OTA_SERVICE_UPDATED;
+  }
 #endif
 
   if ((OTADeviceInfo_GetCurrentVersion(out_version, version_size) == OTA_DEVICE_INFO_OK) &&
