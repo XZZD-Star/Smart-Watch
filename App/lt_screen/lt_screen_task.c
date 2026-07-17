@@ -7,6 +7,7 @@
 #include "motion_ai.h"
 #include "motion_app_events.h"
 #include "motion_input.h"
+#include "motion_sensor_pipeline.h"
 #include "onenet.h"
 #include "ota_service.h"
 #include "usart.h"
@@ -18,8 +19,9 @@
 #define LTSCREEN_POLL_INTERVAL_MS    20U
 #define LTSCREEN_HEALTH_REFRESH_MS   1000U
 #define LTSCREEN_VERSION_PAGE_DELAY_MS 50U
-#define LTSCREEN_UPDATE_STEP_DELAY_MS 350U
+#define LTSCREEN_UPDATE_PROGRESS_TOTAL_MS 25000U
 #define LTSCREEN_OTA_EXCLUSIVE_TIMEOUT_MS 10000U
+
 
 #define LTSCREEN_HEART_RATE_ADDR     0x02B9U
 #define LTSCREEN_SPO2_ADDR           0x02CDU
@@ -38,7 +40,8 @@
 #define LTSCREEN_VERSION_SAME_PAGE_ID   0x0005U
 #define LTSCREEN_VERSION_UPDATE_PAGE_ID 0x0002U
 #define LTSCREEN_UPDATE_PROGRESS_MAX    0x0010U
-#define LTSCREEN_CALIBRATION_DELAY_MS   3000U
+#define LTSCREEN_CALIBRATION_POLL_MS    50U
+#define LTSCREEN_CALIBRATION_TIMEOUT_MS 4000U
 #define LTSCREEN_TRAINING_COUNT_MAX     99U
 #define LTSCREEN_TRAINING_ACTION_COUNT  4U
 
@@ -294,14 +297,38 @@ static void lt_screen_apply_device_door_icon(uint8_t is_open)
 static void lt_screen_handle_calibration_start(void)
 {
   static const uint8_t text_done[] = {0xD2U, 0xD1U, 0xCDU, 0xEAU, 0xB3U, 0xC9U};
+  static const uint8_t text_not_done[] = {0xCEU, 0xB4U, 0xCDU, 0xEAU, 0xB3U, 0xC9U};
+  uint32_t waited_ms = 0U;
 
   s_lt_screen_calibration_done = 0U;
-  osDelay(LTSCREEN_CALIBRATION_DELAY_MS);
   LT168B_SendStr(0x10U,
                  LTSCREEN_CALIBRATION_STATUS_ADDR,
-                 text_done,
-                 (uint8_t)sizeof(text_done));
-  s_lt_screen_calibration_done = 1U;
+                 text_not_done,
+                 (uint8_t)sizeof(text_not_done));
+
+  MotionSensorPipeline_RequestUpperCalibration();
+  while ((MotionSensorPipeline_IsUpperCalibrationActive() != 0U) &&
+         (waited_ms < LTSCREEN_CALIBRATION_TIMEOUT_MS))
+  {
+    osDelay(LTSCREEN_CALIBRATION_POLL_MS);
+    waited_ms += LTSCREEN_CALIBRATION_POLL_MS;
+  }
+
+  if (MotionSensorPipeline_IsUpperCalibrationDone() != 0U)
+  {
+    LT168B_SendStr(0x10U,
+                   LTSCREEN_CALIBRATION_STATUS_ADDR,
+                   text_done,
+                   (uint8_t)sizeof(text_done));
+    s_lt_screen_calibration_done = 1U;
+  }
+  else
+  {
+    LT168B_SendStr(0x10U,
+                   LTSCREEN_CALIBRATION_STATUS_ADDR,
+                   text_not_done,
+                   (uint8_t)sizeof(text_not_done));
+  }
 }
 
 static void lt_screen_reset_training_counts(void)
@@ -577,6 +604,8 @@ static void lt_screen_handle_update_start(void)
 {
   char target_version[OTA_TARGET_VERSION_LEN];
   int report_result;
+  uint32_t last_progress_ms = 0U;
+  uint32_t next_progress_ms;
   uint16_t progress;
 
   if (s_lt_screen_has_ota_task == 0U)
@@ -591,7 +620,14 @@ static void lt_screen_handle_update_start(void)
   Debug_Printf("[OTA SCREEN] simulate progress=0\r\n");
   for (progress = 1U; progress <= LTSCREEN_UPDATE_PROGRESS_MAX; progress++)
   {
-    osDelay(LTSCREEN_UPDATE_STEP_DELAY_MS);
+    next_progress_ms = (LTSCREEN_UPDATE_PROGRESS_TOTAL_MS * (uint32_t)progress) /
+                       (uint32_t)LTSCREEN_UPDATE_PROGRESS_MAX;
+
+    if (next_progress_ms > last_progress_ms)
+    {
+      osDelay(next_progress_ms - last_progress_ms);
+    }
+    last_progress_ms = next_progress_ms;
     LT168B_WriteU16(LTSCREEN_UPDATE_PROGRESS_ADDR, progress);
     Debug_Printf("[OTA SCREEN] simulate progress=%u\r\n", (unsigned int)progress);
   }

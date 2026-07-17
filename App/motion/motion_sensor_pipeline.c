@@ -11,6 +11,8 @@
 #include <string.h>
 
 #define ALIGN_THRESHOLD_US 3000000ULL
+#define UPPER_CALIBRATION_TICK_COUNT 15U
+#define UPPER_CALIBRATION_DONE_THRESHOLD_DEG 30.0f
 
 typedef struct
 {
@@ -72,11 +74,27 @@ float yaw2 = 0.0f;
 float pitch2 = 0.0f;
 float roll2 = 0.0f;
 
+static volatile float upper_raw_yaw = 0.0f;
+static volatile float upper_raw_pitch = 0.0f;
+static volatile float upper_raw_roll = 0.0f;
+static volatile uint8_t upper_raw_valid = 0U;
+static volatile float upper_calibrate_yaw = 0.0f;
+static volatile float upper_calibrate_pitch = 0.0f;
+static volatile float upper_calibrate_roll = 0.0f;
+static volatile uint8_t upper_calibration_active = 0U;
+static volatile uint8_t upper_calibration_done = 0U;
+static volatile uint16_t upper_calibration_count = 0U;
+static volatile uint8_t upper_calibration_report_pending = 0U;
+static volatile float upper_calibration_report_yaw = 0.0f;
+static volatile float upper_calibration_report_pitch = 0.0f;
+static volatile float upper_calibration_report_roll = 0.0f;
+
 static volatile uint8_t fused_row_ready = 0U;
 static motion_fused_frame_t fused_frame = {0};
 static uint8_t upper_only_enabled = 0U;
 
 static char *trim_spaces(char *s);
+static float motion_absf(float value);
 static int parse_u32_token(char *token, uint32_t *out);
 static int parse_i32_token(char *token, int32_t *out);
 static int parse_float_token(char *token, float *out);
@@ -109,6 +127,11 @@ static char *trim_spaces(char *s)
     }
 
     return s;
+}
+
+static float motion_absf(float value)
+{
+    return (value < 0.0f) ? -value : value;
 }
 
 static int parse_u32_token(char *token, uint32_t *out)
@@ -580,6 +603,13 @@ static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t defaul
         {
             align_fail_count++;
         }
+        upper_raw_yaw = frame.yaw;
+        upper_raw_pitch = frame.pitch;
+        upper_raw_roll = frame.roll;
+        upper_raw_valid = 1U;
+        frame.yaw -= upper_calibrate_yaw;
+        frame.pitch -= upper_calibrate_pitch;
+        frame.roll -= upper_calibrate_roll;
         upper_frame = frame;
         yaw = frame.yaw;
         pitch = frame.pitch;
@@ -624,7 +654,118 @@ uint8_t Motion_ProcessPendingPosePackets(void)
 }
 
 /**
- * @brief  配置单上臂输入模式，切换时清空旧的管线数据
+ * @brief  发起上臂姿态校准。
+ * @return 无
+ */
+void MotionSensorPipeline_RequestUpperCalibration(void)
+{
+    uint32_t primask = 0U;
+
+    if (__get_IPSR() == 0U)
+    {
+        primask = __get_PRIMASK();
+        __disable_irq();
+    }
+
+    upper_calibration_active = 1U;
+    upper_calibration_done = 0U;
+    upper_calibration_count = 0U;
+    upper_calibration_report_pending = 0U;
+    if ((__get_IPSR() == 0U) && (primask == 0U))
+    {
+        __enable_irq();
+    }
+}
+
+void MotionSensorPipeline_CalibrationTickFromIsr(void)
+{
+    float raw_yaw;
+    float raw_pitch;
+    float raw_roll;
+
+    if (upper_calibration_active == 0U)
+    {
+        return;
+    }
+
+    upper_calibration_count++;
+    if (upper_calibration_count < UPPER_CALIBRATION_TICK_COUNT)
+    {
+        return;
+    }
+
+    raw_yaw = upper_raw_yaw;
+    raw_pitch = upper_raw_pitch;
+    raw_roll = upper_raw_roll;
+
+    if (upper_raw_valid != 0U)
+    {
+        upper_calibrate_yaw = raw_yaw;
+        upper_calibrate_pitch = raw_pitch;
+        upper_calibrate_roll = raw_roll;
+        yaw = raw_yaw - upper_calibrate_yaw;
+        pitch = raw_pitch - upper_calibrate_pitch;
+        roll = raw_roll - upper_calibrate_roll;
+        upper_calibration_report_yaw = yaw;
+        upper_calibration_report_pitch = pitch;
+        upper_calibration_report_roll = roll;
+        upper_calibration_report_pending = 1U;
+        upper_calibration_done =
+            ((motion_absf(yaw) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG) &&
+             (motion_absf(pitch) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG) &&
+             (motion_absf(roll) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG)) ? 1U : 0U;
+    }
+    else
+    {
+        upper_calibration_done = 0U;
+    }
+
+    upper_calibration_count = 0U;
+    upper_calibration_active = 0U;
+}
+
+uint8_t MotionSensorPipeline_IsUpperCalibrationActive(void)
+{
+    return upper_calibration_active;
+}
+
+uint8_t MotionSensorPipeline_IsUpperCalibrationDone(void)
+{
+    return (upper_calibration_active == 0U) ? upper_calibration_done : 0U;
+}
+
+uint8_t MotionSensorPipeline_TakeUpperCalibrationReport(float *out_yaw,
+                                                        float *out_pitch,
+                                                        float *out_roll)
+{
+    uint8_t has_report = 0U;
+    uint32_t primask;
+
+    if ((out_yaw == NULL) || (out_pitch == NULL) || (out_roll == NULL))
+    {
+        return 0U;
+    }
+
+    primask = __get_PRIMASK();
+    __disable_irq();
+    if (upper_calibration_report_pending != 0U)
+    {
+        *out_yaw = upper_calibration_report_yaw;
+        *out_pitch = upper_calibration_report_pitch;
+        *out_roll = upper_calibration_report_roll;
+        upper_calibration_report_pending = 0U;
+        has_report = 1U;
+    }
+    if (primask == 0U)
+    {
+        __enable_irq();
+    }
+
+    return has_report;
+}
+
+/**
+ * @brief  配置单上臂输入模式，切换时清空旧的管线数据。
  * @param  enable  1 启用单上臂输入，0 恢复双传感器对齐
  * @return 无
  */
@@ -659,6 +800,10 @@ void MotionSensorPipeline_ResetUpperCapture(void)
     yaw = 0.0f;
     pitch = 0.0f;
     roll = 0.0f;
+    upper_raw_yaw = 0.0f;
+    upper_raw_pitch = 0.0f;
+    upper_raw_roll = 0.0f;
+    upper_raw_valid = 0U;
 
     fused_row_ready = 0U;
     fused_frame = (motion_fused_frame_t){0};
@@ -691,6 +836,10 @@ void MotionSensorPipeline_Reset(void)
     yaw = 0.0f;
     pitch = 0.0f;
     roll = 0.0f;
+    upper_raw_yaw = 0.0f;
+    upper_raw_pitch = 0.0f;
+    upper_raw_roll = 0.0f;
+    upper_raw_valid = 0U;
     yaw2 = 0.0f;
     pitch2 = 0.0f;
     roll2 = 0.0f;

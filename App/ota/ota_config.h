@@ -25,6 +25,9 @@ extern "C" {
 #define OTA_AUTHORIZATION             "version=2022-05-01&res=userid%2F498339&et=1813592379&method=sha1&sign=zJumjVG6TF9IFVmhszVgKyC1qo4%3D"
 #define OTA_CURRENT_VERSION           "V1.0"
 #define OTA_REPORT_VERSION            "V1.0"
+/* 定义该宏时，启动/查询读取版本会强制把 W25Q128 运行版本重置为 OTA_CURRENT_VERSION。 */
+//#define OTA_FORCE_RESET_STORED_VERSION
+
 #define OTA_QUERY_TYPE                2U
 #define OTA_TASK_RESPONSE_TYPE        1U
 #define OTA_DOWNLOAD_CHUNK_SIZE       256U

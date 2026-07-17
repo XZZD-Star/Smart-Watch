@@ -242,29 +242,36 @@ static int OTAService_ParseOnenetEnvelope(const char *json, uint32_t *code, char
 static uint8_t OTAService_IsVersionTextValid(const char *version)
 {
   const char *minor_text;
+  const char *major_text;
 
-  if ((version == 0) || (strncmp(version, "V1.", 3U) != 0))
+  if ((version == 0) || (version[0] != 'V'))
   {
     return 0U;
   }
 
-  minor_text = version + 3;
-  if (*minor_text == '\0')
+  major_text = version + 1;
+  if ((*major_text < '1') || (*major_text > '9'))
   {
     return 0U;
   }
 
-  while (*minor_text != '\0')
+  while ((*major_text >= '0') && (*major_text <= '9'))
   {
-    if ((*minor_text < '0') || (*minor_text > '9'))
-    {
-      return 0U;
-    }
-
-    minor_text++;
+    major_text++;
   }
 
-  return 1U;
+  if (*major_text != '.')
+  {
+    return 0U;
+  }
+
+  minor_text = major_text + 1;
+  if ((*minor_text < '0') || (*minor_text > '9'))
+  {
+    return 0U;
+  }
+
+  return (minor_text[1] == '\0') ? 1U : 0U;
 }
 
 static int OTAService_LoadRunningVersion(char *out_version, uint32_t version_size)
@@ -273,6 +280,16 @@ static int OTAService_LoadRunningVersion(char *out_version, uint32_t version_siz
   {
     return OTA_SERVICE_ERROR;
   }
+
+#ifdef OTA_FORCE_RESET_STORED_VERSION
+  (void)snprintf(out_version, version_size, "%s", OTA_CURRENT_VERSION);
+  if (OTADeviceInfo_SaveRunningVersion(out_version) != OTA_DEVICE_INFO_OK)
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  return OTA_SERVICE_UPDATED;
+#endif
 
   if ((OTADeviceInfo_GetCurrentVersion(out_version, version_size) == OTA_DEVICE_INFO_OK) &&
       (OTAService_IsVersionTextValid(out_version) != 0U))
@@ -303,8 +320,9 @@ static int OTAService_MakeNextSimulateVersion(const char *current_version,
                                               char *out_version,
                                               uint32_t version_size)
 {
-  const char *minor_text;
-  uint32_t minor = 0UL;
+  char *end = 0;
+  unsigned long major;
+  unsigned long minor;
   int len;
 
   if ((current_version == 0) ||
@@ -315,27 +333,33 @@ static int OTAService_MakeNextSimulateVersion(const char *current_version,
     return 0;
   }
 
-  minor_text = current_version + 3;
-  if (*minor_text == '\0')
+  major = strtoul(current_version + 1, &end, 10);
+  if ((end == 0) || (*end != '.'))
   {
     return 0;
   }
 
-  while (*minor_text != '\0')
+  minor = strtoul(end + 1, &end, 10);
+  if ((end == 0) || (*end != '\0'))
   {
-    if ((*minor_text < '0') || (*minor_text > '9'))
-    {
-      return 0;
-    }
+    return 0;
+  }
 
-    minor = (minor * 10UL) + (uint32_t)(*minor_text - '0');
-    minor_text++;
+  if (minor >= 9UL)
+  {
+    major++;
+    minor = 0UL;
+  }
+  else
+  {
+    minor++;
   }
 
   len = snprintf(out_version,
                  version_size,
-                 "V1.%lu",
-                 (unsigned long)(minor + 1UL));
+                 "V%lu.%lu",
+                 major,
+                 minor);
   return ((len > 0) && ((size_t)len < version_size)) ? 1 : 0;
 }
 

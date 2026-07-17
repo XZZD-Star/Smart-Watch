@@ -334,21 +334,18 @@ static void task1_output_capture_csv(const motion_fused_frame_t *frame)
 
   if (g_task1_output_state.capture_header_printed == 0U)
   {
-    printf("ts_ms,upper_yaw,upper_pitch,upper_roll,fore_yaw,fore_pitch,fore_roll,align_fail_count,lost_u,lost_f\r\n");
+    printf("ts_ms,fore_yaw,fore_pitch,fore_roll,upper_yaw,upper_pitch,upper_roll\r\n");
     g_task1_output_state.capture_header_printed = 1U;
   }
 
-  printf("%llu,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%lu,%lu,%lu\r\n",
+  printf("%llu,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\r\n",
          (unsigned long long)(frame->ts_us / 1000ULL),
-         frame->upper_yaw,
-         frame->upper_pitch,
-         frame->upper_roll,
          frame->fore_yaw,
          frame->fore_pitch,
          frame->fore_roll,
-         (unsigned long)frame->align_fail_count,
-         (unsigned long)frame->lost_u,
-         (unsigned long)frame->lost_f);
+         frame->upper_yaw,
+         frame->upper_pitch,
+         frame->upper_roll);
 }
 
 static void task1_output_bio_capture_csv(const motion_fused_frame_t *frame)
@@ -689,6 +686,9 @@ void MotionTask_Run(void)
   for(;;)
   {
     motion_fused_frame_t fused_frame;
+    float calibration_yaw;
+    float calibration_pitch;
+    float calibration_roll;
     uint8_t sensor_work_done;
 
     if (Motion_TakeUpperCaptureResetRequest() != 0U)
@@ -705,6 +705,17 @@ void MotionTask_Run(void)
 
     MotionSensorPipeline_SetUpperOnly(task1_mode_uses_upper_only(g_motion_output_mode));
     sensor_work_done = Motion_ProcessPendingPosePackets();
+    if (MotionSensorPipeline_TakeUpperCalibrationReport(
+          &calibration_yaw,
+          &calibration_pitch,
+          &calibration_roll) != 0U)
+    {
+      printf("CALIBRATION_DONE,Yaw=%.2f,Pitch=%.2f,Roll=%.2f\r\n",
+             calibration_yaw,
+             calibration_pitch,
+             calibration_roll);
+      sensor_work_done = 1U;
+    }
 
     if (task1_consume_ai_stop_request())
     {
