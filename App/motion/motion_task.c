@@ -636,7 +636,7 @@ static void task1_output_rule_debug(
 
   if (g_task1_output_state.rule_header_printed == 0U)
   {
-    printf("ts_ms,state,result\r\n");
+    printf("ts_ms,event,value\r\n");
     g_task1_output_state.rule_header_printed = 1U;
   }
 
@@ -651,12 +651,16 @@ static void task1_output_rule_debug(
       (result->valid != 0U))
   {
     result_name = Rule_ActionName(result->action);
+    printf("%llu,RESULT,%s\r\n",
+           (unsigned long long)(frame->ts_us / 1000ULL),
+           result_name);
+    g_task1_output_state.rule_last_state = eng->state;
+    return;
   }
 
-  printf("%llu,%s,%s\r\n",
+  printf("%llu,STATE,%s\r\n",
          (unsigned long long)(frame->ts_us / 1000ULL),
-         Rule_StateName(eng->state),
-         result_name);
+         Rule_StateName(eng->state));
   g_task1_output_state.rule_last_state = eng->state;
 }
 

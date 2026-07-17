@@ -97,7 +97,6 @@ static float rule_absf(float value);
 static float rule_maxf(float a, float b);
 static float rule_normalize_angle_delta(float value);
 static uint32_t rule_elapsed_ms(uint32_t start_ms, uint32_t now_ms);
-static uint8_t rule_time_in_range(uint32_t value, uint32_t min_value, uint32_t max_value);
 static float rule_median_values(const float *values, uint16_t count);
 static float rule_pose_offset(
   const float pose[RULE_UPPER_AXIS_COUNT],
@@ -138,7 +137,6 @@ static ActionType rule_classify_action(
   const ActionSession *session,
   float *out_best_distance,
   float *out_second_distance);
-static uint8_t rule_timing_is_valid(const ActionSession *session);
 static void rule_copy_result(
   const ActionSession *session,
   ActionResult *result);
@@ -232,14 +230,15 @@ void RuleEngine_ProcessRaw(
   {
     RuleEngine_ResetSession(eng);
     eng->baseline_valid = 0U;
-    rule_enter_wait_static(eng);
+    rule_enter_recover(eng);
     return;
   }
 
   switch (eng->state)
   {
     case RULE_STATE_WAIT_STATICS:
-      if (eng->motion_speed_dps <= eng->cfg.recover_stable_speed_dps)
+      if (eng->motion_axis_speed_dps[AXIS_UPPER_PITCH] <=
+          eng->cfg.recover_stable_speed_dps)
       {
         if (eng->recover_timer_active == 0U)
         {
@@ -492,14 +491,6 @@ static uint32_t rule_elapsed_ms(uint32_t start_ms, uint32_t now_ms)
   return now_ms - start_ms;
 }
 
-static uint8_t rule_time_in_range(
-  uint32_t value,
-  uint32_t min_value,
-  uint32_t max_value)
-{
-  return ((value >= min_value) && (value <= max_value)) ? 1U : 0U;
-}
-
 static float rule_median_values(const float *values, uint16_t count)
 {
   uint16_t i;
@@ -622,6 +613,7 @@ static void rule_update_pose(
       eng->raw[axis] = raw[axis];
       eng->prev_raw[axis] = raw[axis];
       eng->pose[axis] = raw[axis];
+      eng->motion_axis_speed_dps[axis] = 0.0f;
     }
     eng->prev_ms = now_ms;
     eng->motion_speed_dps = 0.0f;
@@ -643,6 +635,7 @@ static void rule_update_pose(
     {
       axis_speed = rule_absf(frame_delta) * 1000.0f / (float)dt_ms;
     }
+    eng->motion_axis_speed_dps[axis] = axis_speed;
     max_speed = rule_maxf(max_speed, axis_speed);
   }
 
@@ -969,68 +962,35 @@ static ActionType rule_classify_action(
   float *out_second_distance)
 {
   uint32_t index;
-  float best_distance = RULE_DISTANCE_INVALID;
-  float second_distance = RULE_DISTANCE_INVALID;
-  ActionType best_action = ACTION_UNKNOWN2;
+  float front_distance = RULE_DISTANCE_INVALID;
+  float side_distance = RULE_DISTANCE_INVALID;
+  uint8_t is_side_direction;
 
   for (index = 0U;
        index < (sizeof(g_rule_templates) / sizeof(g_rule_templates[0]));
        index++)
   {
-    float distance = rule_template_distance(session, &g_rule_templates[index]);
-
-    if (distance < best_distance)
+    if (g_rule_templates[index].action == ACTION_FRONT_RAISE)
     {
-      second_distance = best_distance;
-      best_distance = distance;
-      best_action = g_rule_templates[index].action;
+      front_distance = rule_template_distance(session, &g_rule_templates[index]);
     }
-    else if (distance < second_distance)
+    else if (g_rule_templates[index].action == ACTION_SIDE_RAISE)
     {
-      second_distance = distance;
+      side_distance = rule_template_distance(session, &g_rule_templates[index]);
     }
   }
 
+  is_side_direction = rule_side_direction_match(session);
   if (out_best_distance != NULL)
   {
-    *out_best_distance = best_distance;
+    *out_best_distance = is_side_direction ? side_distance : front_distance;
   }
   if (out_second_distance != NULL)
   {
-    *out_second_distance = second_distance;
+    *out_second_distance = is_side_direction ? front_distance : side_distance;
   }
 
-  if (best_distance > RULE_TEMPLATE_ACCEPT_DISTANCE)
-  {
-    return ACTION_UNKNOWN2;
-  }
-  if ((second_distance - best_distance) < RULE_TEMPLATE_MIN_SEPARATION)
-  {
-    return ACTION_UNKNOWN1;
-  }
-
-  return best_action;
-}
-
-static uint8_t rule_timing_is_valid(const ActionSession *session)
-{
-  return
-    (rule_time_in_range(
-       session->rise_time_ms,
-       RULE_CFG_RISE_MIN_MS,
-       RULE_CFG_RISE_MAX_MS) != 0U) &&
-    (rule_time_in_range(
-       session->hold_time_ms,
-       RULE_CFG_HOLD_MIN_MS,
-       RULE_CFG_HOLD_MAX_MS) != 0U) &&
-    (rule_time_in_range(
-       session->fall_time_ms,
-       RULE_CFG_FALL_MIN_MS,
-       RULE_CFG_FALL_MAX_MS) != 0U) &&
-    (rule_time_in_range(
-       session->total_time_ms,
-       RULE_CFG_TOTAL_MIN_MS,
-       RULE_CFG_TOTAL_MAX_MS) != 0U) ? 1U : 0U;
+  return (is_side_direction != 0U) ? ACTION_SIDE_RAISE : ACTION_FRONT_RAISE;
 }
 
 static void rule_copy_result(
@@ -1131,10 +1091,7 @@ static void rule_analyze_session(RuleEngine *eng)
 
   rule_copy_result(session, &eng->result);
 
-  if ((session->returned_to_static == 0U) ||
-      (session->timed_out != 0U) ||
-      (session->max_offset_deg < eng->cfg.action_min_peak_offset_deg) ||
-      (rule_timing_is_valid(session) == 0U))
+  if (session->max_offset_deg < eng->cfg.action_min_peak_offset_deg)
   {
     eng->result.action = ACTION_UNKNOWN2;
     return;

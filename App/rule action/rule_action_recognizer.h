@@ -14,7 +14,7 @@ extern "C" {
 
 /* 状态切换阈值：后续根据实测 CSV 统一调整这里。 */
 #define RULE_CFG_RECOVER_STABLE_SPEED_DPS        (25.0f)
-#define RULE_CFG_RECOVER_STABLE_MS               (250U)
+#define RULE_CFG_RECOVER_STABLE_MS               (1200U)
 #define RULE_CFG_STATIC_ACCEPT_SPEED_DPS         (30.0f)
 #define RULE_CFG_STATIC_BREAK_SPEED_DPS          (180.0f)
 #define RULE_CFG_STATIC_BREAK_CONFIRM_MS         (200U)
@@ -217,6 +217,7 @@ typedef struct
   float pose[RULE_UPPER_AXIS_COUNT];
   float base_pose[RULE_UPPER_AXIS_COUNT];
   float delta[RULE_UPPER_AXIS_COUNT];
+  float motion_axis_speed_dps[RULE_UPPER_AXIS_COUNT];
   float motion_speed_dps;
   float pose_offset_deg;
   RulePoseSample pretrigger[RULE_PRETRIGGER_MAX_FRAMES];

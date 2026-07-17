@@ -239,12 +239,75 @@ static int OTAService_ParseOnenetEnvelope(const char *json, uint32_t *code, char
   return 1;
 }
 
+static int OTAService_LoadRunningVersion(char *out_version, uint32_t version_size)
+{
+  if ((out_version == 0) || (version_size == 0UL))
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  if (OTADeviceInfo_GetCurrentVersion(out_version, version_size) == OTA_DEVICE_INFO_OK)
+  {
+    return OTA_SERVICE_UPDATED;
+  }
+
+  (void)snprintf(out_version, version_size, "%s", OTA_CURRENT_VERSION);
+  if (OTADeviceInfo_SaveRunningVersion(out_version) != OTA_DEVICE_INFO_OK)
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  return OTA_SERVICE_UPDATED;
+}
+
 static void OTAService_SyncRunningVersion(void)
 {
-  if (OTADeviceInfo_SaveRunningVersion(OTA_CURRENT_VERSION) != OTA_DEVICE_INFO_OK)
+  char version[OTA_TARGET_VERSION_LEN];
+
+  if (OTAService_LoadRunningVersion(version, (uint32_t)sizeof(version)) != OTA_SERVICE_UPDATED)
   {
     Debug_Printf("[OTA] device version sync failed\r\n");
   }
+}
+
+static int OTAService_MakeNextSimulateVersion(const char *current_version,
+                                              char *out_version,
+                                              uint32_t version_size)
+{
+  const char *minor_text;
+  uint32_t minor = 0UL;
+  int len;
+
+  if ((current_version == 0) ||
+      (out_version == 0) ||
+      (version_size == 0UL) ||
+      (strncmp(current_version, "V1.", 3U) != 0))
+  {
+    return 0;
+  }
+
+  minor_text = current_version + 3;
+  if (*minor_text == '\0')
+  {
+    return 0;
+  }
+
+  while (*minor_text != '\0')
+  {
+    if ((*minor_text < '0') || (*minor_text > '9'))
+    {
+      return 0;
+    }
+
+    minor = (minor * 10UL) + (uint32_t)(*minor_text - '0');
+    minor_text++;
+  }
+
+  len = snprintf(out_version,
+                 version_size,
+                 "V1.%lu",
+                 (unsigned long)(minor + 1UL));
+  return ((len > 0) && ((size_t)len < version_size)) ? 1 : 0;
 }
 
 static void OTAService_GetReportVersion(char *version, uint32_t version_size)
@@ -254,7 +317,7 @@ static void OTAService_GetReportVersion(char *version, uint32_t version_size)
     return;
   }
 
-  if (OTADeviceInfo_GetCurrentVersion(version, version_size) != OTA_DEVICE_INFO_OK)
+  if (OTAService_LoadRunningVersion(version, version_size) != OTA_SERVICE_UPDATED)
   {
     (void)snprintf(version, version_size, "%s", OTA_CURRENT_VERSION);
   }
@@ -652,6 +715,7 @@ int OTAService_QueryTask(OTAService_TaskInfo_t *out_task,
 {
   OTAService_TaskInfo_t task;
   char current_version[OTA_TARGET_VERSION_LEN];
+  char simulate_version[OTA_TARGET_VERSION_LEN];
   int result;
 
   if ((out_task == 0) ||
@@ -664,7 +728,19 @@ int OTAService_QueryTask(OTAService_TaskInfo_t *out_task,
   }
 
   memset(out_task, 0, sizeof(*out_task));
-  (void)snprintf(current_version, sizeof(current_version), "%s", OTA_CURRENT_VERSION);
+  if (OTAService_LoadRunningVersion(current_version,
+                                    (uint32_t)sizeof(current_version)) != OTA_SERVICE_UPDATED)
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  if (OTAService_MakeNextSimulateVersion(current_version,
+                                         simulate_version,
+                                         (uint32_t)sizeof(simulate_version)) == 0)
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
   (void)snprintf(out_current_version, current_version_size, "%s", current_version);
   (void)snprintf(out_latest_version, latest_version_size, "%s", current_version);
 
@@ -684,8 +760,9 @@ int OTAService_QueryTask(OTAService_TaskInfo_t *out_task,
 
   if (result == OTA_SERVICE_UPDATED)
   {
+    (void)snprintf(task.target, sizeof(task.target), "%s", simulate_version);
     *out_task = task;
-    (void)snprintf(out_latest_version, latest_version_size, "%s", task.target);
+    (void)snprintf(out_latest_version, latest_version_size, "%s", simulate_version);
     Debug_Printf("[OTA SCREEN] query updated target=%s\r\n", task.target);
   }
   else if (result == OTA_SERVICE_NO_UPDATE)
@@ -702,17 +779,33 @@ int OTAService_QueryTask(OTAService_TaskInfo_t *out_task,
 
 int OTAService_StartSimulateUpdate(const OTAService_TaskInfo_t *task)
 {
+  int result;
+
   if ((task == 0) || (task->target[0] == '\0'))
   {
     return OTA_SERVICE_NO_UPDATE;
   }
 
-  return OTAService_SaveSimulateInfo(task);
+  result = OTAService_SaveSimulateInfo(task);
+  if (result != OTA_SERVICE_UPDATED)
+  {
+    return result;
+  }
+
+  if (OTADeviceInfo_SaveRunningVersion(task->target) != OTA_DEVICE_INFO_OK)
+  {
+    return OTA_SERVICE_ERROR;
+  }
+
+  return OTA_SERVICE_UPDATED;
 }
 
 int OTAService_ReportConfiguredVersion(void)
 {
+  char current_version[OTA_TARGET_VERSION_LEN];
   int result;
+
+  OTAService_GetReportVersion(current_version, (uint32_t)sizeof(current_version));
 
   if (ESP8266_ConnectTcp(OTA_HTTP_HOST, OTA_HTTP_PORT) == 0U)
   {
@@ -721,7 +814,7 @@ int OTAService_ReportConfiguredVersion(void)
     return OTA_SERVICE_ERROR;
   }
 
-  result = OTAService_PostVersion(OTA_REPORT_VERSION);
+  result = OTAService_PostVersion(current_version);
   ESP8266_CloseTcp();
   return result;
 }
@@ -785,7 +878,18 @@ int OTAService_CheckOnce(void)
   {
     if (OTA_SIMULATE_UPGRADE_ONLY != 0U)
     {
-      if (OTAService_SaveSimulateInfo(&task) == OTA_SERVICE_UPDATED)
+      char simulate_version[OTA_TARGET_VERSION_LEN];
+
+      if (OTAService_MakeNextSimulateVersion(current_version,
+                                             simulate_version,
+                                             (uint32_t)sizeof(simulate_version)) == 0)
+      {
+        ESP8266_CloseTcp();
+        return OTA_SERVICE_ERROR;
+      }
+      (void)snprintf(task.target, sizeof(task.target), "%s", simulate_version);
+
+      if (OTAService_StartSimulateUpdate(&task) == OTA_SERVICE_UPDATED)
       {
         Debug_Printf("[OTA] simulate ready set, reset to bootloader target=%s\r\n", task.target);
         ESP8266_CloseTcp();

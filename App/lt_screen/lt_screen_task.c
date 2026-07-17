@@ -38,8 +38,6 @@
 #define LTSCREEN_VERSION_SAME_PAGE_ID   0x0005U
 #define LTSCREEN_VERSION_UPDATE_PAGE_ID 0x0002U
 #define LTSCREEN_UPDATE_PROGRESS_MAX    0x0010U
-#define LTSCREEN_CURRENT_VERSION_TEXT_TEST "1.2"
-#define LTSCREEN_LATEST_VERSION_TEXT_TEST  "1.1"
 #define LTSCREEN_CALIBRATION_DELAY_MS   3000U
 #define LTSCREEN_TRAINING_COUNT_MAX     99U
 #define LTSCREEN_TRAINING_ACTION_COUNT  4U
@@ -556,8 +554,7 @@ static void lt_screen_handle_version_query(void)
     LT168B_DebugPrintLine("[OTA SCREEN] query updated");
     LT168B_DebugPrintLine("[OTA SCREEN] latest:");
     LT168B_DebugPrintLine(latest_version);
-    (void)LT168B_WriteVersionText(LTSCREEN_LATEST_VERSION_ADDR,
-                                  LTSCREEN_LATEST_VERSION_TEXT_TEST);
+    lt_screen_send_version_texts(current_version, latest_version);
     LT168B_GotoPage(LTSCREEN_VERSION_UPDATE_PAGE_ID);
     return;
   }
@@ -571,6 +568,7 @@ static void lt_screen_handle_version_query(void)
     return;
   }
   LT168B_DebugPrintLine("[OTA SCREEN] query no task");
+  lt_screen_send_version_texts(current_version, current_version);
   LT168B_GotoPage(LTSCREEN_VERSION_SAME_PAGE_ID);
 }
 
@@ -601,6 +599,7 @@ static void lt_screen_handle_update_start(void)
   {
     LT168B_DebugPrintLine("[OTA SCREEN] simulate flag failed");
     lt_screen_leave_ota_demo();
+    LT168B_GotoPage(LTSCREEN_VERSION_SAME_PAGE_ID);
     return;
   }
 
@@ -610,8 +609,8 @@ static void lt_screen_handle_update_start(void)
                (report_result == OTA_SERVICE_UPDATED) ? "ok" : "fail");
   memset(&s_lt_screen_ota_task, 0, sizeof(s_lt_screen_ota_task));
   s_lt_screen_has_ota_task = 0U;
-  lt_screen_send_version_texts(LTSCREEN_LATEST_VERSION_TEXT_TEST,
-                               LTSCREEN_LATEST_VERSION_TEXT_TEST);
+  lt_screen_send_version_texts(target_version, target_version);
+  lt_screen_leave_ota_demo();
   LT168B_GotoPage(LTSCREEN_VERSION_SAME_PAGE_ID);
 }
 
