@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    {"id":"config:.understand-anything/config.json","type":"config","name":"config.json","filePath":".understand-anything/config.json","summary":"配置 Understand Anything 分析产物采用中文输出。","tags":["configuration","知识图谱","输出语言"],"complexity":"simple"},
+    {"id":"config:.understand-anything/fingerprints.json","type":"config","name":"fingerprints.json","filePath":".understand-anything/fingerprints.json","summary":"保存项目文件指纹、Git 提交和生成时间，用于判断知识图谱分析是否需要增量更新。","tags":["configuration","文件指纹","增量分析","元数据"],"complexity":"complex"},
+    {"id":"config:.understand-anything/knowledge-graph.json","type":"config","name":"knowledge-graph.json","filePath":".understand-anything/knowledge-graph.json","summary":"存放 Understand Anything 生成的项目知识图谱，包括节点、边、分层视图与导览信息。","tags":["知识图谱","分析产物","架构数据","configuration"],"complexity":"complex"},
+    {"id":"config:.understand-anything/meta.json","type":"config","name":"meta.json","filePath":".understand-anything/meta.json","summary":"记录上次项目分析时间、对应 Git 提交、格式版本和已分析文件数。","tags":["configuration","分析状态","元数据"],"complexity":"simple"}
+  ],
+  "edges": []
+}

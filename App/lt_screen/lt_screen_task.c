@@ -8,6 +8,7 @@
 #include "motion_app_events.h"
 #include "motion_input.h"
 #include "motion_sensor_pipeline.h"
+#include "motion_task.h"
 #include "onenet.h"
 #include "ota_service.h"
 #include "tim.h"
@@ -19,11 +20,23 @@
 #define LTSCREEN_BOOT_READY_DELAY_MS 1200U
 #define LTSCREEN_POLL_INTERVAL_MS    20U
 #define BRACELET_AUTO_CLOSE_DELAY_MS 4000U
-#define LTSCREEN_HEALTH_REFRESH_MS   1000U
+#define LTSCREEN_HEALTH_REFRESH_MS          60000U
 #define LTSCREEN_VERSION_PAGE_DELAY_MS 50U
 #define LTSCREEN_UPDATE_PROGRESS_TOTAL_MS 25000U
 #define LTSCREEN_OTA_EXCLUSIVE_TIMEOUT_MS 10000U
 
+#ifndef LTSCREEN_USE_FORE_BIO_DATA
+#define LTSCREEN_USE_FORE_BIO_DATA 2
+#endif
+
+#if ((LTSCREEN_USE_FORE_BIO_DATA != 0) && \
+     (LTSCREEN_USE_FORE_BIO_DATA != 1) && \
+     (LTSCREEN_USE_FORE_BIO_DATA != 2))
+#error "LTSCREEN_USE_FORE_BIO_DATA must be 0, 1 or 2"
+#endif
+
+#define LTSCREEN_HEART_RATE_TEXT_LEN 3U
+#define LTSCREEN_SPO2_TEXT_LEN       2U
 
 #define LTSCREEN_HEART_RATE_ADDR     0x02B9U
 #define LTSCREEN_SPO2_ADDR           0x02CDU
@@ -63,6 +76,10 @@ static uint8_t s_lt_screen_training_last_written[LTSCREEN_TRAINING_ACTION_COUNT]
   {0xFFU, 0xFFU, 0xFFU, 0xFFU};
 
 static void lt_screen_refresh_health_test(void);
+#if LTSCREEN_USE_FORE_BIO_DATA
+static uint8_t lt_screen_try_get_fore_bio_text(uint8_t *out_heart_rate, uint8_t *out_spo2);
+static uint8_t lt_screen_format_decimal(uint32_t value, uint8_t *out_text, uint8_t width);
+#endif
 static void lt_screen_refresh_fall_status(uint8_t force_update);
 static void lt_screen_send_version_texts(const char *current_version,
                                          const char *latest_version);
@@ -227,10 +244,14 @@ void LTScreen_SetDeviceDoorState(uint8_t is_open)
 #if APP_LTSCREEN_MODE == LTSCREEN_MODE_NORMAL
 static void lt_screen_refresh_health_test(void)
 {
-  static const uint8_t heart_rate_normal[] = {'7', '8'};
+  static const uint8_t heart_rate_normal[] = {'7', '8', ' '};
   static const uint8_t spo2_normal[] = {'9', '8'};
-  static const uint8_t heart_rate_fall[] = {'9', '2'};
+  static const uint8_t heart_rate_fall[] = {'9', '2', ' '};
   static const uint8_t spo2_fall[] = {'9', '7'};
+#if LTSCREEN_USE_FORE_BIO_DATA
+  uint8_t fore_heart_rate[LTSCREEN_HEART_RATE_TEXT_LEN];
+  uint8_t fore_spo2[LTSCREEN_SPO2_TEXT_LEN];
+#endif
   const uint8_t *heart_rate = heart_rate_normal;
   const uint8_t *spo2 = spo2_normal;
 
@@ -239,6 +260,18 @@ static void lt_screen_refresh_health_test(void)
     heart_rate = heart_rate_fall;
     spo2 = spo2_fall;
   }
+
+#if LTSCREEN_USE_FORE_BIO_DATA
+  if (lt_screen_try_get_fore_bio_text(fore_heart_rate, fore_spo2) != 0U)
+  {
+    heart_rate = fore_heart_rate;
+    spo2 = fore_spo2;
+  }
+  else if (LTSCREEN_USE_FORE_BIO_DATA == 1)
+  {
+    return;
+  }
+#endif
 
   LT168B_SendStr(0x10U,
                  LTSCREEN_HEART_RATE_ADDR,
@@ -249,6 +282,90 @@ static void lt_screen_refresh_health_test(void)
                  spo2,
                  (uint8_t)sizeof(spo2_normal));
 }
+
+#if LTSCREEN_USE_FORE_BIO_DATA
+static uint8_t lt_screen_try_get_fore_bio_text(uint8_t *out_heart_rate, uint8_t *out_spo2)
+{
+  motion_bio_sample_t bio;
+
+  if ((out_heart_rate == NULL) || (out_spo2 == NULL))
+  {
+    return 0U;
+  }
+
+  if (MotionTask_GetLatestForeBio(&bio) == 0U)
+  {
+    return 0U;
+  }
+
+  if ((bio.heart_rate < 0) || (bio.spo2 < 0))
+  {
+    return 0U;
+  }
+
+  if (lt_screen_format_decimal((uint32_t)bio.heart_rate,
+                               out_heart_rate,
+                               LTSCREEN_HEART_RATE_TEXT_LEN) == 0U)
+  {
+    return 0U;
+  }
+
+  if (lt_screen_format_decimal((uint32_t)bio.spo2,
+                               out_spo2,
+                               LTSCREEN_SPO2_TEXT_LEN) == 0U)
+  {
+    return 0U;
+  }
+
+  return 1U;
+}
+
+static uint8_t lt_screen_format_decimal(uint32_t value, uint8_t *out_text, uint8_t width)
+{
+  uint8_t index;
+  uint8_t digit_count = 0U;
+  uint32_t divisor = 1U;
+  uint32_t max_value = 1U;
+  uint32_t temp_value;
+
+  if ((out_text == NULL) || (width == 0U))
+  {
+    return 0U;
+  }
+
+  for (index = 0U; index < width; index++)
+  {
+    out_text[index] = ' ';
+    max_value *= 10U;
+  }
+
+  if (value >= max_value)
+  {
+    return 0U;
+  }
+
+  temp_value = value;
+  do
+  {
+    digit_count++;
+    temp_value /= 10U;
+  } while (temp_value > 0U);
+
+  for (index = 1U; index < digit_count; index++)
+  {
+    divisor *= 10U;
+  }
+
+  for (index = 0U; index < digit_count; index++)
+  {
+    out_text[index] = (uint8_t)('0' + (value / divisor));
+    value %= divisor;
+    divisor /= 10U;
+  }
+
+  return 1U;
+}
+#endif
 
 static void lt_screen_refresh_fall_status(uint8_t force_update)
 {
@@ -338,6 +455,7 @@ static void lt_screen_process_bracelet_auto_close(void)
 
   if (Servo_GetDoorState() == 0U)
   {
+    LTScreen_SetDeviceDoorState(0U);
     s_bracelet_door_open_flag = 0U;
     s_bracelet_auto_close_timing = 0U;
     return;

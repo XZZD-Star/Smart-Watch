@@ -1,0 +1,350 @@
+{
+  "nodes": [
+    {
+      "id": "document:SYSTEM/readme.txt",
+      "type": "document",
+      "name": "readme.txt",
+      "filePath": "SYSTEM/readme.txt",
+      "summary": "说明 SYSTEM 目录中时钟、延时和串口基础支持代码的来源与使用范围。",
+      "tags": [
+        "documentation",
+        "system-support",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:SYSTEM/sys/sys.c",
+      "type": "file",
+      "name": "sys.c",
+      "filePath": "SYSTEM/sys/sys.c",
+      "summary": "实现 STM32H7 系统时钟初始化及底层系统支持函数。",
+      "tags": [
+        "system-init",
+        "clock-control",
+        "hal"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:SYSTEM/sys/sys.c:get_icahce_sta",
+      "type": "function",
+      "name": "get_icahce_sta",
+      "filePath": "SYSTEM/sys/sys.c",
+      "lineRange": [
+        33,
+        38
+      ],
+      "summary": "实现该模块的核心处理逻辑（get_icahce_sta）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:SYSTEM/sys/sys.c:get_dcahce_sta",
+      "type": "function",
+      "name": "get_dcahce_sta",
+      "filePath": "SYSTEM/sys/sys.c",
+      "lineRange": [
+        45,
+        50
+      ],
+      "summary": "实现该模块的核心处理逻辑（get_dcahce_sta）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:SYSTEM/sys/sys.c:sys_nvic_set_vector_table",
+      "type": "function",
+      "name": "sys_nvic_set_vector_table",
+      "filePath": "SYSTEM/sys/sys.c",
+      "lineRange": [
+        58,
+        62
+      ],
+      "summary": "实现该模块的核心处理逻辑（sys_nvic_set_vector_table）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:SYSTEM/sys/sys.c:sys_wfi_set",
+      "type": "function",
+      "name": "sys_wfi_set",
+      "filePath": "SYSTEM/sys/sys.c",
+      "lineRange": [
+        69,
+        72
+      ],
+      "summary": "实现该模块的核心处理逻辑（sys_wfi_set）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:SYSTEM/sys/sys.c:sys_intx_disable",
+      "type": "function",
+      "name": "sys_intx_disable",
+      "filePath": "SYSTEM/sys/sys.c",
+      "lineRange": [
+        79,
+        82
+      ],
+      "summary": "实现该模块的核心处理逻辑（sys_intx_disable）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:SYSTEM/sys/sys.c:sys_intx_enable",
+      "type": "function",
+      "name": "sys_intx_enable",
+      "filePath": "SYSTEM/sys/sys.c",
+      "lineRange": [
+        89,
+        92
+      ],
+      "summary": "实现该模块的核心处理逻辑（sys_intx_enable）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:SYSTEM/sys/sys.c:sys_msr_msp",
+      "type": "function",
+      "name": "sys_msr_msp",
+      "filePath": "SYSTEM/sys/sys.c",
+      "lineRange": [
+        100,
+        103
+      ],
+      "summary": "实现该模块的核心处理逻辑（sys_msr_msp）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:SYSTEM/sys/sys.c:sys_cache_enable",
+      "type": "function",
+      "name": "sys_cache_enable",
+      "filePath": "SYSTEM/sys/sys.c",
+      "lineRange": [
+        110,
+        115
+      ],
+      "summary": "实现该模块的核心处理逻辑（sys_cache_enable）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:SYSTEM/sys/sys.c:sys_stm32_clock_init",
+      "type": "function",
+      "name": "sys_stm32_clock_init",
+      "filePath": "SYSTEM/sys/sys.c",
+      "lineRange": [
+        149,
+        215
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（sys_stm32_clock_init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:SYSTEM/sys/sys.h",
+      "type": "file",
+      "name": "sys.h",
+      "filePath": "SYSTEM/sys/sys.h",
+      "summary": "声明系统时钟配置和底层寄存器辅助接口。",
+      "tags": [
+        "api",
+        "system-init",
+        "clock-control"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:SYSTEM/usart/yuanzi_usart.c",
+      "type": "file",
+      "name": "yuanzi_usart.c",
+      "filePath": "SYSTEM/usart/yuanzi_usart.c",
+      "summary": "提供基础串口调试支持和标准输出重定向，适配原子示例代码风格。",
+      "tags": [
+        "uart",
+        "debugging",
+        "stdio-retarget"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:SYSTEM/usart/yuanzi_usart.h",
+      "type": "file",
+      "name": "yuanzi_usart.h",
+      "filePath": "SYSTEM/usart/yuanzi_usart.h",
+      "summary": "声明基础调试串口配置和输出接口。",
+      "tags": [
+        "api",
+        "uart",
+        "debugging"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:get_icahce_sta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:get_icahce_sta",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:get_dcahce_sta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:get_dcahce_sta",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_nvic_set_vector_table",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_nvic_set_vector_table",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_wfi_set",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_wfi_set",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_intx_disable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_intx_disable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_intx_enable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_intx_enable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_msr_msp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_msr_msp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_cache_enable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_cache_enable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_stm32_clock_init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_stm32_clock_init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

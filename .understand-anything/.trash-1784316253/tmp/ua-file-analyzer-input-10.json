@@ -1,0 +1,28 @@
+{
+  "projectRoot": "D:\\Qian Start\\Smart Watch\\H743",
+  "batchFiles": [
+    {
+      "path": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+      "language": "markdown",
+      "sizeLines": 303,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/H743资料包/note/参考手册重点部分.md",
+      "language": "markdown",
+      "sizeLines": 456,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/H743资料包/note/快速上手.md",
+      "language": "markdown",
+      "sizeLines": 1049,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md": [],
+    "docs/H743资料包/note/参考手册重点部分.md": [],
+    "docs/H743资料包/note/快速上手.md": []
+  }
+}

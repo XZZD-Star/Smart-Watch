@@ -1,17 +1,5 @@
 {
-  "name": "H743",
-  "description": "基于 STM32H743 的智能手表主控源码，负责接收两个传感器节点的数据，完成数据融合、动作识别与规则分析，并连接云平台和屏幕显示。注意：本项目包含超过 100 个源文件；如需加快后续分析，可考虑将范围限定到子目录。",
-  "languages": [
-    "c",
-    "csv",
-    "ioc",
-    "json",
-    "markdown",
-    "txt",
-    "unknown",
-    "xlsx"
-  ],
-  "frameworks": [],
+  "scriptCompleted": true,
   "files": [
     {
       "path": ".ai/network_action_cnn.h5_c_info.json",
@@ -100,7 +88,7 @@
     {
       "path": "App/lt_screen/lt_screen_task.c",
       "language": "c",
-      "sizeLines": 741,
+      "sizeLines": 742,
       "fileCategory": "code"
     },
     {
@@ -160,7 +148,7 @@
     {
       "path": "App/motion/motion_task.c",
       "language": "c",
-      "sizeLines": 795,
+      "sizeLines": 833,
       "fileCategory": "code"
     },
     {
@@ -238,7 +226,7 @@
     {
       "path": "BSP/cloud/onenet.c",
       "language": "c",
-      "sizeLines": 1415,
+      "sizeLines": 1420,
       "fileCategory": "code"
     },
     {
@@ -633,171 +621,25 @@
     }
   ],
   "totalFiles": 103,
-  "filteredByIgnore": 1655,
+  "filteredByIgnore": 1656,
   "estimatedComplexity": "moderate",
-  "importMap": {
-    ".ai/network_action_cnn.h5_c_info.json": [],
-    ".mxproject": [],
-    ".understand-anything/.understandignore": [],
-    ".understand-anything/config.json": [],
-    ".understand-anything/fingerprints.json": [],
-    ".understand-anything/knowledge-graph.json": [],
-    ".understand-anything/meta.json": [],
-    "说明文档.txt": [],
-    "Agents.md": [],
-    "App/ai/motion_ai.c": [
-      "App/ai/motion_ai.h"
-    ],
-    "App/ai/motion_ai.h": [],
-    "App/cloud/cloud_task.c": [
-      "App/cloud/cloud_task.h"
-    ],
-    "App/cloud/cloud_task.h": [],
-    "App/lt_screen/lt_screen_keys.h": [],
-    "App/lt_screen/lt_screen_task.c": [
-      "App/lt_screen/lt_screen_keys.h",
-      "App/lt_screen/lt_screen_task.h"
-    ],
-    "App/lt_screen/lt_screen_task.h": [],
-    "App/motion/motion_app_events.c": [
-      "App/motion/motion_app_events.h"
-    ],
-    "App/motion/motion_app_events.h": [],
-    "App/motion/motion_frame.h": [],
-    "App/motion/motion_input.c": [
-      "App/motion/motion_input.h",
-      "App/motion/motion_mode.h",
-      "App/motion/motion_sensor_pipeline.h",
-      "App/motion/motion_window_test.h"
-    ],
-    "App/motion/motion_input.h": [],
-    "App/motion/motion_mode.h": [],
-    "App/motion/motion_sensor_pipeline.c": [
-      "App/motion/motion_sensor_pipeline.h"
-    ],
-    "App/motion/motion_sensor_pipeline.h": [],
-    "App/motion/motion_task.c": [
-      "App/motion/motion_app_events.h",
-      "App/motion/motion_input.h",
-      "App/motion/motion_mode.h",
-      "App/motion/motion_sensor_pipeline.h",
-      "App/motion/motion_task.h",
-      "App/motion/motion_window_test.h"
-    ],
-    "App/motion/motion_task.h": [],
-    "App/motion/motion_window_test.c": [
-      "App/motion/motion_window_test.h"
-    ],
-    "App/motion/motion_window_test.h": [],
-    "App/ota/ota_config.h": [],
-    "App/ota/ota_http.c": [
-      "App/ota/ota_http.h"
-    ],
-    "App/ota/ota_http.h": [],
-    "App/ota/ota_service.c": [
-      "App/ota/ota_config.h",
-      "App/ota/ota_http.h",
-      "App/ota/ota_service.h"
-    ],
-    "App/ota/ota_service.h": [],
-    "App/rule action/rule_action_recognizer.c": [
-      "App/rule action/rule_action_recognizer.h"
-    ],
-    "App/rule action/rule_action_recognizer.h": [],
-    "BSP/cloud/MqttKit.c": [
-      "BSP/cloud/MqttKit.h"
-    ],
-    "BSP/cloud/MqttKit.h": [],
-    "BSP/cloud/onenet.c": [
-      "BSP/cloud/MqttKit.h",
-      "BSP/cloud/onenet.h"
-    ],
-    "BSP/cloud/onenet.h": [],
-    "BSP/debug_uart/debug_uart7.c": [
-      "BSP/debug_uart/debug_uart7.h",
-      "BSP/debug_uart/uart7_role.h"
-    ],
-    "BSP/debug_uart/debug_uart7.h": [],
-    "BSP/debug_uart/uart7_role.h": [],
-    "BSP/display/lt168b.c": [
-      "BSP/display/lt168b.h"
-    ],
-    "BSP/display/lt168b.h": [],
-    "BSP/w25q128/w25q128.c": [
-      "BSP/w25q128/w25q128.h"
-    ],
-    "BSP/w25q128/w25q128.h": [],
-    "BSP/wifi/ESP8266.c": [
-      "BSP/wifi/ESP8266.h"
-    ],
-    "BSP/wifi/ESP8266.h": [],
-    "Common/crc16.c": [
-      "Common/crc16.h"
-    ],
-    "Common/crc16.h": [],
-    "Common/md5.c": [
-      "Common/md5.h"
-    ],
-    "Common/md5.h": [],
-    "Common/ota_device_info.c": [
-      "Common/crc16.h",
-      "Common/ota_device_info.h"
-    ],
-    "Common/ota_device_info.h": [],
-    "Common/ota_info.c": [
-      "Common/crc16.h",
-      "Common/md5.h",
-      "Common/ota_info.h"
-    ],
-    "Common/ota_info.h": [],
-    "Common/ota_layout.h": [],
-    "Common/ring_buffer.c": [
-      "Common/ring_buffer.h"
-    ],
-    "Common/ring_buffer.h": [],
-    "Core/Inc/bootloader_ota.h": [],
-    "Core/Inc/crc.h": [],
-    "Core/Inc/dma.h": [],
-    "Core/Inc/FreeRTOSConfig.h": [],
-    "Core/Inc/gpio.h": [],
-    "Core/Inc/internal_flash.h": [],
-    "Core/Inc/main.h": [],
-    "Core/Inc/RTE_Components.h": [],
-    "Core/Inc/stm32h7xx_hal_conf.h": [],
-    "Core/Inc/stm32h7xx_it.h": [],
-    "Core/Inc/tim.h": [],
-    "Core/Inc/usart.h": [],
-    "Core/Src/bootloader_main.c": [],
-    "Core/Src/bootloader_ota.c": [],
-    "Core/Src/crc.c": [],
-    "Core/Src/dma.c": [],
-    "Core/Src/freertos.c": [],
-    "Core/Src/gpio.c": [],
-    "Core/Src/internal_flash.c": [],
-    "Core/Src/main.c": [],
-    "Core/Src/stm32h7xx_hal_msp.c": [],
-    "Core/Src/stm32h7xx_hal_timebase_tim.c": [],
-    "Core/Src/stm32h7xx_it.c": [],
-    "Core/Src/system_stm32h7xx.c": [],
-    "Core/Src/tim.c": [],
-    "Core/Src/usart.c": [],
-    "docs/2026-05-31-H743项目脉络补充.md": [],
-    "docs/h743_module_pins.csv": [],
-    "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx": [],
-    "docs/H743资料包/note/参考手册重点部分.md": [],
-    "docs/H743资料包/note/快速上手.md": [],
-    "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md": [],
-    "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx": [],
-    "docs/lt168b_ota_mqtt_change_plan_2026-06-25.md": [],
-    "docs/W25Q128_Bootloader_App_第一版最小跑通方案.md": [],
-    "LICENSE_X-CUBE-AI.txt": [],
-    "Master.ioc": [],
-    "SYSTEM/delay/delay.c": [],
-    "SYSTEM/delay/delay.h": [],
-    "SYSTEM/readme.txt": [],
-    "SYSTEM/sys/sys.c": [],
-    "SYSTEM/sys/sys.h": [],
-    "SYSTEM/usart/yuanzi_usart.c": [],
-    "SYSTEM/usart/yuanzi_usart.h": []
+  "stats": {
+    "filesScanned": 103,
+    "byCategory": {
+      "config": 5,
+      "code": 87,
+      "docs": 10,
+      "data": 1
+    },
+    "byLanguage": {
+      "json": 5,
+      "unknown": 2,
+      "txt": 3,
+      "markdown": 7,
+      "c": 82,
+      "csv": 1,
+      "xlsx": 2,
+      "ioc": 1
+    }
   }
 }

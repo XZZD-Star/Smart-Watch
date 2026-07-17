@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {"id":"file:App/lt_screen/lt_screen_keys.h","type":"file","name":"lt_screen_keys.h","filePath":"App/lt_screen/lt_screen_keys.h","summary":"集中定义 LT168B 串口屏各页面触摸按键的键值常量，供屏幕任务进行事件分派。","tags":["按键映射","屏幕交互","常量定义"],"complexity":"simple"},
+    {"id":"file:App/lt_screen/lt_screen_task.c","type":"file","name":"lt_screen_task.c","filePath":"App/lt_screen/lt_screen_task.c","summary":"实现 LT168B 屏幕任务主循环与触摸事件分派，协调健康数据刷新、训练计数、设备门控制及 OTA 演示流程。","tags":["任务循环","屏幕交互","事件处理","ota","freertos"],"complexity":"complex","languageNotes":"通过条件编译在正常模式与网络调试模式间切换，并以文件内静态状态维护多个屏幕业务流程。"},
+    {"id":"function:App/lt_screen/lt_screen_task.c:LTScreenTask_Run","type":"function","name":"LTScreenTask_Run","filePath":"App/lt_screen/lt_screen_task.c","lineRange":[91,146],"summary":"初始化 LT168B 屏幕并持续轮询触摸事件，同时按周期刷新健康、跌倒及训练状态。","tags":["任务入口","事件循环","屏幕刷新","freertos"],"complexity":"moderate"},
+    {"id":"function:App/lt_screen/lt_screen_task.c:LTScreen_HandleTouchEvent","type":"function","name":"LTScreen_HandleTouchEvent","filePath":"App/lt_screen/lt_screen_task.c","lineRange":[148,213],"summary":"校验并记录触摸事件，根据键值分派版本查询、设备开启、校准、训练及 OTA 更新操作。","tags":["事件处理","按键分派","屏幕交互","ota"],"complexity":"moderate"},
+    {"id":"file:App/lt_screen/lt_screen_task.h","type":"file","name":"lt_screen_task.h","filePath":"App/lt_screen/lt_screen_task.h","summary":"声明 LT168B 屏幕任务、触摸事件处理和设备门状态接口，并定义正常与网络调试两种编译模式。","tags":["接口声明","屏幕任务","编译配置"],"complexity":"simple"}
+  ],
+  "edges": [
+    {"source":"file:App/lt_screen/lt_screen_task.c","target":"file:App/lt_screen/lt_screen_keys.h","type":"imports","direction":"forward","weight":0.7},
+    {"source":"file:App/lt_screen/lt_screen_task.c","target":"file:App/lt_screen/lt_screen_task.h","type":"imports","direction":"forward","weight":0.7},
+    {"source":"file:App/lt_screen/lt_screen_task.c","target":"function:App/lt_screen/lt_screen_task.c:LTScreenTask_Run","type":"contains","direction":"forward","weight":1.0},
+    {"source":"file:App/lt_screen/lt_screen_task.c","target":"function:App/lt_screen/lt_screen_task.c:LTScreen_HandleTouchEvent","type":"contains","direction":"forward","weight":1.0},
+    {"source":"file:App/lt_screen/lt_screen_task.c","target":"function:App/lt_screen/lt_screen_task.c:LTScreenTask_Run","type":"exports","direction":"forward","weight":0.8},
+    {"source":"file:App/lt_screen/lt_screen_task.c","target":"function:App/lt_screen/lt_screen_task.c:LTScreen_HandleTouchEvent","type":"exports","direction":"forward","weight":0.8}
+  ]
+}

@@ -1,0 +1,918 @@
+{
+  "scriptCompleted": true,
+  "entryPointCandidates": [
+    {
+      "id": "file:Core/Src/main.c",
+      "score": 4,
+      "name": "main.c",
+      "summary": "应用固件入口，配置 MPU、Cache、系统时钟和生成外设后启动 FreeRTOS 调度。"
+    },
+    {
+      "id": "document:Agents.md",
+      "score": 2,
+      "name": "Agents.md",
+      "summary": "规定项目自定义代码的开发原则、命名约定、返回值语义、中文注释格式及最小实现要求。"
+    },
+    {
+      "id": "file:.mxproject",
+      "score": 2,
+      "name": ".mxproject",
+      "summary": "保存 STM32CubeMX 工程的源目录、生成目录和工具链元数据，用于工程代码生成。"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "score": 2,
+      "name": ".understandignore",
+      "summary": "定义知识图谱扫描时排除的第三方库、生成目录和构建产物，控制分析边界。"
+    },
+    {
+      "id": "file:App/ai/motion_ai.c",
+      "score": 2,
+      "name": "motion_ai.c",
+      "summary": "实现动作识别 AI 推理流水线，包括窗口预处理、基线与能量计算、跌倒检测、概率平滑及演示覆盖。"
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "file:App/motion/motion_sensor_pipeline.h",
+      "fanIn": 3,
+      "name": "motion_sensor_pipeline.h"
+    },
+    {
+      "id": "file:App/motion/motion_window_test.h",
+      "fanIn": 3,
+      "name": "motion_window_test.h"
+    },
+    {
+      "id": "file:Common/crc16.h",
+      "fanIn": 3,
+      "name": "crc16.h"
+    },
+    {
+      "id": "file:App/motion/motion_app_events.h",
+      "fanIn": 2,
+      "name": "motion_app_events.h"
+    },
+    {
+      "id": "file:App/motion/motion_input.h",
+      "fanIn": 2,
+      "name": "motion_input.h"
+    },
+    {
+      "id": "file:App/motion/motion_mode.h",
+      "fanIn": 2,
+      "name": "motion_mode.h"
+    },
+    {
+      "id": "file:App/ota/ota_http.h",
+      "fanIn": 2,
+      "name": "ota_http.h"
+    },
+    {
+      "id": "file:BSP/cloud/MqttKit.h",
+      "fanIn": 2,
+      "name": "MqttKit.h"
+    },
+    {
+      "id": "file:Common/md5.h",
+      "fanIn": 2,
+      "name": "md5.h"
+    },
+    {
+      "id": "file:App/ai/motion_ai.h",
+      "fanIn": 1,
+      "name": "motion_ai.h"
+    },
+    {
+      "id": "file:App/cloud/cloud_task.h",
+      "fanIn": 1,
+      "name": "cloud_task.h"
+    },
+    {
+      "id": "file:App/lt_screen/lt_screen_keys.h",
+      "fanIn": 1,
+      "name": "lt_screen_keys.h"
+    },
+    {
+      "id": "file:App/lt_screen/lt_screen_task.h",
+      "fanIn": 1,
+      "name": "lt_screen_task.h"
+    },
+    {
+      "id": "file:App/motion/motion_task.h",
+      "fanIn": 1,
+      "name": "motion_task.h"
+    },
+    {
+      "id": "file:App/ota/ota_config.h",
+      "fanIn": 1,
+      "name": "ota_config.h"
+    },
+    {
+      "id": "file:App/ota/ota_service.h",
+      "fanIn": 1,
+      "name": "ota_service.h"
+    },
+    {
+      "id": "file:App/rule action/rule_action_recognizer.h",
+      "fanIn": 1,
+      "name": "rule_action_recognizer.h"
+    },
+    {
+      "id": "file:BSP/cloud/onenet.h",
+      "fanIn": 1,
+      "name": "onenet.h"
+    },
+    {
+      "id": "file:BSP/debug_uart/debug_uart7.h",
+      "fanIn": 1,
+      "name": "debug_uart7.h"
+    },
+    {
+      "id": "file:BSP/debug_uart/uart7_role.h",
+      "fanIn": 1,
+      "name": "uart7_role.h"
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "file:BSP/cloud/onenet.c",
+      "fanOut": 74,
+      "name": "onenet.c"
+    },
+    {
+      "id": "file:BSP/wifi/ESP8266.c",
+      "fanOut": 43,
+      "name": "ESP8266.c"
+    },
+    {
+      "id": "file:App/ai/motion_ai.c",
+      "fanOut": 42,
+      "name": "motion_ai.c"
+    },
+    {
+      "id": "file:App/motion/motion_sensor_pipeline.c",
+      "fanOut": 40,
+      "name": "motion_sensor_pipeline.c"
+    },
+    {
+      "id": "file:Core/Src/stm32h7xx_it.c",
+      "fanOut": 37,
+      "name": "stm32h7xx_it.c"
+    },
+    {
+      "id": "file:App/motion/motion_app_events.c",
+      "fanOut": 33,
+      "name": "motion_app_events.c"
+    },
+    {
+      "id": "file:App/ota/ota_service.c",
+      "fanOut": 31,
+      "name": "ota_service.c"
+    },
+    {
+      "id": "file:BSP/display/lt168b.c",
+      "fanOut": 30,
+      "name": "lt168b.c"
+    },
+    {
+      "id": "file:App/rule action/rule_action_recognizer.c",
+      "fanOut": 27,
+      "name": "rule_action_recognizer.c"
+    },
+    {
+      "id": "file:Core/Src/tim.c",
+      "fanOut": 27,
+      "name": "tim.c"
+    },
+    {
+      "id": "file:BSP/cloud/MqttKit.c",
+      "fanOut": 25,
+      "name": "MqttKit.c"
+    },
+    {
+      "id": "file:BSP/w25q128/w25q128.c",
+      "fanOut": 25,
+      "name": "w25q128.c"
+    },
+    {
+      "id": "file:App/motion/motion_input.c",
+      "fanOut": 22,
+      "name": "motion_input.c"
+    },
+    {
+      "id": "file:Core/Src/usart.c",
+      "fanOut": 21,
+      "name": "usart.c"
+    },
+    {
+      "id": "file:App/cloud/cloud_task.c",
+      "fanOut": 19,
+      "name": "cloud_task.c"
+    },
+    {
+      "id": "file:App/motion/motion_task.c",
+      "fanOut": 19,
+      "name": "motion_task.c"
+    },
+    {
+      "id": "file:Common/ota_info.c",
+      "fanOut": 19,
+      "name": "ota_info.c"
+    },
+    {
+      "id": "file:Common/ring_buffer.c",
+      "fanOut": 18,
+      "name": "ring_buffer.c"
+    },
+    {
+      "id": "file:SYSTEM/sys/sys.c",
+      "fanOut": 18,
+      "name": "sys.c"
+    },
+    {
+      "id": "file:Core/Src/bootloader_main.c",
+      "fanOut": 16,
+      "name": "bootloader_main.c"
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:Core/Src/main.c",
+    "order": [
+      "file:Core/Src/main.c"
+    ],
+    "depthMap": {
+      "file:Core/Src/main.c": 0
+    },
+    "byDepth": {
+      "0": [
+        "file:Core/Src/main.c"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [
+      {
+        "id": "document:Agents.md",
+        "name": "Agents.md",
+        "type": "document",
+        "summary": "规定项目自定义代码的开发原则、命名约定、返回值语义、中文注释格式及最小实现要求。"
+      },
+      {
+        "id": "document:LICENSE_X-CUBE-AI.txt",
+        "name": "LICENSE_X-CUBE-AI.txt",
+        "type": "document",
+        "summary": "收录 STMicroelectronics SLA0044 软件许可条款，限定 X-CUBE-AI 组件的使用、复制和再分发条件。"
+      },
+      {
+        "id": "document:说明文档.txt",
+        "name": "说明文档.txt",
+        "type": "document",
+        "summary": "说明参赛作品源码材料的编号与用途，概述主控工程承担双传感器数据融合、动作识别、规则分析、云连接和屏幕显示。"
+      },
+      {
+        "id": "document:docs/2026-05-31-H743项目脉络补充.md",
+        "name": "2026-05-31-H743项目脉络补充.md",
+        "type": "document",
+        "summary": "系统梳理 H743 固件总体架构、FreeRTOS 任务分工、运动识别与 AI/规则链路、OneNet 云流程及屏幕刷新边界。"
+      },
+      {
+        "id": "document:docs/W25Q128_Bootloader_App_第一版最小跑通方案.md",
+        "name": "W25Q128_Bootloader_App_第一版最小跑通方案.md",
+        "type": "document",
+        "summary": "给出 W25Q128 外部 Flash 与 Bootloader/App 分区的最小验证方案，涵盖地址规划、跳转模板、下载步骤和常见风险。"
+      },
+      {
+        "id": "document:docs/lt168b_ota_mqtt_change_plan_2026-06-25.md",
+        "name": "lt168b_ota_mqtt_change_plan_2026-06-25.md",
+        "type": "document",
+        "summary": "记录 LT168B 屏幕与 ESP8266、OTA、MQTT 联动的修订方案，核对现有键值、页面地址、OTA 独占机制和推荐修改顺序。"
+      },
+      {
+        "id": "document:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+        "name": "STM32H743ZIT6_引脚排针精华笔记.md",
+        "type": "document",
+        "summary": "整理 STM32H743ZIT6 开发板排针、复用功能及板载资源占用，便于硬件接线和引脚冲突排查。"
+      },
+      {
+        "id": "document:docs/H743资料包/note/参考手册重点部分.md",
+        "name": "参考手册重点部分.md",
+        "type": "document",
+        "summary": "提炼 STM32H743 时钟树、总线、DMA 与 Cache 一致性等参考手册重点，并给出常见问题检查清单。"
+      },
+      {
+        "id": "document:docs/H743资料包/note/快速上手.md",
+        "name": "快速上手.md",
+        "type": "document",
+        "summary": "提供 STM32H743 从 CubeMX 建工程到外设调试的学习路线，重点说明手册查阅、内存、Cache、DMA 和时钟配置。"
+      },
+      {
+        "id": "document:SYSTEM/readme.txt",
+        "name": "readme.txt",
+        "type": "document",
+        "summary": "说明 SYSTEM 目录中时钟、延时和串口基础支持代码的来源与使用范围。"
+      }
+    ],
+    "infrastructure": [],
+    "data": [
+      {
+        "id": "table:docs/h743_module_pins.csv:h743_module_pins",
+        "name": "h743_module_pins",
+        "type": "table",
+        "summary": "汇总 H743 主控的时钟、串口、PWM、W25Q128、DMA 等模块与 MCU 引脚、初始化入口和源码依据的对应关系。"
+      }
+    ],
+    "config": [
+      {
+        "id": "config:.understand-anything/config.json",
+        "name": "config.json",
+        "type": "config",
+        "summary": "配置 Understand Anything 分析产物采用中文输出。"
+      },
+      {
+        "id": "config:.understand-anything/fingerprints.json",
+        "name": "fingerprints.json",
+        "type": "config",
+        "summary": "保存项目文件指纹、Git 提交和生成时间，用于判断知识图谱分析是否需要增量更新。"
+      },
+      {
+        "id": "config:.understand-anything/knowledge-graph.json",
+        "name": "knowledge-graph.json",
+        "type": "config",
+        "summary": "存放 Understand Anything 生成的项目知识图谱，包括节点、边、分层视图与导览信息。"
+      },
+      {
+        "id": "config:.understand-anything/meta.json",
+        "name": "meta.json",
+        "type": "config",
+        "summary": "记录上次项目分析时间、对应 Git 提交、格式版本和已分析文件数。"
+      },
+      {
+        "id": "config:.ai/network_action_cnn.h5_c_info.json",
+        "name": "network_action_cnn.h5_c_info.json",
+        "type": "config",
+        "summary": "记录动作识别 CNN 的 X-CUBE-AI 转换信息、张量规格、算子与内存占用，供生成代码和部署诊断使用。"
+      }
+    ]
+  },
+  "clusters": [],
+  "layers": {
+    "count": 7,
+    "list": [
+      {
+        "id": "layer:application",
+        "name": "应用业务层",
+        "description": "承载双传感器数据融合、动作识别与规则分析，并编排 OTA、云端通信和屏幕交互等智能手表业务流程。"
+      },
+      {
+        "id": "layer:bsp",
+        "name": "板级设备接入层",
+        "description": "封装 ESP8266、MQTT/OneNET、LT168B 显示屏、W25Q128 Flash 与调试 UART 等外设和网络设备接口。"
+      },
+      {
+        "id": "layer:utility",
+        "name": "公共组件层",
+        "description": "提供 CRC16、MD5、环形缓冲区以及 OTA 设备信息、布局与共享数据结构等跨模块基础能力。"
+      },
+      {
+        "id": "layer:mcu-runtime",
+        "name": "MCU 平台与运行时层",
+        "description": "包含 STM32H743 启动入口、FreeRTOS 初始化、中断、HAL 配置以及 GPIO、DMA、定时器、UART、CRC 和内部 Flash 驱动。"
+      },
+      {
+        "id": "layer:system-support",
+        "name": "SYSTEM 支撑层",
+        "description": "保留延时、系统时钟与串口等传统底层适配代码，为现有固件模块提供兼容性支撑。"
+      },
+      {
+        "id": "layer:config",
+        "name": "项目配置与分析元数据",
+        "description": "集中管理 CubeMX 工程配置、AI 模型信息以及 Understand Anything 的扫描配置、指纹和知识图谱元数据。"
+      },
+      {
+        "id": "layer:documentation",
+        "name": "文档与硬件资料",
+        "description": "汇集项目说明、设计方案、芯片参考笔记、模块引脚表、授权文本及团队协作规范。"
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "file:App/motion/motion_app_events.c": {
+      "name": "motion_app_events.c",
+      "type": "file",
+      "summary": "维护动作识别结果、训练页刷新和云端上报请求的轻量事件状态，为任务与 UI/云连接之间提供无阻塞状态交接。"
+    },
+    "file:App/motion/motion_app_events.h": {
+      "name": "motion_app_events.h",
+      "type": "file",
+      "summary": "声明动作识别事件队列、训练页刷新和云端待上报状态的公共接口。"
+    },
+    "file:App/motion/motion_input.c": {
+      "name": "motion_input.c",
+      "type": "file",
+      "summary": "接收启动、停止、清除和中断触发请求，并协调姿态传感器流水线及窗口测试的输入状态。"
+    },
+    "file:App/motion/motion_input.h": {
+      "name": "motion_input.h",
+      "type": "file",
+      "summary": "定义运动识别任务的外部控制请求接口。"
+    },
+    "file:App/motion/motion_mode.h": {
+      "name": "motion_mode.h",
+      "type": "file",
+      "summary": "定义运动识别、采集、校准与测试等运行模式枚举及相关模式约束。"
+    },
+    "file:App/motion/motion_sensor_pipeline.c": {
+      "name": "motion_sensor_pipeline.c",
+      "type": "file",
+      "summary": "解析上下肢姿态数据包，完成时间戳与序号校验、双传感器帧融合、校准统计及 ISR 到任务的数据交接。"
+    },
+    "file:App/motion/motion_sensor_pipeline.h": {
+      "name": "motion_sensor_pipeline.h",
+      "type": "file",
+      "summary": "声明姿态数据接收、融合帧提取、校准控制和流水线复位接口。"
+    },
+    "file:App/motion/motion_task.c": {
+      "name": "motion_task.c",
+      "type": "file",
+      "summary": "实现运动识别主任务，驱动融合帧处理、AI 推理、跌倒判定、训练结果事件和多种 UART/CSV 调试输出。"
+    },
+    "file:App/motion/motion_task.h": {
+      "name": "motion_task.h",
+      "type": "file",
+      "summary": "声明运动识别 FreeRTOS 任务入口。"
+    },
+    "file:App/motion/motion_window_test.c": {
+      "name": "motion_window_test.c",
+      "type": "file",
+      "summary": "管理离线模型窗口测试请求，执行内置测试数据推理并输出验证结果。"
+    },
+    "file:App/motion/motion_window_test.h": {
+      "name": "motion_window_test.h",
+      "type": "file",
+      "summary": "声明模型窗口测试的初始化、复位、请求和执行接口。"
+    },
+    "file:Common/crc16.c": {
+      "name": "crc16.c",
+      "type": "file",
+      "summary": "提供流式 CRC16 初始化、增量更新和整块数据计算，用于 OTA 元数据完整性校验。"
+    },
+    "file:Common/crc16.h": {
+      "name": "crc16.h",
+      "type": "file",
+      "summary": "声明通用 CRC16 校验接口及初始值常量。"
+    },
+    "file:Common/md5.c": {
+      "name": "md5.c",
+      "type": "file",
+      "summary": "实现 MD5 分组变换、流式摘要计算、十六进制编码与字符串合法性检查。"
+    },
+    "file:Common/md5.h": {
+      "name": "md5.h",
+      "type": "file",
+      "summary": "定义 MD5 上下文并声明摘要计算和十六进制辅助接口。"
+    },
+    "file:Common/ota_device_info.c": {
+      "name": "ota_device_info.c",
+      "type": "file",
+      "summary": "在冗余 Flash 槽位中读取、校验和保存设备当前运行版本，利用序号选择最新有效记录。"
+    },
+    "file:Common/ota_device_info.h": {
+      "name": "ota_device_info.h",
+      "type": "file",
+      "summary": "定义设备 OTA 版本持久化记录及加载、查询和保存接口。"
+    },
+    "file:Common/ota_info.c": {
+      "name": "ota_info.c",
+      "type": "file",
+      "summary": "持久化并校验待升级固件和模拟升级信息，结合 CRC16 与 MD5 保证元数据有效性。"
+    },
+    "file:Common/ota_info.h": {
+      "name": "ota_info.h",
+      "type": "file",
+      "summary": "定义 OTA 待升级记录结构及加载、保存和失效接口。"
+    },
+    "file:App/ota/ota_config.h": {
+      "name": "ota_config.h",
+      "type": "file",
+      "summary": "集中定义 OTA 服务地址、请求路径、下载分块和 Flash 区域等编译期配置。"
+    },
+    "file:App/ota/ota_http.c": {
+      "name": "ota_http.c",
+      "type": "file",
+      "summary": "基于网络连接实现受限 HTTP 请求与响应解析，以回调方式交付响应体并处理 Content-Length 等头字段。"
+    },
+    "file:App/ota/ota_http.h": {
+      "name": "ota_http.h",
+      "type": "file",
+      "summary": "定义 OTA HTTP 请求参数、响应信息和流式响应体回调接口。"
+    },
+    "file:App/ota/ota_service.c": {
+      "name": "ota_service.c",
+      "type": "file",
+      "summary": "实现 OTA 完整业务流程，包括任务查询、JSON 解析、分段固件下载、Flash 写入、MD5 校验、升级信息保存和版本上报。"
+    },
+    "file:App/ota/ota_service.h": {
+      "name": "ota_service.h",
+      "type": "file",
+      "summary": "声明 OTA 初始化、周期检查、模拟升级和版本上报接口。"
+    },
+    "file:BSP/cloud/MqttKit.c": {
+      "name": "MqttKit.c",
+      "type": "file",
+      "summary": "实现 MQTT 报文缓冲区管理及 CONNECT、SUBSCRIBE、PUBLISH、PING 等报文的编码与解码。"
+    },
+    "file:BSP/cloud/MqttKit.h": {
+      "name": "MqttKit.h",
+      "type": "file",
+      "summary": "定义 MQTT 报文类型、缓冲区结构和协议编解码接口。"
+    },
+    "file:BSP/cloud/onenet.c": {
+      "name": "onenet.c",
+      "type": "file",
+      "summary": "实现 OneNET MQTT 会话、主题订阅、属性上报与属性设置下行处理，并联动训练计划、门状态、跌倒告警和运动测试。"
+    },
+    "file:BSP/cloud/onenet.h": {
+      "name": "onenet.h",
+      "type": "file",
+      "summary": "声明 OneNET 设备连接、订阅发布、下行处理及会话状态查询接口。"
+    },
+    "file:App/lt_screen/lt_screen_keys.h": {
+      "name": "lt_screen_keys.h",
+      "type": "file",
+      "summary": "集中定义 LT168B 串口屏各页面触摸按键的键值常量，供屏幕任务进行事件分派。"
+    },
+    "file:App/lt_screen/lt_screen_task.c": {
+      "name": "lt_screen_task.c",
+      "type": "file",
+      "summary": "实现 LT168B 屏幕任务主循环与触摸事件分派，协调健康数据刷新、训练计数、设备门控制及 OTA 演示流程。"
+    },
+    "file:App/lt_screen/lt_screen_task.h": {
+      "name": "lt_screen_task.h",
+      "type": "file",
+      "summary": "声明 LT168B 屏幕任务、触摸事件处理和设备门状态接口，并定义正常与网络调试两种编译模式。"
+    },
+    "file:BSP/debug_uart/debug_uart7.c": {
+      "name": "debug_uart7.c",
+      "type": "file",
+      "summary": "提供格式化调试输出及 ESP8266、生理数据日志接口；当 UART7 未配置为调试角色时编译为空实现。"
+    },
+    "file:BSP/debug_uart/debug_uart7.h": {
+      "name": "debug_uart7.h",
+      "type": "file",
+      "summary": "声明 UART7 格式化日志、ESP8266 收发日志和生理数据摘要日志接口。"
+    },
+    "file:BSP/debug_uart/uart7_role.h": {
+      "name": "uart7_role.h",
+      "type": "file",
+      "summary": "定义 UART7 在调试与串口屏之间的角色选择，以及屏幕测试模式和隔离测试的编译期配置与合法性检查。"
+    },
+    "config:.understand-anything/config.json": {
+      "name": "config.json",
+      "type": "config",
+      "summary": "配置 Understand Anything 分析产物采用中文输出。"
+    },
+    "config:.understand-anything/fingerprints.json": {
+      "name": "fingerprints.json",
+      "type": "config",
+      "summary": "保存项目文件指纹、Git 提交和生成时间，用于判断知识图谱分析是否需要增量更新。"
+    },
+    "config:.understand-anything/knowledge-graph.json": {
+      "name": "knowledge-graph.json",
+      "type": "config",
+      "summary": "存放 Understand Anything 生成的项目知识图谱，包括节点、边、分层视图与导览信息。"
+    },
+    "config:.understand-anything/meta.json": {
+      "name": "meta.json",
+      "type": "config",
+      "summary": "记录上次项目分析时间、对应 Git 提交、格式版本和已分析文件数。"
+    },
+    "document:Agents.md": {
+      "name": "Agents.md",
+      "type": "document",
+      "summary": "规定项目自定义代码的开发原则、命名约定、返回值语义、中文注释格式及最小实现要求。"
+    },
+    "document:LICENSE_X-CUBE-AI.txt": {
+      "name": "LICENSE_X-CUBE-AI.txt",
+      "type": "document",
+      "summary": "收录 STMicroelectronics SLA0044 软件许可条款，限定 X-CUBE-AI 组件的使用、复制和再分发条件。"
+    },
+    "document:说明文档.txt": {
+      "name": "说明文档.txt",
+      "type": "document",
+      "summary": "说明参赛作品源码材料的编号与用途，概述主控工程承担双传感器数据融合、动作识别、规则分析、云连接和屏幕显示。"
+    },
+    "document:docs/2026-05-31-H743项目脉络补充.md": {
+      "name": "2026-05-31-H743项目脉络补充.md",
+      "type": "document",
+      "summary": "系统梳理 H743 固件总体架构、FreeRTOS 任务分工、运动识别与 AI/规则链路、OneNet 云流程及屏幕刷新边界。"
+    },
+    "document:docs/W25Q128_Bootloader_App_第一版最小跑通方案.md": {
+      "name": "W25Q128_Bootloader_App_第一版最小跑通方案.md",
+      "type": "document",
+      "summary": "给出 W25Q128 外部 Flash 与 Bootloader/App 分区的最小验证方案，涵盖地址规划、跳转模板、下载步骤和常见风险。"
+    },
+    "table:docs/h743_module_pins.csv:h743_module_pins": {
+      "name": "h743_module_pins",
+      "type": "table",
+      "summary": "汇总 H743 主控的时钟、串口、PWM、W25Q128、DMA 等模块与 MCU 引脚、初始化入口和源码依据的对应关系。"
+    },
+    "document:docs/lt168b_ota_mqtt_change_plan_2026-06-25.md": {
+      "name": "lt168b_ota_mqtt_change_plan_2026-06-25.md",
+      "type": "document",
+      "summary": "记录 LT168B 屏幕与 ESP8266、OTA、MQTT 联动的修订方案，核对现有键值、页面地址、OTA 独占机制和推荐修改顺序。"
+    },
+    "document:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md": {
+      "name": "STM32H743ZIT6_引脚排针精华笔记.md",
+      "type": "document",
+      "summary": "整理 STM32H743ZIT6 开发板排针、复用功能及板载资源占用，便于硬件接线和引脚冲突排查。"
+    },
+    "document:docs/H743资料包/note/参考手册重点部分.md": {
+      "name": "参考手册重点部分.md",
+      "type": "document",
+      "summary": "提炼 STM32H743 时钟树、总线、DMA 与 Cache 一致性等参考手册重点，并给出常见问题检查清单。"
+    },
+    "document:docs/H743资料包/note/快速上手.md": {
+      "name": "快速上手.md",
+      "type": "document",
+      "summary": "提供 STM32H743 从 CubeMX 建工程到外设调试的学习路线，重点说明手册查阅、内存、Cache、DMA 和时钟配置。"
+    },
+    "config:.ai/network_action_cnn.h5_c_info.json": {
+      "name": "network_action_cnn.h5_c_info.json",
+      "type": "config",
+      "summary": "记录动作识别 CNN 的 X-CUBE-AI 转换信息、张量规格、算子与内存占用，供生成代码和部署诊断使用。"
+    },
+    "file:.mxproject": {
+      "name": ".mxproject",
+      "type": "file",
+      "summary": "保存 STM32CubeMX 工程的源目录、生成目录和工具链元数据，用于工程代码生成。"
+    },
+    "file:.understand-anything/.understandignore": {
+      "name": ".understandignore",
+      "type": "file",
+      "summary": "定义知识图谱扫描时排除的第三方库、生成目录和构建产物，控制分析边界。"
+    },
+    "file:App/ai/motion_ai.c": {
+      "name": "motion_ai.c",
+      "type": "file",
+      "summary": "实现动作识别 AI 推理流水线，包括窗口预处理、基线与能量计算、跌倒检测、概率平滑及演示覆盖。"
+    },
+    "file:App/ai/motion_ai.h": {
+      "name": "motion_ai.h",
+      "type": "file",
+      "summary": "声明动作 AI 的标签、状态、结果结构和对外控制接口，供采集及业务任务调用。"
+    },
+    "file:App/cloud/cloud_task.c": {
+      "name": "cloud_task.c",
+      "type": "file",
+      "summary": "实现云端 FreeRTOS 任务，管理 Wi-Fi、MQTT 会话、周期上报、下行处理及 OTA 独占暂停。"
+    },
+    "file:App/cloud/cloud_task.h": {
+      "name": "cloud_task.h",
+      "type": "file",
+      "summary": "声明云任务入口和 OTA 独占协调接口。"
+    },
+    "file:App/motion/motion_frame.h": {
+      "name": "motion_frame.h",
+      "type": "file",
+      "summary": "定义运动传感器帧的数据结构和时间戳等共享字段，作为规则识别与 AI 推理的输入契约。"
+    },
+    "file:App/rule action/rule_action_recognizer.c": {
+      "name": "rule_action_recognizer.c",
+      "type": "file",
+      "summary": "实现基于规则的动作识别器，完成基线锁定、预触发缓存、会话采样、特征窗口搜索和模板分类。"
+    },
+    "file:App/rule action/rule_action_recognizer.h": {
+      "name": "rule_action_recognizer.h",
+      "type": "file",
+      "summary": "定义规则动作识别器的配置、状态机、采样会话和识别结果接口。"
+    },
+    "file:BSP/display/lt168b.c": {
+      "name": "lt168b.c",
+      "type": "file",
+      "summary": "实现 LT168B 串口屏文本写入、触摸帧解析、接收恢复和 Modbus CRC 校验。"
+    },
+    "file:BSP/display/lt168b.h": {
+      "name": "lt168b.h",
+      "type": "file",
+      "summary": "声明 LT168B 显示与触摸事件接口。"
+    },
+    "file:BSP/w25q128/w25q128.c": {
+      "name": "w25q128.c",
+      "type": "file",
+      "summary": "实现 W25Q128 SPI Flash 初始化、读写、扇区擦除、忙等待和写后校验。"
+    },
+    "file:BSP/w25q128/w25q128.h": {
+      "name": "w25q128.h",
+      "type": "file",
+      "summary": "声明 W25Q128 存储驱动接口、容量和状态定义。"
+    },
+    "file:BSP/wifi/ESP8266.c": {
+      "name": "ESP8266.c",
+      "type": "file",
+      "summary": "实现 ESP8266 AT 指令和透明传输驱动，处理收发等待、TCP 建连、IPD 数据及错误恢复。"
+    },
+    "file:BSP/wifi/ESP8266.h": {
+      "name": "ESP8266.h",
+      "type": "file",
+      "summary": "声明 ESP8266 初始化、TCP 连接、数据收发和接收喂入接口。"
+    },
+    "file:Common/ota_layout.h": {
+      "name": "ota_layout.h",
+      "type": "file",
+      "summary": "定义外部 Flash OTA 分区、固件镜像和升级元数据布局。"
+    },
+    "file:Common/ring_buffer.c": {
+      "name": "ring_buffer.c",
+      "type": "file",
+      "summary": "提供固定容量环形缓冲区的初始化、复位、读写和索引推进实现。"
+    },
+    "file:Common/ring_buffer.h": {
+      "name": "ring_buffer.h",
+      "type": "file",
+      "summary": "声明环形缓冲区结构及读写接口。"
+    },
+    "file:Core/Inc/bootloader_ota.h": {
+      "name": "bootloader_ota.h",
+      "type": "file",
+      "summary": "声明 bootloader_ota 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/crc.h": {
+      "name": "crc.h",
+      "type": "file",
+      "summary": "声明 crc 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/dma.h": {
+      "name": "dma.h",
+      "type": "file",
+      "summary": "声明 dma 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/FreeRTOSConfig.h": {
+      "name": "FreeRTOSConfig.h",
+      "type": "file",
+      "summary": "配置 FreeRTOS 调度、堆、优先级、中断和调试选项。"
+    },
+    "file:Core/Inc/gpio.h": {
+      "name": "gpio.h",
+      "type": "file",
+      "summary": "声明 gpio 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/internal_flash.h": {
+      "name": "internal_flash.h",
+      "type": "file",
+      "summary": "声明 internal_flash 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/main.h": {
+      "name": "main.h",
+      "type": "file",
+      "summary": "声明 main 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/RTE_Components.h": {
+      "name": "RTE_Components.h",
+      "type": "file",
+      "summary": "声明 RTE_Components 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/stm32h7xx_hal_conf.h": {
+      "name": "stm32h7xx_hal_conf.h",
+      "type": "file",
+      "summary": "声明 stm32h7xx_hal_conf 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/stm32h7xx_it.h": {
+      "name": "stm32h7xx_it.h",
+      "type": "file",
+      "summary": "声明 stm32h7xx_it 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/tim.h": {
+      "name": "tim.h",
+      "type": "file",
+      "summary": "声明 tim 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Inc/usart.h": {
+      "name": "usart.h",
+      "type": "file",
+      "summary": "声明 usart 模块的 STM32 HAL 配置、句柄或对外接口。"
+    },
+    "file:Core/Src/bootloader_main.c": {
+      "name": "bootloader_main.c",
+      "type": "file",
+      "summary": "实现 Bootloader 入口，校验应用向量表、释放外设并跳转应用，同时配置最小串口和系统时钟。"
+    },
+    "file:Core/Src/bootloader_ota.c": {
+      "name": "bootloader_ota.c",
+      "type": "file",
+      "summary": "实现 OTA 镜像 MD5 校验、内部 Flash 写入及安装决策流程。"
+    },
+    "file:Core/Src/crc.c": {
+      "name": "crc.c",
+      "type": "file",
+      "summary": "配置 STM32 CRC 外设及其底层时钟资源。"
+    },
+    "file:Core/Src/dma.c": {
+      "name": "dma.c",
+      "type": "file",
+      "summary": "配置 DMA 控制器时钟和相关中断优先级。"
+    },
+    "file:Core/Src/freertos.c": {
+      "name": "freertos.c",
+      "type": "file",
+      "summary": "创建应用 FreeRTOS 对象和任务，连接运动、云端及设备业务执行入口。"
+    },
+    "file:Core/Src/gpio.c": {
+      "name": "gpio.c",
+      "type": "file",
+      "summary": "初始化板级 GPIO 输出、电平和中断引脚。"
+    },
+    "file:Core/Src/internal_flash.c": {
+      "name": "internal_flash.c",
+      "type": "file",
+      "summary": "封装 STM32H743 内部 Flash 扇区定位、擦除、写入和校验操作。"
+    },
+    "file:Core/Src/main.c": {
+      "name": "main.c",
+      "type": "file",
+      "summary": "应用固件入口，配置 MPU、Cache、系统时钟和生成外设后启动 FreeRTOS 调度。"
+    },
+    "file:Core/Src/stm32h7xx_hal_msp.c": {
+      "name": "stm32h7xx_hal_msp.c",
+      "type": "file",
+      "summary": "提供 HAL 全局 MSP 初始化，配置系统级时钟与中断优先级。"
+    },
+    "file:Core/Src/stm32h7xx_hal_timebase_tim.c": {
+      "name": "stm32h7xx_hal_timebase_tim.c",
+      "type": "file",
+      "summary": "使用硬件定时器实现 HAL 1 ms 时间基准及中断配置。"
+    },
+    "file:Core/Src/stm32h7xx_it.c": {
+      "name": "stm32h7xx_it.c",
+      "type": "file",
+      "summary": "实现 Cortex-M7 异常和 STM32H7 外设中断处理，包括 DMA、定时器及多路 UART 回调分发。"
+    },
+    "file:Core/Src/system_stm32h7xx.c": {
+      "name": "system_stm32h7xx.c",
+      "type": "file",
+      "summary": "提供 CMSIS 系统初始化、核心时钟更新和 Run0 模式切换逻辑。"
+    },
+    "file:Core/Src/tim.c": {
+      "name": "tim.c",
+      "type": "file",
+      "summary": "配置 TIM2/TIM3 及 PWM，并提供舵机角度到脉宽和门锁控制逻辑。"
+    },
+    "file:Core/Src/usart.c": {
+      "name": "usart.c",
+      "type": "file",
+      "summary": "配置多路 UART/USART、GPIO、DMA 与中断，并将接收数据分发到环形缓冲区和协议模块。"
+    },
+    "file:docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx": {
+      "name": "~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "type": "file",
+      "summary": "Microsoft Excel 创建的引脚表临时锁文件，不包含可分析的稳定项目内容。"
+    },
+    "file:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx": {
+      "name": "STM32H743ZIT6_引脚排针精华表.xlsx",
+      "type": "file",
+      "summary": "汇总 STM32H743ZIT6 引脚、排针映射和复用功能，供硬件连接快速查询。"
+    },
+    "file:Master.ioc": {
+      "name": "Master.ioc",
+      "type": "file",
+      "summary": "STM32CubeMX 主工程配置，定义 MCU 引脚、时钟、外设、DMA、中间件和代码生成参数。"
+    },
+    "file:SYSTEM/delay/delay.c": {
+      "name": "delay.c",
+      "type": "file",
+      "summary": "提供面向 STM32H7 的阻塞式微秒和毫秒延时实现，并根据系统时钟初始化计时参数。"
+    },
+    "file:SYSTEM/delay/delay.h": {
+      "name": "delay.h",
+      "type": "file",
+      "summary": "声明系统延时初始化及微秒、毫秒延时接口。"
+    },
+    "document:SYSTEM/readme.txt": {
+      "name": "readme.txt",
+      "type": "document",
+      "summary": "说明 SYSTEM 目录中时钟、延时和串口基础支持代码的来源与使用范围。"
+    },
+    "file:SYSTEM/sys/sys.c": {
+      "name": "sys.c",
+      "type": "file",
+      "summary": "实现 STM32H7 系统时钟初始化及底层系统支持函数。"
+    },
+    "file:SYSTEM/sys/sys.h": {
+      "name": "sys.h",
+      "type": "file",
+      "summary": "声明系统时钟配置和底层寄存器辅助接口。"
+    },
+    "file:SYSTEM/usart/yuanzi_usart.c": {
+      "name": "yuanzi_usart.c",
+      "type": "file",
+      "summary": "提供基础串口调试支持和标准输出重定向，适配原子示例代码风格。"
+    },
+    "file:SYSTEM/usart/yuanzi_usart.h": {
+      "name": "yuanzi_usart.h",
+      "type": "file",
+      "summary": "声明基础调试串口配置和输出接口。"
+    }
+  },
+  "totalNodes": 103,
+  "totalEdges": 701
+}

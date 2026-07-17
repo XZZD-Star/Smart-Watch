@@ -1,0 +1,1367 @@
+{
+  "nodes": [
+    {
+      "id": "file:BSP/cloud/onenet.c",
+      "type": "file",
+      "name": "onenet.c",
+      "filePath": "BSP/cloud/onenet.c",
+      "summary": "实现 OneNET MQTT 会话、主题订阅、属性上报与属性设置下行处理，并联动训练计划、门状态、跌倒告警和运动测试。",
+      "tags": [
+        "mqtt",
+        "onenet",
+        "云端通信"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_PostIntPropertyValue",
+      "type": "function",
+      "name": "OneNet_PostIntPropertyValue",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        118,
+        168
+      ],
+      "summary": "上报 OneNet_PostIntPropertyValue 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_PostTrainPlan",
+      "type": "function",
+      "name": "OneNet_PostTrainPlan",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        170,
+        215
+      ],
+      "summary": "上报 OneNet_PostTrainPlan 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_TopicMatches",
+      "type": "function",
+      "name": "OneNet_TopicMatches",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        217,
+        233
+      ],
+      "summary": "实现 OneNet_TopicMatches 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_CopyTextForLog",
+      "type": "function",
+      "name": "OneNet_CopyTextForLog",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        235,
+        261
+      ],
+      "summary": "复制 OneNet_CopyTextForLog 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_CopyDownlink",
+      "type": "function",
+      "name": "OneNet_CopyDownlink",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        263,
+        295
+      ],
+      "summary": "复制 OneNet_CopyDownlink 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ParseJsonTextValue",
+      "type": "function",
+      "name": "OneNet_ParseJsonTextValue",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        344,
+        395
+      ],
+      "summary": "解析 OneNet_ParseJsonTextValue 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ParseJsonIntValue",
+      "type": "function",
+      "name": "OneNet_ParseJsonIntValue",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        397,
+        421
+      ],
+      "summary": "解析 OneNet_ParseJsonIntValue 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ParsePropertyIntValue",
+      "type": "function",
+      "name": "OneNet_ParsePropertyIntValue",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        431,
+        467
+      ],
+      "summary": "解析 OneNet_ParsePropertyIntValue 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_IsDecodedTestValueValid",
+      "type": "function",
+      "name": "OneNet_IsDecodedTestValueValid",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        474,
+        492
+      ],
+      "summary": "解码 OneNet_IsDecodedTestValueValid 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_PublishRaw",
+      "type": "function",
+      "name": "OneNet_PublishRaw",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        494,
+        525
+      ],
+      "summary": "发布 OneNet_PublishRaw 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_SendPropertySetReply",
+      "type": "function",
+      "name": "OneNet_SendPropertySetReply",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        527,
+        571
+      ],
+      "summary": "发送 OneNet_SendPropertySetReply 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_PostTestConfidenceValue",
+      "type": "function",
+      "name": "OneNet_PostTestConfidenceValue",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        573,
+        616
+      ],
+      "summary": "上报 OneNet_PostTestConfidenceValue 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_PostActionKindValue",
+      "type": "function",
+      "name": "OneNet_PostActionKindValue",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        618,
+        623
+      ],
+      "summary": "上报 OneNet_PostActionKindValue 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_PostFallAlarmValue",
+      "type": "function",
+      "name": "OneNet_PostFallAlarmValue",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        625,
+        630
+      ],
+      "summary": "上报 OneNet_PostFallAlarmValue 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_TakeLastValidTestValue",
+      "type": "function",
+      "name": "OneNet_TakeLastValidTestValue",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        632,
+        642
+      ],
+      "summary": "提取 OneNet_TakeLastValidTestValue 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ActivateFallAlarm",
+      "type": "function",
+      "name": "OneNet_ActivateFallAlarm",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        644,
+        654
+      ],
+      "summary": "实现 OneNet_ActivateFallAlarm 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ClearFallAlarm",
+      "type": "function",
+      "name": "OneNet_ClearFallAlarm",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        656,
+        668
+      ],
+      "summary": "清除 OneNet_ClearFallAlarm 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_IsFallAlarmActive",
+      "type": "function",
+      "name": "OneNet_IsFallAlarmActive",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        670,
+        673
+      ],
+      "summary": "判断 OneNet_IsFallAlarmActive 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_GetTrainPlanSnapshot",
+      "type": "function",
+      "name": "OneNet_GetTrainPlanSnapshot",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        675,
+        686
+      ],
+      "summary": "获取 OneNet_GetTrainPlanSnapshot 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_GetTrainDisplaySnapshot",
+      "type": "function",
+      "name": "OneNet_GetTrainDisplaySnapshot",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        688,
+        699
+      ],
+      "summary": "获取 OneNet_GetTrainDisplaySnapshot 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_UpdateTrainDisplayByAction",
+      "type": "function",
+      "name": "OneNet_UpdateTrainDisplayByAction",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        701,
+        723
+      ],
+      "summary": "更新 OneNet_UpdateTrainDisplayByAction 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_PostPendingTrainPlan",
+      "type": "function",
+      "name": "OneNet_PostPendingTrainPlan",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        725,
+        739
+      ],
+      "summary": "上报 OneNet_PostPendingTrainPlan 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_PostPendingDoorState",
+      "type": "function",
+      "name": "OneNet_PostPendingDoorState",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        741,
+        757
+      ],
+      "summary": "上报 OneNet_PostPendingDoorState 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_RequestDoorStatePost",
+      "type": "function",
+      "name": "OneNet_RequestDoorStatePost",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        759,
+        763
+      ],
+      "summary": "上报 OneNet_RequestDoorStatePost 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_PostPendingFallAlarm",
+      "type": "function",
+      "name": "OneNet_PostPendingFallAlarm",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        765,
+        785
+      ],
+      "summary": "上报 OneNet_PostPendingFallAlarm 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_InitPropSetContext",
+      "type": "function",
+      "name": "OneNet_InitPropSetContext",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        787,
+        797
+      ],
+      "summary": "初始化 OneNet_InitPropSetContext 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_HandleTrainPlanProperty",
+      "type": "function",
+      "name": "OneNet_HandleTrainPlanProperty",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        799,
+        850
+      ],
+      "summary": "处理 OneNet_HandleTrainPlanProperty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_HandleDoorProperty",
+      "type": "function",
+      "name": "OneNet_HandleDoorProperty",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        852,
+        881
+      ],
+      "summary": "处理 OneNet_HandleDoorProperty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_HandleFallAlarmProperty",
+      "type": "function",
+      "name": "OneNet_HandleFallAlarmProperty",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        883,
+        911
+      ],
+      "summary": "处理 OneNet_HandleFallAlarmProperty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_HandleStartProperty",
+      "type": "function",
+      "name": "OneNet_HandleStartProperty",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        913,
+        941
+      ],
+      "summary": "处理 OneNet_HandleStartProperty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_LogPropertySetSummary",
+      "type": "function",
+      "name": "OneNet_LogPropertySetSummary",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        953,
+        990
+      ],
+      "summary": "设置 OneNet_LogPropertySetSummary 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ApplyDoorProperty",
+      "type": "function",
+      "name": "OneNet_ApplyDoorProperty",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        992,
+        1008
+      ],
+      "summary": "应用 OneNet_ApplyDoorProperty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ApplyFallAlarmProperty",
+      "type": "function",
+      "name": "OneNet_ApplyFallAlarmProperty",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1010,
+        1027
+      ],
+      "summary": "应用 OneNet_ApplyFallAlarmProperty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ApplyStartProperty",
+      "type": "function",
+      "name": "OneNet_ApplyStartProperty",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1029,
+        1039
+      ],
+      "summary": "应用 OneNet_ApplyStartProperty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ApplyTestProperty",
+      "type": "function",
+      "name": "OneNet_ApplyTestProperty",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1041,
+        1075
+      ],
+      "summary": "应用 OneNet_ApplyTestProperty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ApplyTrainPlanProperty",
+      "type": "function",
+      "name": "OneNet_ApplyTrainPlanProperty",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1077,
+        1087
+      ],
+      "summary": "应用 OneNet_ApplyTrainPlanProperty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_HandlePropertySet",
+      "type": "function",
+      "name": "OneNet_HandlePropertySet",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1098,
+        1138
+      ],
+      "summary": "处理 OneNet_HandlePropertySet 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_HandlePublishPacket",
+      "type": "function",
+      "name": "OneNet_HandlePublishPacket",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1140,
+        1188
+      ],
+      "summary": "发布 OneNet_HandlePublishPacket 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_DevLink",
+      "type": "function",
+      "name": "OneNet_DevLink",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1190,
+        1248
+      ],
+      "summary": "实现 OneNet_DevLink 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_Subscribe",
+      "type": "function",
+      "name": "OneNet_Subscribe",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1250,
+        1281
+      ],
+      "summary": "订阅 OneNet_Subscribe 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_Publish",
+      "type": "function",
+      "name": "OneNet_Publish",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1283,
+        1321
+      ],
+      "summary": "发布 OneNet_Publish 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_RevPro",
+      "type": "function",
+      "name": "OneNet_RevPro",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1323,
+        1385
+      ],
+      "summary": "实现 OneNet_RevPro 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_HasSessionError",
+      "type": "function",
+      "name": "OneNet_HasSessionError",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1387,
+        1390
+      ],
+      "summary": "判断 OneNet_HasSessionError 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ClearSessionError",
+      "type": "function",
+      "name": "OneNet_ClearSessionError",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1392,
+        1395
+      ],
+      "summary": "清除 OneNet_ClearSessionError 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_ResetSubscribeState",
+      "type": "function",
+      "name": "OneNet_ResetSubscribeState",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1397,
+        1400
+      ],
+      "summary": "复位 OneNet_ResetSubscribeState 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_IsSubscribeReady",
+      "type": "function",
+      "name": "OneNet_IsSubscribeReady",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1402,
+        1405
+      ],
+      "summary": "读取 OneNet_IsSubscribeReady 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_GetLastStatus",
+      "type": "function",
+      "name": "OneNet_GetLastStatus",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1407,
+        1410
+      ],
+      "summary": "获取 OneNet_GetLastStatus 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/onenet.c:OneNet_GetLastConnAckCode",
+      "type": "function",
+      "name": "OneNet_GetLastConnAckCode",
+      "filePath": "BSP/cloud/onenet.c",
+      "lineRange": [
+        1412,
+        1415
+      ],
+      "summary": "获取 OneNet_GetLastConnAckCode 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BSP/cloud/onenet.h",
+      "type": "file",
+      "name": "onenet.h",
+      "filePath": "BSP/cloud/onenet.h",
+      "summary": "声明 OneNET 设备连接、订阅发布、下行处理及会话状态查询接口。",
+      "tags": [
+        "mqtt",
+        "onenet",
+        "协议接口"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostIntPropertyValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostTrainPlan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_TopicMatches",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_CopyTextForLog",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_CopyDownlink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ParseJsonTextValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ParseJsonIntValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ParsePropertyIntValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsDecodedTestValueValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PublishRaw",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_SendPropertySetReply",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostTestConfidenceValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostTestConfidenceValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostActionKindValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostActionKindValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostFallAlarmValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostFallAlarmValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_TakeLastValidTestValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_TakeLastValidTestValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ActivateFallAlarm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ActivateFallAlarm",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ClearFallAlarm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ClearFallAlarm",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsFallAlarmActive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsFallAlarmActive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetTrainPlanSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetTrainPlanSnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetTrainDisplaySnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetTrainDisplaySnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_UpdateTrainDisplayByAction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_UpdateTrainDisplayByAction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingTrainPlan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingTrainPlan",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingDoorState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingDoorState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_RequestDoorStatePost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_RequestDoorStatePost",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingFallAlarm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingFallAlarm",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_InitPropSetContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandleTrainPlanProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandleDoorProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandleFallAlarmProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandleStartProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_LogPropertySetSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyDoorProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyFallAlarmProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyStartProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyTestProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyTrainPlanProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandlePropertySet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandlePublishPacket",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_DevLink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_DevLink",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_Subscribe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_Subscribe",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_Publish",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_Publish",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_RevPro",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_RevPro",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HasSessionError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HasSessionError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ClearSessionError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ClearSessionError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ResetSubscribeState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ResetSubscribeState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsSubscribeReady",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsSubscribeReady",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetLastStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetLastStatus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetLastConnAckCode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetLastConnAckCode",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "file:BSP/cloud/MqttKit.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "file:BSP/cloud/onenet.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

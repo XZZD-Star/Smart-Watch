@@ -1,0 +1,196 @@
+{
+  "projectRoot": "D:\\Qian Start\\Smart Watch\\H743",
+  "batchFiles": [
+    {
+      "path": ".ai/network_action_cnn.h5_c_info.json",
+      "language": "json",
+      "sizeLines": 1123,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".mxproject",
+      "language": "unknown",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "sizeLines": 102,
+      "fileCategory": "code"
+    },
+    {
+      "path": "App/ai/motion_ai.c",
+      "language": "c",
+      "sizeLines": 1222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "App/ai/motion_ai.h",
+      "language": "c",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "App/cloud/cloud_task.c",
+      "language": "c",
+      "sizeLines": 461,
+      "fileCategory": "code"
+    },
+    {
+      "path": "App/cloud/cloud_task.h",
+      "language": "c",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "App/motion/motion_frame.h",
+      "language": "c",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "App/rule action/rule_action_recognizer.c",
+      "language": "c",
+      "sizeLines": 1104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "App/rule action/rule_action_recognizer.h",
+      "language": "c",
+      "sizeLines": 262,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/display/lt168b.c",
+      "language": "c",
+      "sizeLines": 436,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/display/lt168b.h",
+      "language": "c",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/w25q128/w25q128.c",
+      "language": "c",
+      "sizeLines": 500,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/w25q128/w25q128.h",
+      "language": "c",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/wifi/ESP8266.c",
+      "language": "c",
+      "sizeLines": 869,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BSP/wifi/ESP8266.h",
+      "language": "c",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/ota_layout.h",
+      "language": "c",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/ring_buffer.c",
+      "language": "c",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Common/ring_buffer.h",
+      "language": "c",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/bootloader_ota.h",
+      "language": "c",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/crc.h",
+      "language": "c",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/dma.h",
+      "language": "c",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/FreeRTOSConfig.h",
+      "language": "c",
+      "sizeLines": 174,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/gpio.h",
+      "language": "c",
+      "sizeLines": 49,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/internal_flash.h",
+      "language": "c",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    ".ai/network_action_cnn.h5_c_info.json": [],
+    ".mxproject": [],
+    ".understand-anything/.understandignore": [],
+    "App/ai/motion_ai.c": [
+      "App/ai/motion_ai.h"
+    ],
+    "App/ai/motion_ai.h": [],
+    "App/cloud/cloud_task.c": [
+      "App/cloud/cloud_task.h"
+    ],
+    "App/cloud/cloud_task.h": [],
+    "App/motion/motion_frame.h": [],
+    "App/rule action/rule_action_recognizer.c": [
+      "App/rule action/rule_action_recognizer.h"
+    ],
+    "App/rule action/rule_action_recognizer.h": [],
+    "BSP/display/lt168b.c": [
+      "BSP/display/lt168b.h"
+    ],
+    "BSP/display/lt168b.h": [],
+    "BSP/w25q128/w25q128.c": [
+      "BSP/w25q128/w25q128.h"
+    ],
+    "BSP/w25q128/w25q128.h": [],
+    "BSP/wifi/ESP8266.c": [
+      "BSP/wifi/ESP8266.h"
+    ],
+    "BSP/wifi/ESP8266.h": [],
+    "Common/ota_layout.h": [],
+    "Common/ring_buffer.c": [
+      "Common/ring_buffer.h"
+    ],
+    "Common/ring_buffer.h": [],
+    "Core/Inc/bootloader_ota.h": [],
+    "Core/Inc/crc.h": [],
+    "Core/Inc/dma.h": [],
+    "Core/Inc/FreeRTOSConfig.h": [],
+    "Core/Inc/gpio.h": [],
+    "Core/Inc/internal_flash.h": []
+  }
+}

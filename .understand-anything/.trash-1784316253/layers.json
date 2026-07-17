@@ -1,0 +1,154 @@
+[
+  {
+    "id": "layer:application",
+    "name": "应用业务层",
+    "description": "承载双传感器数据融合、动作识别与规则分析，并编排 OTA、云端通信和屏幕交互等智能手表业务流程。",
+    "nodeIds": [
+      "file:App/motion/motion_app_events.c",
+      "file:App/motion/motion_app_events.h",
+      "file:App/motion/motion_input.c",
+      "file:App/motion/motion_input.h",
+      "file:App/motion/motion_mode.h",
+      "file:App/motion/motion_sensor_pipeline.c",
+      "file:App/motion/motion_sensor_pipeline.h",
+      "file:App/motion/motion_task.c",
+      "file:App/motion/motion_task.h",
+      "file:App/motion/motion_window_test.c",
+      "file:App/motion/motion_window_test.h",
+      "file:App/ota/ota_config.h",
+      "file:App/ota/ota_http.c",
+      "file:App/ota/ota_http.h",
+      "file:App/ota/ota_service.c",
+      "file:App/ota/ota_service.h",
+      "file:App/lt_screen/lt_screen_keys.h",
+      "file:App/lt_screen/lt_screen_task.c",
+      "file:App/lt_screen/lt_screen_task.h",
+      "file:App/ai/motion_ai.c",
+      "file:App/ai/motion_ai.h",
+      "file:App/cloud/cloud_task.c",
+      "file:App/cloud/cloud_task.h",
+      "file:App/motion/motion_frame.h",
+      "file:App/rule action/rule_action_recognizer.c",
+      "file:App/rule action/rule_action_recognizer.h"
+    ]
+  },
+  {
+    "id": "layer:bsp",
+    "name": "板级设备接入层",
+    "description": "封装 ESP8266、MQTT/OneNET、LT168B 显示屏、W25Q128 Flash 与调试 UART 等外设和网络设备接口。",
+    "nodeIds": [
+      "file:BSP/cloud/MqttKit.c",
+      "file:BSP/cloud/MqttKit.h",
+      "file:BSP/cloud/onenet.c",
+      "file:BSP/cloud/onenet.h",
+      "file:BSP/debug_uart/debug_uart7.c",
+      "file:BSP/debug_uart/debug_uart7.h",
+      "file:BSP/debug_uart/uart7_role.h",
+      "file:BSP/display/lt168b.c",
+      "file:BSP/display/lt168b.h",
+      "file:BSP/w25q128/w25q128.c",
+      "file:BSP/w25q128/w25q128.h",
+      "file:BSP/wifi/ESP8266.c",
+      "file:BSP/wifi/ESP8266.h"
+    ]
+  },
+  {
+    "id": "layer:utility",
+    "name": "公共组件层",
+    "description": "提供 CRC16、MD5、环形缓冲区以及 OTA 设备信息、布局与共享数据结构等跨模块基础能力。",
+    "nodeIds": [
+      "file:Common/crc16.c",
+      "file:Common/crc16.h",
+      "file:Common/md5.c",
+      "file:Common/md5.h",
+      "file:Common/ota_device_info.c",
+      "file:Common/ota_device_info.h",
+      "file:Common/ota_info.c",
+      "file:Common/ota_info.h",
+      "file:Common/ota_layout.h",
+      "file:Common/ring_buffer.c",
+      "file:Common/ring_buffer.h"
+    ]
+  },
+  {
+    "id": "layer:mcu-runtime",
+    "name": "MCU 平台与运行时层",
+    "description": "包含 STM32H743 启动入口、FreeRTOS 初始化、中断、HAL 配置以及 GPIO、DMA、定时器、UART、CRC 和内部 Flash 驱动。",
+    "nodeIds": [
+      "file:Core/Inc/bootloader_ota.h",
+      "file:Core/Inc/crc.h",
+      "file:Core/Inc/dma.h",
+      "file:Core/Inc/FreeRTOSConfig.h",
+      "file:Core/Inc/gpio.h",
+      "file:Core/Inc/internal_flash.h",
+      "file:Core/Inc/main.h",
+      "file:Core/Inc/RTE_Components.h",
+      "file:Core/Inc/stm32h7xx_hal_conf.h",
+      "file:Core/Inc/stm32h7xx_it.h",
+      "file:Core/Inc/tim.h",
+      "file:Core/Inc/usart.h",
+      "file:Core/Src/bootloader_main.c",
+      "file:Core/Src/bootloader_ota.c",
+      "file:Core/Src/crc.c",
+      "file:Core/Src/dma.c",
+      "file:Core/Src/freertos.c",
+      "file:Core/Src/gpio.c",
+      "file:Core/Src/internal_flash.c",
+      "file:Core/Src/main.c",
+      "file:Core/Src/stm32h7xx_hal_msp.c",
+      "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "file:Core/Src/stm32h7xx_it.c",
+      "file:Core/Src/system_stm32h7xx.c",
+      "file:Core/Src/tim.c",
+      "file:Core/Src/usart.c"
+    ]
+  },
+  {
+    "id": "layer:system-support",
+    "name": "SYSTEM 支撑层",
+    "description": "保留延时、系统时钟与串口等传统底层适配代码，为现有固件模块提供兼容性支撑。",
+    "nodeIds": [
+      "file:SYSTEM/delay/delay.c",
+      "file:SYSTEM/delay/delay.h",
+      "file:SYSTEM/sys/sys.c",
+      "file:SYSTEM/sys/sys.h",
+      "file:SYSTEM/usart/yuanzi_usart.c",
+      "file:SYSTEM/usart/yuanzi_usart.h"
+    ]
+  },
+  {
+    "id": "layer:config",
+    "name": "项目配置与分析元数据",
+    "description": "集中管理 CubeMX 工程配置、AI 模型信息以及 Understand Anything 的扫描配置、指纹和知识图谱元数据。",
+    "nodeIds": [
+      "config:.understand-anything/config.json",
+      "config:.understand-anything/fingerprints.json",
+      "config:.understand-anything/knowledge-graph.json",
+      "config:.understand-anything/meta.json",
+      "config:.ai/network_action_cnn.h5_c_info.json",
+      "file:.mxproject",
+      "file:.understand-anything/.understandignore",
+      "file:Master.ioc"
+    ]
+  },
+  {
+    "id": "layer:documentation",
+    "name": "文档与硬件资料",
+    "description": "汇集项目说明、设计方案、芯片参考笔记、模块引脚表、授权文本及团队协作规范。",
+    "nodeIds": [
+      "document:Agents.md",
+      "document:LICENSE_X-CUBE-AI.txt",
+      "document:说明文档.txt",
+      "document:docs/2026-05-31-H743项目脉络补充.md",
+      "document:docs/W25Q128_Bootloader_App_第一版最小跑通方案.md",
+      "table:docs/h743_module_pins.csv:h743_module_pins",
+      "document:docs/lt168b_ota_mqtt_change_plan_2026-06-25.md",
+      "document:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+      "document:docs/H743资料包/note/参考手册重点部分.md",
+      "document:docs/H743资料包/note/快速上手.md",
+      "file:docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "file:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+      "document:SYSTEM/readme.txt"
+    ]
+  }
+]

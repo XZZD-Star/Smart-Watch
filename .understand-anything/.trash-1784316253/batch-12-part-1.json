@@ -1,0 +1,1300 @@
+{
+  "nodes": [
+    {
+      "id": "file:Core/Inc/main.h",
+      "type": "file",
+      "name": "main.h",
+      "filePath": "Core/Inc/main.h",
+      "summary": "声明 main 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Inc/RTE_Components.h",
+      "type": "file",
+      "name": "RTE_Components.h",
+      "filePath": "Core/Inc/RTE_Components.h",
+      "summary": "声明 RTE_Components 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Inc/stm32h7xx_hal_conf.h",
+      "type": "file",
+      "name": "stm32h7xx_hal_conf.h",
+      "filePath": "Core/Inc/stm32h7xx_hal_conf.h",
+      "summary": "声明 stm32h7xx_hal_conf 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:Core/Inc/stm32h7xx_it.h",
+      "type": "file",
+      "name": "stm32h7xx_it.h",
+      "filePath": "Core/Inc/stm32h7xx_it.h",
+      "summary": "声明 stm32h7xx_it 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Inc/tim.h",
+      "type": "file",
+      "name": "tim.h",
+      "filePath": "Core/Inc/tim.h",
+      "summary": "声明 tim 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Inc/usart.h",
+      "type": "file",
+      "name": "usart.h",
+      "filePath": "Core/Inc/usart.h",
+      "summary": "声明 usart 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/bootloader_main.c",
+      "type": "file",
+      "name": "bootloader_main.c",
+      "filePath": "Core/Src/bootloader_main.c",
+      "summary": "实现 Bootloader 入口，校验应用向量表、释放外设并跳转应用，同时配置最小串口和系统时钟。",
+      "tags": [
+        "bootloader",
+        "entry-point",
+        "firmware-update"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        32,
+        70
+      ],
+      "summary": "完成固件启动初始化并进入主运行流程（main）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:Boot_IsRamAddress",
+      "type": "function",
+      "name": "Boot_IsRamAddress",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        72,
+        95
+      ],
+      "summary": "执行启动校验、固件安装或应用跳转步骤（Boot_IsRamAddress）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:Boot_AppIsValid",
+      "type": "function",
+      "name": "Boot_AppIsValid",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        97,
+        124
+      ],
+      "summary": "执行启动校验、固件安装或应用跳转步骤（Boot_AppIsValid）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:Boot_DeInit",
+      "type": "function",
+      "name": "Boot_DeInit",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        126,
+        156
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（Boot_DeInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:Boot_JumpToApp",
+      "type": "function",
+      "name": "Boot_JumpToApp",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        158,
+        174
+      ],
+      "summary": "执行启动校验、固件安装或应用跳转步骤（Boot_JumpToApp）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:MX_USART2_UART_Init",
+      "type": "function",
+      "name": "MX_USART2_UART_Init",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        176,
+        205
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_USART2_UART_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:HAL_UART_MspInit",
+      "type": "function",
+      "name": "HAL_UART_MspInit",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        207,
+        231
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_UART_MspInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:SysTick_Handler",
+      "type": "function",
+      "name": "SysTick_Handler",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        233,
+        236
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（SysTick_Handler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:SystemClock_Config",
+      "type": "function",
+      "name": "SystemClock_Config",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        238,
+        283
+      ],
+      "summary": "实现该模块的核心处理逻辑（SystemClock_Config）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_main.c:Error_Handler",
+      "type": "function",
+      "name": "Error_Handler",
+      "filePath": "Core/Src/bootloader_main.c",
+      "lineRange": [
+        285,
+        291
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（Error_Handler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Src/bootloader_ota.c",
+      "type": "file",
+      "name": "bootloader_ota.c",
+      "filePath": "Core/Src/bootloader_ota.c",
+      "summary": "实现 OTA 镜像 MD5 校验、内部 Flash 写入及安装决策流程。",
+      "tags": [
+        "bootloader",
+        "ota",
+        "firmware-update",
+        "integrity-check"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/bootloader_ota.c:BootOTA_CalcW25Q128Md5",
+      "type": "function",
+      "name": "BootOTA_CalcW25Q128Md5",
+      "filePath": "Core/Src/bootloader_ota.c",
+      "lineRange": [
+        18,
+        50
+      ],
+      "summary": "计算业务所需的派生量或校验值（BootOTA_CalcW25Q128Md5）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_ota.c:BootOTA_CalcInternalFlashMd5",
+      "type": "function",
+      "name": "BootOTA_CalcInternalFlashMd5",
+      "filePath": "Core/Src/bootloader_ota.c",
+      "lineRange": [
+        52,
+        78
+      ],
+      "summary": "计算业务所需的派生量或校验值（BootOTA_CalcInternalFlashMd5）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_ota.c:BootOTA_WriteAppFlash",
+      "type": "function",
+      "name": "BootOTA_WriteAppFlash",
+      "filePath": "Core/Src/bootloader_ota.c",
+      "lineRange": [
+        80,
+        109
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（BootOTA_WriteAppFlash）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/bootloader_ota.c:BootOTA_TryInstall",
+      "type": "function",
+      "name": "BootOTA_TryInstall",
+      "filePath": "Core/Src/bootloader_ota.c",
+      "lineRange": [
+        111,
+        170
+      ],
+      "summary": "执行启动校验、固件安装或应用跳转步骤（BootOTA_TryInstall）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/crc.c",
+      "type": "file",
+      "name": "crc.c",
+      "filePath": "Core/Src/crc.c",
+      "summary": "配置 STM32 CRC 外设及其底层时钟资源。",
+      "tags": [
+        "hal",
+        "crc",
+        "peripheral-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/crc.c:MX_CRC_Init",
+      "type": "function",
+      "name": "MX_CRC_Init",
+      "filePath": "Core/Src/crc.c",
+      "lineRange": [
+        30,
+        54
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_CRC_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/crc.c:HAL_CRC_MspInit",
+      "type": "function",
+      "name": "HAL_CRC_MspInit",
+      "filePath": "Core/Src/crc.c",
+      "lineRange": [
+        56,
+        70
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_CRC_MspInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/crc.c:HAL_CRC_MspDeInit",
+      "type": "function",
+      "name": "HAL_CRC_MspDeInit",
+      "filePath": "Core/Src/crc.c",
+      "lineRange": [
+        72,
+        86
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_CRC_MspDeInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Src/dma.c",
+      "type": "file",
+      "name": "dma.c",
+      "filePath": "Core/Src/dma.c",
+      "summary": "配置 DMA 控制器时钟和相关中断优先级。",
+      "tags": [
+        "hal",
+        "dma",
+        "peripheral-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/dma.c:MX_DMA_Init",
+      "type": "function",
+      "name": "MX_DMA_Init",
+      "filePath": "Core/Src/dma.c",
+      "lineRange": [
+        39,
+        59
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_DMA_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Src/freertos.c",
+      "type": "file",
+      "name": "freertos.c",
+      "filePath": "Core/Src/freertos.c",
+      "summary": "创建应用 FreeRTOS 对象和任务，连接运动、云端及设备业务执行入口。",
+      "tags": [
+        "freertos",
+        "task-management",
+        "system-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/freertos.c:MX_FREERTOS_Init",
+      "type": "function",
+      "name": "MX_FREERTOS_Init",
+      "filePath": "Core/Src/freertos.c",
+      "lineRange": [
+        106,
+        161
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_FREERTOS_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/freertos.c:StartDefaultTask",
+      "type": "function",
+      "name": "StartDefaultTask",
+      "filePath": "Core/Src/freertos.c",
+      "lineRange": [
+        170,
+        176
+      ],
+      "summary": "实现该模块的核心处理逻辑（StartDefaultTask）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/freertos.c:StartTask1",
+      "type": "function",
+      "name": "StartTask1",
+      "filePath": "Core/Src/freertos.c",
+      "lineRange": [
+        185,
+        191
+      ],
+      "summary": "实现该模块的核心处理逻辑（StartTask1）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/freertos.c:StartTask2",
+      "type": "function",
+      "name": "StartTask2",
+      "filePath": "Core/Src/freertos.c",
+      "lineRange": [
+        200,
+        206
+      ],
+      "summary": "实现该模块的核心处理逻辑（StartTask2）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Src/gpio.c",
+      "type": "file",
+      "name": "gpio.c",
+      "filePath": "Core/Src/gpio.c",
+      "summary": "初始化板级 GPIO 输出、电平和中断引脚。",
+      "tags": [
+        "hal",
+        "gpio",
+        "peripheral-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/gpio.c:MX_GPIO_Init",
+      "type": "function",
+      "name": "MX_GPIO_Init",
+      "filePath": "Core/Src/gpio.c",
+      "lineRange": [
+        40,
+        64
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_GPIO_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Src/internal_flash.c",
+      "type": "file",
+      "name": "internal_flash.c",
+      "filePath": "Core/Src/internal_flash.c",
+      "summary": "封装 STM32H743 内部 Flash 扇区定位、擦除、写入和校验操作。",
+      "tags": [
+        "flash-storage",
+        "hal",
+        "firmware-update"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/internal_flash.c:InternalFlash_GetBankSector",
+      "type": "function",
+      "name": "InternalFlash_GetBankSector",
+      "filePath": "Core/Src/internal_flash.c",
+      "lineRange": [
+        14,
+        35
+      ],
+      "summary": "实现该模块的核心处理逻辑（InternalFlash_GetBankSector）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/internal_flash.c:InternalFlash_EraseSector",
+      "type": "function",
+      "name": "InternalFlash_EraseSector",
+      "filePath": "Core/Src/internal_flash.c",
+      "lineRange": [
+        37,
+        50
+      ],
+      "summary": "擦除目标存储区域并等待操作完成（InternalFlash_EraseSector）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/internal_flash.c:InternalFlash_EraseAppArea",
+      "type": "function",
+      "name": "InternalFlash_EraseAppArea",
+      "filePath": "Core/Src/internal_flash.c",
+      "lineRange": [
+        52,
+        89
+      ],
+      "summary": "擦除目标存储区域并等待操作完成（InternalFlash_EraseAppArea）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/internal_flash.c:InternalFlash_Write",
+      "type": "function",
+      "name": "InternalFlash_Write",
+      "filePath": "Core/Src/internal_flash.c",
+      "lineRange": [
+        91,
+        148
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（InternalFlash_Write）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/internal_flash.c:InternalFlash_Verify",
+      "type": "function",
+      "name": "InternalFlash_Verify",
+      "filePath": "Core/Src/internal_flash.c",
+      "lineRange": [
+        150,
+        162
+      ],
+      "summary": "实现该模块的核心处理逻辑（InternalFlash_Verify）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Src/main.c",
+      "type": "file",
+      "name": "main.c",
+      "filePath": "Core/Src/main.c",
+      "summary": "应用固件入口，配置 MPU、Cache、系统时钟和生成外设后启动 FreeRTOS 调度。",
+      "tags": [
+        "entry-point",
+        "system-init",
+        "freertos",
+        "cubemx"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:Core/Src/main.c:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "Core/Src/main.c",
+      "lineRange": [
+        76,
+        154
+      ],
+      "summary": "完成固件启动初始化并进入主运行流程（main）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/main.c:SystemClock_Config",
+      "type": "function",
+      "name": "SystemClock_Config",
+      "filePath": "Core/Src/main.c",
+      "lineRange": [
+        160,
+        212
+      ],
+      "summary": "实现该模块的核心处理逻辑（SystemClock_Config）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/main.c:MPU_Config",
+      "type": "function",
+      "name": "MPU_Config",
+      "filePath": "Core/Src/main.c",
+      "lineRange": [
+        220,
+        245
+      ],
+      "summary": "实现该模块的核心处理逻辑（MPU_Config）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/main.c:HAL_TIM_PeriodElapsedCallback",
+      "type": "function",
+      "name": "HAL_TIM_PeriodElapsedCallback",
+      "filePath": "Core/Src/main.c",
+      "lineRange": [
+        255,
+        267
+      ],
+      "summary": "实现该模块的核心处理逻辑（HAL_TIM_PeriodElapsedCallback）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/main.c:Error_Handler",
+      "type": "function",
+      "name": "Error_Handler",
+      "filePath": "Core/Src/main.c",
+      "lineRange": [
+        273,
+        282
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（Error_Handler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Src/stm32h7xx_hal_msp.c",
+      "type": "file",
+      "name": "stm32h7xx_hal_msp.c",
+      "filePath": "Core/Src/stm32h7xx_hal_msp.c",
+      "summary": "提供 HAL 全局 MSP 初始化，配置系统级时钟与中断优先级。",
+      "tags": [
+        "hal",
+        "msp",
+        "system-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_hal_msp.c:HAL_MspInit",
+      "type": "function",
+      "name": "HAL_MspInit",
+      "filePath": "Core/Src/stm32h7xx_hal_msp.c",
+      "lineRange": [
+        62,
+        78
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_MspInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "type": "file",
+      "name": "stm32h7xx_hal_timebase_tim.c",
+      "filePath": "Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "summary": "使用硬件定时器实现 HAL 1 ms 时间基准及中断配置。",
+      "tags": [
+        "hal",
+        "timebase",
+        "timer"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_InitTick",
+      "type": "function",
+      "name": "HAL_InitTick",
+      "filePath": "Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "lineRange": [
+        41,
+        97
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_InitTick）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_SuspendTick",
+      "type": "function",
+      "name": "HAL_SuspendTick",
+      "filePath": "Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "lineRange": [
+        105,
+        109
+      ],
+      "summary": "实现该模块的核心处理逻辑（HAL_SuspendTick）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_ResumeTick",
+      "type": "function",
+      "name": "HAL_ResumeTick",
+      "filePath": "Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "lineRange": [
+        117,
+        121
+      ],
+      "summary": "实现该模块的核心处理逻辑（HAL_ResumeTick）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:main",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Boot_IsRamAddress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Boot_AppIsValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Boot_DeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Boot_JumpToApp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:MX_USART2_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:MX_USART2_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:HAL_UART_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:HAL_UART_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:SysTick_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:SysTick_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:SystemClock_Config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:SystemClock_Config",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Error_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Error_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_CalcW25Q128Md5",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_CalcInternalFlashMd5",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_WriteAppFlash",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_TryInstall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_TryInstall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:MX_CRC_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:MX_CRC_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:HAL_CRC_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:HAL_CRC_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:HAL_CRC_MspDeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:HAL_CRC_MspDeInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/dma.c",
+      "target": "function:Core/Src/dma.c:MX_DMA_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/dma.c",
+      "target": "function:Core/Src/dma.c:MX_DMA_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:MX_FREERTOS_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:MX_FREERTOS_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartDefaultTask",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartDefaultTask",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartTask1",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartTask1",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartTask2",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartTask2",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/gpio.c",
+      "target": "function:Core/Src/gpio.c:MX_GPIO_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/gpio.c",
+      "target": "function:Core/Src/gpio.c:MX_GPIO_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_GetBankSector",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_EraseSector",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_EraseAppArea",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_EraseAppArea",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_Write",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_Write",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_Verify",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_Verify",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:main",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:SystemClock_Config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:SystemClock_Config",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:MPU_Config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:MPU_Config",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:HAL_TIM_PeriodElapsedCallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:HAL_TIM_PeriodElapsedCallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:Error_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:Error_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_msp.c",
+      "target": "function:Core/Src/stm32h7xx_hal_msp.c:HAL_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_msp.c",
+      "target": "function:Core/Src/stm32h7xx_hal_msp.c:HAL_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_InitTick",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_InitTick",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_SuspendTick",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_SuspendTick",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_ResumeTick",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_ResumeTick",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

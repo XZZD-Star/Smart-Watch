@@ -1,0 +1,446 @@
+{
+  "nodes": [
+    {
+      "id": "file:BSP/cloud/MqttKit.c",
+      "type": "file",
+      "name": "MqttKit.c",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "summary": "实现 MQTT 报文缓冲区管理及 CONNECT、SUBSCRIBE、PUBLISH、PING 等报文的编码与解码。",
+      "tags": [
+        "mqtt",
+        "onenet",
+        "云端通信"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_NewBuffer",
+      "type": "function",
+      "name": "MQTT_NewBuffer",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        16,
+        48
+      ],
+      "summary": "实现 MQTT_NewBuffer 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_DumpLength",
+      "type": "function",
+      "name": "MQTT_DumpLength",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        50,
+        70
+      ],
+      "summary": "实现 MQTT_DumpLength 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_ReadLength",
+      "type": "function",
+      "name": "MQTT_ReadLength",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        72,
+        100
+      ],
+      "summary": "读取 MQTT_ReadLength 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_WriteString",
+      "type": "function",
+      "name": "MQTT_WriteString",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        102,
+        116
+      ],
+      "summary": "写入 MQTT_WriteString 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_DeleteBuffer",
+      "type": "function",
+      "name": "MQTT_DeleteBuffer",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        118,
+        134
+      ],
+      "summary": "实现 MQTT_DeleteBuffer 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketRecv",
+      "type": "function",
+      "name": "MQTT_UnPacketRecv",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        136,
+        152
+      ],
+      "summary": "构造 MQTT_UnPacketRecv 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_PacketConnect",
+      "type": "function",
+      "name": "MQTT_PacketConnect",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        154,
+        245
+      ],
+      "summary": "构造 MQTT_PacketConnect 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketConnectAck",
+      "type": "function",
+      "name": "MQTT_UnPacketConnectAck",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        247,
+        264
+      ],
+      "summary": "构造 MQTT_UnPacketConnectAck 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_PacketSubscribe",
+      "type": "function",
+      "name": "MQTT_PacketSubscribe",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        266,
+        315
+      ],
+      "summary": "订阅 MQTT_PacketSubscribe 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketSubscribe",
+      "type": "function",
+      "name": "MQTT_UnPacketSubscribe",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        317,
+        345
+      ],
+      "summary": "订阅 MQTT_UnPacketSubscribe 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_PacketPublish",
+      "type": "function",
+      "name": "MQTT_PacketPublish",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        347,
+        409
+      ],
+      "summary": "发布 MQTT_PacketPublish 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublish",
+      "type": "function",
+      "name": "MQTT_UnPacketPublish",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        411,
+        492
+      ],
+      "summary": "发布 MQTT_UnPacketPublish 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublishAck",
+      "type": "function",
+      "name": "MQTT_UnPacketPublishAck",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        494,
+        502
+      ],
+      "summary": "发布 MQTT_UnPacketPublishAck 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "协议解析"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/cloud/MqttKit.c:MQTT_PacketPing",
+      "type": "function",
+      "name": "MQTT_PacketPing",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "lineRange": [
+        504,
+        520
+      ],
+      "summary": "构造 MQTT_PacketPing 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BSP/cloud/MqttKit.h",
+      "type": "file",
+      "name": "MqttKit.h",
+      "filePath": "BSP/cloud/MqttKit.h",
+      "summary": "定义 MQTT 报文类型、缓冲区结构和协议编解码接口。",
+      "tags": [
+        "mqtt",
+        "onenet",
+        "协议接口"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_NewBuffer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_DumpLength",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_ReadLength",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_WriteString",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_DeleteBuffer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_DeleteBuffer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketRecv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketRecv",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketConnect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketConnect",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketConnectAck",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketConnectAck",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketSubscribe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketSubscribe",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketSubscribe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketSubscribe",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketPublish",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketPublish",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublish",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublish",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublishAck",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublishAck",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketPing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketPing",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "file:BSP/cloud/MqttKit.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

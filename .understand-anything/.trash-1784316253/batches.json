@@ -1,0 +1,1265 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 103,
+  "totalBatches": 13,
+  "exportsByPath": {
+    ".mxproject": [],
+    ".understand-anything/.understandignore": [],
+    "App/ai/motion_ai.c": [
+      "MotionAi_Init",
+      "MotionAi_Reset",
+      "MotionAi_SetSingleTestEnabled",
+      "MotionAi_SetLocalFallTriggerEnabled",
+      "MotionAi_IsLocalFallTriggerEnabled",
+      "MotionAi_SetDemoOverride",
+      "MotionAi_ClearDemoOverride"
+    ],
+    "App/ai/motion_ai.h": [],
+    "App/cloud/cloud_task.c": [
+      "CloudTask_Run",
+      "CloudTask_RequestOtaExclusive",
+      "CloudTask_ReleaseOtaExclusive"
+    ],
+    "App/cloud/cloud_task.h": [],
+    "App/lt_screen/lt_screen_keys.h": [],
+    "App/lt_screen/lt_screen_task.c": [
+      "LTScreenTask_Run",
+      "LTScreen_HandleTouchEvent"
+    ],
+    "App/lt_screen/lt_screen_task.h": [],
+    "App/motion/motion_app_events.c": [
+      "MotionEvents_QueueTestConfidence",
+      "MotionEvents_PeekTestConfidence",
+      "MotionEvents_ClearTestConfidenceIfCurrent",
+      "MotionEvents_EncodeActionKind",
+      "MotionEvents_QueueActionKind",
+      "MotionEvents_PeekActionKind",
+      "MotionEvents_ClearActionKindIfCurrent",
+      "MotionEvents_HasPendingCloudPost",
+      "MotionEvents_RequestTrainingPageRefresh",
+      "MotionEvents_RequestTrainingPageRefreshByAction",
+      "MotionEvents_TakeTrainingPageRefresh",
+      "MotionEvents_TakeTrainingPageRefreshAction",
+      "MotionEvents_PeekTrainingPageRefreshAction",
+      "MotionEvents_PeekTrainingPageRefreshDirty",
+      "MotionEvents_ClearTrainingPageRefresh",
+      "MotionEvents_ClearTrainingPageRefreshIfCurrent"
+    ],
+    "App/motion/motion_app_events.h": [],
+    "App/motion/motion_frame.h": [],
+    "App/motion/motion_input.c": [
+      "Motion_RequestStart",
+      "Motion_RequestStartFromIsr",
+      "Motion_RequestStop",
+      "Motion_RequestClear",
+      "Motion_TakeRestartRequest",
+      "Motion_TakeStartFromIsrRequest",
+      "Motion_TakeUpperCaptureResetRequest",
+      "Motion_ResetUpperCaptureInput",
+      "Motion_TakeStopRequest"
+    ],
+    "App/motion/motion_input.h": [],
+    "App/motion/motion_mode.h": [],
+    "App/motion/motion_sensor_pipeline.c": [
+      "MotionSensorPipeline_StorePacketFromIsr",
+      "MotionSensorPipeline_TakeFusedFrame",
+      "Motion_ProcessPendingPosePackets",
+      "MotionSensorPipeline_RequestCalibration",
+      "MotionSensorPipeline_RequestUpperCalibration",
+      "MotionSensorPipeline_CalibrationTickFromIsr",
+      "MotionSensorPipeline_IsUpperCalibrationActive",
+      "MotionSensorPipeline_IsCalibrationActive",
+      "MotionSensorPipeline_IsUpperCalibrationDone",
+      "MotionSensorPipeline_IsCalibrationDone",
+      "MotionSensorPipeline_TakeCalibrationReport",
+      "MotionSensorPipeline_TakeUpperCalibrationReport",
+      "MotionSensorPipeline_SetUpperOnly",
+      "MotionSensorPipeline_ResetUpperCapture",
+      "MotionSensorPipeline_Reset"
+    ],
+    "App/motion/motion_sensor_pipeline.h": [],
+    "App/motion/motion_task.c": [
+      "MotionTask_Run"
+    ],
+    "App/motion/motion_task.h": [],
+    "App/motion/motion_window_test.c": [
+      "MotionWindowTest_Init",
+      "MotionWindowTest_Reset",
+      "MotionWindowTest_RequestRun",
+      "MotionWindowTest_RunPending"
+    ],
+    "App/motion/motion_window_test.h": [],
+    "App/ota/ota_config.h": [],
+    "App/ota/ota_http.c": [
+      "OTAHttp_SendRequest"
+    ],
+    "App/ota/ota_http.h": [],
+    "App/ota/ota_service.c": [
+      "OTAService_QueryTask",
+      "OTAService_StartSimulateUpdate",
+      "OTAService_ReportConfiguredVersion",
+      "OTAService_ReportPendingSimulateVersion",
+      "OTAService_CheckOnce"
+    ],
+    "App/ota/ota_service.h": [],
+    "App/rule action/rule_action_recognizer.c": [
+      "RuleConfig_LoadDefault",
+      "RuleEngine_Init",
+      "RuleEngine_ResetSession",
+      "RuleEngine_ProcessRaw"
+    ],
+    "App/rule action/rule_action_recognizer.h": [],
+    "BSP/cloud/MqttKit.c": [
+      "MQTT_DeleteBuffer",
+      "MQTT_UnPacketRecv",
+      "MQTT_PacketConnect",
+      "MQTT_UnPacketConnectAck",
+      "MQTT_PacketSubscribe",
+      "MQTT_UnPacketSubscribe",
+      "MQTT_PacketPublish",
+      "MQTT_UnPacketPublish",
+      "MQTT_UnPacketPublishAck",
+      "MQTT_PacketPing"
+    ],
+    "BSP/cloud/MqttKit.h": [],
+    "BSP/cloud/onenet.c": [
+      "OneNet_PostTestConfidenceValue",
+      "OneNet_PostActionKindValue",
+      "OneNet_PostFallAlarmValue",
+      "OneNet_TakeLastValidTestValue",
+      "OneNet_ActivateFallAlarm",
+      "OneNet_ClearFallAlarm",
+      "OneNet_IsFallAlarmActive",
+      "OneNet_GetTrainPlanSnapshot",
+      "OneNet_GetTrainDisplaySnapshot",
+      "OneNet_UpdateTrainDisplayByAction",
+      "OneNet_PostPendingTrainPlan",
+      "OneNet_PostPendingDoorState",
+      "OneNet_RequestDoorStatePost",
+      "OneNet_PostPendingFallAlarm",
+      "OneNet_DevLink",
+      "OneNet_Subscribe",
+      "OneNet_Publish",
+      "OneNet_RevPro",
+      "OneNet_HasSessionError",
+      "OneNet_ClearSessionError",
+      "OneNet_ResetSubscribeState",
+      "OneNet_IsSubscribeReady",
+      "OneNet_GetLastStatus",
+      "OneNet_GetLastConnAckCode"
+    ],
+    "BSP/cloud/onenet.h": [],
+    "BSP/debug_uart/debug_uart7.c": [],
+    "BSP/debug_uart/debug_uart7.h": [],
+    "BSP/debug_uart/uart7_role.h": [],
+    "BSP/display/lt168b.c": [
+      "LT168B_Init",
+      "LT168B_SendStr",
+      "LT168B_WriteVersionText",
+      "LT168B_WriteText",
+      "LT168B_WriteU16",
+      "LT168B_GotoPage",
+      "LT168B_DebugPrintLine",
+      "LT168B_DebugPrintKeyEvent",
+      "LT168B_ParseTouchEvent",
+      "LT168B_HandleRxEvent",
+      "LT168B_TakeTouchEvent"
+    ],
+    "BSP/display/lt168b.h": [],
+    "BSP/w25q128/w25q128.c": [
+      "W25Q128_Init",
+      "W25Q128_ReadID",
+      "W25Q128_ReadIDLoopTest",
+      "W25Q128_SectorErase4KB",
+      "W25Q128_PageProgram",
+      "W25Q128_ReadData",
+      "W25Q128_EraseRange",
+      "W25Q128_WriteData",
+      "W25Q128_WriteDataVerified",
+      "W25Q128_Test"
+    ],
+    "BSP/w25q128/w25q128.h": [],
+    "BSP/wifi/ESP8266.c": [
+      "ESP8266_Clear",
+      "ESP8266_WaitReceive",
+      "ESP8266_SendCmd",
+      "ESP8266_SendData",
+      "ESP8266_Init",
+      "ESP8266_ConnectTcp",
+      "ESP8266_CloseTcp",
+      "ESP8266_GetLastIPDLength",
+      "ESP8266_RxFeedBlock",
+      "ESP8266_RxFeedByte",
+      "ESP8266_HasTransportError",
+      "ESP8266_ClearTransportError",
+      "ESP8266_GetLastInitStatus",
+      "ESP8266_DebugDumpCurrentRx"
+    ],
+    "BSP/wifi/ESP8266.h": [],
+    "Common/crc16.c": [
+      "CRC16_Init",
+      "CRC16_Update",
+      "CRC16_Calculate"
+    ],
+    "Common/crc16.h": [],
+    "Common/md5.c": [
+      "MD5_Init",
+      "MD5_Update",
+      "MD5_Final",
+      "MD5_ToHex",
+      "MD5_IsHexString"
+    ],
+    "Common/md5.h": [],
+    "Common/ota_device_info.c": [
+      "OTADeviceInfo_IsValid",
+      "OTADeviceInfo_Load",
+      "OTADeviceInfo_GetCurrentVersion",
+      "OTADeviceInfo_SaveRunningVersion"
+    ],
+    "Common/ota_device_info.h": [],
+    "Common/ota_info.c": [
+      "OTAInfo_CalcCrc16",
+      "OTAInfo_IsReadyValid",
+      "OTAInfo_IsSimulateValid",
+      "OTAInfo_Load",
+      "OTAInfo_LoadSimulate",
+      "OTAInfo_SaveReady",
+      "OTAInfo_SaveSimulate",
+      "OTAInfo_Invalidate"
+    ],
+    "Common/ota_info.h": [],
+    "Common/ota_layout.h": [],
+    "Common/ring_buffer.c": [
+      "RingBuffer_Init",
+      "RingBuffer_Reset",
+      "RingBuffer_Write",
+      "RingBuffer_Read",
+      "RingBuffer_Available",
+      "RingBuffer_Space",
+      "RingBuffer_IsEmpty",
+      "RingBuffer_IsFull"
+    ],
+    "Common/ring_buffer.h": [],
+    "Core/Inc/bootloader_ota.h": [],
+    "Core/Inc/crc.h": [],
+    "Core/Inc/dma.h": [],
+    "Core/Inc/FreeRTOSConfig.h": [],
+    "Core/Inc/gpio.h": [],
+    "Core/Inc/internal_flash.h": [],
+    "Core/Inc/main.h": [],
+    "Core/Inc/RTE_Components.h": [],
+    "Core/Inc/stm32h7xx_hal_conf.h": [],
+    "Core/Inc/stm32h7xx_it.h": [],
+    "Core/Inc/tim.h": [],
+    "Core/Inc/usart.h": [],
+    "Core/Src/bootloader_main.c": [
+      "main",
+      "MX_USART2_UART_Init",
+      "HAL_UART_MspInit",
+      "SysTick_Handler",
+      "SystemClock_Config",
+      "Error_Handler"
+    ],
+    "Core/Src/bootloader_ota.c": [
+      "BootOTA_TryInstall"
+    ],
+    "Core/Src/crc.c": [
+      "MX_CRC_Init",
+      "HAL_CRC_MspInit",
+      "HAL_CRC_MspDeInit"
+    ],
+    "Core/Src/dma.c": [
+      "MX_DMA_Init"
+    ],
+    "Core/Src/freertos.c": [
+      "MX_FREERTOS_Init",
+      "StartDefaultTask",
+      "StartTask1",
+      "StartTask2"
+    ],
+    "Core/Src/gpio.c": [
+      "MX_GPIO_Init"
+    ],
+    "Core/Src/internal_flash.c": [
+      "InternalFlash_EraseAppArea",
+      "InternalFlash_Write",
+      "InternalFlash_Verify"
+    ],
+    "Core/Src/main.c": [
+      "main",
+      "SystemClock_Config",
+      "MPU_Config",
+      "HAL_TIM_PeriodElapsedCallback",
+      "Error_Handler"
+    ],
+    "Core/Src/stm32h7xx_hal_msp.c": [
+      "HAL_MspInit"
+    ],
+    "Core/Src/stm32h7xx_hal_timebase_tim.c": [
+      "HAL_InitTick",
+      "HAL_SuspendTick",
+      "HAL_ResumeTick"
+    ],
+    "Core/Src/stm32h7xx_it.c": [
+      "NMI_Handler",
+      "HardFault_Handler",
+      "MemManage_Handler",
+      "BusFault_Handler",
+      "UsageFault_Handler",
+      "DebugMon_Handler",
+      "DMA1_Stream0_IRQHandler",
+      "DMA1_Stream1_IRQHandler",
+      "DMA1_Stream2_IRQHandler",
+      "DMA1_Stream3_IRQHandler",
+      "TIM1_UP_IRQHandler",
+      "TIM2_IRQHandler",
+      "USART1_IRQHandler",
+      "USART2_IRQHandler",
+      "USART3_IRQHandler",
+      "UART4_IRQHandler",
+      "USART6_IRQHandler",
+      "UART7_IRQHandler"
+    ],
+    "Core/Src/system_stm32h7xx.c": [
+      "SystemInit",
+      "SystemCoreClockUpdate",
+      "ExitRun0Mode"
+    ],
+    "Core/Src/tim.c": [
+      "MX_TIM2_Init",
+      "MX_TIM3_Init",
+      "HAL_TIM_Base_MspInit",
+      "HAL_TIM_PWM_MspInit",
+      "HAL_TIM_Base_MspDeInit",
+      "HAL_TIM_PWM_MspDeInit",
+      "HAL_TIM_MspPostInit",
+      "Servo_DoorInit",
+      "Servo_SetAngleDeg",
+      "Servo_SetDoorOpen",
+      "Servo_SetDoorClosed",
+      "Servo_SetDoorByCloudValue",
+      "Servo_GetDoorState"
+    ],
+    "Core/Src/usart.c": [
+      "MX_UART4_Init",
+      "MX_USART1_UART_Init",
+      "MX_USART2_UART_Init",
+      "MX_USART3_UART_Init",
+      "MX_USART6_UART_Init",
+      "MX_UART7_Init",
+      "HAL_UART_MspInit",
+      "HAL_UART_MspDeInit",
+      "HAL_UART_RxCpltCallback",
+      "HAL_UARTEx_RxEventCallback"
+    ],
+    "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx": [],
+    "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx": [],
+    "Master.ioc": [],
+    "SYSTEM/delay/delay.c": [
+      "delay_init"
+    ],
+    "SYSTEM/delay/delay.h": [],
+    "SYSTEM/sys/sys.c": [
+      "get_icahce_sta",
+      "get_dcahce_sta",
+      "sys_nvic_set_vector_table",
+      "sys_wfi_set",
+      "sys_intx_disable",
+      "sys_intx_enable",
+      "sys_msr_msp",
+      "sys_cache_enable",
+      "sys_stm32_clock_init"
+    ],
+    "SYSTEM/sys/sys.h": [],
+    "SYSTEM/usart/yuanzi_usart.c": [],
+    "SYSTEM/usart/yuanzi_usart.h": []
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": "App/motion/motion_app_events.c",
+          "language": "c",
+          "sizeLines": 210,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_app_events.h",
+          "language": "c",
+          "sizeLines": 43,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_input.c",
+          "language": "c",
+          "sizeLines": 178,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_input.h",
+          "language": "c",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_mode.h",
+          "language": "c",
+          "sizeLines": 39,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_sensor_pipeline.c",
+          "language": "c",
+          "sizeLines": 947,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_sensor_pipeline.h",
+          "language": "c",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_task.c",
+          "language": "c",
+          "sizeLines": 795,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_task.h",
+          "language": "c",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_window_test.c",
+          "language": "c",
+          "sizeLines": 154,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_window_test.h",
+          "language": "c",
+          "sizeLines": 23,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "App/motion/motion_app_events.c": [
+          "App/motion/motion_app_events.h"
+        ],
+        "App/motion/motion_app_events.h": [],
+        "App/motion/motion_input.c": [
+          "App/motion/motion_input.h",
+          "App/motion/motion_mode.h",
+          "App/motion/motion_sensor_pipeline.h",
+          "App/motion/motion_window_test.h"
+        ],
+        "App/motion/motion_input.h": [],
+        "App/motion/motion_mode.h": [],
+        "App/motion/motion_sensor_pipeline.c": [
+          "App/motion/motion_sensor_pipeline.h"
+        ],
+        "App/motion/motion_sensor_pipeline.h": [],
+        "App/motion/motion_task.c": [
+          "App/motion/motion_app_events.h",
+          "App/motion/motion_input.h",
+          "App/motion/motion_mode.h",
+          "App/motion/motion_sensor_pipeline.h",
+          "App/motion/motion_task.h",
+          "App/motion/motion_window_test.h"
+        ],
+        "App/motion/motion_task.h": [],
+        "App/motion/motion_window_test.c": [
+          "App/motion/motion_window_test.h"
+        ],
+        "App/motion/motion_window_test.h": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": "Common/crc16.c",
+          "language": "c",
+          "sizeLines": 44,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/crc16.h",
+          "language": "c",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/md5.c",
+          "language": "c",
+          "sizeLines": 241,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/md5.h",
+          "language": "c",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/ota_device_info.c",
+          "language": "c",
+          "sizeLines": 196,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/ota_device_info.h",
+          "language": "c",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/ota_info.c",
+          "language": "c",
+          "sizeLines": 150,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/ota_info.h",
+          "language": "c",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "Common/crc16.c": [
+          "Common/crc16.h"
+        ],
+        "Common/crc16.h": [],
+        "Common/md5.c": [
+          "Common/md5.h"
+        ],
+        "Common/md5.h": [],
+        "Common/ota_device_info.c": [
+          "Common/crc16.h",
+          "Common/ota_device_info.h"
+        ],
+        "Common/ota_device_info.h": [],
+        "Common/ota_info.c": [
+          "Common/crc16.h",
+          "Common/md5.h",
+          "Common/ota_info.h"
+        ],
+        "Common/ota_info.h": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": "App/ota/ota_config.h",
+          "language": "c",
+          "sizeLines": 39,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/ota/ota_http.c",
+          "language": "c",
+          "sizeLines": 254,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/ota/ota_http.h",
+          "language": "c",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/ota/ota_service.c",
+          "language": "c",
+          "sizeLines": 987,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/ota/ota_service.h",
+          "language": "c",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "App/ota/ota_config.h": [],
+        "App/ota/ota_http.c": [
+          "App/ota/ota_http.h"
+        ],
+        "App/ota/ota_http.h": [],
+        "App/ota/ota_service.c": [
+          "App/ota/ota_config.h",
+          "App/ota/ota_http.h",
+          "App/ota/ota_service.h"
+        ],
+        "App/ota/ota_service.h": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 4,
+      "files": [
+        {
+          "path": "BSP/cloud/MqttKit.c",
+          "language": "c",
+          "sizeLines": 520,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/cloud/MqttKit.h",
+          "language": "c",
+          "sizeLines": 98,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/cloud/onenet.c",
+          "language": "c",
+          "sizeLines": 1415,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/cloud/onenet.h",
+          "language": "c",
+          "sizeLines": 113,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "BSP/cloud/MqttKit.c": [
+          "BSP/cloud/MqttKit.h"
+        ],
+        "BSP/cloud/MqttKit.h": [],
+        "BSP/cloud/onenet.c": [
+          "BSP/cloud/MqttKit.h",
+          "BSP/cloud/onenet.h"
+        ],
+        "BSP/cloud/onenet.h": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 5,
+      "files": [
+        {
+          "path": "App/lt_screen/lt_screen_keys.h",
+          "language": "c",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/lt_screen/lt_screen_task.c",
+          "language": "c",
+          "sizeLines": 741,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/lt_screen/lt_screen_task.h",
+          "language": "c",
+          "sizeLines": 36,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "App/lt_screen/lt_screen_keys.h": [],
+        "App/lt_screen/lt_screen_task.c": [
+          "App/lt_screen/lt_screen_keys.h",
+          "App/lt_screen/lt_screen_task.h"
+        ],
+        "App/lt_screen/lt_screen_task.h": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 6,
+      "files": [
+        {
+          "path": "BSP/debug_uart/debug_uart7.c",
+          "language": "c",
+          "sizeLines": 135,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/debug_uart/debug_uart7.h",
+          "language": "c",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/debug_uart/uart7_role.h",
+          "language": "c",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "BSP/debug_uart/debug_uart7.c": [
+          "BSP/debug_uart/debug_uart7.h",
+          "BSP/debug_uart/uart7_role.h"
+        ],
+        "BSP/debug_uart/debug_uart7.h": [],
+        "BSP/debug_uart/uart7_role.h": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 7,
+      "files": [
+        {
+          "path": ".understand-anything/config.json",
+          "language": "json",
+          "sizeLines": 3,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/fingerprints.json",
+          "language": "json",
+          "sizeLines": 6629,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/knowledge-graph.json",
+          "language": "json",
+          "sizeLines": 13843,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/meta.json",
+          "language": "json",
+          "sizeLines": 5,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".understand-anything/config.json": [],
+        ".understand-anything/fingerprints.json": [],
+        ".understand-anything/knowledge-graph.json": [],
+        ".understand-anything/meta.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 8,
+      "files": [
+        {
+          "path": "Agents.md",
+          "language": "markdown",
+          "sizeLines": 66,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "LICENSE_X-CUBE-AI.txt",
+          "language": "txt",
+          "sizeLines": 86,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "说明文档.txt",
+          "language": "txt",
+          "sizeLines": 4,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "Agents.md": [],
+        "LICENSE_X-CUBE-AI.txt": [],
+        "说明文档.txt": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 9,
+      "files": [
+        {
+          "path": "docs/2026-05-31-H743项目脉络补充.md",
+          "language": "markdown",
+          "sizeLines": 445,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/W25Q128_Bootloader_App_第一版最小跑通方案.md",
+          "language": "markdown",
+          "sizeLines": 370,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/h743_module_pins.csv",
+          "language": "csv",
+          "sizeLines": 30,
+          "fileCategory": "data"
+        },
+        {
+          "path": "docs/lt168b_ota_mqtt_change_plan_2026-06-25.md",
+          "language": "markdown",
+          "sizeLines": 178,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "docs/2026-05-31-H743项目脉络补充.md": [],
+        "docs/W25Q128_Bootloader_App_第一版最小跑通方案.md": [],
+        "docs/h743_module_pins.csv": [],
+        "docs/lt168b_ota_mqtt_change_plan_2026-06-25.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 10,
+      "files": [
+        {
+          "path": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+          "language": "markdown",
+          "sizeLines": 303,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/H743资料包/note/参考手册重点部分.md",
+          "language": "markdown",
+          "sizeLines": 456,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/H743资料包/note/快速上手.md",
+          "language": "markdown",
+          "sizeLines": 1049,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md": [],
+        "docs/H743资料包/note/参考手册重点部分.md": [],
+        "docs/H743资料包/note/快速上手.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 11,
+      "files": [
+        {
+          "path": ".ai/network_action_cnn.h5_c_info.json",
+          "language": "json",
+          "sizeLines": 1123,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".mxproject",
+          "language": "unknown",
+          "sizeLines": 45,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".understand-anything/.understandignore",
+          "language": "unknown",
+          "sizeLines": 102,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/ai/motion_ai.c",
+          "language": "c",
+          "sizeLines": 1222,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/ai/motion_ai.h",
+          "language": "c",
+          "sizeLines": 123,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/cloud/cloud_task.c",
+          "language": "c",
+          "sizeLines": 461,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/cloud/cloud_task.h",
+          "language": "c",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/motion/motion_frame.h",
+          "language": "c",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/rule action/rule_action_recognizer.c",
+          "language": "c",
+          "sizeLines": 1104,
+          "fileCategory": "code"
+        },
+        {
+          "path": "App/rule action/rule_action_recognizer.h",
+          "language": "c",
+          "sizeLines": 262,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/display/lt168b.c",
+          "language": "c",
+          "sizeLines": 436,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/display/lt168b.h",
+          "language": "c",
+          "sizeLines": 36,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/w25q128/w25q128.c",
+          "language": "c",
+          "sizeLines": 500,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/w25q128/w25q128.h",
+          "language": "c",
+          "sizeLines": 85,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/wifi/ESP8266.c",
+          "language": "c",
+          "sizeLines": 869,
+          "fileCategory": "code"
+        },
+        {
+          "path": "BSP/wifi/ESP8266.h",
+          "language": "c",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/ota_layout.h",
+          "language": "c",
+          "sizeLines": 74,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/ring_buffer.c",
+          "language": "c",
+          "sizeLines": 125,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Common/ring_buffer.h",
+          "language": "c",
+          "sizeLines": 85,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/bootloader_ota.h",
+          "language": "c",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/crc.h",
+          "language": "c",
+          "sizeLines": 52,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/dma.h",
+          "language": "c",
+          "sizeLines": 52,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/FreeRTOSConfig.h",
+          "language": "c",
+          "sizeLines": 174,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/gpio.h",
+          "language": "c",
+          "sizeLines": 49,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/internal_flash.h",
+          "language": "c",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        ".ai/network_action_cnn.h5_c_info.json": [],
+        ".mxproject": [],
+        ".understand-anything/.understandignore": [],
+        "App/ai/motion_ai.c": [
+          "App/ai/motion_ai.h"
+        ],
+        "App/ai/motion_ai.h": [],
+        "App/cloud/cloud_task.c": [
+          "App/cloud/cloud_task.h"
+        ],
+        "App/cloud/cloud_task.h": [],
+        "App/motion/motion_frame.h": [],
+        "App/rule action/rule_action_recognizer.c": [
+          "App/rule action/rule_action_recognizer.h"
+        ],
+        "App/rule action/rule_action_recognizer.h": [],
+        "BSP/display/lt168b.c": [
+          "BSP/display/lt168b.h"
+        ],
+        "BSP/display/lt168b.h": [],
+        "BSP/w25q128/w25q128.c": [
+          "BSP/w25q128/w25q128.h"
+        ],
+        "BSP/w25q128/w25q128.h": [],
+        "BSP/wifi/ESP8266.c": [
+          "BSP/wifi/ESP8266.h"
+        ],
+        "BSP/wifi/ESP8266.h": [],
+        "Common/ota_layout.h": [],
+        "Common/ring_buffer.c": [
+          "Common/ring_buffer.h"
+        ],
+        "Common/ring_buffer.h": [],
+        "Core/Inc/bootloader_ota.h": [],
+        "Core/Inc/crc.h": [],
+        "Core/Inc/dma.h": [],
+        "Core/Inc/FreeRTOSConfig.h": [],
+        "Core/Inc/gpio.h": [],
+        "Core/Inc/internal_flash.h": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 12,
+      "files": [
+        {
+          "path": "Core/Inc/main.h",
+          "language": "c",
+          "sizeLines": 77,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/RTE_Components.h",
+          "language": "c",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/stm32h7xx_hal_conf.h",
+          "language": "c",
+          "sizeLines": 514,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/stm32h7xx_it.h",
+          "language": "c",
+          "sizeLines": 75,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/tim.h",
+          "language": "c",
+          "sizeLines": 61,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Inc/usart.h",
+          "language": "c",
+          "sizeLines": 69,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/bootloader_main.c",
+          "language": "c",
+          "sizeLines": 299,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/bootloader_ota.c",
+          "language": "c",
+          "sizeLines": 170,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/crc.c",
+          "language": "c",
+          "sizeLines": 91,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/dma.c",
+          "language": "c",
+          "sizeLines": 64,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/freertos.c",
+          "language": "c",
+          "sizeLines": 211,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/gpio.c",
+          "language": "c",
+          "sizeLines": 68,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/internal_flash.c",
+          "language": "c",
+          "sizeLines": 162,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/main.c",
+          "language": "c",
+          "sizeLines": 298,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/stm32h7xx_hal_msp.c",
+          "language": "c",
+          "sizeLines": 82,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/stm32h7xx_hal_timebase_tim.c",
+          "language": "c",
+          "sizeLines": 122,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/stm32h7xx_it.c",
+          "language": "c",
+          "sizeLines": 473,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/system_stm32h7xx.c",
+          "language": "c",
+          "sizeLines": 556,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/tim.c",
+          "language": "c",
+          "sizeLines": 325,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Core/Src/usart.c",
+          "language": "c",
+          "sizeLines": 839,
+          "fileCategory": "code"
+        },
+        {
+          "path": "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+          "language": "xlsx",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+          "language": "xlsx",
+          "sizeLines": 105,
+          "fileCategory": "code"
+        },
+        {
+          "path": "Master.ioc",
+          "language": "ioc",
+          "sizeLines": 577,
+          "fileCategory": "code"
+        },
+        {
+          "path": "SYSTEM/delay/delay.c",
+          "language": "c",
+          "sizeLines": 200,
+          "fileCategory": "code"
+        },
+        {
+          "path": "SYSTEM/delay/delay.h",
+          "language": "c",
+          "sizeLines": 37,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "Core/Inc/main.h": [],
+        "Core/Inc/RTE_Components.h": [],
+        "Core/Inc/stm32h7xx_hal_conf.h": [],
+        "Core/Inc/stm32h7xx_it.h": [],
+        "Core/Inc/tim.h": [],
+        "Core/Inc/usart.h": [],
+        "Core/Src/bootloader_main.c": [],
+        "Core/Src/bootloader_ota.c": [],
+        "Core/Src/crc.c": [],
+        "Core/Src/dma.c": [],
+        "Core/Src/freertos.c": [],
+        "Core/Src/gpio.c": [],
+        "Core/Src/internal_flash.c": [],
+        "Core/Src/main.c": [],
+        "Core/Src/stm32h7xx_hal_msp.c": [],
+        "Core/Src/stm32h7xx_hal_timebase_tim.c": [],
+        "Core/Src/stm32h7xx_it.c": [],
+        "Core/Src/system_stm32h7xx.c": [],
+        "Core/Src/tim.c": [],
+        "Core/Src/usart.c": [],
+        "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx": [],
+        "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx": [],
+        "Master.ioc": [],
+        "SYSTEM/delay/delay.c": [],
+        "SYSTEM/delay/delay.h": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 13,
+      "files": [
+        {
+          "path": "SYSTEM/readme.txt",
+          "language": "txt",
+          "sizeLines": 20,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "SYSTEM/sys/sys.c",
+          "language": "c",
+          "sizeLines": 236,
+          "fileCategory": "code"
+        },
+        {
+          "path": "SYSTEM/sys/sys.h",
+          "language": "c",
+          "sizeLines": 59,
+          "fileCategory": "code"
+        },
+        {
+          "path": "SYSTEM/usart/yuanzi_usart.c",
+          "language": "c",
+          "sizeLines": 196,
+          "fileCategory": "code"
+        },
+        {
+          "path": "SYSTEM/usart/yuanzi_usart.h",
+          "language": "c",
+          "sizeLines": 77,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "SYSTEM/readme.txt": [],
+        "SYSTEM/sys/sys.c": [],
+        "SYSTEM/sys/sys.h": [],
+        "SYSTEM/usart/yuanzi_usart.c": [],
+        "SYSTEM/usart/yuanzi_usart.h": []
+      },
+      "neighborMap": {}
+    }
+  ]
+}

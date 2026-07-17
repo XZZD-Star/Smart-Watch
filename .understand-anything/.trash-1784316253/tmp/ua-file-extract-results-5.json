@@ -1,0 +1,716 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "App/lt_screen/lt_screen_keys.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 14,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/lt_screen/lt_screen_task.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 742,
+      "nonEmptyLines": 641,
+      "functions": [
+        {
+          "name": "LTScreenTask_Run",
+          "startLine": 91,
+          "endLine": 146,
+          "params": []
+        },
+        {
+          "name": "LTScreen_HandleTouchEvent",
+          "startLine": 148,
+          "endLine": 213,
+          "params": [
+            "event"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LTScreenTask_Run",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "LTScreen_HandleTouchEvent",
+          "line": 148,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "LT168B_Init",
+          "lineNumber": 98
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "osDelay",
+          "lineNumber": 99
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "LTScreen_SetDeviceDoorState",
+          "lineNumber": 102
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "lt_screen_reset_training_counts",
+          "lineNumber": 107
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "lt_screen_refresh_health_test",
+          "lineNumber": 108
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "lt_screen_refresh_fall_status",
+          "lineNumber": 109
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "osKernelGetTickCount",
+          "lineNumber": 110
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "lt_screen_run_net_debug_test",
+          "lineNumber": 112
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "lt_screen_process_bracelet_auto_close",
+          "lineNumber": 118
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "osKernelGetTickCount",
+          "lineNumber": 121
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "lt_screen_refresh_health_test",
+          "lineNumber": 123
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "osKernelGetTickCount",
+          "lineNumber": 124
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "lt_screen_refresh_fall_status",
+          "lineNumber": 129
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "lt_screen_process_training_refresh",
+          "lineNumber": 135
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "LT168B_TakeTouchEvent",
+          "lineNumber": 139
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "LTScreen_HandleTouchEvent",
+          "lineNumber": 141
+        },
+        {
+          "caller": "LTScreenTask_Run",
+          "callee": "osDelay",
+          "lineNumber": 144
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "LT168B_DebugPrintKeyEvent",
+          "lineNumber": 155
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_is_key",
+          "lineNumber": 159
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_leave_ota_demo",
+          "lineNumber": 161
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_is_key",
+          "lineNumber": 165
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_handle_version_query",
+          "lineNumber": 167
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_is_key",
+          "lineNumber": 171
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_handle_open_device",
+          "lineNumber": 173
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_is_key",
+          "lineNumber": 177
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_handle_calibration_start",
+          "lineNumber": 179
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_is_key",
+          "lineNumber": 183
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_handle_training_page_enter",
+          "lineNumber": 185
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_is_key",
+          "lineNumber": 189
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_handle_training_start",
+          "lineNumber": 191
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_is_key",
+          "lineNumber": 195
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_handle_training_stop",
+          "lineNumber": 197
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_is_key",
+          "lineNumber": 201
+        },
+        {
+          "caller": "LTScreen_HandleTouchEvent",
+          "callee": "lt_screen_handle_update_start",
+          "lineNumber": 203
+        },
+        {
+          "caller": "LTScreen_SetDeviceDoorState",
+          "callee": "lt_screen_apply_device_door_icon",
+          "lineNumber": 218
+        },
+        {
+          "caller": "lt_screen_refresh_health_test",
+          "callee": "OneNet_IsFallAlarmActive",
+          "lineNumber": 237
+        },
+        {
+          "caller": "lt_screen_refresh_health_test",
+          "callee": "LT168B_SendStr",
+          "lineNumber": 243
+        },
+        {
+          "caller": "lt_screen_refresh_health_test",
+          "callee": "LT168B_SendStr",
+          "lineNumber": 247
+        },
+        {
+          "caller": "lt_screen_refresh_fall_status",
+          "callee": "OneNet_IsFallAlarmActive",
+          "lineNumber": 260
+        },
+        {
+          "caller": "lt_screen_refresh_fall_status",
+          "callee": "lt_screen_refresh_health_test",
+          "lineNumber": 268
+        },
+        {
+          "caller": "lt_screen_refresh_fall_status",
+          "callee": "LT168B_SendStr",
+          "lineNumber": 270
+        },
+        {
+          "caller": "lt_screen_send_version_texts",
+          "callee": "LT168B_WriteVersionText",
+          "lineNumber": 279
+        },
+        {
+          "caller": "lt_screen_send_version_texts",
+          "callee": "LT168B_WriteVersionText",
+          "lineNumber": 280
+        },
+        {
+          "caller": "lt_screen_apply_device_door_icon",
+          "callee": "LT168B_WriteU16",
+          "lineNumber": 296
+        },
+        {
+          "caller": "lt_screen_apply_device_door_icon",
+          "callee": "LT168B_WriteU16",
+          "lineNumber": 300
+        },
+        {
+          "caller": "lt_screen_handle_open_device",
+          "callee": "Servo_SetDoorByCloudValue",
+          "lineNumber": 308
+        },
+        {
+          "caller": "lt_screen_handle_open_device",
+          "callee": "Servo_GetDoorState",
+          "lineNumber": 313
+        },
+        {
+          "caller": "lt_screen_handle_open_device",
+          "callee": "LTScreen_SetDeviceDoorState",
+          "lineNumber": 314
+        },
+        {
+          "caller": "lt_screen_handle_open_device",
+          "callee": "OneNet_RequestDoorStatePost",
+          "lineNumber": 315
+        },
+        {
+          "caller": "lt_screen_process_bracelet_auto_close",
+          "callee": "HAL_GPIO_ReadPin",
+          "lineNumber": 329
+        },
+        {
+          "caller": "lt_screen_process_bracelet_auto_close",
+          "callee": "HAL_GPIO_ReadPin",
+          "lineNumber": 331
+        },
+        {
+          "caller": "lt_screen_process_bracelet_auto_close",
+          "callee": "Servo_GetDoorState",
+          "lineNumber": 339
+        },
+        {
+          "caller": "lt_screen_process_bracelet_auto_close",
+          "callee": "LTScreen_SetDeviceDoorState",
+          "lineNumber": 341
+        },
+        {
+          "caller": "lt_screen_process_bracelet_auto_close",
+          "callee": "osKernelGetTickCount",
+          "lineNumber": 353
+        },
+        {
+          "caller": "lt_screen_process_bracelet_auto_close",
+          "callee": "Servo_SetDoorClosed",
+          "lineNumber": 366
+        },
+        {
+          "caller": "lt_screen_process_bracelet_auto_close",
+          "callee": "Servo_GetDoorState",
+          "lineNumber": 367
+        },
+        {
+          "caller": "lt_screen_process_bracelet_auto_close",
+          "callee": "LTScreen_SetDeviceDoorState",
+          "lineNumber": 368
+        },
+        {
+          "caller": "lt_screen_process_bracelet_auto_close",
+          "callee": "OneNet_RequestDoorStatePost",
+          "lineNumber": 369
+        },
+        {
+          "caller": "lt_screen_handle_calibration_start",
+          "callee": "LT168B_SendStr",
+          "lineNumber": 382
+        },
+        {
+          "caller": "lt_screen_handle_calibration_start",
+          "callee": "MotionSensorPipeline_RequestCalibration",
+          "lineNumber": 387
+        },
+        {
+          "caller": "lt_screen_handle_calibration_start",
+          "callee": "MotionSensorPipeline_IsCalibrationActive",
+          "lineNumber": 388
+        },
+        {
+          "caller": "lt_screen_handle_calibration_start",
+          "callee": "osDelay",
+          "lineNumber": 391
+        },
+        {
+          "caller": "lt_screen_handle_calibration_start",
+          "callee": "MotionSensorPipeline_IsCalibrationDone",
+          "lineNumber": 395
+        },
+        {
+          "caller": "lt_screen_handle_calibration_start",
+          "callee": "LT168B_SendStr",
+          "lineNumber": 397
+        },
+        {
+          "caller": "lt_screen_handle_calibration_start",
+          "callee": "LT168B_SendStr",
+          "lineNumber": 405
+        },
+        {
+          "caller": "lt_screen_write_training_count",
+          "callee": "LT168B_SendStr",
+          "lineNumber": 443
+        },
+        {
+          "caller": "lt_screen_sync_training_count",
+          "callee": "lt_screen_get_training_count_addr",
+          "lineNumber": 478
+        },
+        {
+          "caller": "lt_screen_sync_training_count",
+          "callee": "lt_screen_write_training_count",
+          "lineNumber": 484
+        },
+        {
+          "caller": "lt_screen_sync_training_counts",
+          "callee": "lt_screen_sync_training_count",
+          "lineNumber": 495
+        },
+        {
+          "caller": "lt_screen_process_training_refresh",
+          "callee": "MotionEvents_TakeTrainingPageRefreshAction",
+          "lineNumber": 522
+        },
+        {
+          "caller": "lt_screen_process_training_refresh",
+          "callee": "lt_screen_find_training_action_index",
+          "lineNumber": 524
+        },
+        {
+          "caller": "lt_screen_process_training_refresh",
+          "callee": "lt_screen_sync_training_count",
+          "lineNumber": 535
+        },
+        {
+          "caller": "lt_screen_handle_training_page_enter",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 543
+        },
+        {
+          "caller": "lt_screen_handle_training_page_enter",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 549
+        },
+        {
+          "caller": "lt_screen_handle_training_start",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 557
+        },
+        {
+          "caller": "lt_screen_handle_training_start",
+          "callee": "MotionEvents_ClearTrainingPageRefresh",
+          "lineNumber": 561
+        },
+        {
+          "caller": "lt_screen_handle_training_start",
+          "callee": "lt_screen_reset_training_counts",
+          "lineNumber": 562
+        },
+        {
+          "caller": "lt_screen_handle_training_start",
+          "callee": "lt_screen_sync_training_counts",
+          "lineNumber": 563
+        },
+        {
+          "caller": "lt_screen_handle_training_start",
+          "callee": "Motion_RequestStart",
+          "lineNumber": 565
+        },
+        {
+          "caller": "lt_screen_handle_training_start",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 566
+        },
+        {
+          "caller": "lt_screen_handle_training_stop",
+          "callee": "LT168B_SendStr",
+          "lineNumber": 576
+        },
+        {
+          "caller": "lt_screen_handle_training_stop",
+          "callee": "lt_screen_reset_training_counts",
+          "lineNumber": 580
+        },
+        {
+          "caller": "lt_screen_handle_training_stop",
+          "callee": "lt_screen_sync_training_counts",
+          "lineNumber": 581
+        },
+        {
+          "caller": "lt_screen_handle_training_stop",
+          "callee": "MotionEvents_ClearTrainingPageRefresh",
+          "lineNumber": 582
+        },
+        {
+          "caller": "lt_screen_handle_training_stop",
+          "callee": "Motion_RequestStop",
+          "lineNumber": 583
+        },
+        {
+          "caller": "lt_screen_handle_training_stop",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 584
+        },
+        {
+          "caller": "lt_screen_enter_ota_demo",
+          "callee": "CloudTask_RequestOtaExclusive",
+          "lineNumber": 609
+        },
+        {
+          "caller": "lt_screen_enter_ota_demo",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 611
+        },
+        {
+          "caller": "lt_screen_enter_ota_demo",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 616
+        },
+        {
+          "caller": "lt_screen_leave_ota_demo",
+          "callee": "memset",
+          "lineNumber": 627
+        },
+        {
+          "caller": "lt_screen_leave_ota_demo",
+          "callee": "CloudTask_ReleaseOtaExclusive",
+          "lineNumber": 630
+        },
+        {
+          "caller": "lt_screen_leave_ota_demo",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 631
+        },
+        {
+          "caller": "lt_screen_leave_ota_demo",
+          "callee": "Debug_Printf",
+          "lineNumber": 632
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 642
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "lt_screen_enter_ota_demo",
+          "lineNumber": 643
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 648
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "OTAService_QueryTask",
+          "lineNumber": 649
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 659
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 660
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 661
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "lt_screen_send_version_texts",
+          "lineNumber": 662
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "LT168B_GotoPage",
+          "lineNumber": 663
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "memset",
+          "lineNumber": 667
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 671
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "lt_screen_leave_ota_demo",
+          "lineNumber": 672
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 675
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "lt_screen_send_version_texts",
+          "lineNumber": 676
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "lt_screen_leave_ota_demo",
+          "lineNumber": 677
+        },
+        {
+          "caller": "lt_screen_handle_version_query",
+          "callee": "LT168B_GotoPage",
+          "lineNumber": 678
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 691
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "LT168B_GotoPage",
+          "lineNumber": 692
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "snprintf",
+          "lineNumber": 696
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "LT168B_WriteU16",
+          "lineNumber": 697
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "Debug_Printf",
+          "lineNumber": 698
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "osDelay",
+          "lineNumber": 706
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "LT168B_WriteU16",
+          "lineNumber": 709
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "Debug_Printf",
+          "lineNumber": 710
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "OTAService_StartSimulateUpdate",
+          "lineNumber": 713
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 715
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "lt_screen_leave_ota_demo",
+          "lineNumber": 716
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "LT168B_GotoPage",
+          "lineNumber": 717
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "OTAService_ReportPendingSimulateVersion",
+          "lineNumber": 721
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "Debug_Printf",
+          "lineNumber": 722
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "memset",
+          "lineNumber": 725
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "lt_screen_send_version_texts",
+          "lineNumber": 727
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "lt_screen_leave_ota_demo",
+          "lineNumber": 728
+        },
+        {
+          "caller": "lt_screen_handle_update_start",
+          "callee": "LT168B_GotoPage",
+          "lineNumber": 729
+        },
+        {
+          "caller": "lt_screen_run_net_debug_test",
+          "callee": "LT168B_SendStr",
+          "lineNumber": 737
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/lt_screen/lt_screen_task.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 27,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

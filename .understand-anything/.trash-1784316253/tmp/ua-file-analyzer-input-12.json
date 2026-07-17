@@ -1,0 +1,182 @@
+{
+  "projectRoot": "D:\\Qian Start\\Smart Watch\\H743",
+  "batchFiles": [
+    {
+      "path": "Core/Inc/main.h",
+      "language": "c",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/RTE_Components.h",
+      "language": "c",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/stm32h7xx_hal_conf.h",
+      "language": "c",
+      "sizeLines": 514,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/stm32h7xx_it.h",
+      "language": "c",
+      "sizeLines": 75,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/tim.h",
+      "language": "c",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Inc/usart.h",
+      "language": "c",
+      "sizeLines": 69,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/bootloader_main.c",
+      "language": "c",
+      "sizeLines": 299,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/bootloader_ota.c",
+      "language": "c",
+      "sizeLines": 170,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/crc.c",
+      "language": "c",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/dma.c",
+      "language": "c",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/freertos.c",
+      "language": "c",
+      "sizeLines": 211,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/gpio.c",
+      "language": "c",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/internal_flash.c",
+      "language": "c",
+      "sizeLines": 162,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/main.c",
+      "language": "c",
+      "sizeLines": 298,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/stm32h7xx_hal_msp.c",
+      "language": "c",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "language": "c",
+      "sizeLines": 122,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/stm32h7xx_it.c",
+      "language": "c",
+      "sizeLines": 473,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/system_stm32h7xx.c",
+      "language": "c",
+      "sizeLines": 556,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/tim.c",
+      "language": "c",
+      "sizeLines": 325,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Core/Src/usart.c",
+      "language": "c",
+      "sizeLines": 839,
+      "fileCategory": "code"
+    },
+    {
+      "path": "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "language": "xlsx",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+      "language": "xlsx",
+      "sizeLines": 105,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Master.ioc",
+      "language": "ioc",
+      "sizeLines": 577,
+      "fileCategory": "code"
+    },
+    {
+      "path": "SYSTEM/delay/delay.c",
+      "language": "c",
+      "sizeLines": 200,
+      "fileCategory": "code"
+    },
+    {
+      "path": "SYSTEM/delay/delay.h",
+      "language": "c",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "Core/Inc/main.h": [],
+    "Core/Inc/RTE_Components.h": [],
+    "Core/Inc/stm32h7xx_hal_conf.h": [],
+    "Core/Inc/stm32h7xx_it.h": [],
+    "Core/Inc/tim.h": [],
+    "Core/Inc/usart.h": [],
+    "Core/Src/bootloader_main.c": [],
+    "Core/Src/bootloader_ota.c": [],
+    "Core/Src/crc.c": [],
+    "Core/Src/dma.c": [],
+    "Core/Src/freertos.c": [],
+    "Core/Src/gpio.c": [],
+    "Core/Src/internal_flash.c": [],
+    "Core/Src/main.c": [],
+    "Core/Src/stm32h7xx_hal_msp.c": [],
+    "Core/Src/stm32h7xx_hal_timebase_tim.c": [],
+    "Core/Src/stm32h7xx_it.c": [],
+    "Core/Src/system_stm32h7xx.c": [],
+    "Core/Src/tim.c": [],
+    "Core/Src/usart.c": [],
+    "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx": [],
+    "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx": [],
+    "Master.ioc": [],
+    "SYSTEM/delay/delay.c": [],
+    "SYSTEM/delay/delay.h": []
+  }
+}

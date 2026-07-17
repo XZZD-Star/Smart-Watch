@@ -1,0 +1,8 @@
+{
+  "nodes": [
+    {"id":"document:Agents.md","type":"document","name":"Agents.md","filePath":"Agents.md","summary":"规定项目自定义代码的开发原则、命名约定、返回值语义、中文注释格式及最小实现要求。","tags":["documentation","代码规范","开发约定","维护性"],"complexity":"moderate"},
+    {"id":"document:LICENSE_X-CUBE-AI.txt","type":"document","name":"LICENSE_X-CUBE-AI.txt","filePath":"LICENSE_X-CUBE-AI.txt","summary":"收录 STMicroelectronics SLA0044 软件许可条款，限定 X-CUBE-AI 组件的使用、复制和再分发条件。","tags":["documentation","license","x-cube-ai","合规"],"complexity":"moderate"},
+    {"id":"document:说明文档.txt","type":"document","name":"说明文档.txt","filePath":"说明文档.txt","summary":"说明参赛作品源码材料的编号与用途，概述主控工程承担双传感器数据融合、动作识别、规则分析、云连接和屏幕显示。","tags":["documentation","项目说明","参赛材料","系统概述"],"complexity":"simple"}
+  ],
+  "edges": []
+}

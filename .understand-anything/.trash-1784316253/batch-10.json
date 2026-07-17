@@ -1,0 +1,45 @@
+{
+  "nodes": [
+    {
+      "id": "document:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+      "type": "document",
+      "name": "STM32H743ZIT6_引脚排针精华笔记.md",
+      "filePath": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+      "summary": "整理 STM32H743ZIT6 开发板排针、复用功能及板载资源占用，便于硬件接线和引脚冲突排查。",
+      "tags": [
+        "documentation",
+        "pinout",
+        "hardware-reference"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/H743资料包/note/参考手册重点部分.md",
+      "type": "document",
+      "name": "参考手册重点部分.md",
+      "filePath": "docs/H743资料包/note/参考手册重点部分.md",
+      "summary": "提炼 STM32H743 时钟树、总线、DMA 与 Cache 一致性等参考手册重点，并给出常见问题检查清单。",
+      "tags": [
+        "documentation",
+        "dma",
+        "cache",
+        "clock-tree"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/H743资料包/note/快速上手.md",
+      "type": "document",
+      "name": "快速上手.md",
+      "filePath": "docs/H743资料包/note/快速上手.md",
+      "summary": "提供 STM32H743 从 CubeMX 建工程到外设调试的学习路线，重点说明手册查阅、内存、Cache、DMA 和时钟配置。",
+      "tags": [
+        "documentation",
+        "getting-started",
+        "stm32h7"
+      ],
+      "complexity": "complex"
+    }
+  ],
+  "edges": []
+}

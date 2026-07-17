@@ -16,6 +16,7 @@
 #include "onenet.h"
 #include "rule_action_recognizer.h"
 #include "uart7_role.h"
+#include "usart.h"
 
 #define FALL_WARNING_INTERVAL_MS 500U
 
@@ -30,6 +31,7 @@ static void task1_output_state_reset(motion_output_mode_t mode, uint8_t fresh_se
 static void task1_reset_recognition_state(void);
 static int32_t task1_encode_action_kind_value(int32_t test_value);
 static void task1_process_fused_frame(const motion_fused_frame_t *frame);
+static void task1_update_latest_fore_bio(const motion_fused_frame_t *frame);
 static void task1_handle_local_fall_result(const motion_ai_result_t *result);
 static void task1_output_upper_capture_csv(const motion_fused_frame_t *frame);
 static void task1_output_capture_csv(const motion_fused_frame_t *frame);
@@ -39,6 +41,12 @@ static void task1_output_recognition_csv(const motion_fused_frame_t *frame, cons
 static void task1_output_single_once_event(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
 static void task1_output_brief_result(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
 static void task1_output_rule_debug(const motion_fused_frame_t *frame, const RuleEngine *eng);
+static void task1_output_calibration_report_uart4(float fore_yaw,
+                                                  float fore_pitch,
+                                                  float fore_roll,
+                                                  float upper_yaw,
+                                                  float upper_pitch,
+                                                  float upper_roll);
 static int32_t task1_bio_value_or_invalid(int32_t value, int8_t valid);
 
 static RuleEngine g_task1_rule_engine;
@@ -71,6 +79,28 @@ static motion_output_state_t g_task1_output_state =
   .rule_last_state = (RuleState)0xFF,
   .single_once_last_state = (motion_ai_state_t)0xFF
 };
+static motion_bio_sample_t g_task1_latest_fore_bio = {0};
+static uint8_t g_task1_latest_fore_bio_valid = 0U;
+
+uint8_t MotionTask_GetLatestForeBio(motion_bio_sample_t *out_bio)
+{
+  uint8_t has_data = 0U;
+
+  if (out_bio == NULL)
+  {
+    return 0U;
+  }
+
+  taskENTER_CRITICAL();
+  if (g_task1_latest_fore_bio_valid != 0U)
+  {
+    *out_bio = g_task1_latest_fore_bio;
+    has_data = 1U;
+  }
+  taskEXIT_CRITICAL();
+
+  return has_data;
+}
 
 static uint8_t task1_consume_ai_restart_request(void)
 {
@@ -114,6 +144,39 @@ static void task1_upper_capture_output_reset(void)
   g_task1_output_state.upper_capture_header_printed = 0U;
   g_task1_output_state.upper_capture_epoch_valid = 0U;
   g_task1_output_state.upper_capture_epoch_us = 0ULL;
+}
+
+static void task1_output_calibration_report_uart4(float fore_yaw,
+                                                  float fore_pitch,
+                                                  float fore_roll,
+                                                  float upper_yaw,
+                                                  float upper_pitch,
+                                                  float upper_roll)
+{
+  char text[160];
+  int len;
+
+  len = snprintf(text,
+                 sizeof(text),
+                 "CALIBRATION_DONE,FORE,Yaw=%.2f,Pitch=%.2f,Roll=%.2f\r\n"
+                 "CALIBRATION_DONE,UPPER,Yaw=%.2f,Pitch=%.2f,Roll=%.2f\r\n",
+                 fore_yaw,
+                 fore_pitch,
+                 fore_roll,
+                 upper_yaw,
+                 upper_pitch,
+                 upper_roll);
+  if (len <= 0)
+  {
+    return;
+  }
+
+  if (len >= (int)sizeof(text))
+  {
+    len = (int)sizeof(text) - 1;
+  }
+
+  (void)HAL_UART_Transmit(&huart4, (uint8_t *)text, (uint16_t)len, 100U);
 }
 
 static void task1_output_state_reset(motion_output_mode_t mode, uint8_t fresh_session)
@@ -177,6 +240,8 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
   {
     return;
   }
+
+  task1_update_latest_fore_bio(frame);
 
   /* 统一在这里按输出模式分发，保持 AI、规则调试和采集输出的入口一致。 */
   current_mode = g_motion_output_mode;
@@ -280,6 +345,25 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
   }
 }
 
+static void task1_update_latest_fore_bio(const motion_fused_frame_t *frame)
+{
+  if (frame == NULL)
+  {
+    return;
+  }
+
+  if ((frame->fore_bio.hr_valid == 0) ||
+      (frame->fore_bio.spo2_valid == 0))
+  {
+    return;
+  }
+
+  taskENTER_CRITICAL();
+  g_task1_latest_fore_bio = frame->fore_bio;
+  g_task1_latest_fore_bio_valid = 1U;
+  taskEXIT_CRITICAL();
+}
+
 static void task1_output_upper_capture_csv(const motion_fused_frame_t *frame)
 {
   uint64_t relative_ts_ms;
@@ -338,7 +422,7 @@ static void task1_output_capture_csv(const motion_fused_frame_t *frame)
     g_task1_output_state.capture_header_printed = 1U;
   }
 
-  printf("%llu,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\r\n",
+  printf("%llu,  %.2f,  %.2f,  %.2f,  %.2f,  %.2f,  %.2f\r\n",
          (unsigned long long)(frame->ts_us / 1000ULL),
          frame->fore_yaw,
          frame->fore_pitch,
@@ -716,14 +800,12 @@ void MotionTask_Run(void)
           &calibration_upper_pitch,
           &calibration_upper_roll) != 0U)
     {
-      printf("CALIBRATION_DONE,FORE,Yaw=%.2f,Pitch=%.2f,Roll=%.2f\r\n",
-             calibration_fore_yaw,
-             calibration_fore_pitch,
-             calibration_fore_roll);
-      printf("CALIBRATION_DONE,UPPER,Yaw=%.2f,Pitch=%.2f,Roll=%.2f\r\n",
-             calibration_upper_yaw,
-             calibration_upper_pitch,
-             calibration_upper_roll);
+      task1_output_calibration_report_uart4(calibration_fore_yaw,
+                                            calibration_fore_pitch,
+                                            calibration_fore_roll,
+                                            calibration_upper_yaw,
+                                            calibration_upper_pitch,
+                                            calibration_upper_roll);
       sensor_work_done = 1U;
     }
 
@@ -753,7 +835,10 @@ void MotionTask_Run(void)
 
       if (g_motion_output_mode != MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST)
       {
-        (void)task1_try_take_fused_frame(&fused_frame);
+        if (task1_try_take_fused_frame(&fused_frame) != 0U)
+        {
+          task1_update_latest_fore_bio(&fused_frame);
+        }
       }
 
       {

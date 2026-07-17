@@ -1,0 +1,62 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'config:.understand-anything/config.json' has no edges (orphan)",
+    "Node 'config:.understand-anything/fingerprints.json' has no edges (orphan)",
+    "Node 'config:.understand-anything/knowledge-graph.json' has no edges (orphan)",
+    "Node 'config:.understand-anything/meta.json' has no edges (orphan)",
+    "Node 'document:Agents.md' has no edges (orphan)",
+    "Node 'document:LICENSE_X-CUBE-AI.txt' has no edges (orphan)",
+    "Node 'document:说明文档.txt' has no edges (orphan)",
+    "Node 'document:docs/2026-05-31-H743项目脉络补充.md' has no edges (orphan)",
+    "Node 'document:docs/W25Q128_Bootloader_App_第一版最小跑通方案.md' has no edges (orphan)",
+    "Node 'table:docs/h743_module_pins.csv:h743_module_pins' has no edges (orphan)",
+    "Node 'document:docs/lt168b_ota_mqtt_change_plan_2026-06-25.md' has no edges (orphan)",
+    "Node 'document:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md' has no edges (orphan)",
+    "Node 'document:docs/H743资料包/note/参考手册重点部分.md' has no edges (orphan)",
+    "Node 'document:docs/H743资料包/note/快速上手.md' has no edges (orphan)",
+    "Node 'config:.ai/network_action_cnn.h5_c_info.json' has no edges (orphan)",
+    "Node 'file:.mxproject' has no edges (orphan)",
+    "Node 'file:.understand-anything/.understandignore' has no edges (orphan)",
+    "Node 'file:App/motion/motion_frame.h' has no edges (orphan)",
+    "Node 'file:Common/ota_layout.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/bootloader_ota.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/crc.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/dma.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/FreeRTOSConfig.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/gpio.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/internal_flash.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/main.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/RTE_Components.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/stm32h7xx_hal_conf.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/stm32h7xx_it.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/tim.h' has no edges (orphan)",
+    "Node 'file:Core/Inc/usart.h' has no edges (orphan)",
+    "Node 'file:docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx' has no edges (orphan)",
+    "Node 'file:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx' has no edges (orphan)",
+    "Node 'file:Master.ioc' has no edges (orphan)",
+    "Node 'file:SYSTEM/delay/delay.h' has no edges (orphan)",
+    "Node 'document:SYSTEM/readme.txt' has no edges (orphan)",
+    "Node 'file:SYSTEM/sys/sys.h' has no edges (orphan)",
+    "Node 'file:SYSTEM/usart/yuanzi_usart.c' has no edges (orphan)",
+    "Node 'file:SYSTEM/usart/yuanzi_usart.h' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 520,
+    "totalEdges": 701,
+    "totalLayers": 7,
+    "tourSteps": 12,
+    "nodeTypes": {
+      "file": 87,
+      "function": 417,
+      "config": 5,
+      "document": 10,
+      "table": 1
+    },
+    "edgeTypes": {
+      "contains": 417,
+      "exports": 246,
+      "imports": 38
+    }
+  }
+}

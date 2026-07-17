@@ -1,0 +1,1585 @@
+{
+  "nodes": [
+    {
+      "id": "file:App/motion/motion_app_events.c",
+      "type": "file",
+      "name": "motion_app_events.c",
+      "filePath": "App/motion/motion_app_events.c",
+      "summary": "维护动作识别结果、训练页刷新和云端上报请求的轻量事件状态，为任务与 UI/云连接之间提供无阻塞状态交接。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_QueueTestConfidence",
+      "type": "function",
+      "name": "MotionEvents_QueueTestConfidence",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        16,
+        23
+      ],
+      "summary": "实现 MotionEvents_QueueTestConfidence 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_PeekTestConfidence",
+      "type": "function",
+      "name": "MotionEvents_PeekTestConfidence",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        25,
+        44
+      ],
+      "summary": "查看 MotionEvents_PeekTestConfidence 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_ClearTestConfidenceIfCurrent",
+      "type": "function",
+      "name": "MotionEvents_ClearTestConfidenceIfCurrent",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        46,
+        55
+      ],
+      "summary": "清除 MotionEvents_ClearTestConfidenceIfCurrent 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_EncodeActionKind",
+      "type": "function",
+      "name": "MotionEvents_EncodeActionKind",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        57,
+        72
+      ],
+      "summary": "编码 MotionEvents_EncodeActionKind 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_QueueActionKind",
+      "type": "function",
+      "name": "MotionEvents_QueueActionKind",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        74,
+        80
+      ],
+      "summary": "实现 MotionEvents_QueueActionKind 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_PeekActionKind",
+      "type": "function",
+      "name": "MotionEvents_PeekActionKind",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        82,
+        100
+      ],
+      "summary": "查看 MotionEvents_PeekActionKind 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_ClearActionKindIfCurrent",
+      "type": "function",
+      "name": "MotionEvents_ClearActionKindIfCurrent",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        102,
+        111
+      ],
+      "summary": "清除 MotionEvents_ClearActionKindIfCurrent 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_HasPendingCloudPost",
+      "type": "function",
+      "name": "MotionEvents_HasPendingCloudPost",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        113,
+        124
+      ],
+      "summary": "上报 MotionEvents_HasPendingCloudPost 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefresh",
+      "type": "function",
+      "name": "MotionEvents_RequestTrainingPageRefresh",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        126,
+        129
+      ],
+      "summary": "请求 MotionEvents_RequestTrainingPageRefresh 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefreshByAction",
+      "type": "function",
+      "name": "MotionEvents_RequestTrainingPageRefreshByAction",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        131,
+        138
+      ],
+      "summary": "请求 MotionEvents_RequestTrainingPageRefreshByAction 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefresh",
+      "type": "function",
+      "name": "MotionEvents_TakeTrainingPageRefresh",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        140,
+        143
+      ],
+      "summary": "提取 MotionEvents_TakeTrainingPageRefresh 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefreshAction",
+      "type": "function",
+      "name": "MotionEvents_TakeTrainingPageRefreshAction",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        145,
+        162
+      ],
+      "summary": "提取 MotionEvents_TakeTrainingPageRefreshAction 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshAction",
+      "type": "function",
+      "name": "MotionEvents_PeekTrainingPageRefreshAction",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        164,
+        167
+      ],
+      "summary": "查看 MotionEvents_PeekTrainingPageRefreshAction 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshDirty",
+      "type": "function",
+      "name": "MotionEvents_PeekTrainingPageRefreshDirty",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        169,
+        190
+      ],
+      "summary": "查看 MotionEvents_PeekTrainingPageRefreshDirty 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefresh",
+      "type": "function",
+      "name": "MotionEvents_ClearTrainingPageRefresh",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        192,
+        198
+      ],
+      "summary": "清除 MotionEvents_ClearTrainingPageRefresh 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefreshIfCurrent",
+      "type": "function",
+      "name": "MotionEvents_ClearTrainingPageRefreshIfCurrent",
+      "filePath": "App/motion/motion_app_events.c",
+      "lineRange": [
+        200,
+        210
+      ],
+      "summary": "清除 MotionEvents_ClearTrainingPageRefreshIfCurrent 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_app_events.h",
+      "type": "file",
+      "name": "motion_app_events.h",
+      "filePath": "App/motion/motion_app_events.h",
+      "summary": "声明动作识别事件队列、训练页刷新和云端待上报状态的公共接口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_input.c",
+      "type": "file",
+      "name": "motion_input.c",
+      "filePath": "App/motion/motion_input.c",
+      "summary": "接收启动、停止、清除和中断触发请求，并协调姿态传感器流水线及窗口测试的输入状态。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:App/motion/motion_input.c:Motion_RequestStart",
+      "type": "function",
+      "name": "Motion_RequestStart",
+      "filePath": "App/motion/motion_input.c",
+      "lineRange": [
+        33,
+        65
+      ],
+      "summary": "请求 Motion_RequestStart 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_input.c:Motion_RequestStartFromIsr",
+      "type": "function",
+      "name": "Motion_RequestStartFromIsr",
+      "filePath": "App/motion/motion_input.c",
+      "lineRange": [
+        67,
+        86
+      ],
+      "summary": "请求 Motion_RequestStartFromIsr 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_input.c:Motion_RequestStop",
+      "type": "function",
+      "name": "Motion_RequestStop",
+      "filePath": "App/motion/motion_input.c",
+      "lineRange": [
+        88,
+        95
+      ],
+      "summary": "请求 Motion_RequestStop 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_input.c:Motion_RequestClear",
+      "type": "function",
+      "name": "Motion_RequestClear",
+      "filePath": "App/motion/motion_input.c",
+      "lineRange": [
+        97,
+        100
+      ],
+      "summary": "请求 Motion_RequestClear 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_input.c:Motion_TakeRestartRequest",
+      "type": "function",
+      "name": "Motion_TakeRestartRequest",
+      "filePath": "App/motion/motion_input.c",
+      "lineRange": [
+        102,
+        115
+      ],
+      "summary": "请求 Motion_TakeRestartRequest 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_input.c:Motion_TakeStartFromIsrRequest",
+      "type": "function",
+      "name": "Motion_TakeStartFromIsrRequest",
+      "filePath": "App/motion/motion_input.c",
+      "lineRange": [
+        117,
+        130
+      ],
+      "summary": "请求 Motion_TakeStartFromIsrRequest 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_input.c:Motion_TakeUpperCaptureResetRequest",
+      "type": "function",
+      "name": "Motion_TakeUpperCaptureResetRequest",
+      "filePath": "App/motion/motion_input.c",
+      "lineRange": [
+        132,
+        145
+      ],
+      "summary": "复位 Motion_TakeUpperCaptureResetRequest 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_input.c:Motion_ResetUpperCaptureInput",
+      "type": "function",
+      "name": "Motion_ResetUpperCaptureInput",
+      "filePath": "App/motion/motion_input.c",
+      "lineRange": [
+        147,
+        163
+      ],
+      "summary": "复位 Motion_ResetUpperCaptureInput 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_input.c:Motion_TakeStopRequest",
+      "type": "function",
+      "name": "Motion_TakeStopRequest",
+      "filePath": "App/motion/motion_input.c",
+      "lineRange": [
+        165,
+        178
+      ],
+      "summary": "请求 Motion_TakeStopRequest 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_input.h",
+      "type": "file",
+      "name": "motion_input.h",
+      "filePath": "App/motion/motion_input.h",
+      "summary": "定义运动识别任务的外部控制请求接口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_mode.h",
+      "type": "file",
+      "name": "motion_mode.h",
+      "filePath": "App/motion/motion_mode.h",
+      "summary": "定义运动识别、采集、校准与测试等运行模式枚举及相关模式约束。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_sensor_pipeline.c",
+      "type": "file",
+      "name": "motion_sensor_pipeline.c",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "summary": "解析上下肢姿态数据包，完成时间戳与序号校验、双传感器帧融合、校准统计及 ISR 到任务的数据交接。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:parse_u32_token",
+      "type": "function",
+      "name": "parse_u32_token",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        147,
+        167
+      ],
+      "summary": "实现 parse_u32_token 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:parse_i32_token",
+      "type": "function",
+      "name": "parse_i32_token",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        169,
+        189
+      ],
+      "summary": "实现 parse_i32_token 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:parse_float_token",
+      "type": "function",
+      "name": "parse_float_token",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        191,
+        211
+      ],
+      "summary": "实现 parse_float_token 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:get_ts_us",
+      "type": "function",
+      "name": "get_ts_us",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        218,
+        245
+      ],
+      "summary": "实现 get_ts_us 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:parse_pose_frame",
+      "type": "function",
+      "name": "parse_pose_frame",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        247,
+        387
+      ],
+      "summary": "实现 parse_pose_frame 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:update_seq_stats",
+      "type": "function",
+      "name": "update_seq_stats",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        389,
+        428
+      ],
+      "summary": "实现 update_seq_stats 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:try_emit_fused",
+      "type": "function",
+      "name": "try_emit_fused",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        430,
+        508
+      ],
+      "summary": "实现 try_emit_fused 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_StorePacketFromIsr",
+      "type": "function",
+      "name": "MotionSensorPipeline_StorePacketFromIsr",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        510,
+        542
+      ],
+      "summary": "判断 MotionSensorPipeline_StorePacketFromIsr 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeFusedFrame",
+      "type": "function",
+      "name": "MotionSensorPipeline_TakeFusedFrame",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        544,
+        564
+      ],
+      "summary": "提取 MotionSensorPipeline_TakeFusedFrame 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:take_pending_pose_packet",
+      "type": "function",
+      "name": "take_pending_pose_packet",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        566,
+        591
+      ],
+      "summary": "实现 take_pending_pose_packet 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:process_pose_packet",
+      "type": "function",
+      "name": "process_pose_packet",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        593,
+        649
+      ],
+      "summary": "实现 process_pose_packet 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:Motion_ProcessPendingPosePackets",
+      "type": "function",
+      "name": "Motion_ProcessPendingPosePackets",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        651,
+        672
+      ],
+      "summary": "处理 Motion_ProcessPendingPosePackets 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestCalibration",
+      "type": "function",
+      "name": "MotionSensorPipeline_RequestCalibration",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        678,
+        698
+      ],
+      "summary": "请求 MotionSensorPipeline_RequestCalibration 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "传感器校准"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestUpperCalibration",
+      "type": "function",
+      "name": "MotionSensorPipeline_RequestUpperCalibration",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        700,
+        703
+      ],
+      "summary": "请求 MotionSensorPipeline_RequestUpperCalibration 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "传感器校准"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_CalibrationTickFromIsr",
+      "type": "function",
+      "name": "MotionSensorPipeline_CalibrationTickFromIsr",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        705,
+        768
+      ],
+      "summary": "判断 MotionSensorPipeline_CalibrationTickFromIsr 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "传感器校准"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationActive",
+      "type": "function",
+      "name": "MotionSensorPipeline_IsUpperCalibrationActive",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        770,
+        773
+      ],
+      "summary": "判断 MotionSensorPipeline_IsUpperCalibrationActive 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "传感器校准"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationActive",
+      "type": "function",
+      "name": "MotionSensorPipeline_IsCalibrationActive",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        775,
+        778
+      ],
+      "summary": "判断 MotionSensorPipeline_IsCalibrationActive 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "传感器校准"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationDone",
+      "type": "function",
+      "name": "MotionSensorPipeline_IsUpperCalibrationDone",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        780,
+        783
+      ],
+      "summary": "判断 MotionSensorPipeline_IsUpperCalibrationDone 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "传感器校准"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationDone",
+      "type": "function",
+      "name": "MotionSensorPipeline_IsCalibrationDone",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        785,
+        788
+      ],
+      "summary": "判断 MotionSensorPipeline_IsCalibrationDone 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "传感器校准"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeCalibrationReport",
+      "type": "function",
+      "name": "MotionSensorPipeline_TakeCalibrationReport",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        790,
+        825
+      ],
+      "summary": "提取 MotionSensorPipeline_TakeCalibrationReport 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "传感器校准"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeUpperCalibrationReport",
+      "type": "function",
+      "name": "MotionSensorPipeline_TakeUpperCalibrationReport",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        827,
+        855
+      ],
+      "summary": "提取 MotionSensorPipeline_TakeUpperCalibrationReport 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "传感器校准"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_SetUpperOnly",
+      "type": "function",
+      "name": "MotionSensorPipeline_SetUpperOnly",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        862,
+        875
+      ],
+      "summary": "设置 MotionSensorPipeline_SetUpperOnly 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_ResetUpperCapture",
+      "type": "function",
+      "name": "MotionSensorPipeline_ResetUpperCapture",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        877,
+        900
+      ],
+      "summary": "复位 MotionSensorPipeline_ResetUpperCapture 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_Reset",
+      "type": "function",
+      "name": "MotionSensorPipeline_Reset",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "lineRange": [
+        902,
+        947
+      ],
+      "summary": "复位 MotionSensorPipeline_Reset 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_QueueTestConfidence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_QueueTestConfidence",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTestConfidence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTestConfidence",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTestConfidenceIfCurrent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTestConfidenceIfCurrent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_EncodeActionKind",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_EncodeActionKind",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_QueueActionKind",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_QueueActionKind",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekActionKind",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekActionKind",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearActionKindIfCurrent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearActionKindIfCurrent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_HasPendingCloudPost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_HasPendingCloudPost",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefresh",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefresh",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefreshByAction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefreshByAction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefresh",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefresh",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefreshAction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefreshAction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshAction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshAction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshDirty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshDirty",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefresh",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefresh",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefreshIfCurrent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefreshIfCurrent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "file:App/motion/motion_app_events.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStart",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStartFromIsr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStartFromIsr",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStop",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStop",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestClear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestClear",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeRestartRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeRestartRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeStartFromIsrRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeStartFromIsrRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeUpperCaptureResetRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeUpperCaptureResetRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_ResetUpperCaptureInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_ResetUpperCaptureInput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeStopRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeStopRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "file:App/motion/motion_input.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "file:App/motion/motion_mode.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "file:App/motion/motion_sensor_pipeline.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "file:App/motion/motion_window_test.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:parse_u32_token",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:parse_i32_token",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:parse_float_token",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:get_ts_us",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:parse_pose_frame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:update_seq_stats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:try_emit_fused",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_StorePacketFromIsr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_StorePacketFromIsr",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeFusedFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeFusedFrame",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:take_pending_pose_packet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:process_pose_packet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:Motion_ProcessPendingPosePackets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:Motion_ProcessPendingPosePackets",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestCalibration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestCalibration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestUpperCalibration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestUpperCalibration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_CalibrationTickFromIsr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_CalibrationTickFromIsr",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationActive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationActive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationActive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationActive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationDone",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationDone",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationDone",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationDone",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeCalibrationReport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeCalibrationReport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeUpperCalibrationReport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeUpperCalibrationReport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_SetUpperOnly",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_SetUpperOnly",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_ResetUpperCapture",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_ResetUpperCapture",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_Reset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_Reset",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "file:App/motion/motion_sensor_pipeline.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

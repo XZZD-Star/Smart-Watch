@@ -1,0 +1,13 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "合并脚本未报告 Fixed 或 Could not fix 条目，节点与边数量和批次输入汇总一致。",
+    "已核对 520 个节点与 701 条边：未发现缺失 ID、未知节点类型、未知复杂度、重复项或悬空引用。",
+    "已从 scan-result.json 的 importMap 字段读取并交叉验证 38 条内部导入关系；对应 imports 边全部存在，方向与权重均符合规范，无需补充。"
+  ]
+}

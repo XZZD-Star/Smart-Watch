@@ -1,0 +1,1594 @@
+{
+  "nodes": [
+    {
+      "id": "file:Core/Src/stm32h7xx_it.c",
+      "type": "file",
+      "name": "stm32h7xx_it.c",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "summary": "实现 Cortex-M7 异常和 STM32H7 外设中断处理，包括 DMA、定时器及多路 UART 回调分发。",
+      "tags": [
+        "interrupt-handler",
+        "hal",
+        "uart",
+        "dma"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:NMI_Handler",
+      "type": "function",
+      "name": "NMI_Handler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        86,
+        96
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（NMI_Handler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:HardFault_Handler",
+      "type": "function",
+      "name": "HardFault_Handler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        101,
+        111
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（HardFault_Handler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:MemManage_Handler",
+      "type": "function",
+      "name": "MemManage_Handler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        116,
+        126
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（MemManage_Handler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:BusFault_Handler",
+      "type": "function",
+      "name": "BusFault_Handler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        131,
+        141
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（BusFault_Handler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:UsageFault_Handler",
+      "type": "function",
+      "name": "UsageFault_Handler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        146,
+        156
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（UsageFault_Handler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:DebugMon_Handler",
+      "type": "function",
+      "name": "DebugMon_Handler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        161,
+        169
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（DebugMon_Handler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream0_IRQHandler",
+      "type": "function",
+      "name": "DMA1_Stream0_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        181,
+        190
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（DMA1_Stream0_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream1_IRQHandler",
+      "type": "function",
+      "name": "DMA1_Stream1_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        195,
+        204
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（DMA1_Stream1_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream2_IRQHandler",
+      "type": "function",
+      "name": "DMA1_Stream2_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        209,
+        218
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（DMA1_Stream2_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream3_IRQHandler",
+      "type": "function",
+      "name": "DMA1_Stream3_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        223,
+        232
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（DMA1_Stream3_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:TIM1_UP_IRQHandler",
+      "type": "function",
+      "name": "TIM1_UP_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        237,
+        246
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（TIM1_UP_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:TIM2_IRQHandler",
+      "type": "function",
+      "name": "TIM2_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        251,
+        260
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（TIM2_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:USART1_IRQHandler",
+      "type": "function",
+      "name": "USART1_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        265,
+        290
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（USART1_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:USART2_IRQHandler",
+      "type": "function",
+      "name": "USART2_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        295,
+        304
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（USART2_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:USART3_IRQHandler",
+      "type": "function",
+      "name": "USART3_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        309,
+        333
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（USART3_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:UART4_IRQHandler",
+      "type": "function",
+      "name": "UART4_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        338,
+        370
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（UART4_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:USART6_IRQHandler",
+      "type": "function",
+      "name": "USART6_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        375,
+        384
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（USART6_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:UART7_IRQHandler",
+      "type": "function",
+      "name": "UART7_IRQHandler",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        389,
+        398
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（UART7_IRQHandler）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/stm32h7xx_it.c:motion_uart4_handle_command",
+      "type": "function",
+      "name": "motion_uart4_handle_command",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "lineRange": [
+        421,
+        471
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（motion_uart4_handle_command）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/system_stm32h7xx.c",
+      "type": "file",
+      "name": "system_stm32h7xx.c",
+      "filePath": "Core/Src/system_stm32h7xx.c",
+      "summary": "提供 CMSIS 系统初始化、核心时钟更新和 Run0 模式切换逻辑。",
+      "tags": [
+        "cmsis",
+        "system-init",
+        "clock-control"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:Core/Src/system_stm32h7xx.c:SystemInit",
+      "type": "function",
+      "name": "SystemInit",
+      "filePath": "Core/Src/system_stm32h7xx.c",
+      "lineRange": [
+        180,
+        315
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（SystemInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/system_stm32h7xx.c:SystemCoreClockUpdate",
+      "type": "function",
+      "name": "SystemCoreClockUpdate",
+      "filePath": "Core/Src/system_stm32h7xx.c",
+      "lineRange": [
+        354,
+        451
+      ],
+      "summary": "更新运行状态、统计量或推理结果（SystemCoreClockUpdate）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/system_stm32h7xx.c:ExitRun0Mode",
+      "type": "function",
+      "name": "ExitRun0Mode",
+      "filePath": "Core/Src/system_stm32h7xx.c",
+      "lineRange": [
+        476,
+        544
+      ],
+      "summary": "实现该模块的核心处理逻辑（ExitRun0Mode）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/tim.c",
+      "type": "file",
+      "name": "tim.c",
+      "filePath": "Core/Src/tim.c",
+      "summary": "配置 TIM2/TIM3 及 PWM，并提供舵机角度到脉宽和门锁控制逻辑。",
+      "tags": [
+        "hal",
+        "timer",
+        "pwm",
+        "servo"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:Core/Src/tim.c:Servo_AngleToPulseUs",
+      "type": "function",
+      "name": "Servo_AngleToPulseUs",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        47,
+        60
+      ],
+      "summary": "实现该模块的核心处理逻辑（Servo_AngleToPulseUs）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:MX_TIM2_Init",
+      "type": "function",
+      "name": "MX_TIM2_Init",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        73,
+        111
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_TIM2_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:MX_TIM3_Init",
+      "type": "function",
+      "name": "MX_TIM3_Init",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        114,
+        161
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_TIM3_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:HAL_TIM_Base_MspInit",
+      "type": "function",
+      "name": "HAL_TIM_Base_MspInit",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        163,
+        181
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_TIM_Base_MspInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:HAL_TIM_PWM_MspInit",
+      "type": "function",
+      "name": "HAL_TIM_PWM_MspInit",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        183,
+        197
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_TIM_PWM_MspInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:HAL_TIM_Base_MspDeInit",
+      "type": "function",
+      "name": "HAL_TIM_Base_MspDeInit",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        199,
+        216
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_TIM_Base_MspDeInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:HAL_TIM_PWM_MspDeInit",
+      "type": "function",
+      "name": "HAL_TIM_PWM_MspDeInit",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        218,
+        232
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_TIM_PWM_MspDeInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:HAL_TIM_MspPostInit",
+      "type": "function",
+      "name": "HAL_TIM_MspPostInit",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        234,
+        265
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_TIM_MspPostInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:Servo_DoorInit",
+      "type": "function",
+      "name": "Servo_DoorInit",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        268,
+        281
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（Servo_DoorInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:Servo_SetAngleDeg",
+      "type": "function",
+      "name": "Servo_SetAngleDeg",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        283,
+        286
+      ],
+      "summary": "实现该模块的核心处理逻辑（Servo_SetAngleDeg）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:Servo_SetDoorOpen",
+      "type": "function",
+      "name": "Servo_SetDoorOpen",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        288,
+        293
+      ],
+      "summary": "实现该模块的核心处理逻辑（Servo_SetDoorOpen）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:Servo_SetDoorClosed",
+      "type": "function",
+      "name": "Servo_SetDoorClosed",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        295,
+        300
+      ],
+      "summary": "实现该模块的核心处理逻辑（Servo_SetDoorClosed）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:Servo_SetDoorByCloudValue",
+      "type": "function",
+      "name": "Servo_SetDoorByCloudValue",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        302,
+        317
+      ],
+      "summary": "实现该模块的核心处理逻辑（Servo_SetDoorByCloudValue）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/tim.c:Servo_GetDoorState",
+      "type": "function",
+      "name": "Servo_GetDoorState",
+      "filePath": "Core/Src/tim.c",
+      "lineRange": [
+        319,
+        322
+      ],
+      "summary": "实现该模块的核心处理逻辑（Servo_GetDoorState）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Src/usart.c",
+      "type": "file",
+      "name": "usart.c",
+      "filePath": "Core/Src/usart.c",
+      "summary": "配置多路 UART/USART、GPIO、DMA 与中断，并将接收数据分发到环形缓冲区和协议模块。",
+      "tags": [
+        "hal",
+        "uart",
+        "dma",
+        "communication"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:Core/Src/usart.c:USART6_FeedRxDmaRing",
+      "type": "function",
+      "name": "USART6_FeedRxDmaRing",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        35,
+        72
+      ],
+      "summary": "实现该模块的核心处理逻辑（USART6_FeedRxDmaRing）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/usart.c:MX_UART4_Init",
+      "type": "function",
+      "name": "MX_UART4_Init",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        87,
+        128
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_UART4_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/usart.c:MX_USART1_UART_Init",
+      "type": "function",
+      "name": "MX_USART1_UART_Init",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        131,
+        173
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_USART1_UART_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/usart.c:MX_USART2_UART_Init",
+      "type": "function",
+      "name": "MX_USART2_UART_Init",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        176,
+        217
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_USART2_UART_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/usart.c:MX_USART3_UART_Init",
+      "type": "function",
+      "name": "MX_USART3_UART_Init",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        220,
+        261
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_USART3_UART_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/usart.c:MX_USART6_UART_Init",
+      "type": "function",
+      "name": "MX_USART6_UART_Init",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        264,
+        313
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_USART6_UART_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/usart.c:MX_UART7_Init",
+      "type": "function",
+      "name": "MX_UART7_Init",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        316,
+        356
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MX_UART7_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/usart.c:HAL_UART_MspInit",
+      "type": "function",
+      "name": "HAL_UART_MspInit",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        358,
+        669
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_UART_MspInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:Core/Src/usart.c:HAL_UART_MspDeInit",
+      "type": "function",
+      "name": "HAL_UART_MspDeInit",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        671,
+        806
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（HAL_UART_MspDeInit）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Core/Src/usart.c:HAL_UART_RxCpltCallback",
+      "type": "function",
+      "name": "HAL_UART_RxCpltCallback",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        809,
+        821
+      ],
+      "summary": "实现该模块的核心处理逻辑（HAL_UART_RxCpltCallback）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Core/Src/usart.c:HAL_UARTEx_RxEventCallback",
+      "type": "function",
+      "name": "HAL_UARTEx_RxEventCallback",
+      "filePath": "Core/Src/usart.c",
+      "lineRange": [
+        823,
+        838
+      ],
+      "summary": "实现该模块的核心处理逻辑（HAL_UARTEx_RxEventCallback）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "type": "file",
+      "name": "~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "filePath": "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "summary": "Microsoft Excel 创建的引脚表临时锁文件，不包含可分析的稳定项目内容。",
+      "tags": [
+        "temporary-file",
+        "spreadsheet",
+        "generated"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+      "type": "file",
+      "name": "STM32H743ZIT6_引脚排针精华表.xlsx",
+      "filePath": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+      "summary": "汇总 STM32H743ZIT6 引脚、排针映射和复用功能，供硬件连接快速查询。",
+      "tags": [
+        "hardware-reference",
+        "pinout",
+        "spreadsheet"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Master.ioc",
+      "type": "file",
+      "name": "Master.ioc",
+      "filePath": "Master.ioc",
+      "summary": "STM32CubeMX 主工程配置，定义 MCU 引脚、时钟、外设、DMA、中间件和代码生成参数。",
+      "tags": [
+        "configuration",
+        "cubemx",
+        "hardware-config",
+        "code-generation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:SYSTEM/delay/delay.c",
+      "type": "file",
+      "name": "delay.c",
+      "filePath": "SYSTEM/delay/delay.c",
+      "summary": "提供面向 STM32H7 的阻塞式微秒和毫秒延时实现，并根据系统时钟初始化计时参数。",
+      "tags": [
+        "utility",
+        "delay",
+        "system-timing"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:SYSTEM/delay/delay.c:delay_init",
+      "type": "function",
+      "name": "delay_init",
+      "filePath": "SYSTEM/delay/delay.c",
+      "lineRange": [
+        55,
+        74
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（delay_init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:SYSTEM/delay/delay.h",
+      "type": "file",
+      "name": "delay.h",
+      "filePath": "SYSTEM/delay/delay.h",
+      "summary": "声明系统延时初始化及微秒、毫秒延时接口。",
+      "tags": [
+        "api",
+        "delay",
+        "system-timing"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:NMI_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:NMI_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:HardFault_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:HardFault_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:MemManage_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:MemManage_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:BusFault_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:BusFault_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UsageFault_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UsageFault_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DebugMon_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DebugMon_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream0_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream0_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream1_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream1_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream2_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream2_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream3_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream3_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:TIM1_UP_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:TIM1_UP_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:TIM2_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:TIM2_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART1_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART1_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART2_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART2_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART3_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART3_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UART4_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UART4_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART6_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART6_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UART7_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UART7_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:motion_uart4_handle_command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:SystemInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:SystemInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:SystemCoreClockUpdate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:SystemCoreClockUpdate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:ExitRun0Mode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:ExitRun0Mode",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_AngleToPulseUs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:MX_TIM2_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:MX_TIM2_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:MX_TIM3_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:MX_TIM3_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_Base_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_Base_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_PWM_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_PWM_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_Base_MspDeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_Base_MspDeInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_PWM_MspDeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_PWM_MspDeInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_MspPostInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_MspPostInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_DoorInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_DoorInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetAngleDeg",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetAngleDeg",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorOpen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorOpen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorClosed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorClosed",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorByCloudValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorByCloudValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_GetDoorState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_GetDoorState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:USART6_FeedRxDmaRing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_UART4_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_UART4_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART1_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART1_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART2_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART2_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART3_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART3_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART6_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART6_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_UART7_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_UART7_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_MspDeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_MspDeInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_RxCpltCallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_RxCpltCallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UARTEx_RxEventCallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UARTEx_RxEventCallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/delay/delay.c",
+      "target": "function:SYSTEM/delay/delay.c:delay_init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/delay/delay.c",
+      "target": "function:SYSTEM/delay/delay.c:delay_init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

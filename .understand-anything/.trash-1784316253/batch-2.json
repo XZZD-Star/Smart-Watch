@@ -1,0 +1,903 @@
+{
+  "nodes": [
+    {
+      "id": "file:Common/crc16.c",
+      "type": "file",
+      "name": "crc16.c",
+      "filePath": "Common/crc16.c",
+      "summary": "提供流式 CRC16 初始化、增量更新和整块数据计算，用于 OTA 元数据完整性校验。",
+      "tags": [
+        "crc16",
+        "数据校验",
+        "工具函数"
+      ],
+      "complexity": "simple",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:Common/crc16.c:CRC16_Init",
+      "type": "function",
+      "name": "CRC16_Init",
+      "filePath": "Common/crc16.c",
+      "lineRange": [
+        6,
+        9
+      ],
+      "summary": "初始化 CRC16_Init 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/crc16.c:CRC16_Update",
+      "type": "function",
+      "name": "CRC16_Update",
+      "filePath": "Common/crc16.c",
+      "lineRange": [
+        11,
+        39
+      ],
+      "summary": "更新 CRC16_Update 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/crc16.c:CRC16_Calculate",
+      "type": "function",
+      "name": "CRC16_Calculate",
+      "filePath": "Common/crc16.c",
+      "lineRange": [
+        41,
+        44
+      ],
+      "summary": "计算 CRC16_Calculate 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/crc16.h",
+      "type": "file",
+      "name": "crc16.h",
+      "filePath": "Common/crc16.h",
+      "summary": "声明通用 CRC16 校验接口及初始值常量。",
+      "tags": [
+        "crc16",
+        "数据校验",
+        "工具函数"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/md5.c",
+      "type": "file",
+      "name": "md5.c",
+      "filePath": "Common/md5.c",
+      "summary": "实现 MD5 分组变换、流式摘要计算、十六进制编码与字符串合法性检查。",
+      "tags": [
+        "md5",
+        "数据校验",
+        "工具函数"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:Common/md5.c:MD5_Transform",
+      "type": "function",
+      "name": "MD5_Transform",
+      "filePath": "Common/md5.c",
+      "lineRange": [
+        35,
+        121
+      ],
+      "summary": "实现 MD5_Transform 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Common/md5.c:MD5_Init",
+      "type": "function",
+      "name": "MD5_Init",
+      "filePath": "Common/md5.c",
+      "lineRange": [
+        123,
+        137
+      ],
+      "summary": "初始化 MD5_Init 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/md5.c:MD5_Update",
+      "type": "function",
+      "name": "MD5_Update",
+      "filePath": "Common/md5.c",
+      "lineRange": [
+        139,
+        172
+      ],
+      "summary": "更新 MD5_Update 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/md5.c:MD5_Final",
+      "type": "function",
+      "name": "MD5_Final",
+      "filePath": "Common/md5.c",
+      "lineRange": [
+        174,
+        200
+      ],
+      "summary": "实现 MD5_Final 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/md5.c:MD5_ToHex",
+      "type": "function",
+      "name": "MD5_ToHex",
+      "filePath": "Common/md5.c",
+      "lineRange": [
+        202,
+        218
+      ],
+      "summary": "实现 MD5_ToHex 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/md5.c:MD5_IsHexString",
+      "type": "function",
+      "name": "MD5_IsHexString",
+      "filePath": "Common/md5.c",
+      "lineRange": [
+        220,
+        241
+      ],
+      "summary": "判断 MD5_IsHexString 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/md5.h",
+      "type": "file",
+      "name": "md5.h",
+      "filePath": "Common/md5.h",
+      "summary": "定义 MD5 上下文并声明摘要计算和十六进制辅助接口。",
+      "tags": [
+        "md5",
+        "数据校验",
+        "工具函数"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/ota_device_info.c",
+      "type": "file",
+      "name": "ota_device_info.c",
+      "filePath": "Common/ota_device_info.c",
+      "summary": "在冗余 Flash 槽位中读取、校验和保存设备当前运行版本，利用序号选择最新有效记录。",
+      "tags": [
+        "ota",
+        "持久化",
+        "完整性校验"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:Common/ota_device_info.c:OTADeviceInfo_CalcCrc16",
+      "type": "function",
+      "name": "OTADeviceInfo_CalcCrc16",
+      "filePath": "Common/ota_device_info.c",
+      "lineRange": [
+        10,
+        19
+      ],
+      "summary": "计算 OTADeviceInfo_CalcCrc16 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_device_info.c:OTADeviceInfo_IsValid",
+      "type": "function",
+      "name": "OTADeviceInfo_IsValid",
+      "filePath": "Common/ota_device_info.c",
+      "lineRange": [
+        21,
+        35
+      ],
+      "summary": "判断 OTADeviceInfo_IsValid 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_device_info.c:OTADeviceInfo_ReadSlot",
+      "type": "function",
+      "name": "OTADeviceInfo_ReadSlot",
+      "filePath": "Common/ota_device_info.c",
+      "lineRange": [
+        37,
+        51
+      ],
+      "summary": "读取 OTADeviceInfo_ReadSlot 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_device_info.c:OTADeviceInfo_LoadBest",
+      "type": "function",
+      "name": "OTADeviceInfo_LoadBest",
+      "filePath": "Common/ota_device_info.c",
+      "lineRange": [
+        53,
+        93
+      ],
+      "summary": "加载 OTADeviceInfo_LoadBest 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_device_info.c:OTADeviceInfo_Load",
+      "type": "function",
+      "name": "OTADeviceInfo_Load",
+      "filePath": "Common/ota_device_info.c",
+      "lineRange": [
+        95,
+        104
+      ],
+      "summary": "加载 OTADeviceInfo_Load 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_device_info.c:OTADeviceInfo_GetCurrentVersion",
+      "type": "function",
+      "name": "OTADeviceInfo_GetCurrentVersion",
+      "filePath": "Common/ota_device_info.c",
+      "lineRange": [
+        106,
+        123
+      ],
+      "summary": "获取 OTADeviceInfo_GetCurrentVersion 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态查询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_device_info.c:OTADeviceInfo_WriteSlot",
+      "type": "function",
+      "name": "OTADeviceInfo_WriteSlot",
+      "filePath": "Common/ota_device_info.c",
+      "lineRange": [
+        125,
+        145
+      ],
+      "summary": "写入 OTADeviceInfo_WriteSlot 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据输出"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_device_info.c:OTADeviceInfo_SaveRunningVersion",
+      "type": "function",
+      "name": "OTADeviceInfo_SaveRunningVersion",
+      "filePath": "Common/ota_device_info.c",
+      "lineRange": [
+        147,
+        196
+      ],
+      "summary": "保存 OTADeviceInfo_SaveRunningVersion 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Common/ota_device_info.h",
+      "type": "file",
+      "name": "ota_device_info.h",
+      "filePath": "Common/ota_device_info.h",
+      "summary": "定义设备 OTA 版本持久化记录及加载、查询和保存接口。",
+      "tags": [
+        "ota",
+        "持久化",
+        "完整性校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/ota_info.c",
+      "type": "file",
+      "name": "ota_info.c",
+      "filePath": "Common/ota_info.c",
+      "summary": "持久化并校验待升级固件和模拟升级信息，结合 CRC16 与 MD5 保证元数据有效性。",
+      "tags": [
+        "ota",
+        "持久化",
+        "完整性校验"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:Common/ota_info.c:OTAInfo_CalcCrc16",
+      "type": "function",
+      "name": "OTAInfo_CalcCrc16",
+      "filePath": "Common/ota_info.c",
+      "lineRange": [
+        10,
+        18
+      ],
+      "summary": "计算 OTAInfo_CalcCrc16 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_info.c:OTAInfo_IsReadyValid",
+      "type": "function",
+      "name": "OTAInfo_IsReadyValid",
+      "filePath": "Common/ota_info.c",
+      "lineRange": [
+        20,
+        37
+      ],
+      "summary": "读取 OTAInfo_IsReadyValid 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_info.c:OTAInfo_IsSimulateValid",
+      "type": "function",
+      "name": "OTAInfo_IsSimulateValid",
+      "filePath": "Common/ota_info.c",
+      "lineRange": [
+        39,
+        54
+      ],
+      "summary": "判断 OTAInfo_IsSimulateValid 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "数据校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_info.c:OTAInfo_Load",
+      "type": "function",
+      "name": "OTAInfo_Load",
+      "filePath": "Common/ota_info.c",
+      "lineRange": [
+        56,
+        70
+      ],
+      "summary": "加载 OTAInfo_Load 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_info.c:OTAInfo_LoadSimulate",
+      "type": "function",
+      "name": "OTAInfo_LoadSimulate",
+      "filePath": "Common/ota_info.c",
+      "lineRange": [
+        72,
+        86
+      ],
+      "summary": "加载 OTAInfo_LoadSimulate 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_info.c:OTAInfo_SaveReady",
+      "type": "function",
+      "name": "OTAInfo_SaveReady",
+      "filePath": "Common/ota_info.c",
+      "lineRange": [
+        88,
+        115
+      ],
+      "summary": "保存 OTAInfo_SaveReady 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_info.c:OTAInfo_SaveSimulate",
+      "type": "function",
+      "name": "OTAInfo_SaveSimulate",
+      "filePath": "Common/ota_info.c",
+      "lineRange": [
+        117,
+        144
+      ],
+      "summary": "保存 OTAInfo_SaveSimulate 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Common/ota_info.c:OTAInfo_Invalidate",
+      "type": "function",
+      "name": "OTAInfo_Invalidate",
+      "filePath": "Common/ota_info.c",
+      "lineRange": [
+        146,
+        150
+      ],
+      "summary": "实现 OTAInfo_Invalidate 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/ota_info.h",
+      "type": "file",
+      "name": "ota_info.h",
+      "filePath": "Common/ota_info.h",
+      "summary": "定义 OTA 待升级记录结构及加载、保存和失效接口。",
+      "tags": [
+        "ota",
+        "持久化",
+        "完整性校验"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Update",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Calculate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Calculate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "file:Common/crc16.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Transform",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Update",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Final",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Final",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_ToHex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_ToHex",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_IsHexString",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_IsHexString",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "file:Common/md5.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_CalcCrc16",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_IsValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_IsValid",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_ReadSlot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_LoadBest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_Load",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_Load",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_GetCurrentVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_GetCurrentVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_WriteSlot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_SaveRunningVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_SaveRunningVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "file:Common/crc16.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "file:Common/ota_device_info.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_CalcCrc16",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_CalcCrc16",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_IsReadyValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_IsReadyValid",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_IsSimulateValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_IsSimulateValid",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_Load",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_Load",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_LoadSimulate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_LoadSimulate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_SaveReady",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_SaveReady",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_SaveSimulate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_SaveSimulate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_Invalidate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_Invalidate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "file:Common/crc16.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "file:Common/md5.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "file:Common/ota_info.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

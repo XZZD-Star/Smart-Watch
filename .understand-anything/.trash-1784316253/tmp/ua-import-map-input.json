@@ -1,0 +1,623 @@
+{
+    "projectRoot":  "D:\\Qian Start\\Smart Watch\\H743",
+    "files":  [
+                  {
+                      "path":  ".ai/network_action_cnn.h5_c_info.json",
+                      "language":  "json",
+                      "sizeLines":  1123,
+                      "fileCategory":  "config"
+                  },
+                  {
+                      "path":  ".mxproject",
+                      "language":  "unknown",
+                      "sizeLines":  45,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  ".understand-anything/.understandignore",
+                      "language":  "unknown",
+                      "sizeLines":  102,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  ".understand-anything/config.json",
+                      "language":  "json",
+                      "sizeLines":  3,
+                      "fileCategory":  "config"
+                  },
+                  {
+                      "path":  ".understand-anything/fingerprints.json",
+                      "language":  "json",
+                      "sizeLines":  6629,
+                      "fileCategory":  "config"
+                  },
+                  {
+                      "path":  ".understand-anything/knowledge-graph.json",
+                      "language":  "json",
+                      "sizeLines":  13843,
+                      "fileCategory":  "config"
+                  },
+                  {
+                      "path":  ".understand-anything/meta.json",
+                      "language":  "json",
+                      "sizeLines":  5,
+                      "fileCategory":  "config"
+                  },
+                  {
+                      "path":  "说明文档.txt",
+                      "language":  "txt",
+                      "sizeLines":  4,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "Agents.md",
+                      "language":  "markdown",
+                      "sizeLines":  66,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "App/ai/motion_ai.c",
+                      "language":  "c",
+                      "sizeLines":  1222,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/ai/motion_ai.h",
+                      "language":  "c",
+                      "sizeLines":  123,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/cloud/cloud_task.c",
+                      "language":  "c",
+                      "sizeLines":  461,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/cloud/cloud_task.h",
+                      "language":  "c",
+                      "sizeLines":  21,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/lt_screen/lt_screen_keys.h",
+                      "language":  "c",
+                      "sizeLines":  16,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/lt_screen/lt_screen_task.c",
+                      "language":  "c",
+                      "sizeLines":  741,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/lt_screen/lt_screen_task.h",
+                      "language":  "c",
+                      "sizeLines":  36,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_app_events.c",
+                      "language":  "c",
+                      "sizeLines":  210,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_app_events.h",
+                      "language":  "c",
+                      "sizeLines":  43,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_frame.h",
+                      "language":  "c",
+                      "sizeLines":  48,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_input.c",
+                      "language":  "c",
+                      "sizeLines":  178,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_input.h",
+                      "language":  "c",
+                      "sizeLines":  33,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_mode.h",
+                      "language":  "c",
+                      "sizeLines":  39,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_sensor_pipeline.c",
+                      "language":  "c",
+                      "sizeLines":  947,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_sensor_pipeline.h",
+                      "language":  "c",
+                      "sizeLines":  48,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_task.c",
+                      "language":  "c",
+                      "sizeLines":  795,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_task.h",
+                      "language":  "c",
+                      "sizeLines":  15,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_window_test.c",
+                      "language":  "c",
+                      "sizeLines":  154,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/motion/motion_window_test.h",
+                      "language":  "c",
+                      "sizeLines":  23,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/ota/ota_config.h",
+                      "language":  "c",
+                      "sizeLines":  39,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/ota/ota_http.c",
+                      "language":  "c",
+                      "sizeLines":  254,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/ota/ota_http.h",
+                      "language":  "c",
+                      "sizeLines":  40,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/ota/ota_service.c",
+                      "language":  "c",
+                      "sizeLines":  987,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/ota/ota_service.h",
+                      "language":  "c",
+                      "sizeLines":  40,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/rule action/rule_action_recognizer.c",
+                      "language":  "c",
+                      "sizeLines":  1104,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "App/rule action/rule_action_recognizer.h",
+                      "language":  "c",
+                      "sizeLines":  262,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/cloud/MqttKit.c",
+                      "language":  "c",
+                      "sizeLines":  520,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/cloud/MqttKit.h",
+                      "language":  "c",
+                      "sizeLines":  98,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/cloud/onenet.c",
+                      "language":  "c",
+                      "sizeLines":  1415,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/cloud/onenet.h",
+                      "language":  "c",
+                      "sizeLines":  113,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/debug_uart/debug_uart7.c",
+                      "language":  "c",
+                      "sizeLines":  135,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/debug_uart/debug_uart7.h",
+                      "language":  "c",
+                      "sizeLines":  15,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/debug_uart/uart7_role.h",
+                      "language":  "c",
+                      "sizeLines":  48,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/display/lt168b.c",
+                      "language":  "c",
+                      "sizeLines":  436,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/display/lt168b.h",
+                      "language":  "c",
+                      "sizeLines":  36,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/w25q128/w25q128.c",
+                      "language":  "c",
+                      "sizeLines":  500,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/w25q128/w25q128.h",
+                      "language":  "c",
+                      "sizeLines":  85,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/wifi/ESP8266.c",
+                      "language":  "c",
+                      "sizeLines":  869,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "BSP/wifi/ESP8266.h",
+                      "language":  "c",
+                      "sizeLines":  48,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/crc16.c",
+                      "language":  "c",
+                      "sizeLines":  44,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/crc16.h",
+                      "language":  "c",
+                      "sizeLines":  18,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/md5.c",
+                      "language":  "c",
+                      "sizeLines":  241,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/md5.h",
+                      "language":  "c",
+                      "sizeLines":  27,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/ota_device_info.c",
+                      "language":  "c",
+                      "sizeLines":  196,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/ota_device_info.h",
+                      "language":  "c",
+                      "sizeLines":  28,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/ota_info.c",
+                      "language":  "c",
+                      "sizeLines":  150,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/ota_info.h",
+                      "language":  "c",
+                      "sizeLines":  29,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/ota_layout.h",
+                      "language":  "c",
+                      "sizeLines":  74,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/ring_buffer.c",
+                      "language":  "c",
+                      "sizeLines":  125,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Common/ring_buffer.h",
+                      "language":  "c",
+                      "sizeLines":  85,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/bootloader_ota.h",
+                      "language":  "c",
+                      "sizeLines":  18,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/crc.h",
+                      "language":  "c",
+                      "sizeLines":  52,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/dma.h",
+                      "language":  "c",
+                      "sizeLines":  52,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/FreeRTOSConfig.h",
+                      "language":  "c",
+                      "sizeLines":  174,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/gpio.h",
+                      "language":  "c",
+                      "sizeLines":  49,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/internal_flash.h",
+                      "language":  "c",
+                      "sizeLines":  21,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/main.h",
+                      "language":  "c",
+                      "sizeLines":  77,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/RTE_Components.h",
+                      "language":  "c",
+                      "sizeLines":  28,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/stm32h7xx_hal_conf.h",
+                      "language":  "c",
+                      "sizeLines":  514,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/stm32h7xx_it.h",
+                      "language":  "c",
+                      "sizeLines":  75,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/tim.h",
+                      "language":  "c",
+                      "sizeLines":  61,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Inc/usart.h",
+                      "language":  "c",
+                      "sizeLines":  69,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/bootloader_main.c",
+                      "language":  "c",
+                      "sizeLines":  299,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/bootloader_ota.c",
+                      "language":  "c",
+                      "sizeLines":  170,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/crc.c",
+                      "language":  "c",
+                      "sizeLines":  91,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/dma.c",
+                      "language":  "c",
+                      "sizeLines":  64,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/freertos.c",
+                      "language":  "c",
+                      "sizeLines":  211,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/gpio.c",
+                      "language":  "c",
+                      "sizeLines":  68,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/internal_flash.c",
+                      "language":  "c",
+                      "sizeLines":  162,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/main.c",
+                      "language":  "c",
+                      "sizeLines":  298,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/stm32h7xx_hal_msp.c",
+                      "language":  "c",
+                      "sizeLines":  82,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/stm32h7xx_hal_timebase_tim.c",
+                      "language":  "c",
+                      "sizeLines":  122,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/stm32h7xx_it.c",
+                      "language":  "c",
+                      "sizeLines":  473,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/system_stm32h7xx.c",
+                      "language":  "c",
+                      "sizeLines":  556,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/tim.c",
+                      "language":  "c",
+                      "sizeLines":  325,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "Core/Src/usart.c",
+                      "language":  "c",
+                      "sizeLines":  839,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "docs/2026-05-31-H743项目脉络补充.md",
+                      "language":  "markdown",
+                      "sizeLines":  445,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "docs/h743_module_pins.csv",
+                      "language":  "csv",
+                      "sizeLines":  30,
+                      "fileCategory":  "data"
+                  },
+                  {
+                      "path":  "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+                      "language":  "xlsx",
+                      "sizeLines":  0,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "docs/H743资料包/note/参考手册重点部分.md",
+                      "language":  "markdown",
+                      "sizeLines":  456,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "docs/H743资料包/note/快速上手.md",
+                      "language":  "markdown",
+                      "sizeLines":  1049,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+                      "language":  "markdown",
+                      "sizeLines":  303,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+                      "language":  "xlsx",
+                      "sizeLines":  105,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "docs/lt168b_ota_mqtt_change_plan_2026-06-25.md",
+                      "language":  "markdown",
+                      "sizeLines":  178,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "docs/W25Q128_Bootloader_App_第一版最小跑通方案.md",
+                      "language":  "markdown",
+                      "sizeLines":  370,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "LICENSE_X-CUBE-AI.txt",
+                      "language":  "txt",
+                      "sizeLines":  86,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "Master.ioc",
+                      "language":  "ioc",
+                      "sizeLines":  577,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "SYSTEM/delay/delay.c",
+                      "language":  "c",
+                      "sizeLines":  200,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "SYSTEM/delay/delay.h",
+                      "language":  "c",
+                      "sizeLines":  37,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "SYSTEM/readme.txt",
+                      "language":  "txt",
+                      "sizeLines":  20,
+                      "fileCategory":  "docs"
+                  },
+                  {
+                      "path":  "SYSTEM/sys/sys.c",
+                      "language":  "c",
+                      "sizeLines":  236,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "SYSTEM/sys/sys.h",
+                      "language":  "c",
+                      "sizeLines":  59,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "SYSTEM/usart/yuanzi_usart.c",
+                      "language":  "c",
+                      "sizeLines":  196,
+                      "fileCategory":  "code"
+                  },
+                  {
+                      "path":  "SYSTEM/usart/yuanzi_usart.h",
+                      "language":  "c",
+                      "sizeLines":  77,
+                      "fileCategory":  "code"
+                  }
+              ]
+}

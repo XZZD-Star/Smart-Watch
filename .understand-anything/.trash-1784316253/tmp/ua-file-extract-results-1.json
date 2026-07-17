@@ -1,0 +1,2325 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 11,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "App/motion/motion_app_events.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 210,
+      "nonEmptyLines": 177,
+      "functions": [
+        {
+          "name": "MotionEvents_QueueTestConfidence",
+          "startLine": 16,
+          "endLine": 23,
+          "params": [
+            "test_value",
+            "confidence"
+          ]
+        },
+        {
+          "name": "MotionEvents_PeekTestConfidence",
+          "startLine": 25,
+          "endLine": 44,
+          "params": [
+            "test_value",
+            "confidence"
+          ]
+        },
+        {
+          "name": "MotionEvents_ClearTestConfidenceIfCurrent",
+          "startLine": 46,
+          "endLine": 55,
+          "params": [
+            "test_value"
+          ]
+        },
+        {
+          "name": "MotionEvents_EncodeActionKind",
+          "startLine": 57,
+          "endLine": 72,
+          "params": [
+            "test_value"
+          ]
+        },
+        {
+          "name": "MotionEvents_QueueActionKind",
+          "startLine": 74,
+          "endLine": 80,
+          "params": [
+            "action_kind_value"
+          ]
+        },
+        {
+          "name": "MotionEvents_PeekActionKind",
+          "startLine": 82,
+          "endLine": 100,
+          "params": [
+            "action_kind_value"
+          ]
+        },
+        {
+          "name": "MotionEvents_ClearActionKindIfCurrent",
+          "startLine": 102,
+          "endLine": 111,
+          "params": [
+            "action_kind_value"
+          ]
+        },
+        {
+          "name": "MotionEvents_HasPendingCloudPost",
+          "startLine": 113,
+          "endLine": 124,
+          "params": []
+        },
+        {
+          "name": "MotionEvents_RequestTrainingPageRefresh",
+          "startLine": 126,
+          "endLine": 129,
+          "params": []
+        },
+        {
+          "name": "MotionEvents_RequestTrainingPageRefreshByAction",
+          "startLine": 131,
+          "endLine": 138,
+          "params": [
+            "action_label"
+          ]
+        },
+        {
+          "name": "MotionEvents_TakeTrainingPageRefresh",
+          "startLine": 140,
+          "endLine": 143,
+          "params": []
+        },
+        {
+          "name": "MotionEvents_TakeTrainingPageRefreshAction",
+          "startLine": 145,
+          "endLine": 162,
+          "params": [
+            "action_label"
+          ]
+        },
+        {
+          "name": "MotionEvents_PeekTrainingPageRefreshAction",
+          "startLine": 164,
+          "endLine": 167,
+          "params": [
+            "action_label"
+          ]
+        },
+        {
+          "name": "MotionEvents_PeekTrainingPageRefreshDirty",
+          "startLine": 169,
+          "endLine": 190,
+          "params": [
+            "action_label",
+            "generation"
+          ]
+        },
+        {
+          "name": "MotionEvents_ClearTrainingPageRefresh",
+          "startLine": 192,
+          "endLine": 198,
+          "params": []
+        },
+        {
+          "name": "MotionEvents_ClearTrainingPageRefreshIfCurrent",
+          "startLine": 200,
+          "endLine": 210,
+          "params": [
+            "generation"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MotionEvents_QueueTestConfidence",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_PeekTestConfidence",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_ClearTestConfidenceIfCurrent",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_EncodeActionKind",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_QueueActionKind",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_PeekActionKind",
+          "line": 82,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_ClearActionKindIfCurrent",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_HasPendingCloudPost",
+          "line": 113,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_RequestTrainingPageRefresh",
+          "line": 126,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_RequestTrainingPageRefreshByAction",
+          "line": 131,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_TakeTrainingPageRefresh",
+          "line": 140,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_TakeTrainingPageRefreshAction",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_PeekTrainingPageRefreshAction",
+          "line": 164,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_PeekTrainingPageRefreshDirty",
+          "line": 169,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_ClearTrainingPageRefresh",
+          "line": 192,
+          "isDefault": false
+        },
+        {
+          "name": "MotionEvents_ClearTrainingPageRefreshIfCurrent",
+          "line": 200,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MotionEvents_QueueTestConfidence",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 18
+        },
+        {
+          "caller": "MotionEvents_QueueTestConfidence",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 22
+        },
+        {
+          "caller": "MotionEvents_PeekTestConfidence",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 34
+        },
+        {
+          "caller": "MotionEvents_PeekTestConfidence",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MotionEvents_ClearTestConfidenceIfCurrent",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 48
+        },
+        {
+          "caller": "MotionEvents_ClearTestConfidenceIfCurrent",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 54
+        },
+        {
+          "caller": "MotionEvents_EncodeActionKind",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 66
+        },
+        {
+          "caller": "MotionEvents_EncodeActionKind",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 69
+        },
+        {
+          "caller": "MotionEvents_QueueActionKind",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 76
+        },
+        {
+          "caller": "MotionEvents_QueueActionKind",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 79
+        },
+        {
+          "caller": "MotionEvents_PeekActionKind",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 91
+        },
+        {
+          "caller": "MotionEvents_PeekActionKind",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 97
+        },
+        {
+          "caller": "MotionEvents_ClearActionKindIfCurrent",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 104
+        },
+        {
+          "caller": "MotionEvents_ClearActionKindIfCurrent",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 110
+        },
+        {
+          "caller": "MotionEvents_HasPendingCloudPost",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 117
+        },
+        {
+          "caller": "MotionEvents_HasPendingCloudPost",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 121
+        },
+        {
+          "caller": "MotionEvents_RequestTrainingPageRefresh",
+          "callee": "MotionEvents_RequestTrainingPageRefreshByAction",
+          "lineNumber": 128
+        },
+        {
+          "caller": "MotionEvents_RequestTrainingPageRefreshByAction",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 133
+        },
+        {
+          "caller": "MotionEvents_RequestTrainingPageRefreshByAction",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 137
+        },
+        {
+          "caller": "MotionEvents_TakeTrainingPageRefresh",
+          "callee": "MotionEvents_TakeTrainingPageRefreshAction",
+          "lineNumber": 142
+        },
+        {
+          "caller": "MotionEvents_TakeTrainingPageRefreshAction",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 149
+        },
+        {
+          "caller": "MotionEvents_TakeTrainingPageRefreshAction",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 159
+        },
+        {
+          "caller": "MotionEvents_PeekTrainingPageRefreshAction",
+          "callee": "MotionEvents_PeekTrainingPageRefreshDirty",
+          "lineNumber": 166
+        },
+        {
+          "caller": "MotionEvents_PeekTrainingPageRefreshDirty",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 174
+        },
+        {
+          "caller": "MotionEvents_PeekTrainingPageRefreshDirty",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 187
+        },
+        {
+          "caller": "MotionEvents_ClearTrainingPageRefresh",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 194
+        },
+        {
+          "caller": "MotionEvents_ClearTrainingPageRefresh",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 197
+        },
+        {
+          "caller": "MotionEvents_ClearTrainingPageRefreshIfCurrent",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 202
+        },
+        {
+          "caller": "MotionEvents_ClearTrainingPageRefreshIfCurrent",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 209
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 16,
+        "functionCount": 16,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_app_events.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 36,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_input.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 178,
+      "nonEmptyLines": 148,
+      "functions": [
+        {
+          "name": "reset_pose_pipeline",
+          "startLine": 23,
+          "endLine": 31,
+          "params": []
+        },
+        {
+          "name": "Motion_RequestStart",
+          "startLine": 33,
+          "endLine": 65,
+          "params": []
+        },
+        {
+          "name": "Motion_RequestStartFromIsr",
+          "startLine": 67,
+          "endLine": 86,
+          "params": []
+        },
+        {
+          "name": "Motion_RequestStop",
+          "startLine": 88,
+          "endLine": 95,
+          "params": []
+        },
+        {
+          "name": "Motion_RequestClear",
+          "startLine": 97,
+          "endLine": 100,
+          "params": []
+        },
+        {
+          "name": "Motion_TakeRestartRequest",
+          "startLine": 102,
+          "endLine": 115,
+          "params": []
+        },
+        {
+          "name": "Motion_TakeStartFromIsrRequest",
+          "startLine": 117,
+          "endLine": 130,
+          "params": []
+        },
+        {
+          "name": "Motion_TakeUpperCaptureResetRequest",
+          "startLine": 132,
+          "endLine": 145,
+          "params": []
+        },
+        {
+          "name": "Motion_ResetUpperCaptureInput",
+          "startLine": 147,
+          "endLine": 163,
+          "params": []
+        },
+        {
+          "name": "Motion_TakeStopRequest",
+          "startLine": 165,
+          "endLine": 178,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Motion_RequestStart",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "Motion_RequestStartFromIsr",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "Motion_RequestStop",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "Motion_RequestClear",
+          "line": 97,
+          "isDefault": false
+        },
+        {
+          "name": "Motion_TakeRestartRequest",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "Motion_TakeStartFromIsrRequest",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "Motion_TakeUpperCaptureResetRequest",
+          "line": 132,
+          "isDefault": false
+        },
+        {
+          "name": "Motion_ResetUpperCaptureInput",
+          "line": 147,
+          "isDefault": false
+        },
+        {
+          "name": "Motion_TakeStopRequest",
+          "line": 165,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "reset_pose_pipeline",
+          "callee": "__disable_irq",
+          "lineNumber": 25
+        },
+        {
+          "caller": "reset_pose_pipeline",
+          "callee": "MotionSensorPipeline_Reset",
+          "lineNumber": 26
+        },
+        {
+          "caller": "reset_pose_pipeline",
+          "callee": "__enable_irq",
+          "lineNumber": 27
+        },
+        {
+          "caller": "reset_pose_pipeline",
+          "callee": "memset",
+          "lineNumber": 29
+        },
+        {
+          "caller": "reset_pose_pipeline",
+          "callee": "memset",
+          "lineNumber": 30
+        },
+        {
+          "caller": "Motion_RequestStart",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 40
+        },
+        {
+          "caller": "Motion_RequestStart",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 42
+        },
+        {
+          "caller": "Motion_RequestStart",
+          "callee": "MotionWindowTest_RequestRun",
+          "lineNumber": 43
+        },
+        {
+          "caller": "Motion_RequestStart",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 54
+        },
+        {
+          "caller": "Motion_RequestStart",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 56
+        },
+        {
+          "caller": "Motion_RequestStart",
+          "callee": "reset_pose_pipeline",
+          "lineNumber": 60
+        },
+        {
+          "caller": "Motion_RequestStart",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 61
+        },
+        {
+          "caller": "Motion_RequestStart",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 64
+        },
+        {
+          "caller": "Motion_RequestStartFromIsr",
+          "callee": "vTaskNotifyGiveFromISR",
+          "lineNumber": 81
+        },
+        {
+          "caller": "Motion_RequestStartFromIsr",
+          "callee": "portYIELD_FROM_ISR",
+          "lineNumber": 84
+        },
+        {
+          "caller": "Motion_RequestStop",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 90
+        },
+        {
+          "caller": "Motion_RequestStop",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 94
+        },
+        {
+          "caller": "Motion_RequestClear",
+          "callee": "OneNet_ClearFallAlarm",
+          "lineNumber": 99
+        },
+        {
+          "caller": "Motion_TakeRestartRequest",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 106
+        },
+        {
+          "caller": "Motion_TakeRestartRequest",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 112
+        },
+        {
+          "caller": "Motion_TakeStartFromIsrRequest",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 121
+        },
+        {
+          "caller": "Motion_TakeStartFromIsrRequest",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 127
+        },
+        {
+          "caller": "Motion_TakeUpperCaptureResetRequest",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 136
+        },
+        {
+          "caller": "Motion_TakeUpperCaptureResetRequest",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 142
+        },
+        {
+          "caller": "Motion_ResetUpperCaptureInput",
+          "callee": "__get_PRIMASK",
+          "lineNumber": 149
+        },
+        {
+          "caller": "Motion_ResetUpperCaptureInput",
+          "callee": "__disable_irq",
+          "lineNumber": 151
+        },
+        {
+          "caller": "Motion_ResetUpperCaptureInput",
+          "callee": "HAL_UART_DMAStop",
+          "lineNumber": 152
+        },
+        {
+          "caller": "Motion_ResetUpperCaptureInput",
+          "callee": "__HAL_UART_CLEAR_IDLEFLAG",
+          "lineNumber": 153
+        },
+        {
+          "caller": "Motion_ResetUpperCaptureInput",
+          "callee": "MotionSensorPipeline_ResetUpperCapture",
+          "lineNumber": 154
+        },
+        {
+          "caller": "Motion_ResetUpperCaptureInput",
+          "callee": "memset",
+          "lineNumber": 155
+        },
+        {
+          "caller": "Motion_ResetUpperCaptureInput",
+          "callee": "HAL_UARTEx_ReceiveToIdle_DMA",
+          "lineNumber": 157
+        },
+        {
+          "caller": "Motion_ResetUpperCaptureInput",
+          "callee": "__enable_irq",
+          "lineNumber": 161
+        },
+        {
+          "caller": "Motion_TakeStopRequest",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 169
+        },
+        {
+          "caller": "Motion_TakeStopRequest",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 175
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 9,
+        "functionCount": 10,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_input.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 28,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_mode.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 32,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_sensor_pipeline.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 947,
+      "nonEmptyLines": 831,
+      "functions": [
+        {
+          "name": "motion_absf",
+          "startLine": 142,
+          "endLine": 145,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "parse_u32_token",
+          "startLine": 147,
+          "endLine": 167,
+          "params": [
+            "token",
+            "out"
+          ]
+        },
+        {
+          "name": "parse_i32_token",
+          "startLine": 169,
+          "endLine": 189,
+          "params": [
+            "token",
+            "out"
+          ]
+        },
+        {
+          "name": "parse_float_token",
+          "startLine": 191,
+          "endLine": 211,
+          "params": [
+            "token",
+            "out"
+          ]
+        },
+        {
+          "name": "abs_diff_u64",
+          "startLine": 213,
+          "endLine": 216,
+          "params": [
+            "a",
+            "b"
+          ]
+        },
+        {
+          "name": "get_ts_us",
+          "startLine": 218,
+          "endLine": 245,
+          "params": []
+        },
+        {
+          "name": "parse_pose_frame",
+          "startLine": 247,
+          "endLine": 387,
+          "params": [
+            "buf",
+            "len",
+            "default_sensor_id",
+            "ts_us",
+            "out"
+          ]
+        },
+        {
+          "name": "update_seq_stats",
+          "startLine": 389,
+          "endLine": 428,
+          "params": [
+            "sensor_id",
+            "seq"
+          ]
+        },
+        {
+          "name": "try_emit_fused",
+          "startLine": 430,
+          "endLine": 508,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_StorePacketFromIsr",
+          "startLine": 510,
+          "endLine": 542,
+          "params": [
+            "sensor_id",
+            "buf",
+            "len"
+          ]
+        },
+        {
+          "name": "MotionSensorPipeline_TakeFusedFrame",
+          "startLine": 544,
+          "endLine": 564,
+          "params": [
+            "frame"
+          ]
+        },
+        {
+          "name": "take_pending_pose_packet",
+          "startLine": 566,
+          "endLine": 591,
+          "params": [
+            "packet",
+            "buf",
+            "len",
+            "ts_us"
+          ]
+        },
+        {
+          "name": "process_pose_packet",
+          "startLine": 593,
+          "endLine": 649,
+          "params": [
+            "buf",
+            "len",
+            "default_sensor_id",
+            "ts_us"
+          ]
+        },
+        {
+          "name": "Motion_ProcessPendingPosePackets",
+          "startLine": 651,
+          "endLine": 672,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_RequestCalibration",
+          "startLine": 678,
+          "endLine": 698,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_RequestUpperCalibration",
+          "startLine": 700,
+          "endLine": 703,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_CalibrationTickFromIsr",
+          "startLine": 705,
+          "endLine": 768,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_IsUpperCalibrationActive",
+          "startLine": 770,
+          "endLine": 773,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_IsCalibrationActive",
+          "startLine": 775,
+          "endLine": 778,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_IsUpperCalibrationDone",
+          "startLine": 780,
+          "endLine": 783,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_IsCalibrationDone",
+          "startLine": 785,
+          "endLine": 788,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_TakeCalibrationReport",
+          "startLine": 790,
+          "endLine": 825,
+          "params": [
+            "out_fore_yaw",
+            "out_fore_pitch",
+            "out_fore_roll",
+            "out_upper_yaw",
+            "out_upper_pitch",
+            "out_upper_roll"
+          ]
+        },
+        {
+          "name": "MotionSensorPipeline_TakeUpperCalibrationReport",
+          "startLine": 827,
+          "endLine": 855,
+          "params": [
+            "out_yaw",
+            "out_pitch",
+            "out_roll"
+          ]
+        },
+        {
+          "name": "MotionSensorPipeline_SetUpperOnly",
+          "startLine": 862,
+          "endLine": 875,
+          "params": [
+            "enable"
+          ]
+        },
+        {
+          "name": "MotionSensorPipeline_ResetUpperCapture",
+          "startLine": 877,
+          "endLine": 900,
+          "params": []
+        },
+        {
+          "name": "MotionSensorPipeline_Reset",
+          "startLine": 902,
+          "endLine": 947,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MotionSensorPipeline_StorePacketFromIsr",
+          "line": 510,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_TakeFusedFrame",
+          "line": 544,
+          "isDefault": false
+        },
+        {
+          "name": "Motion_ProcessPendingPosePackets",
+          "line": 651,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_RequestCalibration",
+          "line": 678,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_RequestUpperCalibration",
+          "line": 700,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_CalibrationTickFromIsr",
+          "line": 705,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_IsUpperCalibrationActive",
+          "line": 770,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_IsCalibrationActive",
+          "line": 775,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_IsUpperCalibrationDone",
+          "line": 780,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_IsCalibrationDone",
+          "line": 785,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_TakeCalibrationReport",
+          "line": 790,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_TakeUpperCalibrationReport",
+          "line": 827,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_SetUpperOnly",
+          "line": 862,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_ResetUpperCapture",
+          "line": 877,
+          "isDefault": false
+        },
+        {
+          "name": "MotionSensorPipeline_Reset",
+          "line": 902,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parse_u32_token",
+          "callee": "trim_spaces",
+          "lineNumber": 152
+        },
+        {
+          "caller": "parse_u32_token",
+          "callee": "strtoul",
+          "lineNumber": 158
+        },
+        {
+          "caller": "parse_u32_token",
+          "callee": "trim_spaces",
+          "lineNumber": 159
+        },
+        {
+          "caller": "parse_i32_token",
+          "callee": "trim_spaces",
+          "lineNumber": 174
+        },
+        {
+          "caller": "parse_i32_token",
+          "callee": "strtol",
+          "lineNumber": 180
+        },
+        {
+          "caller": "parse_i32_token",
+          "callee": "trim_spaces",
+          "lineNumber": 181
+        },
+        {
+          "caller": "parse_float_token",
+          "callee": "trim_spaces",
+          "lineNumber": 196
+        },
+        {
+          "caller": "parse_float_token",
+          "callee": "strtof",
+          "lineNumber": 202
+        },
+        {
+          "caller": "parse_float_token",
+          "callee": "trim_spaces",
+          "lineNumber": 203
+        },
+        {
+          "caller": "get_ts_us",
+          "callee": "HAL_RCC_GetSysClockFreq",
+          "lineNumber": 227
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "strchr",
+          "lineNumber": 307
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "trim_spaces",
+          "lineNumber": 312
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "trim_spaces",
+          "lineNumber": 317
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_u32_token",
+          "lineNumber": 329
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_u32_token",
+          "lineNumber": 334
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_float_token",
+          "lineNumber": 338
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_float_token",
+          "lineNumber": 339
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_float_token",
+          "lineNumber": 340
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_i32_token",
+          "lineNumber": 344
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_i32_token",
+          "lineNumber": 345
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_i32_token",
+          "lineNumber": 346
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_i32_token",
+          "lineNumber": 347
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_u32_token",
+          "lineNumber": 352
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_u32_token",
+          "lineNumber": 353
+        },
+        {
+          "caller": "parse_pose_frame",
+          "callee": "parse_u32_token",
+          "lineNumber": 358
+        },
+        {
+          "caller": "try_emit_fused",
+          "callee": "abs_diff_u64",
+          "lineNumber": 468
+        },
+        {
+          "caller": "MotionSensorPipeline_StorePacketFromIsr",
+          "callee": "memcpy",
+          "lineNumber": 532
+        },
+        {
+          "caller": "MotionSensorPipeline_StorePacketFromIsr",
+          "callee": "get_ts_us",
+          "lineNumber": 534
+        },
+        {
+          "caller": "MotionSensorPipeline_StorePacketFromIsr",
+          "callee": "xTaskGetSchedulerState",
+          "lineNumber": 537
+        },
+        {
+          "caller": "MotionSensorPipeline_StorePacketFromIsr",
+          "callee": "vTaskNotifyGiveFromISR",
+          "lineNumber": 539
+        },
+        {
+          "caller": "MotionSensorPipeline_StorePacketFromIsr",
+          "callee": "portYIELD_FROM_ISR",
+          "lineNumber": 540
+        },
+        {
+          "caller": "MotionSensorPipeline_TakeFusedFrame",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 554
+        },
+        {
+          "caller": "MotionSensorPipeline_TakeFusedFrame",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 561
+        },
+        {
+          "caller": "take_pending_pose_packet",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 579
+        },
+        {
+          "caller": "take_pending_pose_packet",
+          "callee": "memcpy",
+          "lineNumber": 584
+        },
+        {
+          "caller": "take_pending_pose_packet",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 588
+        },
+        {
+          "caller": "process_pose_packet",
+          "callee": "parse_pose_frame",
+          "lineNumber": 597
+        },
+        {
+          "caller": "process_pose_packet",
+          "callee": "update_seq_stats",
+          "lineNumber": 609
+        },
+        {
+          "caller": "process_pose_packet",
+          "callee": "try_emit_fused",
+          "lineNumber": 648
+        },
+        {
+          "caller": "Motion_ProcessPendingPosePackets",
+          "callee": "take_pending_pose_packet",
+          "lineNumber": 659
+        },
+        {
+          "caller": "Motion_ProcessPendingPosePackets",
+          "callee": "process_pose_packet",
+          "lineNumber": 661
+        },
+        {
+          "caller": "Motion_ProcessPendingPosePackets",
+          "callee": "take_pending_pose_packet",
+          "lineNumber": 665
+        },
+        {
+          "caller": "Motion_ProcessPendingPosePackets",
+          "callee": "process_pose_packet",
+          "lineNumber": 667
+        },
+        {
+          "caller": "MotionSensorPipeline_RequestCalibration",
+          "callee": "__get_IPSR",
+          "lineNumber": 682
+        },
+        {
+          "caller": "MotionSensorPipeline_RequestCalibration",
+          "callee": "__get_PRIMASK",
+          "lineNumber": 684
+        },
+        {
+          "caller": "MotionSensorPipeline_RequestCalibration",
+          "callee": "__disable_irq",
+          "lineNumber": 685
+        },
+        {
+          "caller": "MotionSensorPipeline_RequestCalibration",
+          "callee": "__get_IPSR",
+          "lineNumber": 694
+        },
+        {
+          "caller": "MotionSensorPipeline_RequestCalibration",
+          "callee": "__enable_irq",
+          "lineNumber": 696
+        },
+        {
+          "caller": "MotionSensorPipeline_RequestUpperCalibration",
+          "callee": "MotionSensorPipeline_RequestCalibration",
+          "lineNumber": 702
+        },
+        {
+          "caller": "MotionSensorPipeline_CalibrationTickFromIsr",
+          "callee": "motion_absf",
+          "lineNumber": 754
+        },
+        {
+          "caller": "MotionSensorPipeline_CalibrationTickFromIsr",
+          "callee": "motion_absf",
+          "lineNumber": 755
+        },
+        {
+          "caller": "MotionSensorPipeline_CalibrationTickFromIsr",
+          "callee": "motion_absf",
+          "lineNumber": 756
+        },
+        {
+          "caller": "MotionSensorPipeline_CalibrationTickFromIsr",
+          "callee": "motion_absf",
+          "lineNumber": 757
+        },
+        {
+          "caller": "MotionSensorPipeline_CalibrationTickFromIsr",
+          "callee": "motion_absf",
+          "lineNumber": 758
+        },
+        {
+          "caller": "MotionSensorPipeline_CalibrationTickFromIsr",
+          "callee": "motion_absf",
+          "lineNumber": 759
+        },
+        {
+          "caller": "MotionSensorPipeline_IsCalibrationActive",
+          "callee": "MotionSensorPipeline_IsUpperCalibrationActive",
+          "lineNumber": 777
+        },
+        {
+          "caller": "MotionSensorPipeline_IsCalibrationDone",
+          "callee": "MotionSensorPipeline_IsUpperCalibrationDone",
+          "lineNumber": 787
+        },
+        {
+          "caller": "MotionSensorPipeline_TakeCalibrationReport",
+          "callee": "__get_PRIMASK",
+          "lineNumber": 806
+        },
+        {
+          "caller": "MotionSensorPipeline_TakeCalibrationReport",
+          "callee": "__disable_irq",
+          "lineNumber": 807
+        },
+        {
+          "caller": "MotionSensorPipeline_TakeCalibrationReport",
+          "callee": "__enable_irq",
+          "lineNumber": 821
+        },
+        {
+          "caller": "MotionSensorPipeline_TakeUpperCalibrationReport",
+          "callee": "__get_PRIMASK",
+          "lineNumber": 839
+        },
+        {
+          "caller": "MotionSensorPipeline_TakeUpperCalibrationReport",
+          "callee": "__disable_irq",
+          "lineNumber": 840
+        },
+        {
+          "caller": "MotionSensorPipeline_TakeUpperCalibrationReport",
+          "callee": "__enable_irq",
+          "lineNumber": 851
+        },
+        {
+          "caller": "MotionSensorPipeline_SetUpperOnly",
+          "callee": "taskENTER_CRITICAL",
+          "lineNumber": 871
+        },
+        {
+          "caller": "MotionSensorPipeline_SetUpperOnly",
+          "callee": "MotionSensorPipeline_Reset",
+          "lineNumber": 873
+        },
+        {
+          "caller": "MotionSensorPipeline_SetUpperOnly",
+          "callee": "taskEXIT_CRITICAL",
+          "lineNumber": 874
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 15,
+        "functionCount": 26,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_sensor_pipeline.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 48,
+      "nonEmptyLines": 41,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_task.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 833,
+      "nonEmptyLines": 726,
+      "functions": [
+        {
+          "name": "task1_consume_ai_restart_request",
+          "startLine": 82,
+          "endLine": 86,
+          "params": []
+        },
+        {
+          "name": "task1_consume_ai_stop_request",
+          "startLine": 88,
+          "endLine": 91,
+          "params": []
+        },
+        {
+          "name": "task1_mode_uses_single_test",
+          "startLine": 93,
+          "endLine": 96,
+          "params": [
+            "mode"
+          ]
+        },
+        {
+          "name": "task1_mode_uses_upper_only",
+          "startLine": 98,
+          "endLine": 102,
+          "params": [
+            "mode"
+          ]
+        },
+        {
+          "name": "task1_try_run_model_window_test",
+          "startLine": 104,
+          "endLine": 112,
+          "params": []
+        },
+        {
+          "name": "task1_encode_action_kind_value",
+          "startLine": 114,
+          "endLine": 117,
+          "params": [
+            "test_value"
+          ]
+        },
+        {
+          "name": "task1_upper_capture_output_reset",
+          "startLine": 119,
+          "endLine": 124,
+          "params": []
+        },
+        {
+          "name": "task1_output_calibration_report_uart4",
+          "startLine": 126,
+          "endLine": 157,
+          "params": [
+            "fore_yaw",
+            "fore_pitch",
+            "fore_roll",
+            "upper_yaw",
+            "upper_pitch",
+            "upper_roll"
+          ]
+        },
+        {
+          "name": "task1_output_state_reset",
+          "startLine": 159,
+          "endLine": 194,
+          "params": [
+            "mode",
+            "fresh_session"
+          ]
+        },
+        {
+          "name": "task1_reset_recognition_state",
+          "startLine": 196,
+          "endLine": 203,
+          "params": []
+        },
+        {
+          "name": "task1_try_take_fused_frame",
+          "startLine": 205,
+          "endLine": 208,
+          "params": [
+            "frame"
+          ]
+        },
+        {
+          "name": "task1_process_fused_frame",
+          "startLine": 210,
+          "endLine": 321,
+          "params": [
+            "frame"
+          ]
+        },
+        {
+          "name": "task1_output_upper_capture_csv",
+          "startLine": 323,
+          "endLine": 352,
+          "params": [
+            "frame"
+          ]
+        },
+        {
+          "name": "task1_handle_local_fall_result",
+          "startLine": 354,
+          "endLine": 366,
+          "params": [
+            "result"
+          ]
+        },
+        {
+          "name": "task1_output_capture_csv",
+          "startLine": 368,
+          "endLine": 389,
+          "params": [
+            "frame"
+          ]
+        },
+        {
+          "name": "task1_output_bio_capture_csv",
+          "startLine": 391,
+          "endLine": 413,
+          "params": [
+            "frame"
+          ]
+        },
+        {
+          "name": "task1_output_uart_debug_once",
+          "startLine": 415,
+          "endLine": 422,
+          "params": []
+        },
+        {
+          "name": "task1_output_recognition_csv",
+          "startLine": 424,
+          "endLine": 485,
+          "params": [
+            "frame",
+            "result"
+          ]
+        },
+        {
+          "name": "task1_output_brief_result",
+          "startLine": 487,
+          "endLine": 543,
+          "params": [
+            "frame",
+            "result"
+          ]
+        },
+        {
+          "name": "task1_output_single_once_event",
+          "startLine": 545,
+          "endLine": 660,
+          "params": [
+            "frame",
+            "result"
+          ]
+        },
+        {
+          "name": "task1_output_rule_debug",
+          "startLine": 662,
+          "endLine": 702,
+          "params": [
+            "frame",
+            "eng"
+          ]
+        },
+        {
+          "name": "task1_bio_value_or_invalid",
+          "startLine": 704,
+          "endLine": 712,
+          "params": [
+            "value",
+            "valid"
+          ]
+        },
+        {
+          "name": "MotionTask_Run",
+          "startLine": 714,
+          "endLine": 833,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MotionTask_Run",
+          "line": 714,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "task1_consume_ai_restart_request",
+          "callee": "Motion_TakeRestartRequest",
+          "lineNumber": 85
+        },
+        {
+          "caller": "task1_consume_ai_stop_request",
+          "callee": "Motion_TakeStopRequest",
+          "lineNumber": 90
+        },
+        {
+          "caller": "task1_try_run_model_window_test",
+          "callee": "MotionWindowTest_RunPending",
+          "lineNumber": 111
+        },
+        {
+          "caller": "task1_encode_action_kind_value",
+          "callee": "MotionEvents_EncodeActionKind",
+          "lineNumber": 116
+        },
+        {
+          "caller": "task1_output_calibration_report_uart4",
+          "callee": "snprintf",
+          "lineNumber": 136
+        },
+        {
+          "caller": "task1_output_calibration_report_uart4",
+          "callee": "HAL_UART_Transmit",
+          "lineNumber": 156
+        },
+        {
+          "caller": "task1_output_state_reset",
+          "callee": "MotionAi_GetResult",
+          "lineNumber": 161
+        },
+        {
+          "caller": "task1_output_state_reset",
+          "callee": "task1_upper_capture_output_reset",
+          "lineNumber": 164
+        },
+        {
+          "caller": "task1_output_state_reset",
+          "callee": "task1_output_uart_debug_once",
+          "lineNumber": 174
+        },
+        {
+          "caller": "task1_reset_recognition_state",
+          "callee": "MotionAi_SetSingleTestEnabled",
+          "lineNumber": 199
+        },
+        {
+          "caller": "task1_reset_recognition_state",
+          "callee": "task1_mode_uses_single_test",
+          "lineNumber": 199
+        },
+        {
+          "caller": "task1_reset_recognition_state",
+          "callee": "MotionAi_Reset",
+          "lineNumber": 200
+        },
+        {
+          "caller": "task1_reset_recognition_state",
+          "callee": "RuleEngine_Init",
+          "lineNumber": 201
+        },
+        {
+          "caller": "task1_reset_recognition_state",
+          "callee": "task1_output_state_reset",
+          "lineNumber": 202
+        },
+        {
+          "caller": "task1_try_take_fused_frame",
+          "callee": "MotionSensorPipeline_TakeFusedFrame",
+          "lineNumber": 207
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "MotionAi_SetSingleTestEnabled",
+          "lineNumber": 236
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_mode_uses_single_test",
+          "lineNumber": 236
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "RuleEngine_Init",
+          "lineNumber": 241
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_mode_uses_single_test",
+          "lineNumber": 245
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_mode_uses_single_test",
+          "lineNumber": 246
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "MotionAi_Reset",
+          "lineNumber": 248
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_output_state_reset",
+          "lineNumber": 249
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_output_state_reset",
+          "lineNumber": 253
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "MotionAi_ProcessFusedFrame",
+          "lineNumber": 263
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_handle_local_fall_result",
+          "lineNumber": 264
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_output_single_once_event",
+          "lineNumber": 265
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_output_upper_capture_csv",
+          "lineNumber": 269
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_output_capture_csv",
+          "lineNumber": 273
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_output_bio_capture_csv",
+          "lineNumber": 277
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_output_uart_debug_once",
+          "lineNumber": 281
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "RuleEngine_ProcessRaw",
+          "lineNumber": 303
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_output_rule_debug",
+          "lineNumber": 307
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "MotionAi_ProcessFusedFrame",
+          "lineNumber": 316
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_handle_local_fall_result",
+          "lineNumber": 317
+        },
+        {
+          "caller": "task1_process_fused_frame",
+          "callee": "task1_output_single_once_event",
+          "lineNumber": 318
+        },
+        {
+          "caller": "task1_output_upper_capture_csv",
+          "callee": "printf",
+          "lineNumber": 343
+        },
+        {
+          "caller": "task1_output_upper_capture_csv",
+          "callee": "printf",
+          "lineNumber": 347
+        },
+        {
+          "caller": "task1_handle_local_fall_result",
+          "callee": "OneNet_ActivateFallAlarm",
+          "lineNumber": 364
+        },
+        {
+          "caller": "task1_output_capture_csv",
+          "callee": "printf",
+          "lineNumber": 377
+        },
+        {
+          "caller": "task1_output_capture_csv",
+          "callee": "printf",
+          "lineNumber": 381
+        },
+        {
+          "caller": "task1_output_bio_capture_csv",
+          "callee": "printf",
+          "lineNumber": 400
+        },
+        {
+          "caller": "task1_output_bio_capture_csv",
+          "callee": "printf",
+          "lineNumber": 404
+        },
+        {
+          "caller": "task1_output_uart_debug_once",
+          "callee": "printf",
+          "lineNumber": 419
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "task1_output_single_once_event",
+          "lineNumber": 430
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "printf",
+          "lineNumber": 450
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "printf",
+          "lineNumber": 454
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "MotionAi_StateName",
+          "lineNumber": 456
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 461
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 463
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 465
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "printf",
+          "lineNumber": 477
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 478
+        },
+        {
+          "caller": "task1_output_recognition_csv",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 480
+        },
+        {
+          "caller": "task1_output_brief_result",
+          "callee": "task1_bio_value_or_invalid",
+          "lineNumber": 501
+        },
+        {
+          "caller": "task1_output_brief_result",
+          "callee": "task1_bio_value_or_invalid",
+          "lineNumber": 504
+        },
+        {
+          "caller": "task1_output_brief_result",
+          "callee": "task1_bio_value_or_invalid",
+          "lineNumber": 507
+        },
+        {
+          "caller": "task1_output_brief_result",
+          "callee": "task1_bio_value_or_invalid",
+          "lineNumber": 510
+        },
+        {
+          "caller": "task1_output_brief_result",
+          "callee": "printf",
+          "lineNumber": 517
+        },
+        {
+          "caller": "task1_output_brief_result",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 524
+        },
+        {
+          "caller": "task1_output_brief_result",
+          "callee": "printf",
+          "lineNumber": 532
+        },
+        {
+          "caller": "task1_output_brief_result",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 539
+        },
+        {
+          "caller": "task1_output_brief_result",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 540
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "printf",
+          "lineNumber": 566
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "printf",
+          "lineNumber": 571
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "printf",
+          "lineNumber": 576
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "printf",
+          "lineNumber": 584
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "printf",
+          "lineNumber": 595
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 602
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "OneNet_TakeLastValidTestValue",
+          "lineNumber": 605
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "MotionEvents_QueueTestConfidence",
+          "lineNumber": 608
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "task1_encode_action_kind_value",
+          "lineNumber": 610
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "MotionEvents_QueueActionKind",
+          "lineNumber": 612
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "Debug_Printf",
+          "lineNumber": 614
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "Debug_Printf",
+          "lineNumber": 617
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 619
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "MotionEvents_QueueActionKind",
+          "lineNumber": 624
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "Debug_Printf",
+          "lineNumber": 626
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "MotionEvents_RequestTrainingPageRefreshByAction",
+          "lineNumber": 640
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "OneNet_UpdateTrainDisplayByAction",
+          "lineNumber": 642
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "Debug_Printf",
+          "lineNumber": 646
+        },
+        {
+          "caller": "task1_output_single_once_event",
+          "callee": "MotionAi_LabelName",
+          "lineNumber": 647
+        },
+        {
+          "caller": "task1_output_rule_debug",
+          "callee": "printf",
+          "lineNumber": 676
+        },
+        {
+          "caller": "task1_output_rule_debug",
+          "callee": "RuleEngine_GetResult",
+          "lineNumber": 685
+        },
+        {
+          "caller": "task1_output_rule_debug",
+          "callee": "Rule_ActionName",
+          "lineNumber": 690
+        },
+        {
+          "caller": "task1_output_rule_debug",
+          "callee": "printf",
+          "lineNumber": 691
+        },
+        {
+          "caller": "task1_output_rule_debug",
+          "callee": "printf",
+          "lineNumber": 698
+        },
+        {
+          "caller": "task1_output_rule_debug",
+          "callee": "Rule_StateName",
+          "lineNumber": 700
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "osKernelGetTickCount",
+          "lineNumber": 717
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "MotionAi_Init",
+          "lineNumber": 719
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "MotionWindowTest_Init",
+          "lineNumber": 720
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "RuleEngine_Init",
+          "lineNumber": 721
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "MotionAi_SetSingleTestEnabled",
+          "lineNumber": 722
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_mode_uses_single_test",
+          "lineNumber": 722
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "MotionSensorPipeline_SetUpperOnly",
+          "lineNumber": 723
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_mode_uses_upper_only",
+          "lineNumber": 723
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_output_state_reset",
+          "lineNumber": 724
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "Motion_TakeUpperCaptureResetRequest",
+          "lineNumber": 737
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "Motion_ResetUpperCaptureInput",
+          "lineNumber": 739
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_upper_capture_output_reset",
+          "lineNumber": 740
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "Motion_TakeStartFromIsrRequest",
+          "lineNumber": 744
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "Motion_RequestStart",
+          "lineNumber": 746
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "MotionSensorPipeline_SetUpperOnly",
+          "lineNumber": 749
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_mode_uses_upper_only",
+          "lineNumber": 749
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "Motion_ProcessPendingPosePackets",
+          "lineNumber": 750
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "MotionSensorPipeline_TakeCalibrationReport",
+          "lineNumber": 751
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_output_calibration_report_uart4",
+          "lineNumber": 759
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_consume_ai_stop_request",
+          "lineNumber": 768
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_reset_recognition_state",
+          "lineNumber": 771
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_consume_ai_restart_request",
+          "lineNumber": 776
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_reset_recognition_state",
+          "lineNumber": 778
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "OneNet_IsFallAlarmActive",
+          "lineNumber": 783
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_reset_recognition_state",
+          "lineNumber": 787
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "osKernelGetTickCount",
+          "lineNumber": 789
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_try_take_fused_frame",
+          "lineNumber": 794
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "osKernelGetTickCount",
+          "lineNumber": 798
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "printf",
+          "lineNumber": 801
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "ulTaskNotifyTake",
+          "lineNumber": 806
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "pdMS_TO_TICKS",
+          "lineNumber": 806
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_reset_recognition_state",
+          "lineNumber": 812
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_try_run_model_window_test",
+          "lineNumber": 816
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_try_take_fused_frame",
+          "lineNumber": 822
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "task1_process_fused_frame",
+          "lineNumber": 824
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "ulTaskNotifyTake",
+          "lineNumber": 830
+        },
+        {
+          "caller": "MotionTask_Run",
+          "callee": "pdMS_TO_TICKS",
+          "lineNumber": 830
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 23,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_task.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 11,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_window_test.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 154,
+      "nonEmptyLines": 133,
+      "functions": [
+        {
+          "name": "MotionWindowTest_Init",
+          "startLine": 99,
+          "endLine": 102,
+          "params": []
+        },
+        {
+          "name": "MotionWindowTest_Reset",
+          "startLine": 104,
+          "endLine": 107,
+          "params": []
+        },
+        {
+          "name": "MotionWindowTest_RequestRun",
+          "startLine": 109,
+          "endLine": 112,
+          "params": []
+        },
+        {
+          "name": "MotionWindowTest_RunPending",
+          "startLine": 114,
+          "endLine": 126,
+          "params": []
+        },
+        {
+          "name": "motion_window_test_try_consume_request",
+          "startLine": 128,
+          "endLine": 142,
+          "params": []
+        },
+        {
+          "name": "motion_window_test_print_output",
+          "startLine": 144,
+          "endLine": 154,
+          "params": [
+            "output"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MotionWindowTest_Init",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "MotionWindowTest_Reset",
+          "line": 104,
+          "isDefault": false
+        },
+        {
+          "name": "MotionWindowTest_RequestRun",
+          "line": 109,
+          "isDefault": false
+        },
+        {
+          "name": "MotionWindowTest_RunPending",
+          "line": 114,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MotionWindowTest_Init",
+          "callee": "MotionWindowTest_Reset",
+          "lineNumber": 101
+        },
+        {
+          "caller": "MotionWindowTest_RunPending",
+          "callee": "motion_window_test_try_consume_request",
+          "lineNumber": 118
+        },
+        {
+          "caller": "MotionWindowTest_RunPending",
+          "callee": "AppXCubeAI_Run",
+          "lineNumber": 123
+        },
+        {
+          "caller": "MotionWindowTest_RunPending",
+          "callee": "motion_window_test_print_output",
+          "lineNumber": 124
+        },
+        {
+          "caller": "motion_window_test_try_consume_request",
+          "callee": "__get_PRIMASK",
+          "lineNumber": 130
+        },
+        {
+          "caller": "motion_window_test_try_consume_request",
+          "callee": "__disable_irq",
+          "lineNumber": 133
+        },
+        {
+          "caller": "motion_window_test_try_consume_request",
+          "callee": "__enable_irq",
+          "lineNumber": 138
+        },
+        {
+          "caller": "motion_window_test_print_output",
+          "callee": "printf",
+          "lineNumber": 147
+        },
+        {
+          "caller": "motion_window_test_print_output",
+          "callee": "printf",
+          "lineNumber": 148
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/motion/motion_window_test.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 18,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

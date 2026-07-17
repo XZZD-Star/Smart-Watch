@@ -1,0 +1,11 @@
+{
+  "nodes": [
+    {"id":"file:BSP/debug_uart/debug_uart7.c","type":"file","name":"debug_uart7.c","filePath":"BSP/debug_uart/debug_uart7.c","summary":"提供格式化调试输出及 ESP8266、生理数据日志接口；当 UART7 未配置为调试角色时编译为空实现。","tags":["调试日志","uart","条件编译","bsp"],"complexity":"moderate","languageNotes":"使用 APP_UART7_IS_DEBUG 条件编译实现零调用侧改动的启用与禁用。"},
+    {"id":"file:BSP/debug_uart/debug_uart7.h","type":"file","name":"debug_uart7.h","filePath":"BSP/debug_uart/debug_uart7.h","summary":"声明 UART7 格式化日志、ESP8266 收发日志和生理数据摘要日志接口。","tags":["接口声明","调试日志","uart"],"complexity":"simple"},
+    {"id":"file:BSP/debug_uart/uart7_role.h","type":"file","name":"uart7_role.h","filePath":"BSP/debug_uart/uart7_role.h","summary":"定义 UART7 在调试与串口屏之间的角色选择，以及屏幕测试模式和隔离测试的编译期配置与合法性检查。","tags":["编译配置","uart","屏幕模式","角色选择"],"complexity":"simple"}
+  ],
+  "edges": [
+    {"source":"file:BSP/debug_uart/debug_uart7.c","target":"file:BSP/debug_uart/debug_uart7.h","type":"imports","direction":"forward","weight":0.7},
+    {"source":"file:BSP/debug_uart/debug_uart7.c","target":"file:BSP/debug_uart/uart7_role.h","type":"imports","direction":"forward","weight":0.7}
+  ]
+}

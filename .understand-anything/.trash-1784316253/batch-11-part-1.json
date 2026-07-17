@@ -1,0 +1,1373 @@
+{
+  "nodes": [
+    {
+      "id": "config:.ai/network_action_cnn.h5_c_info.json",
+      "type": "config",
+      "name": "network_action_cnn.h5_c_info.json",
+      "filePath": ".ai/network_action_cnn.h5_c_info.json",
+      "summary": "记录动作识别 CNN 的 X-CUBE-AI 转换信息、张量规格、算子与内存占用，供生成代码和部署诊断使用。",
+      "tags": [
+        "configuration",
+        "x-cube-ai",
+        "neural-network",
+        "metadata"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.mxproject",
+      "type": "file",
+      "name": ".mxproject",
+      "filePath": ".mxproject",
+      "summary": "保存 STM32CubeMX 工程的源目录、生成目录和工具链元数据，用于工程代码生成。",
+      "tags": [
+        "configuration",
+        "cubemx",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "定义知识图谱扫描时排除的第三方库、生成目录和构建产物，控制分析边界。",
+      "tags": [
+        "configuration",
+        "analysis-scope",
+        "ignore-rules"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:App/ai/motion_ai.c",
+      "type": "file",
+      "name": "motion_ai.c",
+      "filePath": "App/ai/motion_ai.c",
+      "summary": "实现动作识别 AI 推理流水线，包括窗口预处理、基线与能量计算、跌倒检测、概率平滑及演示覆盖。",
+      "tags": [
+        "ai-inference",
+        "motion-recognition",
+        "signal-processing",
+        "x-cube-ai"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:MotionAi_Init",
+      "type": "function",
+      "name": "MotionAi_Init",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        125,
+        129
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（MotionAi_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:MotionAi_Reset",
+      "type": "function",
+      "name": "MotionAi_Reset",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        131,
+        134
+      ],
+      "summary": "复位内部状态并清理历史数据（MotionAi_Reset）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:MotionAi_SetSingleTestEnabled",
+      "type": "function",
+      "name": "MotionAi_SetSingleTestEnabled",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        136,
+        139
+      ],
+      "summary": "实现该模块的核心处理逻辑（MotionAi_SetSingleTestEnabled）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:MotionAi_SetLocalFallTriggerEnabled",
+      "type": "function",
+      "name": "MotionAi_SetLocalFallTriggerEnabled",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        141,
+        145
+      ],
+      "summary": "实现该模块的核心处理逻辑（MotionAi_SetLocalFallTriggerEnabled）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:MotionAi_IsLocalFallTriggerEnabled",
+      "type": "function",
+      "name": "MotionAi_IsLocalFallTriggerEnabled",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        147,
+        150
+      ],
+      "summary": "实现该模块的核心处理逻辑（MotionAi_IsLocalFallTriggerEnabled）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:MotionAi_SetDemoOverride",
+      "type": "function",
+      "name": "MotionAi_SetDemoOverride",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        152,
+        180
+      ],
+      "summary": "实现该模块的核心处理逻辑（MotionAi_SetDemoOverride）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:MotionAi_ClearDemoOverride",
+      "type": "function",
+      "name": "MotionAi_ClearDemoOverride",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        182,
+        191
+      ],
+      "summary": "复位内部状态并清理历史数据（MotionAi_ClearDemoOverride）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_reset_smoothing_history",
+      "type": "function",
+      "name": "motion_ai_reset_smoothing_history",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        377,
+        390
+      ],
+      "summary": "复位内部状态并清理历史数据（motion_ai_reset_smoothing_history）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_reset_context",
+      "type": "function",
+      "name": "motion_ai_reset_context",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        392,
+        403
+      ],
+      "summary": "复位内部状态并清理历史数据（motion_ai_reset_context）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_reset_cycle_state",
+      "type": "function",
+      "name": "motion_ai_reset_cycle_state",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        405,
+        435
+      ],
+      "summary": "复位内部状态并清理历史数据（motion_ai_reset_cycle_state）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_update_prev_raw",
+      "type": "function",
+      "name": "motion_ai_update_prev_raw",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        447,
+        456
+      ],
+      "summary": "更新运行状态、统计量或推理结果（motion_ai_update_prev_raw）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_compute_gate_motion_energy",
+      "type": "function",
+      "name": "motion_ai_compute_gate_motion_energy",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        458,
+        489
+      ],
+      "summary": "计算业务所需的派生量或校验值（motion_ai_compute_gate_motion_energy）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_compute_frame_delta_energy",
+      "type": "function",
+      "name": "motion_ai_compute_frame_delta_energy",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        491,
+        508
+      ],
+      "summary": "计算业务所需的派生量或校验值（motion_ai_compute_frame_delta_energy）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_update_align_fail",
+      "type": "function",
+      "name": "motion_ai_update_align_fail",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        520,
+        548
+      ],
+      "summary": "更新运行状态、统计量或推理结果（motion_ai_update_align_fail）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_store_baseline_frame",
+      "type": "function",
+      "name": "motion_ai_store_baseline_frame",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        550,
+        582
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_store_baseline_frame）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_finalize_baseline",
+      "type": "function",
+      "name": "motion_ai_finalize_baseline",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        584,
+        611
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_finalize_baseline）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_begin_action_session",
+      "type": "function",
+      "name": "motion_ai_begin_action_session",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        613,
+        622
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_begin_action_session）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_compute_delta",
+      "type": "function",
+      "name": "motion_ai_compute_delta",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        624,
+        634
+      ],
+      "summary": "计算业务所需的派生量或校验值（motion_ai_compute_delta）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_update_motion_energy",
+      "type": "function",
+      "name": "motion_ai_update_motion_energy",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        636,
+        647
+      ],
+      "summary": "更新运行状态、统计量或推理结果（motion_ai_update_motion_energy）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_compute_posture_offset",
+      "type": "function",
+      "name": "motion_ai_compute_posture_offset",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        649,
+        663
+      ],
+      "summary": "计算业务所需的派生量或校验值（motion_ai_compute_posture_offset）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_reset_local_fall_detection",
+      "type": "function",
+      "name": "motion_ai_reset_local_fall_detection",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        665,
+        676
+      ],
+      "summary": "复位内部状态并清理历史数据（motion_ai_reset_local_fall_detection）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_update_local_fall_detection",
+      "type": "function",
+      "name": "motion_ai_update_local_fall_detection",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        687,
+        870
+      ],
+      "summary": "更新运行状态、统计量或推理结果（motion_ai_update_local_fall_detection）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_append_window",
+      "type": "function",
+      "name": "motion_ai_append_window",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        872,
+        886
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_append_window）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_prob_index_to_label",
+      "type": "function",
+      "name": "motion_ai_prob_index_to_label",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        888,
+        899
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_prob_index_to_label）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_action_id_to_label",
+      "type": "function",
+      "name": "motion_ai_action_id_to_label",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        901,
+        912
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_action_id_to_label）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_update_prob_average",
+      "type": "function",
+      "name": "motion_ai_update_prob_average",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        914,
+        940
+      ],
+      "summary": "更新运行状态、统计量或推理结果（motion_ai_update_prob_average）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_update_latest_from_raw",
+      "type": "function",
+      "name": "motion_ai_update_latest_from_raw",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        942,
+        959
+      ],
+      "summary": "更新运行状态、统计量或推理结果（motion_ai_update_latest_from_raw）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_update_top1_from_average",
+      "type": "function",
+      "name": "motion_ai_update_top1_from_average",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        961,
+        986
+      ],
+      "summary": "更新运行状态、统计量或推理结果（motion_ai_update_top1_from_average）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_update_final_label",
+      "type": "function",
+      "name": "motion_ai_update_final_label",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        988,
+        1008
+      ],
+      "summary": "更新运行状态、统计量或推理结果（motion_ai_update_final_label）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_should_apply_demo_override",
+      "type": "function",
+      "name": "motion_ai_should_apply_demo_override",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        1015,
+        1028
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_should_apply_demo_override）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_activate_demo_override_if_needed",
+      "type": "function",
+      "name": "motion_ai_activate_demo_override_if_needed",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        1030,
+        1047
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_activate_demo_override_if_needed）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_apply_demo_override",
+      "type": "function",
+      "name": "motion_ai_apply_demo_override",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        1049,
+        1132
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_apply_demo_override）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_log_demo_probs",
+      "type": "function",
+      "name": "motion_ai_log_demo_probs",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        1134,
+        1151
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_log_demo_probs）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/ai/motion_ai.c:motion_ai_run_inference",
+      "type": "function",
+      "name": "motion_ai_run_inference",
+      "filePath": "App/ai/motion_ai.c",
+      "lineRange": [
+        1153,
+        1222
+      ],
+      "summary": "实现该模块的核心处理逻辑（motion_ai_run_inference）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:App/ai/motion_ai.h",
+      "type": "file",
+      "name": "motion_ai.h",
+      "filePath": "App/ai/motion_ai.h",
+      "summary": "声明动作 AI 的标签、状态、结果结构和对外控制接口，供采集及业务任务调用。",
+      "tags": [
+        "api",
+        "ai-inference",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:App/cloud/cloud_task.c",
+      "type": "file",
+      "name": "cloud_task.c",
+      "filePath": "App/cloud/cloud_task.c",
+      "summary": "实现云端 FreeRTOS 任务，管理 Wi-Fi、MQTT 会话、周期上报、下行处理及 OTA 独占暂停。",
+      "tags": [
+        "cloud-service",
+        "mqtt",
+        "freertos",
+        "ota"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:CloudTask_Run",
+      "type": "function",
+      "name": "CloudTask_Run",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        35,
+        88
+      ],
+      "summary": "实现该模块的核心处理逻辑（CloudTask_Run）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:CloudTask_RequestOtaExclusive",
+      "type": "function",
+      "name": "CloudTask_RequestOtaExclusive",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        90,
+        109
+      ],
+      "summary": "实现该模块的核心处理逻辑（CloudTask_RequestOtaExclusive）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:CloudTask_ReleaseOtaExclusive",
+      "type": "function",
+      "name": "CloudTask_ReleaseOtaExclusive",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        111,
+        114
+      ],
+      "summary": "实现该模块的核心处理逻辑（CloudTask_ReleaseOtaExclusive）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_wait_wifi_init",
+      "type": "function",
+      "name": "cloud_wait_wifi_init",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        124,
+        139
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（cloud_wait_wifi_init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_handle_ota_exclusive_pause",
+      "type": "function",
+      "name": "cloud_handle_ota_exclusive_pause",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        141,
+        164
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（cloud_handle_ota_exclusive_pause）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_check_ota_once",
+      "type": "function",
+      "name": "cloud_check_ota_once",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        171,
+        201
+      ],
+      "summary": "实现该模块的核心处理逻辑（cloud_check_ota_once）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_connect_mqtt",
+      "type": "function",
+      "name": "cloud_connect_mqtt",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        203,
+        239
+      ],
+      "summary": "实现该模块的核心处理逻辑（cloud_connect_mqtt）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_send_subscribe",
+      "type": "function",
+      "name": "cloud_send_subscribe",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        241,
+        253
+      ],
+      "summary": "组织并发送通信数据或业务事件（cloud_send_subscribe）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_restart_session_delay",
+      "type": "function",
+      "name": "cloud_restart_session_delay",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        255,
+        267
+      ],
+      "summary": "实现该模块的核心处理逻辑（cloud_restart_session_delay）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_service_loop",
+      "type": "function",
+      "name": "cloud_service_loop",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        269,
+        311
+      ],
+      "summary": "实现该模块的核心处理逻辑（cloud_service_loop）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_publish_periodic",
+      "type": "function",
+      "name": "cloud_publish_periodic",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        313,
+        328
+      ],
+      "summary": "组织并发送通信数据或业务事件（cloud_publish_periodic）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_post_motion_events",
+      "type": "function",
+      "name": "cloud_post_motion_events",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        330,
+        380
+      ],
+      "summary": "组织并发送通信数据或业务事件（cloud_post_motion_events）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_post_onenet_states",
+      "type": "function",
+      "name": "cloud_post_onenet_states",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        382,
+        411
+      ],
+      "summary": "组织并发送通信数据或业务事件（cloud_post_onenet_states）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_process_downlink",
+      "type": "function",
+      "name": "cloud_process_downlink",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        413,
+        432
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（cloud_process_downlink）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/cloud/cloud_task.c:cloud_has_loop_error",
+      "type": "function",
+      "name": "cloud_has_loop_error",
+      "filePath": "App/cloud/cloud_task.c",
+      "lineRange": [
+        434,
+        461
+      ],
+      "summary": "实现该模块的核心处理逻辑（cloud_has_loop_error）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/cloud/cloud_task.h",
+      "type": "file",
+      "name": "cloud_task.h",
+      "filePath": "App/cloud/cloud_task.h",
+      "summary": "声明云任务入口和 OTA 独占协调接口。",
+      "tags": [
+        "api",
+        "cloud-service",
+        "ota"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_frame.h",
+      "type": "file",
+      "name": "motion_frame.h",
+      "filePath": "App/motion/motion_frame.h",
+      "summary": "定义运动传感器帧的数据结构和时间戳等共享字段，作为规则识别与 AI 推理的输入契约。",
+      "tags": [
+        "data-model",
+        "motion-sensor",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_Reset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_Reset",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetSingleTestEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetSingleTestEnabled",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetLocalFallTriggerEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetLocalFallTriggerEnabled",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_IsLocalFallTriggerEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_IsLocalFallTriggerEnabled",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetDemoOverride",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetDemoOverride",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_ClearDemoOverride",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_ClearDemoOverride",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_reset_smoothing_history",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_reset_context",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_reset_cycle_state",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_prev_raw",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_compute_gate_motion_energy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_compute_frame_delta_energy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_align_fail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_store_baseline_frame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_finalize_baseline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_begin_action_session",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_compute_delta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_motion_energy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_compute_posture_offset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_reset_local_fall_detection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_local_fall_detection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_append_window",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_prob_index_to_label",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_action_id_to_label",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_prob_average",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_latest_from_raw",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_top1_from_average",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_final_label",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_should_apply_demo_override",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_activate_demo_override_if_needed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_apply_demo_override",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_log_demo_probs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_run_inference",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "file:App/ai/motion_ai.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_Run",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_Run",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_RequestOtaExclusive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_RequestOtaExclusive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_ReleaseOtaExclusive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_ReleaseOtaExclusive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_wait_wifi_init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_handle_ota_exclusive_pause",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_check_ota_once",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_connect_mqtt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_send_subscribe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_restart_session_delay",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_service_loop",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_publish_periodic",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_post_motion_events",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_post_onenet_states",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_process_downlink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_has_loop_error",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "file:App/cloud/cloud_task.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

@@ -1,0 +1,1577 @@
+{
+  "nodes": [
+    {
+      "id": "file:App/rule action/rule_action_recognizer.c",
+      "type": "file",
+      "name": "rule_action_recognizer.c",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "summary": "实现基于规则的动作识别器，完成基线锁定、预触发缓存、会话采样、特征窗口搜索和模板分类。",
+      "tags": [
+        "motion-recognition",
+        "rule-engine",
+        "signal-processing"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:RuleConfig_LoadDefault",
+      "type": "function",
+      "name": "RuleConfig_LoadDefault",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        145,
+        173
+      ],
+      "summary": "实现该模块的核心处理逻辑（RuleConfig_LoadDefault）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:RuleEngine_Init",
+      "type": "function",
+      "name": "RuleEngine_Init",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        175,
+        190
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（RuleEngine_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ResetSession",
+      "type": "function",
+      "name": "RuleEngine_ResetSession",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        192,
+        205
+      ],
+      "summary": "复位内部状态并清理历史数据（RuleEngine_ResetSession）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ProcessRaw",
+      "type": "function",
+      "name": "RuleEngine_ProcessRaw",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        207,
+        421
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（RuleEngine_ProcessRaw）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_normalize_angle_delta",
+      "type": "function",
+      "name": "rule_normalize_angle_delta",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        475,
+        487
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_normalize_angle_delta）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_median_values",
+      "type": "function",
+      "name": "rule_median_values",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        494,
+        533
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_median_values）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_pose_offset",
+      "type": "function",
+      "name": "rule_pose_offset",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        535,
+        548
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_pose_offset）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_reset_result",
+      "type": "function",
+      "name": "rule_reset_result",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        550,
+        561
+      ],
+      "summary": "复位内部状态并清理历史数据（rule_reset_result）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_reset_static_window",
+      "type": "function",
+      "name": "rule_reset_static_window",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        563,
+        576
+      ],
+      "summary": "复位内部状态并清理历史数据（rule_reset_static_window）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_update_pose",
+      "type": "function",
+      "name": "rule_update_pose",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        600,
+        644
+      ],
+      "summary": "更新运行状态、统计量或推理结果（rule_update_pose）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_update_delta",
+      "type": "function",
+      "name": "rule_update_delta",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        646,
+        662
+      ],
+      "summary": "更新运行状态、统计量或推理结果（rule_update_delta）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_lock_baseline",
+      "type": "function",
+      "name": "rule_lock_baseline",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        664,
+        691
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_lock_baseline）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_store_pretrigger",
+      "type": "function",
+      "name": "rule_store_pretrigger",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        693,
+        708
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_store_pretrigger）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_append_session_sample",
+      "type": "function",
+      "name": "rule_append_session_sample",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        710,
+        723
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_append_session_sample）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_begin_recording",
+      "type": "function",
+      "name": "rule_begin_recording",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        725,
+        756
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_begin_recording）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_median_axis",
+      "type": "function",
+      "name": "rule_median_axis",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        765,
+        801
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_median_axis）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_find_top_window",
+      "type": "function",
+      "name": "rule_find_top_window",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        803,
+        871
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_find_top_window）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_side_direction_match",
+      "type": "function",
+      "name": "rule_side_direction_match",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        873,
+        920
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_side_direction_match）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_template_distance",
+      "type": "function",
+      "name": "rule_template_distance",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        922,
+        957
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_template_distance）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_classify_action",
+      "type": "function",
+      "name": "rule_classify_action",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        959,
+        994
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_classify_action）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_copy_result",
+      "type": "function",
+      "name": "rule_copy_result",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        996,
+        1010
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_copy_result）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/rule action/rule_action_recognizer.c:rule_analyze_session",
+      "type": "function",
+      "name": "rule_analyze_session",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "lineRange": [
+        1012,
+        1104
+      ],
+      "summary": "实现该模块的核心处理逻辑（rule_analyze_session）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:App/rule action/rule_action_recognizer.h",
+      "type": "file",
+      "name": "rule_action_recognizer.h",
+      "filePath": "App/rule action/rule_action_recognizer.h",
+      "summary": "定义规则动作识别器的配置、状态机、采样会话和识别结果接口。",
+      "tags": [
+        "api",
+        "rule-engine",
+        "type-definition"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BSP/display/lt168b.c",
+      "type": "file",
+      "name": "lt168b.c",
+      "filePath": "BSP/display/lt168b.c",
+      "summary": "实现 LT168B 串口屏文本写入、触摸帧解析、接收恢复和 Modbus CRC 校验。",
+      "tags": [
+        "bsp",
+        "display",
+        "uart",
+        "protocol-parser"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_Init",
+      "type": "function",
+      "name": "LT168B_Init",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        43,
+        47
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（LT168B_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_SendStr",
+      "type": "function",
+      "name": "LT168B_SendStr",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        49,
+        52
+      ],
+      "summary": "组织并发送通信数据或业务事件（LT168B_SendStr）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_WriteVersionText",
+      "type": "function",
+      "name": "LT168B_WriteVersionText",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        60,
+        106
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（LT168B_WriteVersionText）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_SendStrWithStatus",
+      "type": "function",
+      "name": "LT168B_SendStrWithStatus",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        108,
+        148
+      ],
+      "summary": "组织并发送通信数据或业务事件（LT168B_SendStrWithStatus）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_WriteText",
+      "type": "function",
+      "name": "LT168B_WriteText",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        150,
+        172
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（LT168B_WriteText）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_WriteU16",
+      "type": "function",
+      "name": "LT168B_WriteU16",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        174,
+        182
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（LT168B_WriteU16）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_GotoPage",
+      "type": "function",
+      "name": "LT168B_GotoPage",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        184,
+        187
+      ],
+      "summary": "实现该模块的核心处理逻辑（LT168B_GotoPage）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_DebugPrintLine",
+      "type": "function",
+      "name": "LT168B_DebugPrintLine",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        189,
+        193
+      ],
+      "summary": "实现该模块的核心处理逻辑（LT168B_DebugPrintLine）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_DebugPrintKeyEvent",
+      "type": "function",
+      "name": "LT168B_DebugPrintKeyEvent",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        195,
+        207
+      ],
+      "summary": "实现该模块的核心处理逻辑（LT168B_DebugPrintKeyEvent）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_ParseTouchEvent",
+      "type": "function",
+      "name": "LT168B_ParseTouchEvent",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        209,
+        254
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（LT168B_ParseTouchEvent）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_HandleRxEvent",
+      "type": "function",
+      "name": "LT168B_HandleRxEvent",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        256,
+        296
+      ],
+      "summary": "解析输入并驱动对应状态机或事件处理（LT168B_HandleRxEvent）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_TakeTouchEvent",
+      "type": "function",
+      "name": "LT168B_TakeTouchEvent",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        298,
+        309
+      ],
+      "summary": "实现该模块的核心处理逻辑（LT168B_TakeTouchEvent）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_RestartRx",
+      "type": "function",
+      "name": "LT168B_RestartRx",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        311,
+        321
+      ],
+      "summary": "实现该模块的核心处理逻辑（LT168B_RestartRx）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_CalcCrc16Modbus",
+      "type": "function",
+      "name": "LT168B_CalcCrc16Modbus",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        323,
+        346
+      ],
+      "summary": "计算业务所需的派生量或校验值（LT168B_CalcCrc16Modbus）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_DebugUart2WriteByte",
+      "type": "function",
+      "name": "LT168B_DebugUart2WriteByte",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        348,
+        359
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（LT168B_DebugUart2WriteByte）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_DebugUart2WriteString",
+      "type": "function",
+      "name": "LT168B_DebugUart2WriteString",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        361,
+        373
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（LT168B_DebugUart2WriteString）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_DebugUart2WriteDecU16",
+      "type": "function",
+      "name": "LT168B_DebugUart2WriteDecU16",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        375,
+        397
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（LT168B_DebugUart2WriteDecU16）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/display/lt168b.c:LT168B_DebugPrintRawFrame",
+      "type": "function",
+      "name": "LT168B_DebugPrintRawFrame",
+      "filePath": "BSP/display/lt168b.c",
+      "lineRange": [
+        413,
+        436
+      ],
+      "summary": "实现该模块的核心处理逻辑（LT168B_DebugPrintRawFrame）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BSP/display/lt168b.h",
+      "type": "file",
+      "name": "lt168b.h",
+      "filePath": "BSP/display/lt168b.h",
+      "summary": "声明 LT168B 显示与触摸事件接口。",
+      "tags": [
+        "api",
+        "bsp",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BSP/w25q128/w25q128.c",
+      "type": "file",
+      "name": "w25q128.c",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "summary": "实现 W25Q128 SPI Flash 初始化、读写、扇区擦除、忙等待和写后校验。",
+      "tags": [
+        "bsp",
+        "spi-flash",
+        "storage-driver"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_SwapByte",
+      "type": "function",
+      "name": "W25Q128_SwapByte",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        69,
+        94
+      ],
+      "summary": "实现该模块的核心处理逻辑（W25Q128_SwapByte）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_IsRangeValid",
+      "type": "function",
+      "name": "W25Q128_IsRangeValid",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        103,
+        116
+      ],
+      "summary": "实现该模块的核心处理逻辑（W25Q128_IsRangeValid）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_ReadStatusReg1",
+      "type": "function",
+      "name": "W25Q128_ReadStatusReg1",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        118,
+        128
+      ],
+      "summary": "读取数据并处理边界或设备状态（W25Q128_ReadStatusReg1）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_WaitBusy",
+      "type": "function",
+      "name": "W25Q128_WaitBusy",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        130,
+        143
+      ],
+      "summary": "等待指定设备状态或响应模式，并处理超时（W25Q128_WaitBusy）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_Init",
+      "type": "function",
+      "name": "W25Q128_Init",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        154,
+        186
+      ],
+      "summary": "初始化相关硬件、状态或运行资源（W25Q128_Init）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_ReadID",
+      "type": "function",
+      "name": "W25Q128_ReadID",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        188,
+        214
+      ],
+      "summary": "读取数据并处理边界或设备状态（W25Q128_ReadID）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_ReadIDLoopTest",
+      "type": "function",
+      "name": "W25Q128_ReadIDLoopTest",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        216,
+        229
+      ],
+      "summary": "读取数据并处理边界或设备状态（W25Q128_ReadIDLoopTest）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_SectorErase4KB",
+      "type": "function",
+      "name": "W25Q128_SectorErase4KB",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        231,
+        259
+      ],
+      "summary": "擦除目标存储区域并等待操作完成（W25Q128_SectorErase4KB）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_PageProgram",
+      "type": "function",
+      "name": "W25Q128_PageProgram",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        261,
+        302
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（W25Q128_PageProgram）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_ReadData",
+      "type": "function",
+      "name": "W25Q128_ReadData",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        304,
+        328
+      ],
+      "summary": "读取数据并处理边界或设备状态（W25Q128_ReadData）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_EraseRange",
+      "type": "function",
+      "name": "W25Q128_EraseRange",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        330,
+        361
+      ],
+      "summary": "擦除目标存储区域并等待操作完成（W25Q128_EraseRange）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_WriteData",
+      "type": "function",
+      "name": "W25Q128_WriteData",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        363,
+        395
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（W25Q128_WriteData）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_WriteDataVerified",
+      "type": "function",
+      "name": "W25Q128_WriteDataVerified",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        397,
+        444
+      ],
+      "summary": "写入数据并执行必要的设备时序或校验（W25Q128_WriteDataVerified）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BSP/w25q128/w25q128.c:W25Q128_Test",
+      "type": "function",
+      "name": "W25Q128_Test",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "lineRange": [
+        446,
+        500
+      ],
+      "summary": "实现该模块的核心处理逻辑（W25Q128_Test）。",
+      "tags": [
+        "function",
+        "embedded-firmware",
+        "module-logic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BSP/w25q128/w25q128.h",
+      "type": "file",
+      "name": "w25q128.h",
+      "filePath": "BSP/w25q128/w25q128.h",
+      "summary": "声明 W25Q128 存储驱动接口、容量和状态定义。",
+      "tags": [
+        "api",
+        "bsp",
+        "storage-driver"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleConfig_LoadDefault",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleConfig_LoadDefault",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ResetSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ResetSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ProcessRaw",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ProcessRaw",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_normalize_angle_delta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_median_values",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_pose_offset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_reset_result",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_reset_static_window",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_update_pose",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_update_delta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_lock_baseline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_store_pretrigger",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_append_session_sample",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_begin_recording",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_median_axis",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_find_top_window",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_side_direction_match",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_template_distance",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_classify_action",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_copy_result",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_analyze_session",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "file:App/rule action/rule_action_recognizer.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_SendStr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_SendStr",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteVersionText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteVersionText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_SendStrWithStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteU16",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteU16",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_GotoPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_GotoPage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintKeyEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintKeyEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_ParseTouchEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_ParseTouchEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_HandleRxEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_HandleRxEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_TakeTouchEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_TakeTouchEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_RestartRx",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_CalcCrc16Modbus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugUart2WriteByte",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugUart2WriteString",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugUart2WriteDecU16",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintRawFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "file:BSP/display/lt168b.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_SwapByte",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_IsRangeValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadStatusReg1",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WaitBusy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadID",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadID",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadIDLoopTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadIDLoopTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_SectorErase4KB",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_SectorErase4KB",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_PageProgram",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_PageProgram",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadData",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_EraseRange",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_EraseRange",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WriteData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WriteData",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WriteDataVerified",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WriteDataVerified",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_Test",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_Test",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "file:BSP/w25q128/w25q128.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

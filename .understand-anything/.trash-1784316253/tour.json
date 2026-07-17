@@ -1,0 +1,131 @@
+[
+  {
+    "order": 1,
+    "title": "项目全景",
+    "description": "先通过项目材料说明与架构补充文档建立整体认识：H743 主控固件负责双传感器融合、动作识别、规则分析、云连接和 LT168B 屏幕交互。架构文档进一步标出 FreeRTOS 任务边界和主要业务链路，为后续阅读代码提供路线图。",
+    "nodeIds": [
+      "document:说明文档.txt",
+      "document:docs/2026-05-31-H743项目脉络补充.md"
+    ]
+  },
+  {
+    "order": 2,
+    "title": "启动与调度",
+    "description": "在理解项目目标后，从 main.c 观察 MCU 如何配置 MPU、Cache、时钟和外设，并最终启动 FreeRTOS。freertos.c 随后创建运动、云端和设备业务任务，是从硬件初始化进入并发业务执行的关键枢纽。",
+    "nodeIds": [
+      "file:Core/Src/main.c",
+      "file:Core/Src/freertos.c",
+      "file:Core/Inc/FreeRTOSConfig.h"
+    ],
+    "languageLesson": "FreeRTOS 以任务优先级、堆和中断优先级配置约束运行时行为；在 Cortex-M7 上还要同时关注 Cache、DMA 与中断上下文之间的数据一致性。"
+  },
+  {
+    "order": 3,
+    "title": "传感器融合",
+    "description": "调度启动后，运动输入模块接收启动、停止、清除和中断请求，传感器流水线则解析上下肢数据并校验时间戳与序号。两者共同完成 ISR 到任务的安全交接和双传感器帧融合，为 AI 与规则识别建立统一输入。",
+    "nodeIds": [
+      "file:App/motion/motion_input.c",
+      "file:App/motion/motion_sensor_pipeline.c",
+      "file:App/motion/motion_frame.h"
+    ],
+    "languageLesson": "嵌入式 C 常把 ISR 设计为快速收数与置位，把解析和计算留给任务上下文，以缩短中断占用并减少实时性抖动。"
+  },
+  {
+    "order": 4,
+    "title": "双路识别",
+    "description": "融合帧形成后，motion_ai.c 执行窗口预处理、CNN 推理、概率平滑与跌倒检测，规则识别器则通过基线、预触发缓存和特征模板给出可解释判断。两条路径共享运动帧契约，使学习模型与确定性规则能够互补。",
+    "nodeIds": [
+      "file:App/ai/motion_ai.c",
+      "file:App/rule action/rule_action_recognizer.c",
+      "file:App/rule action/rule_action_recognizer.h"
+    ],
+    "languageLesson": "状态机适合表达采集、触发、会话和分类等阶段；将状态与上下文显式放入结构体，可避免依赖分散的全局标志。"
+  },
+  {
+    "order": 5,
+    "title": "运动业务闭环",
+    "description": "motion_task.c 把融合与双路识别串成持续运行的 FreeRTOS 主任务，并处理跌倒判定、训练结果和调试输出。motion_app_events.c 以轻量事件状态把识别结果交给 UI 与云任务，从而避免业务模块之间直接阻塞调用。",
+    "nodeIds": [
+      "file:App/motion/motion_task.c",
+      "file:App/motion/motion_app_events.c",
+      "file:App/motion/motion_window_test.c"
+    ]
+  },
+  {
+    "order": 6,
+    "title": "中断与串口",
+    "description": "运动任务依赖 MCU 运行时层持续输送数据，usart.c 配置多路 UART、DMA 和接收分发，stm32h7xx_it.c 则承接 DMA、定时器与串口中断。理解这两个文件可以把第 3 步的数据入口追溯到真实硬件事件。",
+    "nodeIds": [
+      "file:Core/Src/usart.c",
+      "file:Core/Src/dma.c",
+      "file:Core/Src/stm32h7xx_it.c"
+    ],
+    "languageLesson": "DMA 能降低 CPU 搬运数据的负担，但缓冲区所有权、中断通知和 Cortex-M7 D-Cache 一致性必须形成明确约定。"
+  },
+  {
+    "order": 7,
+    "title": "屏幕交互",
+    "description": "识别与设备状态需要反馈给用户，LT168B 驱动负责文本写入、触摸帧解析和 CRC 校验，屏幕任务负责页面事件分派。它把训练计数、门锁控制、健康数据和 OTA 演示汇聚到同一交互界面，是业务链路的本地出口。",
+    "nodeIds": [
+      "file:BSP/display/lt168b.c",
+      "file:App/lt_screen/lt_screen_task.c",
+      "file:App/lt_screen/lt_screen_keys.h"
+    ]
+  },
+  {
+    "order": 8,
+    "title": "云端通信",
+    "description": "本地事件的另一出口是 cloud_task.c，它管理 Wi-Fi、MQTT 会话、周期上报和下行处理。ESP8266 驱动提供 AT 指令与 TCP 传输，MqttKit 负责编解码协议报文，onenet.c 再把 OneNET 主题映射到训练、门状态和跌倒告警等业务。",
+    "nodeIds": [
+      "file:App/cloud/cloud_task.c",
+      "file:BSP/wifi/ESP8266.c",
+      "file:BSP/cloud/MqttKit.c",
+      "file:BSP/cloud/onenet.c"
+    ],
+    "languageLesson": "MQTT 将连接管理、报文编解码和业务主题分层；这种分层让底层 TCP 恢复、协议状态与产品属性处理可以分别验证。"
+  },
+  {
+    "order": 9,
+    "title": "在线升级",
+    "description": "OTA 与云任务通过独占机制协调网络资源，ota_service.c 依次完成任务查询、JSON 解析、分段下载、外部 Flash 写入和版本上报。ota_http.c 提供受限的流式 HTTP 解析，W25Q128 驱动则承担擦写、忙等待和写后校验。",
+    "nodeIds": [
+      "file:App/ota/ota_service.c",
+      "file:App/ota/ota_http.c",
+      "file:BSP/w25q128/w25q128.c",
+      "file:Common/ota_layout.h"
+    ]
+  },
+  {
+    "order": 10,
+    "title": "镜像安装",
+    "description": "下载完成后，OTA 元数据通过 CRC16 与 MD5 校验并持久化，Bootloader 再验证镜像、写入内部 Flash 并决定是否跳转应用。这里把应用态下载与启动态安装分开，降低升级中断电或镜像损坏造成设备失效的风险。",
+    "nodeIds": [
+      "file:Common/ota_info.c",
+      "file:Common/ota_device_info.c",
+      "file:Core/Src/bootloader_ota.c",
+      "file:Core/Src/bootloader_main.c"
+    ],
+    "languageLesson": "可靠 OTA 通常结合冗余元数据、单调序号和完整性摘要；Bootloader 只接受可验证状态，避免把半写入镜像当作有效应用。"
+  },
+  {
+    "order": 11,
+    "title": "模型与工程配置",
+    "description": "业务链路之外，CNN 转换信息记录输入输出张量、算子和内存占用，是核对第 4 步模型部署边界的重要依据。Master.ioc 与 .mxproject 则保存 CubeMX 的引脚、时钟、外设和代码生成元数据，解释 MCU 初始化代码从何而来。",
+    "nodeIds": [
+      "config:.ai/network_action_cnn.h5_c_info.json",
+      "file:Master.ioc",
+      "file:.mxproject"
+    ],
+    "languageLesson": "CubeMX 生成区与自定义业务代码应保持清晰边界；重新生成工程前，需要确认 USER CODE 区域和外部模块不会被覆盖。"
+  },
+  {
+    "order": 12,
+    "title": "硬件映射核验",
+    "description": "最后用模块引脚表把时钟、UART、PWM、W25Q128 和 DMA 映射回 MCU 引脚及初始化入口，并结合芯片笔记排查复用冲突。项目协作规范补充了自定义代码的命名、返回值和中文注释约束，使后续修改既符合硬件事实，也保持代码一致性。",
+    "nodeIds": [
+      "table:docs/h743_module_pins.csv:h743_module_pins",
+      "document:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+      "document:Agents.md"
+    ]
+  }
+]

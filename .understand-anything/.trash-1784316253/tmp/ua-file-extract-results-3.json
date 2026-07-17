@@ -1,0 +1,1257 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "App/ota/ota_config.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 30,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/ota/ota_http.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 254,
+      "nonEmptyLines": 212,
+      "functions": [
+        {
+          "name": "OTAHttp_ResetResponse",
+          "startLine": 16,
+          "endLine": 22,
+          "params": [
+            "response"
+          ]
+        },
+        {
+          "name": "OTAHttp_HeaderNameEquals",
+          "startLine": 53,
+          "endLine": 78,
+          "params": [
+            "line",
+            "name",
+            "name_len"
+          ]
+        },
+        {
+          "name": "OTAHttp_ParseHeader",
+          "startLine": 90,
+          "endLine": 133,
+          "params": [
+            "headers",
+            "response"
+          ]
+        },
+        {
+          "name": "OTAHttp_DeliverBody",
+          "startLine": 135,
+          "endLine": 158,
+          "params": [
+            "data",
+            "length",
+            "response",
+            "body_callback",
+            "user"
+          ]
+        },
+        {
+          "name": "OTAHttp_SendRequest",
+          "startLine": 160,
+          "endLine": 254,
+          "params": [
+            "request",
+            "request_length",
+            "response",
+            "body_callback",
+            "user"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "OTAHttp_SendRequest",
+          "line": 160,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "OTAHttp_ResetResponse",
+          "callee": "memset",
+          "lineNumber": 20
+        },
+        {
+          "caller": "OTAHttp_ParseHeader",
+          "callee": "sscanf",
+          "lineNumber": 105
+        },
+        {
+          "caller": "OTAHttp_ParseHeader",
+          "callee": "OTAHttp_SkipSpaces",
+          "lineNumber": 111
+        },
+        {
+          "caller": "OTAHttp_ParseHeader",
+          "callee": "OTAHttp_FindHeaderLine",
+          "lineNumber": 111
+        },
+        {
+          "caller": "OTAHttp_ParseHeader",
+          "callee": "sscanf",
+          "lineNumber": 112
+        },
+        {
+          "caller": "OTAHttp_ParseHeader",
+          "callee": "OTAHttp_SkipSpaces",
+          "lineNumber": 119
+        },
+        {
+          "caller": "OTAHttp_ParseHeader",
+          "callee": "OTAHttp_FindHeaderLine",
+          "lineNumber": 119
+        },
+        {
+          "caller": "OTAHttp_ParseHeader",
+          "callee": "sscanf",
+          "lineNumber": 122
+        },
+        {
+          "caller": "OTAHttp_DeliverBody",
+          "callee": "body_callback",
+          "lineNumber": 151
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "OTAHttp_ResetResponse",
+          "lineNumber": 177
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "memset",
+          "lineNumber": 178
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "ESP8266_SendData",
+          "lineNumber": 180
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "ESP8266_GetIPD",
+          "lineNumber": 189
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "ESP8266_GetLastIPDLength",
+          "lineNumber": 190
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "ESP8266_Clear",
+          "lineNumber": 200
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "memcpy",
+          "lineNumber": 204
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "ESP8266_Clear",
+          "lineNumber": 205
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "memcmp",
+          "lineNumber": 220
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "OTAHttp_ParseHeader",
+          "lineNumber": 223
+        },
+        {
+          "caller": "OTAHttp_SendRequest",
+          "callee": "OTAHttp_DeliverBody",
+          "lineNumber": 235
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/ota/ota_http.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 32,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/ota/ota_service.c",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 987,
+      "nonEmptyLines": 845,
+      "functions": [
+        {
+          "name": "OTAService_CopyJsonBody",
+          "startLine": 44,
+          "endLine": 62,
+          "params": [
+            "data",
+            "length",
+            "user"
+          ]
+        },
+        {
+          "name": "OTAService_WriteFirmwareBody",
+          "startLine": 64,
+          "endLine": 88,
+          "params": [
+            "data",
+            "length",
+            "user"
+          ]
+        },
+        {
+          "name": "OTAService_ParseJsonText",
+          "startLine": 146,
+          "endLine": 195,
+          "params": [
+            "value_start",
+            "out",
+            "out_size"
+          ]
+        },
+        {
+          "name": "OTAService_ParseJsonUint",
+          "startLine": 197,
+          "endLine": 219,
+          "params": [
+            "json",
+            "key",
+            "out"
+          ]
+        },
+        {
+          "name": "OTAService_ToLowerMd5",
+          "startLine": 221,
+          "endLine": 232,
+          "params": [
+            "md5"
+          ]
+        },
+        {
+          "name": "OTAService_ParseOnenetEnvelope",
+          "startLine": 234,
+          "endLine": 244,
+          "params": [
+            "json",
+            "code",
+            "msg",
+            "msg_size"
+          ]
+        },
+        {
+          "name": "OTAService_IsVersionTextValid",
+          "startLine": 246,
+          "endLine": 279,
+          "params": [
+            "version"
+          ]
+        },
+        {
+          "name": "OTAService_LoadRunningVersion",
+          "startLine": 281,
+          "endLine": 315,
+          "params": [
+            "out_version",
+            "version_size"
+          ]
+        },
+        {
+          "name": "OTAService_SyncRunningVersion",
+          "startLine": 317,
+          "endLine": 325,
+          "params": []
+        },
+        {
+          "name": "OTAService_MakeNextSimulateVersion",
+          "startLine": 327,
+          "endLine": 372,
+          "params": [
+            "current_version",
+            "out_version",
+            "version_size"
+          ]
+        },
+        {
+          "name": "OTAService_GetReportVersion",
+          "startLine": 374,
+          "endLine": 385,
+          "params": [
+            "version",
+            "version_size"
+          ]
+        },
+        {
+          "name": "OTAService_ParseTask",
+          "startLine": 387,
+          "endLine": 422,
+          "params": [
+            "json",
+            "task"
+          ]
+        },
+        {
+          "name": "OTAService_PostVersion",
+          "startLine": 424,
+          "endLine": 488,
+          "params": [
+            "version"
+          ]
+        },
+        {
+          "name": "OTAService_PostPendingSimulateVersion",
+          "startLine": 490,
+          "endLine": 517,
+          "params": []
+        },
+        {
+          "name": "OTAService_QueryTaskHttp",
+          "startLine": 519,
+          "endLine": 625,
+          "params": [
+            "task",
+            "current_version"
+          ]
+        },
+        {
+          "name": "OTAService_DownloadRange",
+          "startLine": 627,
+          "endLine": 686,
+          "params": [
+            "task",
+            "offset",
+            "chunk_len",
+            "md5"
+          ]
+        },
+        {
+          "name": "OTAService_DownloadFirmware",
+          "startLine": 688,
+          "endLine": 733,
+          "params": [
+            "task",
+            "out_md5"
+          ]
+        },
+        {
+          "name": "OTAService_SaveReadyInfo",
+          "startLine": 735,
+          "endLine": 751,
+          "params": [
+            "task"
+          ]
+        },
+        {
+          "name": "OTAService_SaveSimulateInfo",
+          "startLine": 753,
+          "endLine": 769,
+          "params": [
+            "task"
+          ]
+        },
+        {
+          "name": "OTAService_QueryTask",
+          "startLine": 771,
+          "endLine": 839,
+          "params": [
+            "out_task",
+            "out_current_version",
+            "current_version_size",
+            "out_latest_version",
+            "latest_version_size"
+          ]
+        },
+        {
+          "name": "OTAService_StartSimulateUpdate",
+          "startLine": 841,
+          "endLine": 862,
+          "params": [
+            "task"
+          ]
+        },
+        {
+          "name": "OTAService_ReportConfiguredVersion",
+          "startLine": 864,
+          "endLine": 881,
+          "params": []
+        },
+        {
+          "name": "OTAService_ReportPendingSimulateVersion",
+          "startLine": 883,
+          "endLine": 897,
+          "params": []
+        },
+        {
+          "name": "OTAService_CheckOnce",
+          "startLine": 899,
+          "endLine": 987,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "OTAService_QueryTask",
+          "line": 771,
+          "isDefault": false
+        },
+        {
+          "name": "OTAService_StartSimulateUpdate",
+          "line": 841,
+          "isDefault": false
+        },
+        {
+          "name": "OTAService_ReportConfiguredVersion",
+          "line": 864,
+          "isDefault": false
+        },
+        {
+          "name": "OTAService_ReportPendingSimulateVersion",
+          "line": 883,
+          "isDefault": false
+        },
+        {
+          "name": "OTAService_CheckOnce",
+          "line": 899,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "OTAService_CopyJsonBody",
+          "callee": "memcpy",
+          "lineNumber": 58
+        },
+        {
+          "caller": "OTAService_WriteFirmwareBody",
+          "callee": "W25Q128_WriteDataVerified",
+          "lineNumber": 78
+        },
+        {
+          "caller": "OTAService_WriteFirmwareBody",
+          "callee": "MD5_Update",
+          "lineNumber": 85
+        },
+        {
+          "caller": "OTAService_ParseJsonText",
+          "callee": "memcpy",
+          "lineNumber": 192
+        },
+        {
+          "caller": "OTAService_ParseJsonUint",
+          "callee": "OTAService_ParseJsonText",
+          "lineNumber": 204
+        },
+        {
+          "caller": "OTAService_ParseJsonUint",
+          "callee": "OTAService_FindJsonValue",
+          "lineNumber": 204
+        },
+        {
+          "caller": "OTAService_ParseJsonUint",
+          "callee": "strtoul",
+          "lineNumber": 211
+        },
+        {
+          "caller": "OTAService_ParseOnenetEnvelope",
+          "callee": "OTAService_ParseJsonUint",
+          "lineNumber": 237
+        },
+        {
+          "caller": "OTAService_ParseOnenetEnvelope",
+          "callee": "OTAService_ParseJsonText",
+          "lineNumber": 238
+        },
+        {
+          "caller": "OTAService_ParseOnenetEnvelope",
+          "callee": "OTAService_FindJsonValue",
+          "lineNumber": 238
+        },
+        {
+          "caller": "OTAService_LoadRunningVersion",
+          "callee": "snprintf",
+          "lineNumber": 292
+        },
+        {
+          "caller": "OTAService_LoadRunningVersion",
+          "callee": "OTADeviceInfo_SaveRunningVersion",
+          "lineNumber": 293
+        },
+        {
+          "caller": "OTAService_LoadRunningVersion",
+          "callee": "OTADeviceInfo_GetCurrentVersion",
+          "lineNumber": 302
+        },
+        {
+          "caller": "OTAService_LoadRunningVersion",
+          "callee": "OTAService_IsVersionTextValid",
+          "lineNumber": 303
+        },
+        {
+          "caller": "OTAService_LoadRunningVersion",
+          "callee": "snprintf",
+          "lineNumber": 308
+        },
+        {
+          "caller": "OTAService_LoadRunningVersion",
+          "callee": "OTADeviceInfo_SaveRunningVersion",
+          "lineNumber": 309
+        },
+        {
+          "caller": "OTAService_SyncRunningVersion",
+          "callee": "OTAService_LoadRunningVersion",
+          "lineNumber": 321
+        },
+        {
+          "caller": "OTAService_SyncRunningVersion",
+          "callee": "Debug_Printf",
+          "lineNumber": 323
+        },
+        {
+          "caller": "OTAService_MakeNextSimulateVersion",
+          "callee": "OTAService_IsVersionTextValid",
+          "lineNumber": 339
+        },
+        {
+          "caller": "OTAService_MakeNextSimulateVersion",
+          "callee": "strtoul",
+          "lineNumber": 344
+        },
+        {
+          "caller": "OTAService_MakeNextSimulateVersion",
+          "callee": "strtoul",
+          "lineNumber": 350
+        },
+        {
+          "caller": "OTAService_MakeNextSimulateVersion",
+          "callee": "snprintf",
+          "lineNumber": 366
+        },
+        {
+          "caller": "OTAService_GetReportVersion",
+          "callee": "OTAService_LoadRunningVersion",
+          "lineNumber": 381
+        },
+        {
+          "caller": "OTAService_GetReportVersion",
+          "callee": "snprintf",
+          "lineNumber": 383
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "memset",
+          "lineNumber": 394
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_ParseJsonText",
+          "lineNumber": 395
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_FindJsonValue",
+          "lineNumber": 395
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_ParseJsonText",
+          "lineNumber": 398
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_FindJsonValue",
+          "lineNumber": 398
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_ParseJsonUint",
+          "lineNumber": 401
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_ParseJsonText",
+          "lineNumber": 402
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_FindJsonValue",
+          "lineNumber": 402
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_ParseJsonUint",
+          "lineNumber": 405
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_ParseJsonUint",
+          "lineNumber": 406
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "OTAService_ToLowerMd5",
+          "lineNumber": 411
+        },
+        {
+          "caller": "OTAService_ParseTask",
+          "callee": "MD5_IsHexString",
+          "lineNumber": 412
+        },
+        {
+          "caller": "OTAService_PostVersion",
+          "callee": "memset",
+          "lineNumber": 436
+        },
+        {
+          "caller": "OTAService_PostVersion",
+          "callee": "snprintf",
+          "lineNumber": 442
+        },
+        {
+          "caller": "OTAService_PostVersion",
+          "callee": "snprintf",
+          "lineNumber": 452
+        },
+        {
+          "caller": "OTAService_PostVersion",
+          "callee": "OTAHttp_SendRequest",
+          "lineNumber": 473
+        },
+        {
+          "caller": "OTAService_PostVersion",
+          "callee": "OTAService_ParseOnenetEnvelope",
+          "lineNumber": 479
+        },
+        {
+          "caller": "OTAService_PostVersion",
+          "callee": "Debug_Printf",
+          "lineNumber": 482
+        },
+        {
+          "caller": "OTAService_PostVersion",
+          "callee": "Debug_Printf",
+          "lineNumber": 486
+        },
+        {
+          "caller": "OTAService_PostPendingSimulateVersion",
+          "callee": "OTAInfo_LoadSimulate",
+          "lineNumber": 495
+        },
+        {
+          "caller": "OTAService_PostPendingSimulateVersion",
+          "callee": "OTAService_PostVersion",
+          "lineNumber": 505
+        },
+        {
+          "caller": "OTAService_PostPendingSimulateVersion",
+          "callee": "OTAInfo_Invalidate",
+          "lineNumber": 510
+        },
+        {
+          "caller": "OTAService_PostPendingSimulateVersion",
+          "callee": "Debug_Printf",
+          "lineNumber": 515
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "memset",
+          "lineNumber": 536
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "snprintf",
+          "lineNumber": 537
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "OTAHttp_SendRequest",
+          "lineNumber": 555
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 561
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "Debug_Printf",
+          "lineNumber": 562
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 568
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "Debug_Printf",
+          "lineNumber": 569
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "OTAService_ParseOnenetEnvelope",
+          "lineNumber": 573
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 575
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "Debug_Printf",
+          "lineNumber": 576
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "Debug_Printf",
+          "lineNumber": 580
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "strcmp",
+          "lineNumber": 582
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "Debug_Printf",
+          "lineNumber": 584
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "snprintf",
+          "lineNumber": 590
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 594
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 595
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 596
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 597
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "Debug_Printf",
+          "lineNumber": 598
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "strcmp",
+          "lineNumber": 602
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 604
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 605
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 606
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "Debug_Printf",
+          "lineNumber": 607
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "OTAService_ParseTask",
+          "lineNumber": 611
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "OTAService_FindJsonObject",
+          "lineNumber": 611
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 613
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "Debug_Printf",
+          "lineNumber": 614
+        },
+        {
+          "caller": "OTAService_QueryTaskHttp",
+          "callee": "Debug_Printf",
+          "lineNumber": 618
+        },
+        {
+          "caller": "OTAService_DownloadRange",
+          "callee": "snprintf",
+          "lineNumber": 638
+        },
+        {
+          "caller": "OTAService_DownloadRange",
+          "callee": "OTAHttp_SendRequest",
+          "lineNumber": 663
+        },
+        {
+          "caller": "OTAService_DownloadFirmware",
+          "callee": "OTAInfo_Invalidate",
+          "lineNumber": 701
+        },
+        {
+          "caller": "OTAService_DownloadFirmware",
+          "callee": "W25Q128_EraseRange",
+          "lineNumber": 707
+        },
+        {
+          "caller": "OTAService_DownloadFirmware",
+          "callee": "Debug_Printf",
+          "lineNumber": 709
+        },
+        {
+          "caller": "OTAService_DownloadFirmware",
+          "callee": "MD5_Init",
+          "lineNumber": 713
+        },
+        {
+          "caller": "OTAService_DownloadFirmware",
+          "callee": "OTAService_DownloadRange",
+          "lineNumber": 719
+        },
+        {
+          "caller": "OTAService_DownloadFirmware",
+          "callee": "Debug_Printf",
+          "lineNumber": 721
+        },
+        {
+          "caller": "OTAService_DownloadFirmware",
+          "callee": "MD5_Final",
+          "lineNumber": 730
+        },
+        {
+          "caller": "OTAService_DownloadFirmware",
+          "callee": "MD5_ToHex",
+          "lineNumber": 731
+        },
+        {
+          "caller": "OTAService_SaveReadyInfo",
+          "callee": "memset",
+          "lineNumber": 739
+        },
+        {
+          "caller": "OTAService_SaveReadyInfo",
+          "callee": "snprintf",
+          "lineNumber": 741
+        },
+        {
+          "caller": "OTAService_SaveReadyInfo",
+          "callee": "snprintf",
+          "lineNumber": 742
+        },
+        {
+          "caller": "OTAService_SaveReadyInfo",
+          "callee": "snprintf",
+          "lineNumber": 743
+        },
+        {
+          "caller": "OTAService_SaveReadyInfo",
+          "callee": "OTAInfo_SaveReady",
+          "lineNumber": 745
+        },
+        {
+          "caller": "OTAService_SaveSimulateInfo",
+          "callee": "memset",
+          "lineNumber": 757
+        },
+        {
+          "caller": "OTAService_SaveSimulateInfo",
+          "callee": "snprintf",
+          "lineNumber": 759
+        },
+        {
+          "caller": "OTAService_SaveSimulateInfo",
+          "callee": "snprintf",
+          "lineNumber": 760
+        },
+        {
+          "caller": "OTAService_SaveSimulateInfo",
+          "callee": "snprintf",
+          "lineNumber": 761
+        },
+        {
+          "caller": "OTAService_SaveSimulateInfo",
+          "callee": "OTAInfo_SaveSimulate",
+          "lineNumber": 763
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "memset",
+          "lineNumber": 791
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "OTAService_LoadRunningVersion",
+          "lineNumber": 792
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "OTAService_MakeNextSimulateVersion",
+          "lineNumber": 798
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "snprintf",
+          "lineNumber": 805
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "snprintf",
+          "lineNumber": 806
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 808
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "Debug_Printf",
+          "lineNumber": 809
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "ESP8266_ConnectTcp",
+          "lineNumber": 810
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 812
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "Debug_Printf",
+          "lineNumber": 813
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "ESP8266_GetLastInitStatus",
+          "lineNumber": 814
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "LT168B_DebugPrintLine",
+          "lineNumber": 818
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "OTAService_QueryTaskHttp",
+          "lineNumber": 819
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "ESP8266_CloseTcp",
+          "lineNumber": 820
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "snprintf",
+          "lineNumber": 824
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "snprintf",
+          "lineNumber": 826
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "Debug_Printf",
+          "lineNumber": 827
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "Debug_Printf",
+          "lineNumber": 831
+        },
+        {
+          "caller": "OTAService_QueryTask",
+          "callee": "Debug_Printf",
+          "lineNumber": 835
+        },
+        {
+          "caller": "OTAService_StartSimulateUpdate",
+          "callee": "OTAService_SaveSimulateInfo",
+          "lineNumber": 850
+        },
+        {
+          "caller": "OTAService_StartSimulateUpdate",
+          "callee": "OTADeviceInfo_SaveRunningVersion",
+          "lineNumber": 856
+        },
+        {
+          "caller": "OTAService_ReportConfiguredVersion",
+          "callee": "OTAService_GetReportVersion",
+          "lineNumber": 869
+        },
+        {
+          "caller": "OTAService_ReportConfiguredVersion",
+          "callee": "ESP8266_ConnectTcp",
+          "lineNumber": 871
+        },
+        {
+          "caller": "OTAService_ReportConfiguredVersion",
+          "callee": "Debug_Printf",
+          "lineNumber": 873
+        },
+        {
+          "caller": "OTAService_ReportConfiguredVersion",
+          "callee": "ESP8266_GetLastInitStatus",
+          "lineNumber": 874
+        },
+        {
+          "caller": "OTAService_ReportConfiguredVersion",
+          "callee": "OTAService_PostVersion",
+          "lineNumber": 878
+        },
+        {
+          "caller": "OTAService_ReportConfiguredVersion",
+          "callee": "ESP8266_CloseTcp",
+          "lineNumber": 879
+        },
+        {
+          "caller": "OTAService_ReportPendingSimulateVersion",
+          "callee": "ESP8266_ConnectTcp",
+          "lineNumber": 887
+        },
+        {
+          "caller": "OTAService_ReportPendingSimulateVersion",
+          "callee": "Debug_Printf",
+          "lineNumber": 889
+        },
+        {
+          "caller": "OTAService_ReportPendingSimulateVersion",
+          "callee": "ESP8266_GetLastInitStatus",
+          "lineNumber": 890
+        },
+        {
+          "caller": "OTAService_ReportPendingSimulateVersion",
+          "callee": "OTAService_PostPendingSimulateVersion",
+          "lineNumber": 894
+        },
+        {
+          "caller": "OTAService_ReportPendingSimulateVersion",
+          "callee": "ESP8266_CloseTcp",
+          "lineNumber": 895
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "OTAService_SyncRunningVersion",
+          "lineNumber": 906
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "OTAService_GetReportVersion",
+          "lineNumber": 907
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "Debug_Printf",
+          "lineNumber": 909
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "ESP8266_ConnectTcp",
+          "lineNumber": 913
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "Debug_Printf",
+          "lineNumber": 915
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "ESP8266_GetLastInitStatus",
+          "lineNumber": 916
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "OTAService_PostPendingSimulateVersion",
+          "lineNumber": 920
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "ESP8266_CloseTcp",
+          "lineNumber": 923
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "ESP8266_CloseTcp",
+          "lineNumber": 928
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "OTAService_PostVersion",
+          "lineNumber": 932
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "OTAService_QueryTaskHttp",
+          "lineNumber": 935
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "OTAService_MakeNextSimulateVersion",
+          "lineNumber": 944
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "ESP8266_CloseTcp",
+          "lineNumber": 948
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "snprintf",
+          "lineNumber": 951
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "OTAService_StartSimulateUpdate",
+          "lineNumber": 953
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "Debug_Printf",
+          "lineNumber": 955
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "ESP8266_CloseTcp",
+          "lineNumber": 956
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "osDelay",
+          "lineNumber": 957
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "NVIC_SystemReset",
+          "lineNumber": 958
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "memset",
+          "lineNumber": 964
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "OTAService_DownloadFirmware",
+          "lineNumber": 965
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "strcmp",
+          "lineNumber": 966
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "Debug_Printf",
+          "lineNumber": 968
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "OTAService_SaveReadyInfo",
+          "lineNumber": 973
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "Debug_Printf",
+          "lineNumber": 975
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "ESP8266_CloseTcp",
+          "lineNumber": 976
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "osDelay",
+          "lineNumber": 977
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "NVIC_SystemReset",
+          "lineNumber": 978
+        },
+        {
+          "caller": "OTAService_CheckOnce",
+          "callee": "ESP8266_CloseTcp",
+          "lineNumber": 985
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 5,
+        "functionCount": 24,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "App/ota/ota_service.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 32,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

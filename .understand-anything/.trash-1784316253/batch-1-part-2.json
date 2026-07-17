@@ -1,0 +1,589 @@
+{
+  "nodes": [
+    {
+      "id": "file:App/motion/motion_sensor_pipeline.h",
+      "type": "file",
+      "name": "motion_sensor_pipeline.h",
+      "filePath": "App/motion/motion_sensor_pipeline.h",
+      "summary": "声明姿态数据接收、融合帧提取、校准控制和流水线复位接口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_task.c",
+      "type": "file",
+      "name": "motion_task.c",
+      "filePath": "App/motion/motion_task.c",
+      "summary": "实现运动识别主任务，驱动融合帧处理、AI 推理、跌倒判定、训练结果事件和多种 UART/CSV 调试输出。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_output_calibration_report_uart4",
+      "type": "function",
+      "name": "task1_output_calibration_report_uart4",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        126,
+        157
+      ],
+      "summary": "实现 task1_output_calibration_report_uart4 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_output_state_reset",
+      "type": "function",
+      "name": "task1_output_state_reset",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        159,
+        194
+      ],
+      "summary": "实现 task1_output_state_reset 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_process_fused_frame",
+      "type": "function",
+      "name": "task1_process_fused_frame",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        210,
+        321
+      ],
+      "summary": "实现 task1_process_fused_frame 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_output_upper_capture_csv",
+      "type": "function",
+      "name": "task1_output_upper_capture_csv",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        323,
+        352
+      ],
+      "summary": "实现 task1_output_upper_capture_csv 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_handle_local_fall_result",
+      "type": "function",
+      "name": "task1_handle_local_fall_result",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        354,
+        366
+      ],
+      "summary": "实现 task1_handle_local_fall_result 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_output_capture_csv",
+      "type": "function",
+      "name": "task1_output_capture_csv",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        368,
+        389
+      ],
+      "summary": "实现 task1_output_capture_csv 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_output_bio_capture_csv",
+      "type": "function",
+      "name": "task1_output_bio_capture_csv",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        391,
+        413
+      ],
+      "summary": "实现 task1_output_bio_capture_csv 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_output_recognition_csv",
+      "type": "function",
+      "name": "task1_output_recognition_csv",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        424,
+        485
+      ],
+      "summary": "实现 task1_output_recognition_csv 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_output_brief_result",
+      "type": "function",
+      "name": "task1_output_brief_result",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        487,
+        543
+      ],
+      "summary": "实现 task1_output_brief_result 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_output_single_once_event",
+      "type": "function",
+      "name": "task1_output_single_once_event",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        545,
+        660
+      ],
+      "summary": "实现 task1_output_single_once_event 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:task1_output_rule_debug",
+      "type": "function",
+      "name": "task1_output_rule_debug",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        662,
+        702
+      ],
+      "summary": "实现 task1_output_rule_debug 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_task.c:MotionTask_Run",
+      "type": "function",
+      "name": "MotionTask_Run",
+      "filePath": "App/motion/motion_task.c",
+      "lineRange": [
+        714,
+        833
+      ],
+      "summary": "执行 MotionTask_Run 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:App/motion/motion_task.h",
+      "type": "file",
+      "name": "motion_task.h",
+      "filePath": "App/motion/motion_task.h",
+      "summary": "声明运动识别 FreeRTOS 任务入口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_window_test.c",
+      "type": "file",
+      "name": "motion_window_test.c",
+      "filePath": "App/motion/motion_window_test.c",
+      "summary": "管理离线模型窗口测试请求，执行内置测试数据推理并输出验证结果。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "function:App/motion/motion_window_test.c:MotionWindowTest_Init",
+      "type": "function",
+      "name": "MotionWindowTest_Init",
+      "filePath": "App/motion/motion_window_test.c",
+      "lineRange": [
+        99,
+        102
+      ],
+      "summary": "初始化 MotionWindowTest_Init 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_window_test.c:MotionWindowTest_Reset",
+      "type": "function",
+      "name": "MotionWindowTest_Reset",
+      "filePath": "App/motion/motion_window_test.c",
+      "lineRange": [
+        104,
+        107
+      ],
+      "summary": "复位 MotionWindowTest_Reset 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "状态管理"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_window_test.c:MotionWindowTest_RequestRun",
+      "type": "function",
+      "name": "MotionWindowTest_RequestRun",
+      "filePath": "App/motion/motion_window_test.c",
+      "lineRange": [
+        109,
+        112
+      ],
+      "summary": "请求 MotionWindowTest_RequestRun 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_window_test.c:MotionWindowTest_RunPending",
+      "type": "function",
+      "name": "MotionWindowTest_RunPending",
+      "filePath": "App/motion/motion_window_test.c",
+      "lineRange": [
+        114,
+        126
+      ],
+      "summary": "执行 MotionWindowTest_RunPending 对应的模块状态或数据流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_window_test.c:motion_window_test_try_consume_request",
+      "type": "function",
+      "name": "motion_window_test_try_consume_request",
+      "filePath": "App/motion/motion_window_test.c",
+      "lineRange": [
+        128,
+        142
+      ],
+      "summary": "实现 motion_window_test_try_consume_request 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:App/motion/motion_window_test.c:motion_window_test_print_output",
+      "type": "function",
+      "name": "motion_window_test_print_output",
+      "filePath": "App/motion/motion_window_test.c",
+      "lineRange": [
+        144,
+        154
+      ],
+      "summary": "实现 motion_window_test_print_output 对应的内部处理流程。",
+      "tags": [
+        "函数",
+        "嵌入式",
+        "业务逻辑"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_window_test.h",
+      "type": "file",
+      "name": "motion_window_test.h",
+      "filePath": "App/motion/motion_window_test.h",
+      "summary": "声明模型窗口测试的初始化、复位、请求和执行接口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_calibration_report_uart4",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_state_reset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_process_fused_frame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_upper_capture_csv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_handle_local_fall_result",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_capture_csv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_bio_capture_csv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_recognition_csv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_brief_result",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_single_once_event",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_rule_debug",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:MotionTask_Run",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:MotionTask_Run",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_app_events.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_input.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_mode.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_sensor_pipeline.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_task.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_window_test.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_Reset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_Reset",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_RequestRun",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_RequestRun",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_RunPending",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_RunPending",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:motion_window_test_try_consume_request",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:motion_window_test_print_output",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "file:App/motion/motion_window_test.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

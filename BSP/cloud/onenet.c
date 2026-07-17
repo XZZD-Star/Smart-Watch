@@ -7,6 +7,7 @@
 #include "ESP8266.h"
 #include "MqttKit.h"
 #include "debug_uart7.h"
+#include "lt_screen_task.h"
 #include "motion_ai.h"
 #include "motion_app_events.h"
 #include "motion_input.h"
@@ -990,6 +991,8 @@ static void OneNet_LogPropertySetSummary(const onenet_prop_set_context_t *ctx)
 
 static void OneNet_ApplyDoorProperty(const onenet_prop_set_context_t *ctx)
 {
+  uint8_t door_state;
+
   if ((ctx == NULL) ||
       (ctx->has_open_value == 0U) ||
       (ctx->open_value_valid == 0U))
@@ -997,7 +1000,9 @@ static void OneNet_ApplyDoorProperty(const onenet_prop_set_context_t *ctx)
     return;
   }
 
-  OneNet_RequestDoorStatePost(Servo_GetDoorState());
+  door_state = Servo_GetDoorState();
+  LTScreen_SetDeviceDoorState(door_state);
+  OneNet_RequestDoorStatePost(door_state);
   Debug_Printf("[MQTT] open cached, defer post to net task value=%ld\r\n",
                (long)g_onenet_pending_door_state_value);
 }

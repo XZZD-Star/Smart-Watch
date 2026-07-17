@@ -1,0 +1,42 @@
+{
+  "projectRoot": "D:\\Qian Start\\Smart Watch\\H743",
+  "batchFiles": [
+    {
+      "path": "SYSTEM/readme.txt",
+      "language": "txt",
+      "sizeLines": 20,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "SYSTEM/sys/sys.c",
+      "language": "c",
+      "sizeLines": 236,
+      "fileCategory": "code"
+    },
+    {
+      "path": "SYSTEM/sys/sys.h",
+      "language": "c",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "SYSTEM/usart/yuanzi_usart.c",
+      "language": "c",
+      "sizeLines": 196,
+      "fileCategory": "code"
+    },
+    {
+      "path": "SYSTEM/usart/yuanzi_usart.h",
+      "language": "c",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "SYSTEM/readme.txt": [],
+    "SYSTEM/sys/sys.c": [],
+    "SYSTEM/sys/sys.h": [],
+    "SYSTEM/usart/yuanzi_usart.c": [],
+    "SYSTEM/usart/yuanzi_usart.h": []
+  }
+}

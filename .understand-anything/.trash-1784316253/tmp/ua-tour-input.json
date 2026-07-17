@@ -1,0 +1,6332 @@
+{
+  "nodes": [
+    {
+      "id": "file:App/motion/motion_app_events.c",
+      "type": "file",
+      "name": "motion_app_events.c",
+      "filePath": "App/motion/motion_app_events.c",
+      "summary": "维护动作识别结果、训练页刷新和云端上报请求的轻量事件状态，为任务与 UI/云连接之间提供无阻塞状态交接。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:App/motion/motion_app_events.h",
+      "type": "file",
+      "name": "motion_app_events.h",
+      "filePath": "App/motion/motion_app_events.h",
+      "summary": "声明动作识别事件队列、训练页刷新和云端待上报状态的公共接口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_input.c",
+      "type": "file",
+      "name": "motion_input.c",
+      "filePath": "App/motion/motion_input.c",
+      "summary": "接收启动、停止、清除和中断触发请求，并协调姿态传感器流水线及窗口测试的输入状态。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:App/motion/motion_input.h",
+      "type": "file",
+      "name": "motion_input.h",
+      "filePath": "App/motion/motion_input.h",
+      "summary": "定义运动识别任务的外部控制请求接口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_mode.h",
+      "type": "file",
+      "name": "motion_mode.h",
+      "filePath": "App/motion/motion_mode.h",
+      "summary": "定义运动识别、采集、校准与测试等运行模式枚举及相关模式约束。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_sensor_pipeline.c",
+      "type": "file",
+      "name": "motion_sensor_pipeline.c",
+      "filePath": "App/motion/motion_sensor_pipeline.c",
+      "summary": "解析上下肢姿态数据包，完成时间戳与序号校验、双传感器帧融合、校准统计及 ISR 到任务的数据交接。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:App/motion/motion_sensor_pipeline.h",
+      "type": "file",
+      "name": "motion_sensor_pipeline.h",
+      "filePath": "App/motion/motion_sensor_pipeline.h",
+      "summary": "声明姿态数据接收、融合帧提取、校准控制和流水线复位接口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_task.c",
+      "type": "file",
+      "name": "motion_task.c",
+      "filePath": "App/motion/motion_task.c",
+      "summary": "实现运动识别主任务，驱动融合帧处理、AI 推理、跌倒判定、训练结果事件和多种 UART/CSV 调试输出。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:App/motion/motion_task.h",
+      "type": "file",
+      "name": "motion_task.h",
+      "filePath": "App/motion/motion_task.h",
+      "summary": "声明运动识别 FreeRTOS 任务入口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_window_test.c",
+      "type": "file",
+      "name": "motion_window_test.c",
+      "filePath": "App/motion/motion_window_test.c",
+      "summary": "管理离线模型窗口测试请求，执行内置测试数据推理并输出验证结果。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "任务处理"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:App/motion/motion_window_test.h",
+      "type": "file",
+      "name": "motion_window_test.h",
+      "filePath": "App/motion/motion_window_test.h",
+      "summary": "声明模型窗口测试的初始化、复位、请求和执行接口。",
+      "tags": [
+        "运动识别",
+        "传感器融合",
+        "接口定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/crc16.c",
+      "type": "file",
+      "name": "crc16.c",
+      "filePath": "Common/crc16.c",
+      "summary": "提供流式 CRC16 初始化、增量更新和整块数据计算，用于 OTA 元数据完整性校验。",
+      "tags": [
+        "crc16",
+        "数据校验",
+        "工具函数"
+      ],
+      "complexity": "simple",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:Common/crc16.h",
+      "type": "file",
+      "name": "crc16.h",
+      "filePath": "Common/crc16.h",
+      "summary": "声明通用 CRC16 校验接口及初始值常量。",
+      "tags": [
+        "crc16",
+        "数据校验",
+        "工具函数"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/md5.c",
+      "type": "file",
+      "name": "md5.c",
+      "filePath": "Common/md5.c",
+      "summary": "实现 MD5 分组变换、流式摘要计算、十六进制编码与字符串合法性检查。",
+      "tags": [
+        "md5",
+        "数据校验",
+        "工具函数"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:Common/md5.h",
+      "type": "file",
+      "name": "md5.h",
+      "filePath": "Common/md5.h",
+      "summary": "定义 MD5 上下文并声明摘要计算和十六进制辅助接口。",
+      "tags": [
+        "md5",
+        "数据校验",
+        "工具函数"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/ota_device_info.c",
+      "type": "file",
+      "name": "ota_device_info.c",
+      "filePath": "Common/ota_device_info.c",
+      "summary": "在冗余 Flash 槽位中读取、校验和保存设备当前运行版本，利用序号选择最新有效记录。",
+      "tags": [
+        "ota",
+        "持久化",
+        "完整性校验"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:Common/ota_device_info.h",
+      "type": "file",
+      "name": "ota_device_info.h",
+      "filePath": "Common/ota_device_info.h",
+      "summary": "定义设备 OTA 版本持久化记录及加载、查询和保存接口。",
+      "tags": [
+        "ota",
+        "持久化",
+        "完整性校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/ota_info.c",
+      "type": "file",
+      "name": "ota_info.c",
+      "filePath": "Common/ota_info.c",
+      "summary": "持久化并校验待升级固件和模拟升级信息，结合 CRC16 与 MD5 保证元数据有效性。",
+      "tags": [
+        "ota",
+        "持久化",
+        "完整性校验"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:Common/ota_info.h",
+      "type": "file",
+      "name": "ota_info.h",
+      "filePath": "Common/ota_info.h",
+      "summary": "定义 OTA 待升级记录结构及加载、保存和失效接口。",
+      "tags": [
+        "ota",
+        "持久化",
+        "完整性校验"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/ota/ota_config.h",
+      "type": "file",
+      "name": "ota_config.h",
+      "filePath": "App/ota/ota_config.h",
+      "summary": "集中定义 OTA 服务地址、请求路径、下载分块和 Flash 区域等编译期配置。",
+      "tags": [
+        "ota",
+        "固件升级",
+        "配置接口"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/ota/ota_http.c",
+      "type": "file",
+      "name": "ota_http.c",
+      "filePath": "App/ota/ota_http.c",
+      "summary": "基于网络连接实现受限 HTTP 请求与响应解析，以回调方式交付响应体并处理 Content-Length 等头字段。",
+      "tags": [
+        "ota",
+        "固件升级",
+        "网络服务"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:App/ota/ota_http.h",
+      "type": "file",
+      "name": "ota_http.h",
+      "filePath": "App/ota/ota_http.h",
+      "summary": "定义 OTA HTTP 请求参数、响应信息和流式响应体回调接口。",
+      "tags": [
+        "ota",
+        "固件升级",
+        "配置接口"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/ota/ota_service.c",
+      "type": "file",
+      "name": "ota_service.c",
+      "filePath": "App/ota/ota_service.c",
+      "summary": "实现 OTA 完整业务流程，包括任务查询、JSON 解析、分段固件下载、Flash 写入、MD5 校验、升级信息保存和版本上报。",
+      "tags": [
+        "ota",
+        "固件升级",
+        "网络服务"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:App/ota/ota_service.h",
+      "type": "file",
+      "name": "ota_service.h",
+      "filePath": "App/ota/ota_service.h",
+      "summary": "声明 OTA 初始化、周期检查、模拟升级和版本上报接口。",
+      "tags": [
+        "ota",
+        "固件升级",
+        "配置接口"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BSP/cloud/MqttKit.c",
+      "type": "file",
+      "name": "MqttKit.c",
+      "filePath": "BSP/cloud/MqttKit.c",
+      "summary": "实现 MQTT 报文缓冲区管理及 CONNECT、SUBSCRIBE、PUBLISH、PING 等报文的编码与解码。",
+      "tags": [
+        "mqtt",
+        "onenet",
+        "云端通信"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:BSP/cloud/MqttKit.h",
+      "type": "file",
+      "name": "MqttKit.h",
+      "filePath": "BSP/cloud/MqttKit.h",
+      "summary": "定义 MQTT 报文类型、缓冲区结构和协议编解码接口。",
+      "tags": [
+        "mqtt",
+        "onenet",
+        "协议接口"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BSP/cloud/onenet.c",
+      "type": "file",
+      "name": "onenet.c",
+      "filePath": "BSP/cloud/onenet.c",
+      "summary": "实现 OneNET MQTT 会话、主题订阅、属性上报与属性设置下行处理，并联动训练计划、门状态、跌倒告警和运动测试。",
+      "tags": [
+        "mqtt",
+        "onenet",
+        "云端通信"
+      ],
+      "complexity": "complex",
+      "languageNotes": "采用 STM32 C 模块化接口，使用文件内 static 状态封装实现细节。"
+    },
+    {
+      "id": "file:BSP/cloud/onenet.h",
+      "type": "file",
+      "name": "onenet.h",
+      "filePath": "BSP/cloud/onenet.h",
+      "summary": "声明 OneNET 设备连接、订阅发布、下行处理及会话状态查询接口。",
+      "tags": [
+        "mqtt",
+        "onenet",
+        "协议接口"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:App/lt_screen/lt_screen_keys.h",
+      "type": "file",
+      "name": "lt_screen_keys.h",
+      "filePath": "App/lt_screen/lt_screen_keys.h",
+      "summary": "集中定义 LT168B 串口屏各页面触摸按键的键值常量，供屏幕任务进行事件分派。",
+      "tags": [
+        "按键映射",
+        "屏幕交互",
+        "常量定义"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/lt_screen/lt_screen_task.c",
+      "type": "file",
+      "name": "lt_screen_task.c",
+      "filePath": "App/lt_screen/lt_screen_task.c",
+      "summary": "实现 LT168B 屏幕任务主循环与触摸事件分派，协调健康数据刷新、训练计数、设备门控制及 OTA 演示流程。",
+      "tags": [
+        "任务循环",
+        "屏幕交互",
+        "事件处理",
+        "ota",
+        "freertos"
+      ],
+      "complexity": "complex",
+      "languageNotes": "通过条件编译在正常模式与网络调试模式间切换，并以文件内静态状态维护多个屏幕业务流程。"
+    },
+    {
+      "id": "file:App/lt_screen/lt_screen_task.h",
+      "type": "file",
+      "name": "lt_screen_task.h",
+      "filePath": "App/lt_screen/lt_screen_task.h",
+      "summary": "声明 LT168B 屏幕任务、触摸事件处理和设备门状态接口，并定义正常与网络调试两种编译模式。",
+      "tags": [
+        "接口声明",
+        "屏幕任务",
+        "编译配置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BSP/debug_uart/debug_uart7.c",
+      "type": "file",
+      "name": "debug_uart7.c",
+      "filePath": "BSP/debug_uart/debug_uart7.c",
+      "summary": "提供格式化调试输出及 ESP8266、生理数据日志接口；当 UART7 未配置为调试角色时编译为空实现。",
+      "tags": [
+        "调试日志",
+        "uart",
+        "条件编译",
+        "bsp"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "使用 APP_UART7_IS_DEBUG 条件编译实现零调用侧改动的启用与禁用。"
+    },
+    {
+      "id": "file:BSP/debug_uart/debug_uart7.h",
+      "type": "file",
+      "name": "debug_uart7.h",
+      "filePath": "BSP/debug_uart/debug_uart7.h",
+      "summary": "声明 UART7 格式化日志、ESP8266 收发日志和生理数据摘要日志接口。",
+      "tags": [
+        "接口声明",
+        "调试日志",
+        "uart"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BSP/debug_uart/uart7_role.h",
+      "type": "file",
+      "name": "uart7_role.h",
+      "filePath": "BSP/debug_uart/uart7_role.h",
+      "summary": "定义 UART7 在调试与串口屏之间的角色选择，以及屏幕测试模式和隔离测试的编译期配置与合法性检查。",
+      "tags": [
+        "编译配置",
+        "uart",
+        "屏幕模式",
+        "角色选择"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/config.json",
+      "type": "config",
+      "name": "config.json",
+      "filePath": ".understand-anything/config.json",
+      "summary": "配置 Understand Anything 分析产物采用中文输出。",
+      "tags": [
+        "configuration",
+        "知识图谱",
+        "输出语言"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/fingerprints.json",
+      "type": "config",
+      "name": "fingerprints.json",
+      "filePath": ".understand-anything/fingerprints.json",
+      "summary": "保存项目文件指纹、Git 提交和生成时间，用于判断知识图谱分析是否需要增量更新。",
+      "tags": [
+        "configuration",
+        "文件指纹",
+        "增量分析",
+        "元数据"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/knowledge-graph.json",
+      "type": "config",
+      "name": "knowledge-graph.json",
+      "filePath": ".understand-anything/knowledge-graph.json",
+      "summary": "存放 Understand Anything 生成的项目知识图谱，包括节点、边、分层视图与导览信息。",
+      "tags": [
+        "知识图谱",
+        "分析产物",
+        "架构数据",
+        "configuration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.understand-anything/meta.json",
+      "type": "config",
+      "name": "meta.json",
+      "filePath": ".understand-anything/meta.json",
+      "summary": "记录上次项目分析时间、对应 Git 提交、格式版本和已分析文件数。",
+      "tags": [
+        "configuration",
+        "分析状态",
+        "元数据"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:Agents.md",
+      "type": "document",
+      "name": "Agents.md",
+      "filePath": "Agents.md",
+      "summary": "规定项目自定义代码的开发原则、命名约定、返回值语义、中文注释格式及最小实现要求。",
+      "tags": [
+        "documentation",
+        "代码规范",
+        "开发约定",
+        "维护性"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:LICENSE_X-CUBE-AI.txt",
+      "type": "document",
+      "name": "LICENSE_X-CUBE-AI.txt",
+      "filePath": "LICENSE_X-CUBE-AI.txt",
+      "summary": "收录 STMicroelectronics SLA0044 软件许可条款，限定 X-CUBE-AI 组件的使用、复制和再分发条件。",
+      "tags": [
+        "documentation",
+        "license",
+        "x-cube-ai",
+        "合规"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:说明文档.txt",
+      "type": "document",
+      "name": "说明文档.txt",
+      "filePath": "说明文档.txt",
+      "summary": "说明参赛作品源码材料的编号与用途，概述主控工程承担双传感器数据融合、动作识别、规则分析、云连接和屏幕显示。",
+      "tags": [
+        "documentation",
+        "项目说明",
+        "参赛材料",
+        "系统概述"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/2026-05-31-H743项目脉络补充.md",
+      "type": "document",
+      "name": "2026-05-31-H743项目脉络补充.md",
+      "filePath": "docs/2026-05-31-H743项目脉络补充.md",
+      "summary": "系统梳理 H743 固件总体架构、FreeRTOS 任务分工、运动识别与 AI/规则链路、OneNet 云流程及屏幕刷新边界。",
+      "tags": [
+        "documentation",
+        "系统架构",
+        "数据流",
+        "freertos",
+        "onenet"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/W25Q128_Bootloader_App_第一版最小跑通方案.md",
+      "type": "document",
+      "name": "W25Q128_Bootloader_App_第一版最小跑通方案.md",
+      "filePath": "docs/W25Q128_Bootloader_App_第一版最小跑通方案.md",
+      "summary": "给出 W25Q128 外部 Flash 与 Bootloader/App 分区的最小验证方案，涵盖地址规划、跳转模板、下载步骤和常见风险。",
+      "tags": [
+        "documentation",
+        "bootloader",
+        "w25q128",
+        "flash-分区",
+        "验证方案"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "table:docs/h743_module_pins.csv:h743_module_pins",
+      "type": "table",
+      "name": "h743_module_pins",
+      "filePath": "docs/h743_module_pins.csv",
+      "summary": "汇总 H743 主控的时钟、串口、PWM、W25Q128、DMA 等模块与 MCU 引脚、初始化入口和源码依据的对应关系。",
+      "tags": [
+        "硬件映射",
+        "引脚表",
+        "外设配置",
+        "参考数据"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/lt168b_ota_mqtt_change_plan_2026-06-25.md",
+      "type": "document",
+      "name": "lt168b_ota_mqtt_change_plan_2026-06-25.md",
+      "filePath": "docs/lt168b_ota_mqtt_change_plan_2026-06-25.md",
+      "summary": "记录 LT168B 屏幕与 ESP8266、OTA、MQTT 联动的修订方案，核对现有键值、页面地址、OTA 独占机制和推荐修改顺序。",
+      "tags": [
+        "documentation",
+        "lt168b",
+        "ota",
+        "mqtt",
+        "修改方案"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+      "type": "document",
+      "name": "STM32H743ZIT6_引脚排针精华笔记.md",
+      "filePath": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华笔记.md",
+      "summary": "整理 STM32H743ZIT6 开发板排针、复用功能及板载资源占用，便于硬件接线和引脚冲突排查。",
+      "tags": [
+        "documentation",
+        "pinout",
+        "hardware-reference"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/H743资料包/note/参考手册重点部分.md",
+      "type": "document",
+      "name": "参考手册重点部分.md",
+      "filePath": "docs/H743资料包/note/参考手册重点部分.md",
+      "summary": "提炼 STM32H743 时钟树、总线、DMA 与 Cache 一致性等参考手册重点，并给出常见问题检查清单。",
+      "tags": [
+        "documentation",
+        "dma",
+        "cache",
+        "clock-tree"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/H743资料包/note/快速上手.md",
+      "type": "document",
+      "name": "快速上手.md",
+      "filePath": "docs/H743资料包/note/快速上手.md",
+      "summary": "提供 STM32H743 从 CubeMX 建工程到外设调试的学习路线，重点说明手册查阅、内存、Cache、DMA 和时钟配置。",
+      "tags": [
+        "documentation",
+        "getting-started",
+        "stm32h7"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:.ai/network_action_cnn.h5_c_info.json",
+      "type": "config",
+      "name": "network_action_cnn.h5_c_info.json",
+      "filePath": ".ai/network_action_cnn.h5_c_info.json",
+      "summary": "记录动作识别 CNN 的 X-CUBE-AI 转换信息、张量规格、算子与内存占用，供生成代码和部署诊断使用。",
+      "tags": [
+        "configuration",
+        "x-cube-ai",
+        "neural-network",
+        "metadata"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.mxproject",
+      "type": "file",
+      "name": ".mxproject",
+      "filePath": ".mxproject",
+      "summary": "保存 STM32CubeMX 工程的源目录、生成目录和工具链元数据，用于工程代码生成。",
+      "tags": [
+        "configuration",
+        "cubemx",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "定义知识图谱扫描时排除的第三方库、生成目录和构建产物，控制分析边界。",
+      "tags": [
+        "configuration",
+        "analysis-scope",
+        "ignore-rules"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:App/ai/motion_ai.c",
+      "type": "file",
+      "name": "motion_ai.c",
+      "filePath": "App/ai/motion_ai.c",
+      "summary": "实现动作识别 AI 推理流水线，包括窗口预处理、基线与能量计算、跌倒检测、概率平滑及演示覆盖。",
+      "tags": [
+        "ai-inference",
+        "motion-recognition",
+        "signal-processing",
+        "x-cube-ai"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:App/ai/motion_ai.h",
+      "type": "file",
+      "name": "motion_ai.h",
+      "filePath": "App/ai/motion_ai.h",
+      "summary": "声明动作 AI 的标签、状态、结果结构和对外控制接口，供采集及业务任务调用。",
+      "tags": [
+        "api",
+        "ai-inference",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:App/cloud/cloud_task.c",
+      "type": "file",
+      "name": "cloud_task.c",
+      "filePath": "App/cloud/cloud_task.c",
+      "summary": "实现云端 FreeRTOS 任务，管理 Wi-Fi、MQTT 会话、周期上报、下行处理及 OTA 独占暂停。",
+      "tags": [
+        "cloud-service",
+        "mqtt",
+        "freertos",
+        "ota"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:App/cloud/cloud_task.h",
+      "type": "file",
+      "name": "cloud_task.h",
+      "filePath": "App/cloud/cloud_task.h",
+      "summary": "声明云任务入口和 OTA 独占协调接口。",
+      "tags": [
+        "api",
+        "cloud-service",
+        "ota"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/motion/motion_frame.h",
+      "type": "file",
+      "name": "motion_frame.h",
+      "filePath": "App/motion/motion_frame.h",
+      "summary": "定义运动传感器帧的数据结构和时间戳等共享字段，作为规则识别与 AI 推理的输入契约。",
+      "tags": [
+        "data-model",
+        "motion-sensor",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:App/rule action/rule_action_recognizer.c",
+      "type": "file",
+      "name": "rule_action_recognizer.c",
+      "filePath": "App/rule action/rule_action_recognizer.c",
+      "summary": "实现基于规则的动作识别器，完成基线锁定、预触发缓存、会话采样、特征窗口搜索和模板分类。",
+      "tags": [
+        "motion-recognition",
+        "rule-engine",
+        "signal-processing"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:App/rule action/rule_action_recognizer.h",
+      "type": "file",
+      "name": "rule_action_recognizer.h",
+      "filePath": "App/rule action/rule_action_recognizer.h",
+      "summary": "定义规则动作识别器的配置、状态机、采样会话和识别结果接口。",
+      "tags": [
+        "api",
+        "rule-engine",
+        "type-definition"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BSP/display/lt168b.c",
+      "type": "file",
+      "name": "lt168b.c",
+      "filePath": "BSP/display/lt168b.c",
+      "summary": "实现 LT168B 串口屏文本写入、触摸帧解析、接收恢复和 Modbus CRC 校验。",
+      "tags": [
+        "bsp",
+        "display",
+        "uart",
+        "protocol-parser"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BSP/display/lt168b.h",
+      "type": "file",
+      "name": "lt168b.h",
+      "filePath": "BSP/display/lt168b.h",
+      "summary": "声明 LT168B 显示与触摸事件接口。",
+      "tags": [
+        "api",
+        "bsp",
+        "display"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BSP/w25q128/w25q128.c",
+      "type": "file",
+      "name": "w25q128.c",
+      "filePath": "BSP/w25q128/w25q128.c",
+      "summary": "实现 W25Q128 SPI Flash 初始化、读写、扇区擦除、忙等待和写后校验。",
+      "tags": [
+        "bsp",
+        "spi-flash",
+        "storage-driver"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BSP/w25q128/w25q128.h",
+      "type": "file",
+      "name": "w25q128.h",
+      "filePath": "BSP/w25q128/w25q128.h",
+      "summary": "声明 W25Q128 存储驱动接口、容量和状态定义。",
+      "tags": [
+        "api",
+        "bsp",
+        "storage-driver"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BSP/wifi/ESP8266.c",
+      "type": "file",
+      "name": "ESP8266.c",
+      "filePath": "BSP/wifi/ESP8266.c",
+      "summary": "实现 ESP8266 AT 指令和透明传输驱动，处理收发等待、TCP 建连、IPD 数据及错误恢复。",
+      "tags": [
+        "bsp",
+        "wifi",
+        "at-command",
+        "network-driver"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BSP/wifi/ESP8266.h",
+      "type": "file",
+      "name": "ESP8266.h",
+      "filePath": "BSP/wifi/ESP8266.h",
+      "summary": "声明 ESP8266 初始化、TCP 连接、数据收发和接收喂入接口。",
+      "tags": [
+        "api",
+        "bsp",
+        "wifi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Common/ota_layout.h",
+      "type": "file",
+      "name": "ota_layout.h",
+      "filePath": "Common/ota_layout.h",
+      "summary": "定义外部 Flash OTA 分区、固件镜像和升级元数据布局。",
+      "tags": [
+        "ota",
+        "memory-layout",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Common/ring_buffer.c",
+      "type": "file",
+      "name": "ring_buffer.c",
+      "filePath": "Common/ring_buffer.c",
+      "summary": "提供固定容量环形缓冲区的初始化、复位、读写和索引推进实现。",
+      "tags": [
+        "utility",
+        "ring-buffer",
+        "data-structure"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Common/ring_buffer.h",
+      "type": "file",
+      "name": "ring_buffer.h",
+      "filePath": "Common/ring_buffer.h",
+      "summary": "声明环形缓冲区结构及读写接口。",
+      "tags": [
+        "api",
+        "ring-buffer",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Inc/bootloader_ota.h",
+      "type": "file",
+      "name": "bootloader_ota.h",
+      "filePath": "Core/Inc/bootloader_ota.h",
+      "summary": "声明 bootloader_ota 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Inc/crc.h",
+      "type": "file",
+      "name": "crc.h",
+      "filePath": "Core/Inc/crc.h",
+      "summary": "声明 crc 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Inc/dma.h",
+      "type": "file",
+      "name": "dma.h",
+      "filePath": "Core/Inc/dma.h",
+      "summary": "声明 dma 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Inc/FreeRTOSConfig.h",
+      "type": "file",
+      "name": "FreeRTOSConfig.h",
+      "filePath": "Core/Inc/FreeRTOSConfig.h",
+      "summary": "配置 FreeRTOS 调度、堆、优先级、中断和调试选项。",
+      "tags": [
+        "configuration",
+        "freertos",
+        "rtos"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Inc/gpio.h",
+      "type": "file",
+      "name": "gpio.h",
+      "filePath": "Core/Inc/gpio.h",
+      "summary": "声明 gpio 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Inc/internal_flash.h",
+      "type": "file",
+      "name": "internal_flash.h",
+      "filePath": "Core/Inc/internal_flash.h",
+      "summary": "声明 internal_flash 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Inc/main.h",
+      "type": "file",
+      "name": "main.h",
+      "filePath": "Core/Inc/main.h",
+      "summary": "声明 main 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Inc/RTE_Components.h",
+      "type": "file",
+      "name": "RTE_Components.h",
+      "filePath": "Core/Inc/RTE_Components.h",
+      "summary": "声明 RTE_Components 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Inc/stm32h7xx_hal_conf.h",
+      "type": "file",
+      "name": "stm32h7xx_hal_conf.h",
+      "filePath": "Core/Inc/stm32h7xx_hal_conf.h",
+      "summary": "声明 stm32h7xx_hal_conf 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:Core/Inc/stm32h7xx_it.h",
+      "type": "file",
+      "name": "stm32h7xx_it.h",
+      "filePath": "Core/Inc/stm32h7xx_it.h",
+      "summary": "声明 stm32h7xx_it 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Inc/tim.h",
+      "type": "file",
+      "name": "tim.h",
+      "filePath": "Core/Inc/tim.h",
+      "summary": "声明 tim 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Core/Inc/usart.h",
+      "type": "file",
+      "name": "usart.h",
+      "filePath": "Core/Inc/usart.h",
+      "summary": "声明 usart 模块的 STM32 HAL 配置、句柄或对外接口。",
+      "tags": [
+        "api",
+        "hal",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/bootloader_main.c",
+      "type": "file",
+      "name": "bootloader_main.c",
+      "filePath": "Core/Src/bootloader_main.c",
+      "summary": "实现 Bootloader 入口，校验应用向量表、释放外设并跳转应用，同时配置最小串口和系统时钟。",
+      "tags": [
+        "bootloader",
+        "entry-point",
+        "firmware-update"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:Core/Src/bootloader_ota.c",
+      "type": "file",
+      "name": "bootloader_ota.c",
+      "filePath": "Core/Src/bootloader_ota.c",
+      "summary": "实现 OTA 镜像 MD5 校验、内部 Flash 写入及安装决策流程。",
+      "tags": [
+        "bootloader",
+        "ota",
+        "firmware-update",
+        "integrity-check"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/crc.c",
+      "type": "file",
+      "name": "crc.c",
+      "filePath": "Core/Src/crc.c",
+      "summary": "配置 STM32 CRC 外设及其底层时钟资源。",
+      "tags": [
+        "hal",
+        "crc",
+        "peripheral-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/dma.c",
+      "type": "file",
+      "name": "dma.c",
+      "filePath": "Core/Src/dma.c",
+      "summary": "配置 DMA 控制器时钟和相关中断优先级。",
+      "tags": [
+        "hal",
+        "dma",
+        "peripheral-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/freertos.c",
+      "type": "file",
+      "name": "freertos.c",
+      "filePath": "Core/Src/freertos.c",
+      "summary": "创建应用 FreeRTOS 对象和任务，连接运动、云端及设备业务执行入口。",
+      "tags": [
+        "freertos",
+        "task-management",
+        "system-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/gpio.c",
+      "type": "file",
+      "name": "gpio.c",
+      "filePath": "Core/Src/gpio.c",
+      "summary": "初始化板级 GPIO 输出、电平和中断引脚。",
+      "tags": [
+        "hal",
+        "gpio",
+        "peripheral-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/internal_flash.c",
+      "type": "file",
+      "name": "internal_flash.c",
+      "filePath": "Core/Src/internal_flash.c",
+      "summary": "封装 STM32H743 内部 Flash 扇区定位、擦除、写入和校验操作。",
+      "tags": [
+        "flash-storage",
+        "hal",
+        "firmware-update"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/main.c",
+      "type": "file",
+      "name": "main.c",
+      "filePath": "Core/Src/main.c",
+      "summary": "应用固件入口，配置 MPU、Cache、系统时钟和生成外设后启动 FreeRTOS 调度。",
+      "tags": [
+        "entry-point",
+        "system-init",
+        "freertos",
+        "cubemx"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:Core/Src/stm32h7xx_hal_msp.c",
+      "type": "file",
+      "name": "stm32h7xx_hal_msp.c",
+      "filePath": "Core/Src/stm32h7xx_hal_msp.c",
+      "summary": "提供 HAL 全局 MSP 初始化，配置系统级时钟与中断优先级。",
+      "tags": [
+        "hal",
+        "msp",
+        "system-init"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "type": "file",
+      "name": "stm32h7xx_hal_timebase_tim.c",
+      "filePath": "Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "summary": "使用硬件定时器实现 HAL 1 ms 时间基准及中断配置。",
+      "tags": [
+        "hal",
+        "timebase",
+        "timer"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Core/Src/stm32h7xx_it.c",
+      "type": "file",
+      "name": "stm32h7xx_it.c",
+      "filePath": "Core/Src/stm32h7xx_it.c",
+      "summary": "实现 Cortex-M7 异常和 STM32H7 外设中断处理，包括 DMA、定时器及多路 UART 回调分发。",
+      "tags": [
+        "interrupt-handler",
+        "hal",
+        "uart",
+        "dma"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:Core/Src/system_stm32h7xx.c",
+      "type": "file",
+      "name": "system_stm32h7xx.c",
+      "filePath": "Core/Src/system_stm32h7xx.c",
+      "summary": "提供 CMSIS 系统初始化、核心时钟更新和 Run0 模式切换逻辑。",
+      "tags": [
+        "cmsis",
+        "system-init",
+        "clock-control"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:Core/Src/tim.c",
+      "type": "file",
+      "name": "tim.c",
+      "filePath": "Core/Src/tim.c",
+      "summary": "配置 TIM2/TIM3 及 PWM，并提供舵机角度到脉宽和门锁控制逻辑。",
+      "tags": [
+        "hal",
+        "timer",
+        "pwm",
+        "servo"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:Core/Src/usart.c",
+      "type": "file",
+      "name": "usart.c",
+      "filePath": "Core/Src/usart.c",
+      "summary": "配置多路 UART/USART、GPIO、DMA 与中断，并将接收数据分发到环形缓冲区和协议模块。",
+      "tags": [
+        "hal",
+        "uart",
+        "dma",
+        "communication"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "type": "file",
+      "name": "~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "filePath": "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
+      "summary": "Microsoft Excel 创建的引脚表临时锁文件，不包含可分析的稳定项目内容。",
+      "tags": [
+        "temporary-file",
+        "spreadsheet",
+        "generated"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+      "type": "file",
+      "name": "STM32H743ZIT6_引脚排针精华表.xlsx",
+      "filePath": "docs/H743资料包/note/STM32H743ZIT6_引脚排针精华表.xlsx",
+      "summary": "汇总 STM32H743ZIT6 引脚、排针映射和复用功能，供硬件连接快速查询。",
+      "tags": [
+        "hardware-reference",
+        "pinout",
+        "spreadsheet"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:Master.ioc",
+      "type": "file",
+      "name": "Master.ioc",
+      "filePath": "Master.ioc",
+      "summary": "STM32CubeMX 主工程配置，定义 MCU 引脚、时钟、外设、DMA、中间件和代码生成参数。",
+      "tags": [
+        "configuration",
+        "cubemx",
+        "hardware-config",
+        "code-generation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:SYSTEM/delay/delay.c",
+      "type": "file",
+      "name": "delay.c",
+      "filePath": "SYSTEM/delay/delay.c",
+      "summary": "提供面向 STM32H7 的阻塞式微秒和毫秒延时实现，并根据系统时钟初始化计时参数。",
+      "tags": [
+        "utility",
+        "delay",
+        "system-timing"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:SYSTEM/delay/delay.h",
+      "type": "file",
+      "name": "delay.h",
+      "filePath": "SYSTEM/delay/delay.h",
+      "summary": "声明系统延时初始化及微秒、毫秒延时接口。",
+      "tags": [
+        "api",
+        "delay",
+        "system-timing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:SYSTEM/readme.txt",
+      "type": "document",
+      "name": "readme.txt",
+      "filePath": "SYSTEM/readme.txt",
+      "summary": "说明 SYSTEM 目录中时钟、延时和串口基础支持代码的来源与使用范围。",
+      "tags": [
+        "documentation",
+        "system-support",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:SYSTEM/sys/sys.c",
+      "type": "file",
+      "name": "sys.c",
+      "filePath": "SYSTEM/sys/sys.c",
+      "summary": "实现 STM32H7 系统时钟初始化及底层系统支持函数。",
+      "tags": [
+        "system-init",
+        "clock-control",
+        "hal"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:SYSTEM/sys/sys.h",
+      "type": "file",
+      "name": "sys.h",
+      "filePath": "SYSTEM/sys/sys.h",
+      "summary": "声明系统时钟配置和底层寄存器辅助接口。",
+      "tags": [
+        "api",
+        "system-init",
+        "clock-control"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:SYSTEM/usart/yuanzi_usart.c",
+      "type": "file",
+      "name": "yuanzi_usart.c",
+      "filePath": "SYSTEM/usart/yuanzi_usart.c",
+      "summary": "提供基础串口调试支持和标准输出重定向，适配原子示例代码风格。",
+      "tags": [
+        "uart",
+        "debugging",
+        "stdio-retarget"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:SYSTEM/usart/yuanzi_usart.h",
+      "type": "file",
+      "name": "yuanzi_usart.h",
+      "filePath": "SYSTEM/usart/yuanzi_usart.h",
+      "summary": "声明基础调试串口配置和输出接口。",
+      "tags": [
+        "api",
+        "uart",
+        "debugging"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_QueueTestConfidence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_QueueTestConfidence",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTestConfidence",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTestConfidence",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTestConfidenceIfCurrent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTestConfidenceIfCurrent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_EncodeActionKind",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_EncodeActionKind",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_QueueActionKind",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_QueueActionKind",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekActionKind",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekActionKind",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearActionKindIfCurrent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearActionKindIfCurrent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_HasPendingCloudPost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_HasPendingCloudPost",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefresh",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefresh",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefreshByAction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_RequestTrainingPageRefreshByAction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefresh",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefresh",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefreshAction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_TakeTrainingPageRefreshAction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshAction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshAction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshDirty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_PeekTrainingPageRefreshDirty",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefresh",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefresh",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefreshIfCurrent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "function:App/motion/motion_app_events.c:MotionEvents_ClearTrainingPageRefreshIfCurrent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_app_events.c",
+      "target": "file:App/motion/motion_app_events.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStart",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStart",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStartFromIsr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStartFromIsr",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStop",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestStop",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestClear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_RequestClear",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeRestartRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeRestartRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeStartFromIsrRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeStartFromIsrRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeUpperCaptureResetRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeUpperCaptureResetRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_ResetUpperCaptureInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_ResetUpperCaptureInput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeStopRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "function:App/motion/motion_input.c:Motion_TakeStopRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "file:App/motion/motion_input.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "file:App/motion/motion_mode.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "file:App/motion/motion_sensor_pipeline.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_input.c",
+      "target": "file:App/motion/motion_window_test.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:parse_u32_token",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:parse_i32_token",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:parse_float_token",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:get_ts_us",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:parse_pose_frame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:update_seq_stats",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:try_emit_fused",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_StorePacketFromIsr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_StorePacketFromIsr",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeFusedFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeFusedFrame",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:take_pending_pose_packet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:process_pose_packet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:Motion_ProcessPendingPosePackets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:Motion_ProcessPendingPosePackets",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestCalibration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestCalibration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestUpperCalibration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_RequestUpperCalibration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_CalibrationTickFromIsr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_CalibrationTickFromIsr",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationActive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationActive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationActive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationActive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationDone",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsUpperCalibrationDone",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationDone",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_IsCalibrationDone",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeCalibrationReport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeCalibrationReport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeUpperCalibrationReport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_TakeUpperCalibrationReport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_SetUpperOnly",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_SetUpperOnly",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_ResetUpperCapture",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_ResetUpperCapture",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_Reset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "function:App/motion/motion_sensor_pipeline.c:MotionSensorPipeline_Reset",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_sensor_pipeline.c",
+      "target": "file:App/motion/motion_sensor_pipeline.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_calibration_report_uart4",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_state_reset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_process_fused_frame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_upper_capture_csv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_handle_local_fall_result",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_capture_csv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_bio_capture_csv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_recognition_csv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_brief_result",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_single_once_event",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:task1_output_rule_debug",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:MotionTask_Run",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "function:App/motion/motion_task.c:MotionTask_Run",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_app_events.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_input.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_mode.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_sensor_pipeline.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_task.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_task.c",
+      "target": "file:App/motion/motion_window_test.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_Reset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_Reset",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_RequestRun",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_RequestRun",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_RunPending",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:MotionWindowTest_RunPending",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:motion_window_test_try_consume_request",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "function:App/motion/motion_window_test.c:motion_window_test_print_output",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/motion/motion_window_test.c",
+      "target": "file:App/motion/motion_window_test.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Update",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Calculate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "function:Common/crc16.c:CRC16_Calculate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/crc16.c",
+      "target": "file:Common/crc16.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Transform",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Update",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Update",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Final",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_Final",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_ToHex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_ToHex",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_IsHexString",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "function:Common/md5.c:MD5_IsHexString",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/md5.c",
+      "target": "file:Common/md5.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_CalcCrc16",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_IsValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_IsValid",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_ReadSlot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_LoadBest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_Load",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_Load",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_GetCurrentVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_GetCurrentVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_WriteSlot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_SaveRunningVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "function:Common/ota_device_info.c:OTADeviceInfo_SaveRunningVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "file:Common/crc16.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_device_info.c",
+      "target": "file:Common/ota_device_info.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_CalcCrc16",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_CalcCrc16",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_IsReadyValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_IsReadyValid",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_IsSimulateValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_IsSimulateValid",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_Load",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_Load",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_LoadSimulate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_LoadSimulate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_SaveReady",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_SaveReady",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_SaveSimulate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_SaveSimulate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_Invalidate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "function:Common/ota_info.c:OTAInfo_Invalidate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "file:Common/crc16.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "file:Common/md5.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ota_info.c",
+      "target": "file:Common/ota_info.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/ota/ota_http.c",
+      "target": "function:App/ota/ota_http.c:OTAHttp_HeaderNameEquals",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_http.c",
+      "target": "function:App/ota/ota_http.c:OTAHttp_ParseHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_http.c",
+      "target": "function:App/ota/ota_http.c:OTAHttp_DeliverBody",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_http.c",
+      "target": "function:App/ota/ota_http.c:OTAHttp_SendRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_http.c",
+      "target": "function:App/ota/ota_http.c:OTAHttp_SendRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ota/ota_http.c",
+      "target": "file:App/ota/ota_http.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_CopyJsonBody",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_WriteFirmwareBody",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_ParseJsonText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_ParseJsonUint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_ToLowerMd5",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_ParseOnenetEnvelope",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_IsVersionTextValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_LoadRunningVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_MakeNextSimulateVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_GetReportVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_ParseTask",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_PostVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_PostPendingSimulateVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_QueryTaskHttp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_DownloadRange",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_DownloadFirmware",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_SaveReadyInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_SaveSimulateInfo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_QueryTask",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_QueryTask",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_StartSimulateUpdate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_StartSimulateUpdate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_ReportConfiguredVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_ReportConfiguredVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_ReportPendingSimulateVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_ReportPendingSimulateVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_CheckOnce",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "function:App/ota/ota_service.c:OTAService_CheckOnce",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "file:App/ota/ota_config.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "file:App/ota/ota_http.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/ota/ota_service.c",
+      "target": "file:App/ota/ota_service.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_NewBuffer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_DumpLength",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_ReadLength",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_WriteString",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_DeleteBuffer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_DeleteBuffer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketRecv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketRecv",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketConnect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketConnect",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketConnectAck",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketConnectAck",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketSubscribe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketSubscribe",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketSubscribe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketSubscribe",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketPublish",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketPublish",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublish",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublish",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublishAck",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_UnPacketPublishAck",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketPing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "function:BSP/cloud/MqttKit.c:MQTT_PacketPing",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/MqttKit.c",
+      "target": "file:BSP/cloud/MqttKit.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostIntPropertyValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostTrainPlan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_TopicMatches",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_CopyTextForLog",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_CopyDownlink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ParseJsonTextValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ParseJsonIntValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ParsePropertyIntValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsDecodedTestValueValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PublishRaw",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_SendPropertySetReply",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostTestConfidenceValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostTestConfidenceValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostActionKindValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostActionKindValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostFallAlarmValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostFallAlarmValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_TakeLastValidTestValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_TakeLastValidTestValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ActivateFallAlarm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ActivateFallAlarm",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ClearFallAlarm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ClearFallAlarm",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsFallAlarmActive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsFallAlarmActive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetTrainPlanSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetTrainPlanSnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetTrainDisplaySnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetTrainDisplaySnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_UpdateTrainDisplayByAction",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_UpdateTrainDisplayByAction",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingTrainPlan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingTrainPlan",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingDoorState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingDoorState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_RequestDoorStatePost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_RequestDoorStatePost",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingFallAlarm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_PostPendingFallAlarm",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_InitPropSetContext",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandleTrainPlanProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandleDoorProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandleFallAlarmProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandleStartProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_LogPropertySetSummary",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyDoorProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyFallAlarmProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyStartProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyTestProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ApplyTrainPlanProperty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandlePropertySet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HandlePublishPacket",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_DevLink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_DevLink",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_Subscribe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_Subscribe",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_Publish",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_Publish",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_RevPro",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_RevPro",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HasSessionError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_HasSessionError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ClearSessionError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ClearSessionError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ResetSubscribeState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_ResetSubscribeState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsSubscribeReady",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_IsSubscribeReady",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetLastStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetLastStatus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetLastConnAckCode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "function:BSP/cloud/onenet.c:OneNet_GetLastConnAckCode",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "file:BSP/cloud/MqttKit.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/cloud/onenet.c",
+      "target": "file:BSP/cloud/onenet.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/lt_screen/lt_screen_task.c",
+      "target": "file:App/lt_screen/lt_screen_keys.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/lt_screen/lt_screen_task.c",
+      "target": "file:App/lt_screen/lt_screen_task.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/lt_screen/lt_screen_task.c",
+      "target": "function:App/lt_screen/lt_screen_task.c:LTScreenTask_Run",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/lt_screen/lt_screen_task.c",
+      "target": "function:App/lt_screen/lt_screen_task.c:LTScreen_HandleTouchEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/lt_screen/lt_screen_task.c",
+      "target": "function:App/lt_screen/lt_screen_task.c:LTScreenTask_Run",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/lt_screen/lt_screen_task.c",
+      "target": "function:App/lt_screen/lt_screen_task.c:LTScreen_HandleTouchEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/debug_uart/debug_uart7.c",
+      "target": "file:BSP/debug_uart/debug_uart7.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/debug_uart/debug_uart7.c",
+      "target": "file:BSP/debug_uart/uart7_role.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_Reset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_Reset",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetSingleTestEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetSingleTestEnabled",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetLocalFallTriggerEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetLocalFallTriggerEnabled",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_IsLocalFallTriggerEnabled",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_IsLocalFallTriggerEnabled",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetDemoOverride",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_SetDemoOverride",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_ClearDemoOverride",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:MotionAi_ClearDemoOverride",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_reset_smoothing_history",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_reset_context",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_reset_cycle_state",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_prev_raw",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_compute_gate_motion_energy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_compute_frame_delta_energy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_align_fail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_store_baseline_frame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_finalize_baseline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_begin_action_session",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_compute_delta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_motion_energy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_compute_posture_offset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_reset_local_fall_detection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_local_fall_detection",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_append_window",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_prob_index_to_label",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_action_id_to_label",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_prob_average",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_latest_from_raw",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_top1_from_average",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_update_final_label",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_should_apply_demo_override",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_activate_demo_override_if_needed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_apply_demo_override",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_log_demo_probs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "function:App/ai/motion_ai.c:motion_ai_run_inference",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/ai/motion_ai.c",
+      "target": "file:App/ai/motion_ai.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_Run",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_Run",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_RequestOtaExclusive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_RequestOtaExclusive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_ReleaseOtaExclusive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:CloudTask_ReleaseOtaExclusive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_wait_wifi_init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_handle_ota_exclusive_pause",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_check_ota_once",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_connect_mqtt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_send_subscribe",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_restart_session_delay",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_service_loop",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_publish_periodic",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_post_motion_events",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_post_onenet_states",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_process_downlink",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "function:App/cloud/cloud_task.c:cloud_has_loop_error",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/cloud/cloud_task.c",
+      "target": "file:App/cloud/cloud_task.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleConfig_LoadDefault",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleConfig_LoadDefault",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ResetSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ResetSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ProcessRaw",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:RuleEngine_ProcessRaw",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_normalize_angle_delta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_median_values",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_pose_offset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_reset_result",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_reset_static_window",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_update_pose",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_update_delta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_lock_baseline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_store_pretrigger",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_append_session_sample",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_begin_recording",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_median_axis",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_find_top_window",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_side_direction_match",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_template_distance",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_classify_action",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_copy_result",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "function:App/rule action/rule_action_recognizer.c:rule_analyze_session",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:App/rule action/rule_action_recognizer.c",
+      "target": "file:App/rule action/rule_action_recognizer.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_SendStr",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_SendStr",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteVersionText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteVersionText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_SendStrWithStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteText",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteText",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteU16",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_WriteU16",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_GotoPage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_GotoPage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintLine",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintLine",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintKeyEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintKeyEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_ParseTouchEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_ParseTouchEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_HandleRxEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_HandleRxEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_TakeTouchEvent",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_TakeTouchEvent",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_RestartRx",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_CalcCrc16Modbus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugUart2WriteByte",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugUart2WriteString",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugUart2WriteDecU16",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "function:BSP/display/lt168b.c:LT168B_DebugPrintRawFrame",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/display/lt168b.c",
+      "target": "file:BSP/display/lt168b.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_SwapByte",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_IsRangeValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadStatusReg1",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WaitBusy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadID",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadID",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadIDLoopTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadIDLoopTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_SectorErase4KB",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_SectorErase4KB",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_PageProgram",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_PageProgram",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_ReadData",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_EraseRange",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_EraseRange",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WriteData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WriteData",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WriteDataVerified",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_WriteDataVerified",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_Test",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "function:BSP/w25q128/w25q128.c:W25Q128_Test",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/w25q128/w25q128.c",
+      "target": "file:BSP/w25q128/w25q128.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_GetRxCountSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_GetRxLastTickSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_DebugPrintHexPrefix",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_BufferContains",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_WaitForPattern",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_WaitForEitherPattern",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_TryCloseSocket",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_TryExitTransparentMode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_CheckIPDPayload",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_IsTxAckBuffer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_SendCmdInternal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_ResetModule",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_Clear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_Clear",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_WaitReceive",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_WaitReceive",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_SendCmd",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_SendCmd",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_SendData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_SendData",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_InitCommands",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_ConnectTcp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_ConnectTcp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_CloseTcp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_CloseTcp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_GetLastIPDLength",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_GetLastIPDLength",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_UpdateTransportError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_RxFeedBlock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_RxFeedBlock",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_RxFeedByte",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_RxFeedByte",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_HasTransportError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_HasTransportError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_ClearTransportError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_ClearTransportError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_GetLastInitStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_GetLastInitStatus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_DebugDumpCurrentRx",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "function:BSP/wifi/ESP8266.c:ESP8266_DebugDumpCurrentRx",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:BSP/wifi/ESP8266.c",
+      "target": "file:BSP/wifi/ESP8266.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_NextIndex",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Reset",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Reset",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Write",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Write",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Read",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Read",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Available",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Available",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Space",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_Space",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_IsEmpty",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_IsEmpty",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_IsFull",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "function:Common/ring_buffer.c:RingBuffer_IsFull",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Common/ring_buffer.c",
+      "target": "file:Common/ring_buffer.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:main",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Boot_IsRamAddress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Boot_AppIsValid",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Boot_DeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Boot_JumpToApp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:MX_USART2_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:MX_USART2_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:HAL_UART_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:HAL_UART_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:SysTick_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:SysTick_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:SystemClock_Config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:SystemClock_Config",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Error_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_main.c",
+      "target": "function:Core/Src/bootloader_main.c:Error_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_CalcW25Q128Md5",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_CalcInternalFlashMd5",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_WriteAppFlash",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_TryInstall",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/bootloader_ota.c",
+      "target": "function:Core/Src/bootloader_ota.c:BootOTA_TryInstall",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:MX_CRC_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:MX_CRC_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:HAL_CRC_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:HAL_CRC_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:HAL_CRC_MspDeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/crc.c",
+      "target": "function:Core/Src/crc.c:HAL_CRC_MspDeInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/dma.c",
+      "target": "function:Core/Src/dma.c:MX_DMA_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/dma.c",
+      "target": "function:Core/Src/dma.c:MX_DMA_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:MX_FREERTOS_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:MX_FREERTOS_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartDefaultTask",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartDefaultTask",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartTask1",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartTask1",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartTask2",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/freertos.c",
+      "target": "function:Core/Src/freertos.c:StartTask2",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/gpio.c",
+      "target": "function:Core/Src/gpio.c:MX_GPIO_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/gpio.c",
+      "target": "function:Core/Src/gpio.c:MX_GPIO_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_GetBankSector",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_EraseSector",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_EraseAppArea",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_EraseAppArea",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_Write",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_Write",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_Verify",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/internal_flash.c",
+      "target": "function:Core/Src/internal_flash.c:InternalFlash_Verify",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:main",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:SystemClock_Config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:SystemClock_Config",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:MPU_Config",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:MPU_Config",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:HAL_TIM_PeriodElapsedCallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:HAL_TIM_PeriodElapsedCallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:Error_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/main.c",
+      "target": "function:Core/Src/main.c:Error_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_msp.c",
+      "target": "function:Core/Src/stm32h7xx_hal_msp.c:HAL_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_msp.c",
+      "target": "function:Core/Src/stm32h7xx_hal_msp.c:HAL_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_InitTick",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_InitTick",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_SuspendTick",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_SuspendTick",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_ResumeTick",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_hal_timebase_tim.c",
+      "target": "function:Core/Src/stm32h7xx_hal_timebase_tim.c:HAL_ResumeTick",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:NMI_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:NMI_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:HardFault_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:HardFault_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:MemManage_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:MemManage_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:BusFault_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:BusFault_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UsageFault_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UsageFault_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DebugMon_Handler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DebugMon_Handler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream0_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream0_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream1_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream1_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream2_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream2_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream3_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:DMA1_Stream3_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:TIM1_UP_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:TIM1_UP_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:TIM2_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:TIM2_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART1_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART1_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART2_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART2_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART3_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART3_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UART4_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UART4_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART6_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:USART6_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UART7_IRQHandler",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:UART7_IRQHandler",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/stm32h7xx_it.c",
+      "target": "function:Core/Src/stm32h7xx_it.c:motion_uart4_handle_command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:SystemInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:SystemInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:SystemCoreClockUpdate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:SystemCoreClockUpdate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:ExitRun0Mode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/system_stm32h7xx.c",
+      "target": "function:Core/Src/system_stm32h7xx.c:ExitRun0Mode",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_AngleToPulseUs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:MX_TIM2_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:MX_TIM2_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:MX_TIM3_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:MX_TIM3_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_Base_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_Base_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_PWM_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_PWM_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_Base_MspDeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_Base_MspDeInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_PWM_MspDeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_PWM_MspDeInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_MspPostInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:HAL_TIM_MspPostInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_DoorInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_DoorInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetAngleDeg",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetAngleDeg",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorOpen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorOpen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorClosed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorClosed",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorByCloudValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_SetDoorByCloudValue",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_GetDoorState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/tim.c",
+      "target": "function:Core/Src/tim.c:Servo_GetDoorState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:USART6_FeedRxDmaRing",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_UART4_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_UART4_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART1_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART1_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART2_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART2_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART3_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART3_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART6_UART_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_USART6_UART_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_UART7_Init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:MX_UART7_Init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_MspInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_MspInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_MspDeInit",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_MspDeInit",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_RxCpltCallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UART_RxCpltCallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UARTEx_RxEventCallback",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:Core/Src/usart.c",
+      "target": "function:Core/Src/usart.c:HAL_UARTEx_RxEventCallback",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/delay/delay.c",
+      "target": "function:SYSTEM/delay/delay.c:delay_init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/delay/delay.c",
+      "target": "function:SYSTEM/delay/delay.c:delay_init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:get_icahce_sta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:get_icahce_sta",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:get_dcahce_sta",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:get_dcahce_sta",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_nvic_set_vector_table",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_nvic_set_vector_table",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_wfi_set",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_wfi_set",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_intx_disable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_intx_disable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_intx_enable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_intx_enable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_msr_msp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_msr_msp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_cache_enable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_cache_enable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_stm32_clock_init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:SYSTEM/sys/sys.c",
+      "target": "function:SYSTEM/sys/sys.c:sys_stm32_clock_init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:application",
+      "name": "应用业务层",
+      "description": "承载双传感器数据融合、动作识别与规则分析，并编排 OTA、云端通信和屏幕交互等智能手表业务流程。"
+    },
+    {
+      "id": "layer:bsp",
+      "name": "板级设备接入层",
+      "description": "封装 ESP8266、MQTT/OneNET、LT168B 显示屏、W25Q128 Flash 与调试 UART 等外设和网络设备接口。"
+    },
+    {
+      "id": "layer:utility",
+      "name": "公共组件层",
+      "description": "提供 CRC16、MD5、环形缓冲区以及 OTA 设备信息、布局与共享数据结构等跨模块基础能力。"
+    },
+    {
+      "id": "layer:mcu-runtime",
+      "name": "MCU 平台与运行时层",
+      "description": "包含 STM32H743 启动入口、FreeRTOS 初始化、中断、HAL 配置以及 GPIO、DMA、定时器、UART、CRC 和内部 Flash 驱动。"
+    },
+    {
+      "id": "layer:system-support",
+      "name": "SYSTEM 支撑层",
+      "description": "保留延时、系统时钟与串口等传统底层适配代码，为现有固件模块提供兼容性支撑。"
+    },
+    {
+      "id": "layer:config",
+      "name": "项目配置与分析元数据",
+      "description": "集中管理 CubeMX 工程配置、AI 模型信息以及 Understand Anything 的扫描配置、指纹和知识图谱元数据。"
+    },
+    {
+      "id": "layer:documentation",
+      "name": "文档与硬件资料",
+      "description": "汇集项目说明、设计方案、芯片参考笔记、模块引脚表、授权文本及团队协作规范。"
+    }
+  ]
+}

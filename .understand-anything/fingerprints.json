@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "9976a842e3232a5ec57f110e3580094926f94580",
-  "generatedAt": "2026-07-05T08:30:37.302Z",
+  "gitCommitHash": "6f8ced7655f58c23a9b5b87ea716071941e4015f",
+  "generatedAt": "2026-07-17T19:23:19.271Z",
   "files": {
     ".ai/network_action_cnn.h5_c_info.json": {
       "filePath": ".ai/network_action_cnn.h5_c_info.json",
@@ -43,6 +43,36 @@
       "totalLines": 4,
       "hasStructuralAnalysis": true
     },
+    ".understand-anything/fingerprints.json": {
+      "filePath": ".understand-anything/fingerprints.json",
+      "contentHash": "0d0b1688598fd3cb01e515b775a4b3b36dda30c0718c78386c1b10efa7634f86",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6630,
+      "hasStructuralAnalysis": true
+    },
+    ".understand-anything/knowledge-graph.json": {
+      "filePath": ".understand-anything/knowledge-graph.json",
+      "contentHash": "a0b312622814468d54ede34b0a1b16fa24b8e81ea05753651cc3298130e64e05",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13695,
+      "hasStructuralAnalysis": true
+    },
+    ".understand-anything/meta.json": {
+      "filePath": ".understand-anything/meta.json",
+      "contentHash": "4a86884d869e2c103fad3b38babad86c4b49c8ac6135a154dd1c42f3bb238d3f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
     "说明文档.txt": {
       "filePath": "说明文档.txt",
       "contentHash": "b8715807b581eb86577fab0e783407973299cb15dd06da9abc0675f08c9e7be1",
@@ -65,7 +95,7 @@
     },
     "App/ai/motion_ai.c": {
       "filePath": "App/ai/motion_ai.c",
-      "contentHash": "082514efb941e1a8c1f7147500d85a2466689e70e8bc12c78839391207a13f7f",
+      "contentHash": "8c2e74befd3e66ec42fce52d8a5d815d64267dc65b2a616079036620c267e993",
       "functions": [
         {
           "name": "MotionAi_Init",
@@ -115,7 +145,7 @@
           ],
           "returnType": "void",
           "exported": true,
-          "lineCount": 21
+          "lineCount": 29
         },
         {
           "name": "MotionAi_ClearDemoOverride",
@@ -363,7 +393,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 79
+          "lineCount": 84
         },
         {
           "name": "motion_ai_log_demo_probs",
@@ -409,12 +439,6 @@
           "specifiers": [
             "debug_uart7.h"
           ]
-        },
-        {
-          "source": "rule_action_recognizer.h",
-          "specifiers": [
-            "rule_action_recognizer.h"
-          ]
         }
       ],
       "exports": [
@@ -426,7 +450,7 @@
         "MotionAi_SetDemoOverride",
         "MotionAi_ClearDemoOverride"
       ],
-      "totalLines": 1209,
+      "totalLines": 1223,
       "hasStructuralAnalysis": true
     },
     "App/ai/motion_ai.h": {
@@ -669,14 +693,14 @@
     },
     "App/lt_screen/lt_screen_task.c": {
       "filePath": "App/lt_screen/lt_screen_task.c",
-      "contentHash": "da4fb6eb5f118af5fc53066cb526bd7aeffe9776294150312aa6c15077de09a1",
+      "contentHash": "cf4f37bb3798d1d14361a62762cccc471d2caa7971937a4affdb03797c174dae",
       "functions": [
         {
           "name": "LTScreenTask_Run",
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 54
+          "lineCount": 56
         },
         {
           "name": "LTScreen_HandleTouchEvent",
@@ -739,6 +763,18 @@
           ]
         },
         {
+          "source": "motion_sensor_pipeline.h",
+          "specifiers": [
+            "motion_sensor_pipeline.h"
+          ]
+        },
+        {
+          "source": "motion_task.h",
+          "specifiers": [
+            "motion_task.h"
+          ]
+        },
+        {
           "source": "onenet.h",
           "specifiers": [
             "onenet.h"
@@ -748,6 +784,12 @@
           "source": "ota_service.h",
           "specifiers": [
             "ota_service.h"
+          ]
+        },
+        {
+          "source": "tim.h",
+          "specifiers": [
+            "tim.h"
           ]
         },
         {
@@ -773,7 +815,7 @@
         "LTScreenTask_Run",
         "LTScreen_HandleTouchEvent"
       ],
-      "totalLines": 611,
+      "totalLines": 866,
       "hasStructuralAnalysis": true
     },
     "App/lt_screen/lt_screen_task.h": {
@@ -994,7 +1036,7 @@
     },
     "App/motion/motion_input.c": {
       "filePath": "App/motion/motion_input.c",
-      "contentHash": "4a44b197b621bd1c2ea24c325c796633b6c244879291cf0baba250a926b8accb",
+      "contentHash": "cb758091bb052010d9d4eddb27e722dadfb49025b2b546e48612cb7a4ce7ca73",
       "functions": [
         {
           "name": "reset_pose_pipeline",
@@ -1008,7 +1050,14 @@
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 26
+          "lineCount": 33
+        },
+        {
+          "name": "Motion_RequestStartFromIsr",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 20
         },
         {
           "name": "Motion_RequestStop",
@@ -1030,6 +1079,27 @@
           "returnType": "uint8_t",
           "exported": true,
           "lineCount": 14
+        },
+        {
+          "name": "Motion_TakeStartFromIsrRequest",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "Motion_TakeUpperCaptureResetRequest",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "Motion_ResetUpperCaptureInput",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 17
         },
         {
           "name": "Motion_TakeStopRequest",
@@ -1063,6 +1133,12 @@
           "source": "FreeRTOS.h",
           "specifiers": [
             "FreeRTOS.h"
+          ]
+        },
+        {
+          "source": "cmsis_os2.h",
+          "specifiers": [
+            "cmsis_os2.h"
           ]
         },
         {
@@ -1100,42 +1176,61 @@
           "specifiers": [
             "onenet.h"
           ]
+        },
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
         }
       ],
       "exports": [
         "Motion_RequestStart",
+        "Motion_RequestStartFromIsr",
         "Motion_RequestStop",
         "Motion_RequestClear",
         "Motion_TakeRestartRequest",
+        "Motion_TakeStartFromIsrRequest",
+        "Motion_TakeUpperCaptureResetRequest",
+        "Motion_ResetUpperCaptureInput",
         "Motion_TakeStopRequest"
       ],
-      "totalLines": 97,
+      "totalLines": 179,
       "hasStructuralAnalysis": true
     },
     "App/motion/motion_input.h": {
       "filePath": "App/motion/motion_input.h",
-      "contentHash": "7e6dd76c9d65410c4f173acf48ef8b9bb23d853b5e271ff3bca48732bbac85b0",
+      "contentHash": "34ced5eed7fa3d415aa73b0c12c084080ecc7f07232f7aadcde8a72039fb831f",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 26,
+      "totalLines": 34,
       "hasStructuralAnalysis": true
     },
     "App/motion/motion_mode.h": {
       "filePath": "App/motion/motion_mode.h",
-      "contentHash": "9474cb4913bbdb1c58fd0cd7c6484ca9bb256b035a28ac63c91173b29005cd25",
+      "contentHash": "00598faefd28fb23a63234b1d9eef4a765f5d3041231d543b3b7267cd267c7bb",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 35,
+      "totalLines": 40,
       "hasStructuralAnalysis": true
     },
     "App/motion/motion_sensor_pipeline.c": {
       "filePath": "App/motion/motion_sensor_pipeline.c",
-      "contentHash": "7a34a8798f107f348b0cfe29d372b4f4fa4dc96142374dacc8fcdc15888cae55",
+      "contentHash": "4635305e71cdaad5fabdb951d30f0ce6b6eca2caf6b6f72d82e2a5afdf42915e",
       "functions": [
+        {
+          "name": "motion_absf",
+          "params": [
+            "value"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 4
+        },
         {
           "name": "parse_u32_token",
           "params": [
@@ -1211,7 +1306,7 @@
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 50
+          "lineCount": 79
         },
         {
           "name": "MotionSensorPipeline_StorePacketFromIsr",
@@ -1255,7 +1350,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 36
+          "lineCount": 57
         },
         {
           "name": "Motion_ProcessPendingPosePackets",
@@ -1265,11 +1360,101 @@
           "lineCount": 22
         },
         {
+          "name": "MotionSensorPipeline_RequestCalibration",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "MotionSensorPipeline_RequestUpperCalibration",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionSensorPipeline_CalibrationTickFromIsr",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 64
+        },
+        {
+          "name": "MotionSensorPipeline_IsUpperCalibrationActive",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionSensorPipeline_IsCalibrationActive",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionSensorPipeline_IsUpperCalibrationDone",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionSensorPipeline_IsCalibrationDone",
+          "params": [],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "MotionSensorPipeline_TakeCalibrationReport",
+          "params": [
+            "out_fore_yaw",
+            "out_fore_pitch",
+            "out_fore_roll",
+            "out_upper_yaw",
+            "out_upper_pitch",
+            "out_upper_roll"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "MotionSensorPipeline_TakeUpperCalibrationReport",
+          "params": [
+            "out_yaw",
+            "out_pitch",
+            "out_roll"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 29
+        },
+        {
+          "name": "MotionSensorPipeline_SetUpperOnly",
+          "params": [
+            "enable"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "MotionSensorPipeline_ResetUpperCapture",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
           "name": "MotionSensorPipeline_Reset",
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 38
+          "lineCount": 46
         }
       ],
       "classes": [],
@@ -1339,25 +1524,45 @@
         "MotionSensorPipeline_StorePacketFromIsr",
         "MotionSensorPipeline_TakeFusedFrame",
         "Motion_ProcessPendingPosePackets",
+        "MotionSensorPipeline_RequestCalibration",
+        "MotionSensorPipeline_RequestUpperCalibration",
+        "MotionSensorPipeline_CalibrationTickFromIsr",
+        "MotionSensorPipeline_IsUpperCalibrationActive",
+        "MotionSensorPipeline_IsCalibrationActive",
+        "MotionSensorPipeline_IsUpperCalibrationDone",
+        "MotionSensorPipeline_IsCalibrationDone",
+        "MotionSensorPipeline_TakeCalibrationReport",
+        "MotionSensorPipeline_TakeUpperCalibrationReport",
+        "MotionSensorPipeline_SetUpperOnly",
+        "MotionSensorPipeline_ResetUpperCapture",
         "MotionSensorPipeline_Reset"
       ],
-      "totalLines": 628,
+      "totalLines": 948,
       "hasStructuralAnalysis": true
     },
     "App/motion/motion_sensor_pipeline.h": {
       "filePath": "App/motion/motion_sensor_pipeline.h",
-      "contentHash": "73a3bd3a0791d1b92f012a227d07ecc675c40beca0c071e79b65fcced87a5e14",
+      "contentHash": "2006839acbc79d5a20a81d6afbfc12bf510dcedba7527224a61814cfbf576202",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 29,
+      "totalLines": 49,
       "hasStructuralAnalysis": true
     },
     "App/motion/motion_task.c": {
       "filePath": "App/motion/motion_task.c",
-      "contentHash": "efa9b9ff8e1ceafbf49004ec317807120dd379512594c12af053b01ba70308f2",
+      "contentHash": "1f64301deda4e487742d2d6f6d85c309c43acc8b15781d6892b06bf85bd77134",
       "functions": [
+        {
+          "name": "MotionTask_GetLatestForeBio",
+          "params": [
+            "out_bio"
+          ],
+          "returnType": "uint8_t",
+          "exported": true,
+          "lineCount": 19
+        },
         {
           "name": "task1_consume_ai_restart_request",
           "params": [],
@@ -1382,6 +1587,15 @@
           "lineCount": 4
         },
         {
+          "name": "task1_mode_uses_upper_only",
+          "params": [
+            "mode"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
           "name": "task1_try_run_model_window_test",
           "params": [],
           "returnType": "uint8_t",
@@ -1398,6 +1612,27 @@
           "lineCount": 4
         },
         {
+          "name": "task1_upper_capture_output_reset",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "task1_output_calibration_report_uart4",
+          "params": [
+            "fore_yaw",
+            "fore_pitch",
+            "fore_roll",
+            "upper_yaw",
+            "upper_pitch",
+            "upper_roll"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
           "name": "task1_output_state_reset",
           "params": [
             "mode",
@@ -1405,7 +1640,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 34
+          "lineCount": 36
         },
         {
           "name": "task1_reset_recognition_state",
@@ -1430,7 +1665,25 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 102
+          "lineCount": 114
+        },
+        {
+          "name": "task1_update_latest_fore_bio",
+          "params": [
+            "frame"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "task1_output_upper_capture_csv",
+          "params": [
+            "frame"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 30
         },
         {
           "name": "task1_handle_local_fall_result",
@@ -1448,7 +1701,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 25
+          "lineCount": 22
         },
         {
           "name": "task1_output_bio_capture_csv",
@@ -1494,7 +1747,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 120
+          "lineCount": 116
         },
         {
           "name": "task1_output_rule_debug",
@@ -1504,7 +1757,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 84
+          "lineCount": 41
         },
         {
           "name": "task1_bio_value_or_invalid",
@@ -1521,7 +1774,7 @@
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 82
+          "lineCount": 123
         }
       ],
       "classes": [],
@@ -1621,22 +1874,29 @@
           "specifiers": [
             "uart7_role.h"
           ]
+        },
+        {
+          "source": "usart.h",
+          "specifiers": [
+            "usart.h"
+          ]
         }
       ],
       "exports": [
+        "MotionTask_GetLatestForeBio",
         "MotionTask_Run"
       ],
-      "totalLines": 751,
+      "totalLines": 881,
       "hasStructuralAnalysis": true
     },
     "App/motion/motion_task.h": {
       "filePath": "App/motion/motion_task.h",
-      "contentHash": "f3c668ef2ec7f6847070714092b48b057ec5cf6c4727808dfa11e4705a858564",
+      "contentHash": "7dd2c2498abcdb8545d0f2a65656fbcbc00311d80bf621256f388f6a42de7c60",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 16,
+      "totalLines": 24,
       "hasStructuralAnalysis": true
     },
     "App/motion/motion_window_test.c": {
@@ -1736,12 +1996,12 @@
     },
     "App/ota/ota_config.h": {
       "filePath": "App/ota/ota_config.h",
-      "contentHash": "4145290248dc8b6f1771e71253136c8c6f56250b50551dbd3b4ef97364a81e3e",
+      "contentHash": "ef2bcd4dda42e8b7e4015447e861880e9ebc2a43eb75062ba45dc9ace7137660",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 37,
+      "totalLines": 40,
       "hasStructuralAnalysis": true
     },
     "App/ota/ota_http.c": {
@@ -1850,7 +2110,7 @@
     },
     "App/ota/ota_service.c": {
       "filePath": "App/ota/ota_service.c",
-      "contentHash": "f0cbbd0126ffce7206552c412fec7362bc9b0c683863f14484947fedba9a302f",
+      "contentHash": "4c8e8382bea2a1bb0b4d7cdea872f8426b10717ebd030b604c26642244d56af5",
       "functions": [
         {
           "name": "OTAService_CopyJsonBody",
@@ -1918,11 +2178,41 @@
           "lineCount": 11
         },
         {
+          "name": "OTAService_IsVersionTextValid",
+          "params": [
+            "version"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "OTAService_LoadRunningVersion",
+          "params": [
+            "out_version",
+            "version_size"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 35
+        },
+        {
           "name": "OTAService_SyncRunningVersion",
           "params": [],
           "returnType": "void",
           "exported": false,
-          "lineCount": 7
+          "lineCount": 9
+        },
+        {
+          "name": "OTAService_MakeNextSimulateVersion",
+          "params": [
+            "current_version",
+            "out_version",
+            "version_size"
+          ],
+          "returnType": "int",
+          "exported": false,
+          "lineCount": 46
         },
         {
           "name": "OTAService_GetReportVersion",
@@ -2021,7 +2311,7 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 55
+          "lineCount": 69
         },
         {
           "name": "OTAService_StartSimulateUpdate",
@@ -2030,14 +2320,14 @@
           ],
           "returnType": "int",
           "exported": true,
-          "lineCount": 9
+          "lineCount": 22
         },
         {
           "name": "OTAService_ReportConfiguredVersion",
           "params": [],
           "returnType": "int",
           "exported": true,
-          "lineCount": 15
+          "lineCount": 18
         },
         {
           "name": "OTAService_ReportPendingSimulateVersion",
@@ -2051,7 +2341,7 @@
           "params": [],
           "returnType": "int",
           "exported": true,
-          "lineCount": 78
+          "lineCount": 89
         }
       ],
       "classes": [],
@@ -2154,7 +2444,7 @@
         "OTAService_ReportPendingSimulateVersion",
         "OTAService_CheckOnce"
       ],
-      "totalLines": 823,
+      "totalLines": 988,
       "hasStructuralAnalysis": true
     },
     "App/ota/ota_service.h": {
@@ -2169,7 +2459,7 @@
     },
     "App/rule action/rule_action_recognizer.c": {
       "filePath": "App/rule action/rule_action_recognizer.c",
-      "contentHash": "b85742057ed9b263e4e789bc6d74c8490ec98ecf23a3d9b5374e05ef52d36fea",
+      "contentHash": "022fbf08fb574fcedc5f3bb583630c95b82a038c71137d67872eccb5370e12fb",
       "functions": [
         {
           "name": "RuleConfig_LoadDefault",
@@ -2178,7 +2468,7 @@
           ],
           "returnType": "void",
           "exported": true,
-          "lineCount": 25
+          "lineCount": 29
         },
         {
           "name": "RuleEngine_Init",
@@ -2188,7 +2478,7 @@
           ],
           "returnType": "void",
           "exported": true,
-          "lineCount": 17
+          "lineCount": 16
         },
         {
           "name": "RuleEngine_ResetSession",
@@ -2197,30 +2487,7 @@
           ],
           "returnType": "void",
           "exported": true,
-          "lineCount": 15
-        },
-        {
-          "name": "RuleEngine_SetTemplates",
-          "params": [
-            "eng",
-            "templates",
-            "template_count"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 21
-        },
-        {
-          "name": "RuleEngine_Update",
-          "params": [
-            "eng",
-            "raw",
-            "motion_energy",
-            "now_ms"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 162
+          "lineCount": 14
         },
         {
           "name": "RuleEngine_ProcessRaw",
@@ -2231,138 +2498,7 @@
           ],
           "returnType": "void",
           "exported": true,
-          "lineCount": 15
-        },
-        {
-          "name": "Rule_ComputeMotionEnergy",
-          "params": [
-            "eng",
-            "raw"
-          ],
-          "returnType": "float",
-          "exported": true,
-          "lineCount": 32
-        },
-        {
-          "name": "Rule_UpdateAmplitudeStats",
-          "params": [
-            "session",
-            "delta"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 45
-        },
-        {
-          "name": "Rule_UpdatePeakStats",
-          "params": [
-            "session",
-            "delta"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 19
-        },
-        {
-          "name": "Rule_ShouldEnterPeakHold",
-          "params": [
-            "eng"
-          ],
-          "returnType": "uint8_t",
-          "exported": true,
-          "lineCount": 44
-        },
-        {
-          "name": "Rule_ShouldExitPeakHold",
-          "params": [
-            "eng"
-          ],
-          "returnType": "uint8_t",
-          "exported": true,
-          "lineCount": 42
-        },
-        {
-          "name": "Rule_IsActionReturned",
-          "params": [
-            "eng"
-          ],
-          "returnType": "uint8_t",
-          "exported": true,
-          "lineCount": 34
-        },
-        {
-          "name": "Rule_FilterTemplate",
-          "params": [
-            "session",
-            "tmpl"
-          ],
-          "returnType": "uint8_t",
-          "exported": true,
-          "lineCount": 55
-        },
-        {
-          "name": "Rule_ComputeTemplateMatchScore",
-          "params": [
-            "session",
-            "tmpl",
-            "amp_distance",
-            "peak_distance"
-          ],
-          "returnType": "float",
-          "exported": true,
-          "lineCount": 58
-        },
-        {
-          "name": "Rule_RecognizeAction",
-          "params": [
-            "session",
-            "templates",
-            "template_count",
-            "out_result"
-          ],
-          "returnType": "ActionType",
-          "exported": true,
-          "lineCount": 103
-        },
-        {
-          "name": "Rule_ScoreCompleteness",
-          "params": [
-            "session"
-          ],
-          "returnType": "uint16_t",
-          "exported": true,
-          "lineCount": 18
-        },
-        {
-          "name": "Rule_ScoreAmplitude",
-          "params": [
-            "session",
-            "tmpl"
-          ],
-          "returnType": "uint16_t",
-          "exported": true,
-          "lineCount": 52
-        },
-        {
-          "name": "Rule_ScorePeakHold",
-          "params": [
-            "session",
-            "tmpl"
-          ],
-          "returnType": "uint16_t",
-          "exported": true,
-          "lineCount": 55
-        },
-        {
-          "name": "Rule_EvaluateResult",
-          "params": [
-            "cfg",
-            "session",
-            "out_result"
-          ],
-          "returnType": "void",
-          "exported": true,
-          "lineCount": 46
+          "lineCount": 215
         },
         {
           "name": "rule_absf",
@@ -2384,14 +2520,13 @@
           "lineCount": 4
         },
         {
-          "name": "rule_minf",
+          "name": "rule_normalize_angle_delta",
           "params": [
-            "a",
-            "b"
+            "value"
           ],
           "returnType": "float",
           "exported": false,
-          "lineCount": 4
+          "lineCount": 13
         },
         {
           "name": "rule_elapsed_ms",
@@ -2404,39 +2539,24 @@
           "lineCount": 4
         },
         {
-          "name": "rule_normalize_linear",
+          "name": "rule_median_values",
           "params": [
-            "value",
-            "min_value",
-            "max_value"
+            "values",
+            "count"
           ],
           "returnType": "float",
           "exported": false,
-          "lineCount": 19
+          "lineCount": 40
         },
         {
-          "name": "rule_scale_score",
+          "name": "rule_pose_offset",
           "params": [
-            "value",
-            "in_min",
-            "in_max",
-            "out_min",
-            "out_max"
+            "pose",
+            "base"
           ],
-          "returnType": "uint16_t",
+          "returnType": "float",
           "exported": false,
-          "lineCount": 25
-        },
-        {
-          "name": "rule_value_in_range",
-          "params": [
-            "value",
-            "min_value",
-            "max_value"
-          ],
-          "returnType": "uint8_t",
-          "exported": false,
-          "lineCount": 15
+          "lineCount": 14
         },
         {
           "name": "rule_reset_result",
@@ -2445,35 +2565,65 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 16
-        },
-        {
-          "name": "rule_copy_result_features",
-          "params": [
-            "result",
-            "session"
-          ],
-          "returnType": "void",
-          "exported": false,
           "lineCount": 12
         },
         {
-          "name": "rule_reset_static_accumulator",
+          "name": "rule_reset_static_window",
           "params": [
-            "eng"
+            "eng",
+            "now_ms"
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 10
+          "lineCount": 14
         },
         {
-          "name": "rule_compute_delta",
+          "name": "rule_enter_state",
+          "params": [
+            "eng",
+            "state"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "rule_enter_recover",
           "params": [
             "eng"
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 9
+          "lineCount": 7
+        },
+        {
+          "name": "rule_enter_wait_static",
+          "params": [
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "rule_update_pose",
+          "params": [
+            "eng",
+            "raw",
+            "now_ms"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 45
+        },
+        {
+          "name": "rule_update_delta",
+          "params": [
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 17
         },
         {
           "name": "rule_lock_baseline",
@@ -2482,65 +2632,117 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 19
+          "lineCount": 28
         },
         {
-          "name": "rule_update_static_candidate",
+          "name": "rule_store_pretrigger",
           "params": [
-            "eng",
-            "raw"
+            "eng"
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 24
+          "lineCount": 16
         },
         {
-          "name": "rule_store_session_frame",
+          "name": "rule_append_session_sample",
           "params": [
             "session",
-            "raw",
-            "delta"
-          ],
-          "returnType": "void",
-          "exported": false,
-          "lineCount": 13
-        },
-        {
-          "name": "rule_begin_action",
-          "params": [
-            "eng"
-          ],
-          "returnType": "void",
-          "exported": false,
-          "lineCount": 20
-        },
-        {
-          "name": "rule_finalize_action",
-          "params": [
-            "eng",
-            "returned_to_static"
-          ],
-          "returnType": "void",
-          "exported": false,
-          "lineCount": 43
-        },
-        {
-          "name": "rule_session_timed_out",
-          "params": [
-            "eng"
+            "sample"
           ],
           "returnType": "uint8_t",
           "exported": false,
           "lineCount": 14
         },
         {
-          "name": "rule_find_dominant_axis",
+          "name": "rule_begin_recording",
+          "params": [
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "rule_sample_offset",
+          "params": [
+            "sample",
+            "base"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "rule_median_axis",
+          "params": [
+            "session",
+            "start_index",
+            "end_index",
+            "axis"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 37
+        },
+        {
+          "name": "rule_find_top_window",
+          "params": [
+            "eng",
+            "out_start_index",
+            "out_end_index"
+          ],
+          "returnType": "uint8_t",
+          "exported": false,
+          "lineCount": 69
+        },
+        {
+          "name": "rule_side_direction_match",
           "params": [
             "session"
           ],
-          "returnType": "AxisIndex",
+          "returnType": "uint8_t",
           "exported": false,
-          "lineCount": 25
+          "lineCount": 48
+        },
+        {
+          "name": "rule_template_distance",
+          "params": [
+            "session",
+            "tmpl"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 36
+        },
+        {
+          "name": "rule_classify_action",
+          "params": [
+            "session",
+            "out_best_distance",
+            "out_second_distance"
+          ],
+          "returnType": "ActionType",
+          "exported": false,
+          "lineCount": 36
+        },
+        {
+          "name": "rule_copy_result",
+          "params": [
+            "session",
+            "result"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "rule_analyze_session",
+          "params": [
+            "eng"
+          ],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 93
         }
       ],
       "classes": [],
@@ -2568,34 +2770,19 @@
         "RuleConfig_LoadDefault",
         "RuleEngine_Init",
         "RuleEngine_ResetSession",
-        "RuleEngine_SetTemplates",
-        "RuleEngine_Update",
-        "RuleEngine_ProcessRaw",
-        "Rule_ComputeMotionEnergy",
-        "Rule_UpdateAmplitudeStats",
-        "Rule_UpdatePeakStats",
-        "Rule_ShouldEnterPeakHold",
-        "Rule_ShouldExitPeakHold",
-        "Rule_IsActionReturned",
-        "Rule_FilterTemplate",
-        "Rule_ComputeTemplateMatchScore",
-        "Rule_RecognizeAction",
-        "Rule_ScoreCompleteness",
-        "Rule_ScoreAmplitude",
-        "Rule_ScorePeakHold",
-        "Rule_EvaluateResult"
+        "RuleEngine_ProcessRaw"
       ],
-      "totalLines": 1412,
+      "totalLines": 1105,
       "hasStructuralAnalysis": true
     },
     "App/rule action/rule_action_recognizer.h": {
       "filePath": "App/rule action/rule_action_recognizer.h",
-      "contentHash": "53c46e54440891347a1785a0ca1ce95f01def73463284b38d7e728fa66c04c2f",
+      "contentHash": "f1b82138a156d50cb253606f01a617fa29ac3a56c6b39dbc0b8137f676f2ce5b",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 332,
+      "totalLines": 263,
       "hasStructuralAnalysis": true
     },
     "BSP/cloud/MqttKit.c": {
@@ -2809,7 +2996,7 @@
     },
     "BSP/cloud/onenet.c": {
       "filePath": "BSP/cloud/onenet.c",
-      "contentHash": "63717662d45de15c5342e9f593bd8b316a12bb5c8a57f40624effdec1470a19c",
+      "contentHash": "3a57468ca416f00f7e68e5cd97c58eee69a42ec3f07701f327ffe4e13a3ef540",
       "functions": [
         {
           "name": "OneNet_ResetTrainDisplayFromPlan",
@@ -2932,7 +3119,7 @@
           ],
           "returnType": "uint8_t",
           "exported": false,
-          "lineCount": 14
+          "lineCount": 19
         },
         {
           "name": "OneNet_PublishRaw",
@@ -3058,6 +3245,15 @@
           "lineCount": 17
         },
         {
+          "name": "OneNet_RequestDoorStatePost",
+          "params": [
+            "is_open"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
           "name": "OneNet_PostPendingFallAlarm",
           "params": [],
           "returnType": "uint8_t",
@@ -3134,7 +3330,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 14
+          "lineCount": 17
         },
         {
           "name": "OneNet_ApplyFallAlarmProperty",
@@ -3161,7 +3357,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 33
+          "lineCount": 35
         },
         {
           "name": "OneNet_ApplyTrainPlanProperty",
@@ -3221,7 +3417,7 @@
           "params": [],
           "returnType": "uint8_t",
           "exported": true,
-          "lineCount": 31
+          "lineCount": 39
         },
         {
           "name": "OneNet_RevPro",
@@ -3320,6 +3516,12 @@
           ]
         },
         {
+          "source": "lt_screen_task.h",
+          "specifiers": [
+            "lt_screen_task.h"
+          ]
+        },
+        {
           "source": "motion_ai.h",
           "specifiers": [
             "motion_ai.h"
@@ -3357,6 +3559,7 @@
         "OneNet_UpdateTrainDisplayByAction",
         "OneNet_PostPendingTrainPlan",
         "OneNet_PostPendingDoorState",
+        "OneNet_RequestDoorStatePost",
         "OneNet_PostPendingFallAlarm",
         "OneNet_DevLink",
         "OneNet_Subscribe",
@@ -3369,17 +3572,17 @@
         "OneNet_GetLastStatus",
         "OneNet_GetLastConnAckCode"
       ],
-      "totalLines": 1395,
+      "totalLines": 1421,
       "hasStructuralAnalysis": true
     },
     "BSP/cloud/onenet.h": {
       "filePath": "BSP/cloud/onenet.h",
-      "contentHash": "7b60570911eb42d94c6d45c1563f790005b7fba6306dfc882e77fffced912172",
+      "contentHash": "f7b82f7d18f04dc371244d3347f6cee4c60022fe66f8be40178fb9fff0de2625",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 110,
+      "totalLines": 114,
       "hasStructuralAnalysis": true
     },
     "BSP/debug_uart/debug_uart7.c": {
@@ -4953,12 +5156,12 @@
     },
     "Core/Inc/main.h": {
       "filePath": "Core/Inc/main.h",
-      "contentHash": "7e143bf57a71b36095574d67552177240f257686d146e64d44d3ecce4f637d9b",
+      "contentHash": "cb696fbcbd3d47de201e31c20bc37b65f446d9fcb762c0f8e403bf0305c55253",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 74,
+      "totalLines": 78,
       "hasStructuralAnalysis": true
     },
     "Core/Inc/RTE_Components.h": {
@@ -5430,14 +5633,14 @@
     },
     "Core/Src/gpio.c": {
       "filePath": "Core/Src/gpio.c",
-      "contentHash": "265ee0c59baf1e038d0a2e5ec98204992f95c7247f8075c12888c44cf4edd72e",
+      "contentHash": "da5a1f10ef49f11a884a7a2cf40f635b28ce23c7d1ee6b1de87d1c8e19bd4363",
       "functions": [
         {
           "name": "MX_GPIO_Init",
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 10
+          "lineCount": 25
         }
       ],
       "classes": [],
@@ -5452,7 +5655,7 @@
       "exports": [
         "MX_GPIO_Init"
       ],
-      "totalLines": 54,
+      "totalLines": 69,
       "hasStructuralAnalysis": true
     },
     "Core/Src/internal_flash.c": {
@@ -5761,7 +5964,7 @@
     },
     "Core/Src/stm32h7xx_it.c": {
       "filePath": "Core/Src/stm32h7xx_it.c",
-      "contentHash": "3c7e571fceb5a69468a7c9b3a14f032d8d7c8628ab1bfa48d2caf6fedc751e75",
+      "contentHash": "9b92ca2116dee612ec5cf2aff18f8bc82814dcaed2a87293b1df449e77040757",
       "functions": [
         {
           "name": "NMI_Handler",
@@ -5845,7 +6048,7 @@
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 9
+          "lineCount": 10
         },
         {
           "name": "USART1_IRQHandler",
@@ -5897,7 +6100,7 @@
           ],
           "returnType": "void",
           "exported": false,
-          "lineCount": 47
+          "lineCount": 51
         }
       ],
       "classes": [],
@@ -5977,7 +6180,7 @@
         "USART6_IRQHandler",
         "UART7_IRQHandler"
       ],
-      "totalLines": 469,
+      "totalLines": 474,
       "hasStructuralAnalysis": true
     },
     "Core/Src/system_stm32h7xx.c": {
@@ -6031,7 +6234,7 @@
     },
     "Core/Src/tim.c": {
       "filePath": "Core/Src/tim.c",
-      "contentHash": "b546a7640952836c20400b25619d02e89bedfe8f104e9580d7be131a84b3c419",
+      "contentHash": "f36c2c5a1dbb0a1c504e8d94bc054cbcb952f9ef15682a5230adc14b7fcd1e6c",
       "functions": [
         {
           "name": "Servo_AngleToPulseUs",
@@ -6182,12 +6385,12 @@
         "Servo_SetDoorByCloudValue",
         "Servo_GetDoorState"
       ],
-      "totalLines": 323,
+      "totalLines": 326,
       "hasStructuralAnalysis": true
     },
     "Core/Src/usart.c": {
       "filePath": "Core/Src/usart.c",
-      "contentHash": "8066ccaebd766a172ff28f6f0e8e000fc52d96f4545319cd146daf673de5de86",
+      "contentHash": "34c418847493b158bb1a33346bfa4ee72eccdc2107df683401165c0cb6e0bacb",
       "functions": [
         {
           "name": "USART6_FeedRxDmaRing",
@@ -6248,7 +6451,7 @@
           ],
           "returnType": "void",
           "exported": true,
-          "lineCount": 304
+          "lineCount": 312
         },
         {
           "name": "HAL_UART_MspDeInit",
@@ -6324,7 +6527,7 @@
         "HAL_UART_RxCpltCallback",
         "HAL_UARTEx_RxEventCallback"
       ],
-      "totalLines": 832,
+      "totalLines": 840,
       "hasStructuralAnalysis": true
     },
     "docs/2026-05-31-H743项目脉络补充.md": {
@@ -6336,6 +6539,16 @@
       "exports": [],
       "totalLines": 446,
       "hasStructuralAnalysis": true
+    },
+    "docs/h743_module_pins.csv": {
+      "filePath": "docs/h743_module_pins.csv",
+      "contentHash": "eee4722cd4a50c1f65e556f6b1655d347d5e9fbdd19fa24f333127af14a470b4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": false
     },
     "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx": {
       "filePath": "docs/H743资料包/note/~$STM32H743ZIT6_引脚排针精华表.xlsx",
@@ -6419,12 +6632,12 @@
     },
     "Master.ioc": {
       "filePath": "Master.ioc",
-      "contentHash": "9fa984c1f2acaeb0aea3d24b25356eda8158be5ddccb7b790746614aeed88145",
+      "contentHash": "7e5e74308f903ead1cd72e22afdced786f03e55cc035ef1c95089d45a6af5940",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 568,
+      "totalLines": 578,
       "hasStructuralAnalysis": false
     },
     "SYSTEM/delay/delay.c": {

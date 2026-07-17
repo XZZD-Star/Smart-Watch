@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    {"id":"document:docs/2026-05-31-H743项目脉络补充.md","type":"document","name":"2026-05-31-H743项目脉络补充.md","filePath":"docs/2026-05-31-H743项目脉络补充.md","summary":"系统梳理 H743 固件总体架构、FreeRTOS 任务分工、运动识别与 AI/规则链路、OneNet 云流程及屏幕刷新边界。","tags":["documentation","系统架构","数据流","freertos","onenet"],"complexity":"complex"},
+    {"id":"document:docs/W25Q128_Bootloader_App_第一版最小跑通方案.md","type":"document","name":"W25Q128_Bootloader_App_第一版最小跑通方案.md","filePath":"docs/W25Q128_Bootloader_App_第一版最小跑通方案.md","summary":"给出 W25Q128 外部 Flash 与 Bootloader/App 分区的最小验证方案，涵盖地址规划、跳转模板、下载步骤和常见风险。","tags":["documentation","bootloader","w25q128","flash-分区","验证方案"],"complexity":"complex"},
+    {"id":"table:docs/h743_module_pins.csv:h743_module_pins","type":"table","name":"h743_module_pins","filePath":"docs/h743_module_pins.csv","summary":"汇总 H743 主控的时钟、串口、PWM、W25Q128、DMA 等模块与 MCU 引脚、初始化入口和源码依据的对应关系。","tags":["硬件映射","引脚表","外设配置","参考数据"],"complexity":"moderate"},
+    {"id":"document:docs/lt168b_ota_mqtt_change_plan_2026-06-25.md","type":"document","name":"lt168b_ota_mqtt_change_plan_2026-06-25.md","filePath":"docs/lt168b_ota_mqtt_change_plan_2026-06-25.md","summary":"记录 LT168B 屏幕与 ESP8266、OTA、MQTT 联动的修订方案，核对现有键值、页面地址、OTA 独占机制和推荐修改顺序。","tags":["documentation","lt168b","ota","mqtt","修改方案"],"complexity":"moderate"}
+  ],
+  "edges": []
+}
