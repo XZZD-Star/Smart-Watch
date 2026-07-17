@@ -100,7 +100,7 @@ static volatile float fore_calibration_report_pitch = 0.0f;
 static volatile float fore_calibration_report_roll = 0.0f;
 
 static volatile uint8_t fused_row_ready = 0U;
-static motion_fused_frame_t fused_frame = {0};
+motion_fused_frame_t fused_frame = {0};
 static uint8_t upper_only_enabled = 0U;
 
 static char *trim_spaces(char *s);

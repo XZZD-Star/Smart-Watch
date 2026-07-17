@@ -29,6 +29,7 @@
 #include "usart.h"
 #include "motion_input.h"
 #include "motion_sensor_pipeline.h"
+#include "rule_action_recognizer.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,6 +54,7 @@
 /* USER CODE BEGIN PFP */
 static void motion_uart4_handle_command(const uint8_t *buf, uint16_t len);
 
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -73,6 +75,7 @@ extern UART_HandleTypeDef huart3;
 extern UART_HandleTypeDef huart6;
 extern UART_HandleTypeDef huart7;
 extern TIM_HandleTypeDef htim1;
+extern motion_fused_frame_t fused_frame;
 
 /* USER CODE BEGIN EV */
 /* USER CODE END EV */
@@ -252,6 +255,12 @@ void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
   MotionSensorPipeline_CalibrationTickFromIsr();
+	
+//	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && fused_frame.upper_roll > 5 && fused_frame.upper_roll < 70&& ceping_flag == 0)
+//	{
+//		ceping_t1++;
+//		
+//	}
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */

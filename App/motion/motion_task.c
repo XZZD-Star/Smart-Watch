@@ -14,7 +14,6 @@
 #include "motion_sensor_pipeline.h"
 #include "motion_window_test.h"
 #include "onenet.h"
-#include "rule_action_recognizer.h"
 #include "uart7_role.h"
 #include "usart.h"
 
@@ -40,7 +39,7 @@ static void task1_output_uart_debug_once(void);
 static void task1_output_recognition_csv(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
 static void task1_output_single_once_event(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
 static void task1_output_brief_result(const motion_fused_frame_t *frame, const motion_ai_result_t *result);
-static void task1_output_rule_debug(const motion_fused_frame_t *frame, const RuleEngine *eng);
+static void task1_output_rule_debug_placeholder(const motion_fused_frame_t *frame);
 static void task1_output_calibration_report_uart4(float fore_yaw,
                                                   float fore_pitch,
                                                   float fore_roll,
@@ -49,7 +48,6 @@ static void task1_output_calibration_report_uart4(float fore_yaw,
                                                   float upper_roll);
 static int32_t task1_bio_value_or_invalid(int32_t value, int8_t valid);
 
-static RuleEngine g_task1_rule_engine;
 typedef struct
 {
   motion_output_mode_t last_mode;
@@ -61,7 +59,6 @@ typedef struct
   uint8_t uart_debug_reported;
   uint8_t recognition_header_printed;
   uint8_t rule_header_printed;
-  RuleState rule_last_state;
   uint8_t recognition_done_reported;
   uint8_t brief_last_infer_count;
   uint8_t brief_final_reported;
@@ -76,7 +73,6 @@ volatile uint8_t g_motion_single_armed = 0U;
 static motion_output_state_t g_task1_output_state =
 {
   .last_mode = (motion_output_mode_t)0xFF,
-  .rule_last_state = (RuleState)0xFF,
   .single_once_last_state = (motion_ai_state_t)0xFF
 };
 static motion_bio_sample_t g_task1_latest_fore_bio = {0};
@@ -190,7 +186,6 @@ static void task1_output_state_reset(motion_output_mode_t mode, uint8_t fresh_se
   g_task1_output_state.uart_debug_reported = 0U;
   g_task1_output_state.recognition_header_printed = 0U;
   g_task1_output_state.rule_header_printed = 0U;
-  g_task1_output_state.rule_last_state = (RuleState)0xFF;
 
   if (mode == MOTION_OUTPUT_MODE_UART_DEBUG)
   {
@@ -221,7 +216,6 @@ static void task1_reset_recognition_state(void)
   /* start/clear、摔倒告警切换共用同一套复位流程，避免三处状态不同步。 */
   MotionAi_SetSingleTestEnabled(task1_mode_uses_single_test(g_motion_output_mode));
   MotionAi_Reset();
-  RuleEngine_Init(&g_task1_rule_engine, NULL);
   task1_output_state_reset(g_motion_output_mode, 1U);
 }
 
@@ -259,12 +253,6 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
   if (g_task1_output_state.last_mode != current_mode)
   {
     MotionAi_SetSingleTestEnabled(task1_mode_uses_single_test(current_mode));
-
-    if ((previous_mode == MOTION_OUTPUT_MODE_RULE_DEBUG) ||
-        (current_mode == MOTION_OUTPUT_MODE_RULE_DEBUG))
-    {
-      RuleEngine_Init(&g_task1_rule_engine, NULL);
-    }
 
     if ((previous_mode != (motion_output_mode_t)0xFF) &&
         (task1_mode_uses_single_test(previous_mode) !=
@@ -310,27 +298,11 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
       break;
 
     case MOTION_OUTPUT_MODE_RULE_DEBUG:
+      if (g_motion_single_armed == 0U)
       {
-        float raw[AXIS_COUNT];
-
-        if (g_motion_single_armed == 0U)
-        {
-          return;
-        }
-
-        raw[AXIS_UPPER_YAW] = frame->upper_yaw;
-        raw[AXIS_UPPER_PITCH] = frame->upper_pitch;
-        raw[AXIS_UPPER_ROLL] = frame->upper_roll;
-        raw[AXIS_FORE_YAW] = frame->fore_yaw;
-        raw[AXIS_FORE_PITCH] = frame->fore_pitch;
-        raw[AXIS_FORE_ROLL] = frame->fore_roll;
-
-        RuleEngine_ProcessRaw(
-          &g_task1_rule_engine,
-          raw,
-          (uint32_t)(frame->ts_us / 1000ULL));
-        task1_output_rule_debug(frame, &g_task1_rule_engine);
+        return;
       }
+      task1_output_rule_debug_placeholder(frame);
       break;
 
     default:
@@ -703,14 +675,9 @@ static void task1_output_single_once_event(
   g_task1_output_state.single_once_last_state = result->ai_state;
 }
 
-static void task1_output_rule_debug(
-  const motion_fused_frame_t *frame,
-  const RuleEngine *eng)
+static void task1_output_rule_debug_placeholder(const motion_fused_frame_t *frame)
 {
-  const ActionResult *result;
-  const char *result_name = "none";
-
-  if ((frame == NULL) || (eng == NULL))
+  if (frame == NULL)
   {
     return;
   }
@@ -718,31 +685,11 @@ static void task1_output_rule_debug(
   if (g_task1_output_state.rule_header_printed == 0U)
   {
     printf("ts_ms,event,value\r\n");
+    printf("%llu,STATE,%s\r\n",
+           (unsigned long long)(frame->ts_us / 1000ULL),
+           "RULE_INTERFACE_PENDING");
     g_task1_output_state.rule_header_printed = 1U;
   }
-
-  if (g_task1_output_state.rule_last_state == eng->state)
-  {
-    return;
-  }
-
-  result = RuleEngine_GetResult(eng);
-  if ((eng->state == RULE_STATE_DONE) &&
-      (result != NULL) &&
-      (result->valid != 0U))
-  {
-    result_name = Rule_ActionName(result->action);
-    printf("%llu,RESULT,%s\r\n",
-           (unsigned long long)(frame->ts_us / 1000ULL),
-           result_name);
-    g_task1_output_state.rule_last_state = eng->state;
-    return;
-  }
-
-  printf("%llu,STATE,%s\r\n",
-         (unsigned long long)(frame->ts_us / 1000ULL),
-         Rule_StateName(eng->state));
-  g_task1_output_state.rule_last_state = eng->state;
 }
 
 static int32_t task1_bio_value_or_invalid(int32_t value, int8_t valid)
@@ -762,7 +709,6 @@ void MotionTask_Run(void)
   /* Task1 是实时链路主循环：消费融合帧，推进 AI/规则识别，产生待上报结果。 */
   MotionAi_Init();
   MotionWindowTest_Init();
-  RuleEngine_Init(&g_task1_rule_engine, NULL);
   MotionAi_SetSingleTestEnabled(task1_mode_uses_single_test(g_motion_output_mode));
   MotionSensorPipeline_SetUpperOnly(task1_mode_uses_upper_only(g_motion_output_mode));
   task1_output_state_reset(g_motion_output_mode, 1U);
