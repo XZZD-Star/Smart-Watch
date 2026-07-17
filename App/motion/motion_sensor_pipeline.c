@@ -78,9 +78,16 @@ static volatile float upper_raw_yaw = 0.0f;
 static volatile float upper_raw_pitch = 0.0f;
 static volatile float upper_raw_roll = 0.0f;
 static volatile uint8_t upper_raw_valid = 0U;
+static volatile float fore_raw_yaw = 0.0f;
+static volatile float fore_raw_pitch = 0.0f;
+static volatile float fore_raw_roll = 0.0f;
+static volatile uint8_t fore_raw_valid = 0U;
 static volatile float upper_calibrate_yaw = 0.0f;
 static volatile float upper_calibrate_pitch = 0.0f;
 static volatile float upper_calibrate_roll = 0.0f;
+static volatile float fore_calibrate_yaw = 0.0f;
+static volatile float fore_calibrate_pitch = 0.0f;
+static volatile float fore_calibrate_roll = 0.0f;
 static volatile uint8_t upper_calibration_active = 0U;
 static volatile uint8_t upper_calibration_done = 0U;
 static volatile uint16_t upper_calibration_count = 0U;
@@ -88,6 +95,9 @@ static volatile uint8_t upper_calibration_report_pending = 0U;
 static volatile float upper_calibration_report_yaw = 0.0f;
 static volatile float upper_calibration_report_pitch = 0.0f;
 static volatile float upper_calibration_report_roll = 0.0f;
+static volatile float fore_calibration_report_yaw = 0.0f;
+static volatile float fore_calibration_report_pitch = 0.0f;
+static volatile float fore_calibration_report_roll = 0.0f;
 
 static volatile uint8_t fused_row_ready = 0U;
 static motion_fused_frame_t fused_frame = {0};
@@ -590,6 +600,7 @@ static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t defaul
     }
 
     if ((upper_only_enabled != 0U) &&
+        (upper_calibration_active == 0U) &&
         (frame.sensor_id != MOTION_SENSOR_ID_UPPER))
     {
         return;
@@ -621,6 +632,13 @@ static void process_pose_packet(const uint8_t *buf, uint16_t len, uint8_t defaul
         {
             align_fail_count++;
         }
+        fore_raw_yaw = frame.yaw;
+        fore_raw_pitch = frame.pitch;
+        fore_raw_roll = frame.roll;
+        fore_raw_valid = 1U;
+        frame.yaw -= fore_calibrate_yaw;
+        frame.pitch -= fore_calibrate_pitch;
+        frame.roll -= fore_calibrate_roll;
         fore_frame = frame;
         yaw2 = frame.yaw;
         pitch2 = frame.pitch;
@@ -654,10 +672,10 @@ uint8_t Motion_ProcessPendingPosePackets(void)
 }
 
 /**
- * @brief  发起上臂姿态校准。
+ * @brief  发起上臂和前臂姿态校准。
  * @return 无
  */
-void MotionSensorPipeline_RequestUpperCalibration(void)
+void MotionSensorPipeline_RequestCalibration(void)
 {
     uint32_t primask = 0U;
 
@@ -671,17 +689,27 @@ void MotionSensorPipeline_RequestUpperCalibration(void)
     upper_calibration_done = 0U;
     upper_calibration_count = 0U;
     upper_calibration_report_pending = 0U;
+    upper_raw_valid = 0U;
+    fore_raw_valid = 0U;
     if ((__get_IPSR() == 0U) && (primask == 0U))
     {
         __enable_irq();
     }
 }
 
+void MotionSensorPipeline_RequestUpperCalibration(void)
+{
+    MotionSensorPipeline_RequestCalibration();
+}
+
 void MotionSensorPipeline_CalibrationTickFromIsr(void)
 {
-    float raw_yaw;
-    float raw_pitch;
-    float raw_roll;
+    float raw_upper_yaw;
+    float raw_upper_pitch;
+    float raw_upper_roll;
+    float raw_fore_yaw;
+    float raw_fore_pitch;
+    float raw_fore_roll;
 
     if (upper_calibration_active == 0U)
     {
@@ -694,26 +722,41 @@ void MotionSensorPipeline_CalibrationTickFromIsr(void)
         return;
     }
 
-    raw_yaw = upper_raw_yaw;
-    raw_pitch = upper_raw_pitch;
-    raw_roll = upper_raw_roll;
+    raw_upper_yaw = upper_raw_yaw;
+    raw_upper_pitch = upper_raw_pitch;
+    raw_upper_roll = upper_raw_roll;
+    raw_fore_yaw = fore_raw_yaw;
+    raw_fore_pitch = fore_raw_pitch;
+    raw_fore_roll = fore_raw_roll;
 
-    if (upper_raw_valid != 0U)
+    if ((upper_raw_valid != 0U) && (fore_raw_valid != 0U))
     {
-        upper_calibrate_yaw = raw_yaw;
-        upper_calibrate_pitch = raw_pitch;
-        upper_calibrate_roll = raw_roll;
-        yaw = raw_yaw - upper_calibrate_yaw;
-        pitch = raw_pitch - upper_calibrate_pitch;
-        roll = raw_roll - upper_calibrate_roll;
-        upper_calibration_report_yaw = yaw;
-        upper_calibration_report_pitch = pitch;
-        upper_calibration_report_roll = roll;
+        upper_calibrate_yaw = raw_upper_yaw;
+        upper_calibrate_pitch = raw_upper_pitch;
+        upper_calibrate_roll = raw_upper_roll;
+        fore_calibrate_yaw = raw_fore_yaw;
+        fore_calibrate_pitch = raw_fore_pitch;
+        fore_calibrate_roll = raw_fore_roll;
+        yaw = raw_upper_yaw - upper_calibrate_yaw;
+        pitch = raw_upper_pitch - upper_calibrate_pitch;
+        roll = raw_upper_roll - upper_calibrate_roll;
+        yaw2 = raw_fore_yaw - fore_calibrate_yaw;
+        pitch2 = raw_fore_pitch - fore_calibrate_pitch;
+        roll2 = raw_fore_roll - fore_calibrate_roll;
+        upper_calibration_report_yaw = raw_upper_yaw;
+        upper_calibration_report_pitch = raw_upper_pitch;
+        upper_calibration_report_roll = raw_upper_roll;
+        fore_calibration_report_yaw = raw_fore_yaw;
+        fore_calibration_report_pitch = raw_fore_pitch;
+        fore_calibration_report_roll = raw_fore_roll;
         upper_calibration_report_pending = 1U;
         upper_calibration_done =
             ((motion_absf(yaw) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG) &&
              (motion_absf(pitch) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG) &&
-             (motion_absf(roll) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG)) ? 1U : 0U;
+             (motion_absf(roll) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG) &&
+             (motion_absf(yaw2) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG) &&
+             (motion_absf(pitch2) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG) &&
+             (motion_absf(roll2) < UPPER_CALIBRATION_DONE_THRESHOLD_DEG)) ? 1U : 0U;
     }
     else
     {
@@ -729,9 +772,56 @@ uint8_t MotionSensorPipeline_IsUpperCalibrationActive(void)
     return upper_calibration_active;
 }
 
+uint8_t MotionSensorPipeline_IsCalibrationActive(void)
+{
+    return MotionSensorPipeline_IsUpperCalibrationActive();
+}
+
 uint8_t MotionSensorPipeline_IsUpperCalibrationDone(void)
 {
     return (upper_calibration_active == 0U) ? upper_calibration_done : 0U;
+}
+
+uint8_t MotionSensorPipeline_IsCalibrationDone(void)
+{
+    return MotionSensorPipeline_IsUpperCalibrationDone();
+}
+
+uint8_t MotionSensorPipeline_TakeCalibrationReport(float *out_fore_yaw,
+                                                   float *out_fore_pitch,
+                                                   float *out_fore_roll,
+                                                   float *out_upper_yaw,
+                                                   float *out_upper_pitch,
+                                                   float *out_upper_roll)
+{
+    uint8_t has_report = 0U;
+    uint32_t primask;
+
+    if ((out_fore_yaw == NULL) || (out_fore_pitch == NULL) || (out_fore_roll == NULL) ||
+        (out_upper_yaw == NULL) || (out_upper_pitch == NULL) || (out_upper_roll == NULL))
+    {
+        return 0U;
+    }
+
+    primask = __get_PRIMASK();
+    __disable_irq();
+    if (upper_calibration_report_pending != 0U)
+    {
+        *out_fore_yaw = fore_calibration_report_yaw;
+        *out_fore_pitch = fore_calibration_report_pitch;
+        *out_fore_roll = fore_calibration_report_roll;
+        *out_upper_yaw = upper_calibration_report_yaw;
+        *out_upper_pitch = upper_calibration_report_pitch;
+        *out_upper_roll = upper_calibration_report_roll;
+        upper_calibration_report_pending = 0U;
+        has_report = 1U;
+    }
+    if (primask == 0U)
+    {
+        __enable_irq();
+    }
+
+    return has_report;
 }
 
 uint8_t MotionSensorPipeline_TakeUpperCalibrationReport(float *out_yaw,
@@ -840,6 +930,10 @@ void MotionSensorPipeline_Reset(void)
     upper_raw_pitch = 0.0f;
     upper_raw_roll = 0.0f;
     upper_raw_valid = 0U;
+    fore_raw_yaw = 0.0f;
+    fore_raw_pitch = 0.0f;
+    fore_raw_roll = 0.0f;
+    fore_raw_valid = 0U;
     yaw2 = 0.0f;
     pitch2 = 0.0f;
     roll2 = 0.0f;

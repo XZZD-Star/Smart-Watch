@@ -53,6 +53,7 @@ static uint8_t s_lt_screen_has_ota_task = 0U;
 static uint8_t s_lt_screen_ota_demo_active = 0U;
 static uint8_t s_device_door_open = 0U;
 static uint8_t s_device_door_icon_applied = 0U;
+static uint8_t s_bracelet_door_open_flag = 0U;
 static uint8_t s_lt_screen_calibration_done = 0U;
 static uint8_t s_lt_screen_training_page_entered = 0U;
 static uint8_t s_lt_screen_training_active = 0U;
@@ -312,6 +313,7 @@ static void lt_screen_handle_open_device(void)
   door_state = Servo_GetDoorState();
   LTScreen_SetDeviceDoorState(door_state);
   OneNet_RequestDoorStatePost(door_state);
+  s_bracelet_door_open_flag = 1U;
 }
 
 static void lt_screen_process_bracelet_auto_close(void)
@@ -328,7 +330,20 @@ static void lt_screen_process_bracelet_auto_close(void)
   is_right_removed =
       (HAL_GPIO_ReadPin(BRACELET_RIGHT_DO_GPIO_Port, BRACELET_RIGHT_DO_Pin) == GPIO_PIN_SET) ? 1U : 0U;
 
-  if ((is_left_removed == 0U) || (is_right_removed == 0U) || (Servo_GetDoorState() == 0U))
+  if (s_bracelet_door_open_flag == 0U)
+  {
+    s_bracelet_auto_close_timing = 0U;
+    return;
+  }
+
+  if (Servo_GetDoorState() == 0U)
+  {
+    s_bracelet_door_open_flag = 0U;
+    s_bracelet_auto_close_timing = 0U;
+    return;
+  }
+
+  if ((is_left_removed == 0U) || (is_right_removed == 0U))
   {
     s_bracelet_auto_close_timing = 0U;
     return;
@@ -351,14 +366,15 @@ static void lt_screen_process_bracelet_auto_close(void)
   door_state = Servo_GetDoorState();
   LTScreen_SetDeviceDoorState(door_state);
   OneNet_RequestDoorStatePost(door_state);
+  s_bracelet_door_open_flag = 0U;
   s_bracelet_auto_close_timing = 0U;
 }
 
 static void lt_screen_handle_calibration_start(void)
 {
-  static const uint8_t text_done[] = {0xD2U, 0xD1U, 0xCDU, 0xEAU, 0xB3U, 0xC9U};
-  static const uint8_t text_calibrating[] = {0xD5U, 0xFDU, 0xD4U, 0xDAU, 0xD0U, 0xA3U, 0xD7U, 0xBCU};
-  static const uint8_t text_failed[] = {0xD0U, 0xA3U, 0xD7U, 0xBCU, 0xCAU, 0xA7U, 0xB0U, 0xDCU};
+  static const uint8_t text_calibrated[] = {0xD2U, 0xD1U, 0xD0U, 0xA3U, 0xD7U, 0xBCU};
+  static const uint8_t text_calibrating[] = {0xD0U, 0xA3U, 0xD7U, 0xBCU, 0xD6U, 0xD0U};
+  static const uint8_t text_not_done[] = {0xCEU, 0xB4U, 0xCDU, 0xEAU, 0xB3U, 0xC9U};
   uint32_t waited_ms = 0U;
 
   s_lt_screen_calibration_done = 0U;
@@ -367,28 +383,28 @@ static void lt_screen_handle_calibration_start(void)
                  text_calibrating,
                  (uint8_t)sizeof(text_calibrating));
 
-  MotionSensorPipeline_RequestUpperCalibration();
-  while ((MotionSensorPipeline_IsUpperCalibrationActive() != 0U) &&
+  MotionSensorPipeline_RequestCalibration();
+  while ((MotionSensorPipeline_IsCalibrationActive() != 0U) &&
          (waited_ms < LTSCREEN_CALIBRATION_TIMEOUT_MS))
   {
     osDelay(LTSCREEN_CALIBRATION_POLL_MS);
     waited_ms += LTSCREEN_CALIBRATION_POLL_MS;
   }
 
-  if (MotionSensorPipeline_IsUpperCalibrationDone() != 0U)
+  if (MotionSensorPipeline_IsCalibrationDone() != 0U)
   {
     LT168B_SendStr(0x10U,
                    LTSCREEN_CALIBRATION_STATUS_ADDR,
-                   text_done,
-                   (uint8_t)sizeof(text_done));
+                   text_calibrated,
+                   (uint8_t)sizeof(text_calibrated));
     s_lt_screen_calibration_done = 1U;
   }
   else
   {
     LT168B_SendStr(0x10U,
                    LTSCREEN_CALIBRATION_STATUS_ADDR,
-                   text_failed,
-                   (uint8_t)sizeof(text_failed));
+                   text_not_done,
+                   (uint8_t)sizeof(text_not_done));
   }
 }
 

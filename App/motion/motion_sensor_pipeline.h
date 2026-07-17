@@ -20,10 +20,19 @@ uint8_t Motion_ProcessPendingPosePackets(void);
 uint8_t MotionSensorPipeline_TakeFusedFrame(motion_fused_frame_t *frame);
 /* 配置单上臂输入；启用后，上臂包不等待前臂包即可生成输出帧。 */
 void MotionSensorPipeline_SetUpperOnly(uint8_t enable);
+void MotionSensorPipeline_RequestCalibration(void);
 void MotionSensorPipeline_RequestUpperCalibration(void);
 void MotionSensorPipeline_CalibrationTickFromIsr(void);
+uint8_t MotionSensorPipeline_IsCalibrationActive(void);
 uint8_t MotionSensorPipeline_IsUpperCalibrationActive(void);
+uint8_t MotionSensorPipeline_IsCalibrationDone(void);
 uint8_t MotionSensorPipeline_IsUpperCalibrationDone(void);
+uint8_t MotionSensorPipeline_TakeCalibrationReport(float *out_fore_yaw,
+                                                   float *out_fore_pitch,
+                                                   float *out_fore_roll,
+                                                   float *out_upper_yaw,
+                                                   float *out_upper_pitch,
+                                                   float *out_upper_roll);
 uint8_t MotionSensorPipeline_TakeUpperCalibrationReport(float *out_yaw,
                                                         float *out_pitch,
                                                         float *out_roll);

@@ -686,9 +686,12 @@ void MotionTask_Run(void)
   for(;;)
   {
     motion_fused_frame_t fused_frame;
-    float calibration_yaw;
-    float calibration_pitch;
-    float calibration_roll;
+    float calibration_fore_yaw;
+    float calibration_fore_pitch;
+    float calibration_fore_roll;
+    float calibration_upper_yaw;
+    float calibration_upper_pitch;
+    float calibration_upper_roll;
     uint8_t sensor_work_done;
 
     if (Motion_TakeUpperCaptureResetRequest() != 0U)
@@ -705,15 +708,22 @@ void MotionTask_Run(void)
 
     MotionSensorPipeline_SetUpperOnly(task1_mode_uses_upper_only(g_motion_output_mode));
     sensor_work_done = Motion_ProcessPendingPosePackets();
-    if (MotionSensorPipeline_TakeUpperCalibrationReport(
-          &calibration_yaw,
-          &calibration_pitch,
-          &calibration_roll) != 0U)
+    if (MotionSensorPipeline_TakeCalibrationReport(
+          &calibration_fore_yaw,
+          &calibration_fore_pitch,
+          &calibration_fore_roll,
+          &calibration_upper_yaw,
+          &calibration_upper_pitch,
+          &calibration_upper_roll) != 0U)
     {
-      printf("CALIBRATION_DONE,Yaw=%.2f,Pitch=%.2f,Roll=%.2f\r\n",
-             calibration_yaw,
-             calibration_pitch,
-             calibration_roll);
+      printf("CALIBRATION_DONE,FORE,Yaw=%.2f,Pitch=%.2f,Roll=%.2f\r\n",
+             calibration_fore_yaw,
+             calibration_fore_pitch,
+             calibration_fore_roll);
+      printf("CALIBRATION_DONE,UPPER,Yaw=%.2f,Pitch=%.2f,Roll=%.2f\r\n",
+             calibration_upper_yaw,
+             calibration_upper_pitch,
+             calibration_upper_roll);
       sensor_work_done = 1U;
     }
 

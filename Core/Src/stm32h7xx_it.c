@@ -466,7 +466,7 @@ static void motion_uart4_handle_command(const uint8_t *buf, uint16_t len)
     }
     else if (strcmp(command, "cali") == 0)
     {
-        MotionSensorPipeline_RequestUpperCalibration();
+        MotionSensorPipeline_RequestCalibration();
     }
 }
 
