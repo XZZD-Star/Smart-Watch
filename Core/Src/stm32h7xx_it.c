@@ -257,7 +257,7 @@ void TIM2_IRQHandler(void)
   /* USER CODE BEGIN TIM2_IRQn 0 */
   MotionSensorPipeline_CalibrationTickFromIsr();
 	
-	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && fused_frame.upper_roll > 5 && fused_frame.upper_roll < 70&& ceping_flag == 0)
+	if(fused_frame.fore_pitch < -70 && fused_frame.fore_pitch > -90 && ceping_flag == 0)
 	{
 		ceping_t1++;
 		if(ceping_t1 >= 20)
@@ -265,7 +265,7 @@ void TIM2_IRQHandler(void)
 		qianping_t1 = 0;
 	}
 
-	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && fused_frame.upper_roll < -5 && fused_frame.upper_roll > -90&& qianping_flag == 0)
+	if(fused_frame.fore_pitch < -50 && fused_frame.fore_pitch > -70 && qianping_flag == 0)
 	{
 		qianping_t1++;
 		if(qianping_t1 >= 20)
@@ -273,33 +273,86 @@ void TIM2_IRQHandler(void)
 		ceping_t1 = 0;
 	}
 	
-	if(fused_frame.fore_pitch < 20 && fused_frame.upper_pitch > -20 && ceping_flag == 1)
+	if(fused_frame.fore_pitch < 20 && fused_frame.fore_pitch > -20 && ceping_flag == 1)
 	{
 		ceping_t2++;
 		if(ceping_t2 >= 20)
 			ceping_t2 = 20;
 		//任务函数清空ceping1
 	}
+	if(!(fused_frame.fore_pitch < 20 && fused_frame.fore_pitch > -20) && ceping_flag == 1 && ceping_t2 != 0)
+	{
+		ceping_t2 = 0;
+	}
 	
-	if(fused_frame.fore_pitch < 20 && fused_frame.upper_pitch > -20 && qianping_flag == 1)
+	if(fused_frame.fore_pitch < 20 && fused_frame.fore_pitch > -20 && qianping_flag == 1 )
 	{
 		qianping_t2++;
 		if(qianping_t2 >= 20)
 			qianping_t2 = 20;
 	}
 	
-	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && ceping_flag == 2)
+	if(fused_frame.fore_pitch < -70 && fused_frame.fore_pitch > -90 && ceping_flag == 2)
 	{
 		ceping_t3++;
 		if(ceping_t3 >= 20)
 			ceping_t3 = 20;
 	}
 	
-	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && qianping_flag == 2)
+	if(fused_frame.fore_pitch < -70 && fused_frame.fore_pitch > -90 && qianping_flag == 2)
 	{
 		qianping_t3++;
 		if(qianping_t3 >= 20)
 			qianping_t3 = 20;
+	}	
+	
+	
+	
+	if(fused_frame.fore_pitch < -70 && fused_frame.fore_pitch > -90 && shangju_flag == 0)
+	{
+		shangju_t1++;
+		if(shangju_t1 >= 20)
+			shangju_t1 = 20;
+	}
+	
+	if(fused_frame.fore_pitch < 90 && fused_frame.fore_pitch > 60 && shangju_flag == 1)
+	{
+		shangju_t2++;
+		if(shangju_t2 >= 20)
+			shangju_t2 = 20;
+	}
+	if(!(fused_frame.fore_pitch < 90 && fused_frame.fore_pitch > 60) && shangju_flag == 1 && shangju_t2 != 0)
+	{
+		shangju_t2 = 0;
+	}
+	
+	if(fused_frame.fore_pitch < -70 && fused_frame.fore_pitch > -90 && shangju_flag == 2)
+	{
+		shangju_t3++;
+		if(shangju_t3 >= 20)
+			shangju_t3 = 20;
+	}
+	
+	if(fused_frame.fore_pitch < -70 && fused_frame.fore_pitch > -90 && wanju_flag == 0)
+	{
+		wanju_t1++;
+		if(wanju_t1 >= 20)
+			wanju_t1 = 20;
+	}
+	
+	if(fused_frame.fore_pitch < 80 && fused_frame.fore_pitch > 20 && fused_frame.upper_pitch < -20 && wanju_flag == 1)
+	{
+		wanju_t2++;
+		if(wanju_t2 >= 20)
+			wanju_t2 = 20;
+	}	
+	
+	
+	if(fused_frame.fore_pitch < -60 && fused_frame.fore_pitch > -90 && wanju_flag == 2)
+	{
+		wanju_t3++;
+		if(wanju_t3 >= 20)
+			wanju_t3 = 20;
 	}	
 	
   /* USER CODE END TIM2_IRQn 0 */

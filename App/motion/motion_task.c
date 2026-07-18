@@ -47,6 +47,7 @@ static void task1_output_calibration_report_uart4(float fore_yaw,
                                                   float upper_yaw,
                                                   float upper_pitch,
                                                   float upper_roll);
+static void task1_output_pose_uart4(const motion_fused_frame_t *frame);
 static int32_t task1_bio_value_or_invalid(int32_t value, int8_t valid);
 
 typedef struct
@@ -176,6 +177,39 @@ static void task1_output_calibration_report_uart4(float fore_yaw,
   (void)HAL_UART_Transmit(&huart4, (uint8_t *)text, (uint16_t)len, 100U);
 }
 
+static void task1_output_pose_uart4(const motion_fused_frame_t *frame)
+{
+  char text[128];
+  int len;
+
+  if (frame == NULL)
+  {
+    return;
+  }
+
+  len = snprintf(text,
+                 sizeof(text),
+                 "%llu,  %.2f,  %.2f,  %.2f,  %.2f,  %.2f,  %.2f\r\n",
+                 (unsigned long long)(frame->ts_us / 1000ULL),
+                 (double)frame->fore_yaw,
+                 (double)frame->fore_pitch,
+                 (double)frame->fore_roll,
+                 (double)frame->upper_yaw,
+                 (double)frame->upper_pitch,
+                 (double)frame->upper_roll);
+  if (len <= 0)
+  {
+    return;
+  }
+
+  if (len >= (int)sizeof(text))
+  {
+    len = (int)sizeof(text) - 1;
+  }
+
+  (void)HAL_UART_Transmit(&huart4, (uint8_t *)text, (uint16_t)len, 100U);
+}
+
 static void task1_output_state_reset(motion_output_mode_t mode, uint8_t fresh_session)
 {
   const motion_ai_result_t *result = MotionAi_GetResult();
@@ -228,7 +262,6 @@ static uint8_t task1_try_take_fused_frame(motion_fused_frame_t *frame)
 
 static void task1_process_fused_frame(const motion_fused_frame_t *frame)
 {
-  const motion_ai_result_t *result = NULL;
   motion_output_mode_t current_mode;
   motion_output_mode_t previous_mode;
 
@@ -275,9 +308,13 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
       {
         return;
       }
-      result = MotionAi_ProcessFusedFrame(frame);
-      task1_handle_local_fall_result(result);
-      task1_output_single_once_event(frame, result);
+      /*
+       * 当前动作识别改为规则识别链路。
+       * AI 推理、AI 侧跌倒检测和 AI 状态机打印暂时停用。
+       */
+      /* result = MotionAi_ProcessFusedFrame(frame); */
+      /* task1_handle_local_fall_result(result); */
+      /* task1_output_single_once_event(frame, result); */
       break;
 
     case MOTION_OUTPUT_MODE_UPPER_CAPTURE:
@@ -312,9 +349,13 @@ static void task1_process_fused_frame(const motion_fused_frame_t *frame)
       {
         return;
       }
-      result = MotionAi_ProcessFusedFrame(frame);
-      task1_handle_local_fall_result(result);
-      task1_output_single_once_event(frame, result);
+      /*
+       * 当前动作识别改为规则识别链路。
+       * AI 推理、AI 侧跌倒检测和 AI 状态机打印暂时停用。
+       */
+      /* result = MotionAi_ProcessFusedFrame(frame); */
+      /* task1_handle_local_fall_result(result); */
+      /* task1_output_single_once_event(frame, result); */
       break;
   }
 }
@@ -819,6 +860,10 @@ void MotionTask_Run(void)
     if ((g_motion_output_mode != MOTION_OUTPUT_MODE_MODEL_WINDOW_TEST) &&
         task1_try_take_fused_frame(&fused_frame))
     {
+      if (g_motion_single_armed != 0U)
+      {
+        task1_output_pose_uart4(&fused_frame);
+      }
       task1_process_fused_frame(&fused_frame);
       sensor_work_done = 1U;
     }
