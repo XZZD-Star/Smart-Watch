@@ -1,5 +1,5 @@
 #include "rule_action_recognizer.h"
-#include ""
+#include "motion_ai.h"
 
 uint8_t wanju_flag = 0;
 uint8_t shangju_flag = 0;
@@ -22,6 +22,7 @@ uint16_t qianping_t3 = 0;
 
 extern motion_fused_frame_t fused_frame;
 
+action_label_t action_label;
 /*
 
 typedef enum
@@ -72,12 +73,18 @@ void AI_task(void)
 	if(ceping_flag == 3)
 	{
 		ceping_flag = 0;
-		
+		if(action_label.ceping < 20)
+		{
+			action_label.ceping++;
+		}	
 	}
 	if(qianping_flag == 3)
 	{
 		qianping_flag = 0;
-		
+		if(action_label.qianping < 20)
+		{
+			action_label.qianping++;
+		}	
 	}
 }
 

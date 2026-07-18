@@ -44,5 +44,15 @@ extern uint16_t qianping_t3;
 //  uint32_t align_fail_count;
 //} motion_fused_frame_t;
 
+typedef struct{
+	uint8_t wanju;
+	uint8_t shangju;
+	uint8_t ceping;
+	uint8_t qianping;
+}action_label_t;
+
+
+void AI_task(void);
+extern action_label_t action_label;
 
 #endif /* RULE_ACTION_RECOGNIZER_H */
