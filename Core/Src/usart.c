@@ -24,13 +24,22 @@
 #include "./usart/yuanzi_usart.h"
 #include "ESP8266.h"
 #include "lt168b.h"
+#include "uart7_role.h"
 #include "string.h"
 
 uint8_t rx_buffer[RX_BUFFER_SIZE];
 uint16_t rx_index;
 #define ESP8266_RX_DMA_BUFFER_SIZE 2048U
+#define UART7_SCREEN_PROBE_RX_BUFFER_SIZE 256U
 static uint8_t esp8266_rx_dma_buffer[ESP8266_RX_DMA_BUFFER_SIZE];
 static uint16_t esp8266_rx_dma_last_pos;
+static uint8_t s_uart7_screen_probe_rx_buffer[UART7_SCREEN_PROBE_RX_BUFFER_SIZE];
+
+static void UART7ScreenProbe_RestartRx(void);
+static void UART7ScreenProbe_WriteByte(uint8_t byte);
+static void UART7ScreenProbe_WriteString(const char *text);
+static void UART7ScreenProbe_WriteHexByte(uint8_t byte);
+static void UART7ScreenProbe_WriteDecU16(uint16_t value);
 
 static void USART6_FeedRxDmaRing(uint16_t dma_pos, HAL_UART_RxEventTypeTypeDef event_type)
 {
@@ -69,6 +78,127 @@ static void USART6_FeedRxDmaRing(uint16_t dma_pos, HAL_UART_RxEventTypeTypeDef e
     }
 
     esp8266_rx_dma_last_pos = (dma_pos == buffer_size) ? 0U : dma_pos;
+}
+
+void UART7ScreenProbe_Start(void)
+{
+    UART7ScreenProbe_WriteString("\r\n[UART7 SCREEN PROBE] start\r\n");
+    UART7ScreenProbe_RestartRx();
+}
+
+void UART7ScreenProbe_HandleRxEvent(UART_HandleTypeDef *huart, uint16_t size)
+{
+    uint16_t index;
+    uint8_t byte;
+
+    if ((huart == NULL) || (huart->Instance != UART7))
+    {
+        return;
+    }
+
+    if (size == 0U)
+    {
+        UART7ScreenProbe_RestartRx();
+        return;
+    }
+
+    if (size > UART7_SCREEN_PROBE_RX_BUFFER_SIZE)
+    {
+        size = UART7_SCREEN_PROBE_RX_BUFFER_SIZE;
+    }
+
+    UART7ScreenProbe_WriteString("\r\n[UART7 RX] len=");
+    UART7ScreenProbe_WriteDecU16(size);
+    UART7ScreenProbe_WriteString("\r\nHEX: ");
+    for (index = 0U; index < size; index++)
+    {
+        UART7ScreenProbe_WriteHexByte(s_uart7_screen_probe_rx_buffer[index]);
+        UART7ScreenProbe_WriteByte((uint8_t)' ');
+    }
+
+    UART7ScreenProbe_WriteString("\r\nASCII: ");
+    for (index = 0U; index < size; index++)
+    {
+        byte = s_uart7_screen_probe_rx_buffer[index];
+        if ((byte >= 0x20U) && (byte <= 0x7EU))
+        {
+            UART7ScreenProbe_WriteByte(byte);
+        }
+        else
+        {
+            UART7ScreenProbe_WriteByte((uint8_t)'.');
+        }
+    }
+    UART7ScreenProbe_WriteString("\r\n");
+
+    UART7ScreenProbe_RestartRx();
+}
+
+static void UART7ScreenProbe_RestartRx(void)
+{
+    (void)HAL_UARTEx_ReceiveToIdle_IT(&huart7,
+                                      s_uart7_screen_probe_rx_buffer,
+                                      sizeof(s_uart7_screen_probe_rx_buffer));
+}
+
+static void UART7ScreenProbe_WriteByte(uint8_t byte)
+{
+    if (huart2.Instance == NULL)
+    {
+        return;
+    }
+
+    while ((huart2.Instance->ISR & UART_FLAG_TXE) == 0U)
+    {
+    }
+    huart2.Instance->TDR = byte;
+}
+
+static void UART7ScreenProbe_WriteString(const char *text)
+{
+    if (text == NULL)
+    {
+        return;
+    }
+
+    while (*text != '\0')
+    {
+        UART7ScreenProbe_WriteByte((uint8_t)*text);
+        text++;
+    }
+}
+
+static void UART7ScreenProbe_WriteHexByte(uint8_t byte)
+{
+    static const char hex_table[] = "0123456789ABCDEF";
+
+    UART7ScreenProbe_WriteByte((uint8_t)hex_table[(byte >> 4) & 0x0FU]);
+    UART7ScreenProbe_WriteByte((uint8_t)hex_table[byte & 0x0FU]);
+}
+
+static void UART7ScreenProbe_WriteDecU16(uint16_t value)
+{
+    char digits[5];
+    uint8_t count = 0U;
+
+    if (value == 0U)
+    {
+        UART7ScreenProbe_WriteByte((uint8_t)'0');
+        return;
+    }
+
+    while ((value > 0U) && (count < sizeof(digits)))
+    {
+        digits[count] = (char)('0' + (value % 10U));
+        value /= 10U;
+        count++;
+    }
+
+    while (count > 0U)
+    {
+        count--;
+        UART7ScreenProbe_WriteByte((uint8_t)digits[count]);
+    }
 }
 /* USER CODE END 0 */
 
@@ -324,7 +454,7 @@ void MX_UART7_Init(void)
 
   /* USER CODE END UART7_Init 1 */
   huart7.Instance = UART7;
-  huart7.Init.BaudRate = 115200;
+  huart7.Init.BaudRate = 9600;
   huart7.Init.WordLength = UART_WORDLENGTH_8B;
   huart7.Init.StopBits = UART_STOPBITS_1;
   huart7.Init.Parity = UART_PARITY_NONE;
@@ -830,10 +960,25 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
     if (huart->Instance == UART7)
     {
+#if APP_UART7_SCREEN_RAW_PROBE_ENABLED
+        UART7ScreenProbe_HandleRxEvent(huart, Size);
+#else
         LT168B_HandleRxEvent(huart, Size);
+#endif
         return;
     }
 
     (void)Size;
+}
+
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
+{
+    if ((huart != NULL) && (huart->Instance == UART7))
+    {
+#if APP_UART7_SCREEN_RAW_PROBE_ENABLED
+        UART7ScreenProbe_RestartRx();
+#endif
+        return;
+    }
 }
 /* USER CODE END 1 */

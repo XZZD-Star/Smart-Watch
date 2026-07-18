@@ -138,7 +138,7 @@ void MX_FREERTOS_Init(void) {
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-#if !(APP_UART7_IS_SCREEN && APP_SCREEN_ISOLATION_ENABLED)
+#if !(APP_UART7_SCREEN_RAW_PROBE_ENABLED || (APP_UART7_IS_SCREEN && APP_SCREEN_ISOLATION_ENABLED))
   /* creation of Task1 */
   Task1Handle = osThreadNew(StartTask1, NULL, &Task1_attributes);
 
@@ -152,7 +152,7 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
-#if !(APP_UART7_IS_SCREEN && APP_SCREEN_ISOLATION_ENABLED)
+#if !(APP_UART7_SCREEN_RAW_PROBE_ENABLED || (APP_UART7_IS_SCREEN && APP_SCREEN_ISOLATION_ENABLED))
 HAL_TIM_Base_Start_IT(&htim2);
 #endif
 
@@ -171,7 +171,15 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
   (void)argument;
+#if APP_UART7_SCREEN_RAW_PROBE_ENABLED
+  UART7ScreenProbe_Start();
+  for (;;)
+  {
+    osDelay(1000U);
+  }
+#else
   LTScreenTask_Run();
+#endif
   /* USER CODE END StartDefaultTask */
 }
 

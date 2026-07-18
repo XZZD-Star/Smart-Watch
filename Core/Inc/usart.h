@@ -58,6 +58,8 @@ void MX_USART6_UART_Init(void);
 void MX_UART7_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+void UART7ScreenProbe_Start(void);
+void UART7ScreenProbe_HandleRxEvent(UART_HandleTypeDef *huart, uint16_t size);
 
 /* USER CODE END Prototypes */
 
