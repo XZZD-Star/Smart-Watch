@@ -30,6 +30,7 @@
 #include "motion_input.h"
 #include "motion_sensor_pipeline.h"
 #include "rule_action_recognizer.h"
+#include "motion_frame.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -256,11 +257,51 @@ void TIM2_IRQHandler(void)
   /* USER CODE BEGIN TIM2_IRQn 0 */
   MotionSensorPipeline_CalibrationTickFromIsr();
 	
-//	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && fused_frame.upper_roll > 5 && fused_frame.upper_roll < 70&& ceping_flag == 0)
-//	{
-//		ceping_t1++;
-//		
-//	}
+	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && fused_frame.upper_roll > 5 && fused_frame.upper_roll < 70&& ceping_flag == 0)
+	{
+		ceping_t1++;
+		if(ceping_t1 >= 20)
+			ceping_t1 = 20;
+		qianping_t1 = 0;
+	}
+
+	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && fused_frame.upper_roll < -5 && fused_frame.upper_roll > -90&& qianping_flag == 0)
+	{
+		qianping_t1++;
+		if(qianping_t1 >= 20)
+			qianping_t1 = 20;
+		ceping_t1 = 0;
+	}
+	
+	if(fused_frame.fore_pitch < 20 && fused_frame.upper_pitch > -20 && ceping_flag == 1)
+	{
+		ceping_t2++;
+		if(ceping_t2 >= 20)
+			ceping_t2 = 20;
+		//任务函数清空ceping1
+	}
+	
+	if(fused_frame.fore_pitch < 20 && fused_frame.upper_pitch > -20 && qianping_flag == 1)
+	{
+		qianping_t2++;
+		if(qianping_t2 >= 20)
+			qianping_t2 = 20;
+	}
+	
+	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && ceping_flag == 2)
+	{
+		ceping_t3++;
+		if(ceping_t3 >= 20)
+			ceping_t3 = 20;
+	}
+	
+	if(fused_frame.fore_pitch < -70 && fused_frame.upper_pitch > -90 && qianping_flag == 2)
+	{
+		qianping_t3++;
+		if(qianping_t3 >= 20)
+			qianping_t3 = 20;
+	}	
+	
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */

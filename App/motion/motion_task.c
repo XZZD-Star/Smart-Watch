@@ -1,4 +1,4 @@
-﻿#include "motion_task.h"
+#include "motion_task.h"
 
 #include <stdio.h>
 #include <stdint.h>
