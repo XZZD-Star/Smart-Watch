@@ -91,6 +91,7 @@ static void lt_screen_write_training_count(uint16_t address, uint8_t count);
 static void lt_screen_sync_training_count(uint8_t action_index);
 static void lt_screen_sync_training_counts(void);
 static int8_t lt_screen_find_training_action_index(int32_t action_label);
+static const char *lt_screen_get_training_action_name(uint8_t action_index);
 static void lt_screen_process_training_refresh(void);
 static void lt_screen_handle_calibration_start(void);
 static void lt_screen_handle_training_page_enter(void);
@@ -630,6 +631,23 @@ static int8_t lt_screen_find_training_action_index(int32_t action_label)
   }
 }
 
+static const char *lt_screen_get_training_action_name(uint8_t action_index)
+{
+  switch (action_index)
+  {
+    case 0U:
+      return "FRONT";
+    case 1U:
+      return "SIDE";
+    case 2U:
+      return "SHOULDER";
+    case 3U:
+      return "ELBOW";
+    default:
+      return "UNKNOWN";
+  }
+}
+
 static void lt_screen_process_training_refresh(void)
 {
   int32_t action_label;
@@ -650,6 +668,9 @@ static void lt_screen_process_training_refresh(void)
     }
 
     lt_screen_sync_training_count((uint8_t)action_index);
+    Debug_Printf("%s : %u\r\n",
+                 lt_screen_get_training_action_name((uint8_t)action_index),
+                 (unsigned int)s_lt_screen_training_count[(uint8_t)action_index]);
   }
 }
 

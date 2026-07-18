@@ -14,6 +14,7 @@
 #include "motion_sensor_pipeline.h"
 #include "motion_window_test.h"
 #include "onenet.h"
+#include "rule_action_recognizer.h"
 #include "uart7_role.h"
 #include "usart.h"
 
@@ -214,6 +215,7 @@ static void task1_output_state_reset(motion_output_mode_t mode, uint8_t fresh_se
 static void task1_reset_recognition_state(void)
 {
   /* start/clear、摔倒告警切换共用同一套复位流程，避免三处状态不同步。 */
+  RuleActionRecognizer_Reset();
   MotionAi_SetSingleTestEnabled(task1_mode_uses_single_test(g_motion_output_mode));
   MotionAi_Reset();
   task1_output_state_reset(g_motion_output_mode, 1U);
@@ -637,9 +639,7 @@ static void task1_output_single_once_event(
     else
     {
       action_kind_value = 0;
-      MotionEvents_QueueActionKind(action_kind_value);
-
-      Debug_Printf("[MQTT][WARN] no test cached at TEST_DONE, skip confidence and queue action_kind=0\r\n");
+      Debug_Printf("[MQTT][WARN] no test cached at TEST_DONE, skip confidence/action_kind\r\n");
     }
 
     should_update_train_display =
@@ -727,6 +727,7 @@ void MotionTask_Run(void)
     if (Motion_TakeUpperCaptureResetRequest() != 0U)
     {
       Motion_ResetUpperCaptureInput();
+      RuleActionRecognizer_Reset();
       task1_upper_capture_output_reset();
       continue;
     }
@@ -738,6 +739,10 @@ void MotionTask_Run(void)
 
     MotionSensorPipeline_SetUpperOnly(task1_mode_uses_upper_only(g_motion_output_mode));
     sensor_work_done = Motion_ProcessPendingPosePackets();
+    if (g_motion_single_armed != 0U)
+    {
+      RuleActionRecognizer_Process();
+    }
     if (MotionSensorPipeline_TakeCalibrationReport(
           &calibration_fore_yaw,
           &calibration_fore_pitch,

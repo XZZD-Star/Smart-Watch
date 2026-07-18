@@ -1054,24 +1054,10 @@ static void OneNet_ApplyTestProperty(onenet_prop_set_context_t *ctx)
                (long)ctx->decoded_score,
                (unsigned int)ctx->test_value_valid);
 
-  if (ctx->test_value_valid != 0U)
-  {
-    g_onenet_last_valid_test_value = ctx->test_value;
-    g_onenet_has_valid_test_value = 1U;
-    MotionAi_SetDemoOverride(ctx->test_value,
-                             ctx->decoded_action_id,
-                             ctx->decoded_score);
-  }
-  else
-  {
-    g_onenet_last_valid_test_value = 0;
-    g_onenet_has_valid_test_value = 0U;
-    MotionAi_ClearDemoOverride();
-    Debug_Printf("[MQTT][WARN] PROP SET invalid test=%ld, demo override and cache cleared\r\n",
-                 (long)ctx->test_value);
-  }
-
-  Debug_Printf("[MQTT] PROP SET test cached, defer post until TEST_DONE\r\n");
+  g_onenet_last_valid_test_value = 0;
+  g_onenet_has_valid_test_value = 0U;
+  MotionAi_ClearDemoOverride();
+  Debug_Printf("[MQTT] PROP SET test ignored, local rule recognition controls action_kind\r\n");
 }
 
 static void OneNet_ApplyTrainPlanProperty(const onenet_prop_set_context_t *ctx)

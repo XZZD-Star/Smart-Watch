@@ -8,24 +8,24 @@ extern "C" {
 #include <stdint.h>
 #include "motion_frame.h"
 
-extern uint8_t wanju_flag;
-extern uint8_t shangju_flag;
-extern uint8_t ceping_flag;
-extern uint8_t qianping_flag;
+extern volatile uint8_t wanju_flag;
+extern volatile uint8_t shangju_flag;
+extern volatile uint8_t ceping_flag;
+extern volatile uint8_t qianping_flag;
 
 
-extern uint16_t wanju_t1;
-extern uint16_t wanju_t2;
-extern uint16_t wanju_t3;
-extern uint16_t shangju_t1;
-extern uint16_t shangju_t2;
-extern uint16_t shangju_t3;
-extern uint16_t ceping_t1;
-extern uint16_t ceping_t2;
-extern uint16_t ceping_t3;
-extern uint16_t qianping_t1;
-extern uint16_t qianping_t2;
-extern uint16_t qianping_t3;
+extern volatile uint16_t wanju_t1;
+extern volatile uint16_t wanju_t2;
+extern volatile uint16_t wanju_t3;
+extern volatile uint16_t shangju_t1;
+extern volatile uint16_t shangju_t2;
+extern volatile uint16_t shangju_t3;
+extern volatile uint16_t ceping_t1;
+extern volatile uint16_t ceping_t2;
+extern volatile uint16_t ceping_t3;
+extern volatile uint16_t qianping_t1;
+extern volatile uint16_t qianping_t2;
+extern volatile uint16_t qianping_t3;
 
 /* 上臂和前臂按时间对齐后的融合帧，是运动识别链路的统一输入。 */
 //typedef struct
@@ -52,6 +52,8 @@ typedef struct{
 }action_label_t;
 
 
+void RuleActionRecognizer_Reset(void);
+void RuleActionRecognizer_Process(void);
 void AI_task(void);
 extern action_label_t action_label;
 
